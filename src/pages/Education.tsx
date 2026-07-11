@@ -1,5 +1,3 @@
-import React from 'react';
-
 // --- Section 1: Hero ---
 const EducationHero = () => {
   return (
@@ -267,7 +265,7 @@ const EducationInsights = () => {
         <div className="flex justify-end gap-4 mt-6 pr-4">
           <button className="text-gray-600 hover:text-gray-300 transition-colors">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7-7H3" />
             </svg>
           </button>
           <button className="text-gray-600 hover:text-gray-300 transition-colors">
@@ -346,7 +344,7 @@ const WhyCapyngen = () => {
         <div className="flex justify-end gap-6 mt-4">
           <button className="text-gray-400 hover:text-black transition-colors" aria-label="Previous">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7-7H3" />
             </svg>
           </button>
           <button className="text-black hover:text-gray-600 transition-colors" aria-label="Next">

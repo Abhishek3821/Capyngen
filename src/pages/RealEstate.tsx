@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 // --- 1. Real Estate Hero Section ---
 const RealEstateHero = () => {

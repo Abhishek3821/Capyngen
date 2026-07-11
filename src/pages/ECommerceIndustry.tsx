@@ -1,5 +1,3 @@
-import React from 'react';
-
 // --- Section 1: E-commerce Hero ---
 const EcommerceHero = () => {
   return (

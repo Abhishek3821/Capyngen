@@ -1,5 +1,3 @@
-import React from 'react';
-
 // --- Section 1: CPG Hero ---
 const CPGHero = () => {
   return (
@@ -377,4 +375,4 @@ const CPGDistributionPage = () => {
   );
 };
 
-export default CPGDistributionPage; 
+export default CPGDistributionPage;

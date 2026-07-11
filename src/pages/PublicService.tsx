@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const PublicServicesLandingPage = () => {
   const [activeTab, setActiveTab] = useState('All Updates');

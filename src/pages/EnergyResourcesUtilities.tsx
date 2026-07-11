@@ -1,5 +1,3 @@
-import React from 'react';
-
 // --- Section 1: Energy Hero ---
 const EnergyHero = () => {
   return (
