@@ -4,6 +4,7 @@ const HomePage: React.FC = () => {
   // References for the scrollable containers
   const latestArticlesContainerRef = useRef<HTMLDivElement>(null);
   const solutionsContainerRef = useRef<HTMLDivElement>(null);
+  const successStoriesContainerRef = useRef<HTMLDivElement>(null);
   const insightsContainerRef = useRef<HTMLDivElement>(null);
 
   // Functions to handle left/right scrolling
@@ -27,6 +28,16 @@ const HomePage: React.FC = () => {
     }
   };
 
+  const scrollSuccessStories = (direction: 'left' | 'right') => {
+    if (successStoriesContainerRef.current) {
+      const scrollAmount = 350; 
+      successStoriesContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const scrollInsights = (direction: 'left' | 'right') => {
     if (insightsContainerRef.current) {
       const scrollAmount = 350; 
@@ -42,59 +53,146 @@ const HomePage: React.FC = () => {
   // =========================================
   
   const latestArticles = [
-    { id: 1, title: "AI-Powered Enterprise Solutions", description: "Leadership in Enterprise AI: Infrastructure to Intelligence", imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" },
-    { id: 2, title: "Custom Software Success Stories", description: "Discover how we build scalable digital products for modern businesses", imageUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop" },
-    { id: 3, title: "UX Design Trends 2026", description: "Creating digital experiences people love to use every day", imageUrl: "https://images.unsplash.com/photo-1581090122319-335c412f8646?q=80&w=800&auto=format&fit=crop" },
-    { id: 4, title: "Cloud & DevOps at Scale", description: "Building reliable infrastructure for rapidly growing companies", imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop" },
-    { id: 5, title: "Innovation in Decentralized Finance", description: "Exploring the role of blockchain and Web3 for corporate finance.", imageUrl: "https://images.unsplash.com/photo-1639762681485-074b7f4ec651?q=80&w=800&auto=format&fit=crop" },
+    { id: 1, title: "AI-Powered Enterprise Solutions", description: "Leadership in Enterprise AI: From Infrastructure to Intelligence. Our AI solutions help businesses automate operations, predict outcomes, and personalize at scale.", imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" },
+    { id: 2, title: "Custom Software Success Stories", description: "Discover how we build scalable digital products for modern businesses. Our custom software development transforms complex business challenges into simple, effective solutions.", imageUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop" },
+    { id: 3, title: "UX Design Trends 2026", description: "Creating digital experiences people love to use every day. We design user-focused experiences grounded in research and real user feedback.", imageUrl: "https://images.unsplash.com/photo-1581090122319-335c412f8646?q=80&w=800&auto=format&fit=crop" },
+    { id: 4, title: "Cloud & DevOps at Scale", description: "Building reliable infrastructure for rapidly growing businesses. Our cloud solutions ensure your business runs smoothly at any scale.", imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop" },
+    { id: 5, title: "Digital Transformation Strategies", description: "Helping businesses embrace digital change with confidence. We guide you through every step of your transformation journey.", imageUrl: "https://images.unsplash.com/photo-1639762681485-074b7f4ec651?q=80&w=800&auto=format&fit=crop" },
+    { id: 6, title: "Innovation Labs & R&D", description: "Exploring emerging technologies to keep your business ahead of the curve. Our innovation labs experiment with AI, blockchain, and next-gen solutions.", imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop" }
   ];
 
   const technologySolutions = [
-    { title: "Software Development", description: "Custom web, mobile, and enterprise applications built for scale. End-to-end delivery from architecture to launch.", imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop" },
-    { title: "AI & Automation", description: "Intelligent solutions powered by machine learning and generative AI. Automate operations, predict outcomes, personalize at scale.", imageUrl: "https://images.unsplash.com/photo-1580894742597-87bc8789db3d?q=80&w=800&auto=format&fit=crop" },
-    { title: "Cloud & Infrastructure", description: "Modern cloud architecture, DevOps pipelines, and infrastructure-as-code that keeps your business running at any scale.", imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" },
-    { title: "Data Analytics & BI", description: "Transform raw organizational data into actionable intelligence dashboards, predictive modeling architectures, and reports.", imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" }
+    { title: "Software Development", description: "Tailored web, mobile, and enterprise software built for growth. Complete delivery from system design to final deployment.", imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop" },
+    { title: "AI & Automation", description: "Advanced solutions driven by machine learning and generative AI. Streamline workflows, forecast trends, and deliver personalized experiences at any scale.", imageUrl: "https://images.unsplash.com/photo-1580894742597-87bc8789db3d?q=80&w=800&auto=format&fit=crop" },
+    { title: "Cloud & Infrastructure", description: "Scalable cloud architecture, automated DevOps workflows, and infrastructure-as-code that ensures your business performs reliably at any level.", imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" },
+    { title: "Data Analytics & Business Intelligence", description: "Transform raw data into actionable insights. Our analytics solutions help you make data-driven decisions with confidence.", imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" },
+    { title: "Cybersecurity Solutions", description: "Protect your business from evolving threats. We provide comprehensive security assessments, compliance guidance, and monitoring.", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" },
+    { title: "ERP & Enterprise Solutions", description: "Streamline your business operations with integrated enterprise solutions. From HRMS to finance, we automate your core processes.", imageUrl: "https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?q=80&w=800&auto=format&fit=crop" }
+  ];
+
+  const successStories = [
+    { id: 1, category: "SAAS", title: "SaaS Platform", description: "How AI automation reduced manual work by 65%.", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" },
+    { id: 2, category: "E-COMMERCE", title: "Retail E-commerce", description: "Boosting online sales through custom commerce solutions.", imageUrl: "https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=800&auto=format&fit=crop" },
+    { id: 3, category: "ENTERPRISE", title: "HRMS Platform", description: "Helping enterprises manage employees with smarter workflows.", imageUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop" },
+    { id: 4, category: "FINANCE", title: "Fintech Innovation", description: "Building secure, scalable platforms for modern financial services.", imageUrl: "https://images.unsplash.com/photo-1639762681485-074b7f4ec651?q=80&w=800&auto=format&fit=crop" },
+    { id: 5, category: "HEALTH", title: "Healthcare Digitalization", description: "Improving patient outcomes through intelligent healthcare solutions.", imageUrl: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=800&auto=format&fit=crop" },
+    { id: 6, category: "INDUSTRY", title: "Manufacturing Automation", description: "Streamlining production processes with IoT and AI integration.", imageUrl: "https://images.unsplash.com/photo-1565439390118-c2b622af5981?q=80&w=800&auto=format&fit=crop" },
   ];
 
   const insightsData = [
-    { id: 1, category: "INSIGHTS", title: "Technology Blog", description: "Latest trends in AI, cloud, cybersecurity, and software engineering.", imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" },
-    { id: 2, category: "CASE STUDIES", title: "Case Studies", description: "Real projects. Real business results. Explore our impact across industries.", imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" },
-    { id: 3, category: "REPORTS", title: "Industry Reports", description: "Expert analysis across digital transformation and technology adoption.", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" },
-    { id: 4, category: "WEBINARS", title: "Tech Leadership Series", description: "Join our engineers and strategists as they discuss the future of digital architecture.", imageUrl: "https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?q=80&w=800&auto=format&fit=crop" }
+    { id: 1, category: "BLOG", title: "Technology Blog", description: "Latest trends in AI, cloud, cybersecurity, and software engineering. Stay updated with expert analysis and practical insights.", imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" },
+    { id: 2, category: "CASE STUDIES", title: "Case Studies", description: "Real projects. Real business results. Explore our impact across industries and see how we solve complex challenges.", imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" },
+    { id: 3, category: "REPORTS", title: "Industry Reports", description: "Expert analysis across digital transformation and technology adoption. Get data-driven insights to guide your strategy.", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" },
+    { id: 4, category: "WEBINARS", title: "Webinars & Events", description: "Join our expert sessions on emerging technologies and best practices. Learn from industry leaders and hands-on practitioners.", imageUrl: "https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?q=80&w=800&auto=format&fit=crop" },
+    { id: 5, category: "GUIDES", title: "Whitepapers & Guides", description: "In-depth resources on specific technology topics. Download our comprehensive guides to deepen your understanding.", imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop" },
+    { id: 6, category: "VIDEO", title: "Video Library", description: "Watch our technology demos, client testimonials, and expert talks. Visual content that makes complex topics easy to understand.", imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" }
   ];
 
   const industries = [
-    { id: 'banking', name: 'Banking & Finance', imageUrl: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=1200&auto=format&fit=crop' },
-    { id: 'healthcare', name: 'Healthcare', imageUrl: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1200&auto=format&fit=crop' },
-    { id: 'manufacturing', name: 'Manufacturing', imageUrl: 'https://images.unsplash.com/photo-1565439390118-c2b622af5981?q=80&w=1200&auto=format&fit=crop' },
-    { id: 'education', name: 'Education', imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1200&auto=format&fit=crop' },
-    { id: 'retail', name: 'Retail', imageUrl: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop' },
-    { id: 'realestate', name: 'Real Estate', imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200&auto=format&fit=crop' },
-    { id: 'insurance', name: 'Insurance', imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop' },
-    { id: 'logistics', name: 'Logistics', imageUrl: 'https://images.unsplash.com/photo-1586528116311-ad8ed79ec6a4?q=80&w=1200&auto=format&fit=crop' },
-    { id: 'hightech', name: 'High-Tech', imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop' },
-    { id: 'government', name: 'Government', imageUrl: 'https://images.unsplash.com/photo-1523292562811-8fa7962a78c8?q=80&w=1200&auto=format&fit=crop' },
+    { 
+      id: 'banking', 
+      name: 'Banking & Finance', 
+      description: 'Secure, compliant, and scalable solutions for modern financial institutions. From core banking to wealth management, we digitize your operations.', 
+      imageUrl: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=1200&auto=format&fit=crop' 
+    },
+    { 
+      id: 'healthcare', 
+      name: 'Healthcare', 
+      description: 'Patient-centric solutions that improve outcomes and streamline operations. Our healthcare platforms are HIPAA-compliant and user-friendly.', 
+      imageUrl: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1200&auto=format&fit=crop' 
+    },
+    { 
+      id: 'manufacturing', 
+      name: 'Manufacturing', 
+      description: 'Smart manufacturing solutions with IoT, automation, and predictive analytics. Optimize production, reduce downtime, and improve quality.', 
+      imageUrl: 'https://images.unsplash.com/photo-1565439390118-c2b622af5981?q=80&w=1200&auto=format&fit=crop' 
+    },
+    { 
+      id: 'education', 
+      name: 'Education', 
+      description: 'E-learning platforms and education management systems. We help educational institutions deliver better learning experiences.', 
+      imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1200&auto=format&fit=crop' 
+    },
+    { 
+      id: 'retail', 
+      name: 'Retail', 
+      description: 'Omnichannel retail solutions that boost sales and customer engagement. From ecommerce to inventory management, we cover it all.', 
+      imageUrl: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop' 
+    },
+    { 
+      id: 'realestate', 
+      name: 'Real Estate', 
+      description: 'Property management platforms and real estate marketplaces. Simplify property listings, transactions, and customer relationships.', 
+      imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200&auto=format&fit=crop' 
+    },
+    { 
+      id: 'insurance', 
+      name: 'Insurance', 
+      description: 'Digital insurance platforms for claims management, underwriting, and customer engagement. Modernize your insurance operations.', 
+      imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop' 
+    },
+    { 
+      id: 'logistics', 
+      name: 'Logistics', 
+      description: 'Supply chain solutions that improve visibility and efficiency. Track shipments, optimize routes, and reduce operational costs.', 
+      imageUrl: 'https://images.unsplash.com/photo-1586528116311-ad8ed79ec6a4?q=80&w=1200&auto=format&fit=crop' 
+    },
+    { 
+      id: 'hightech', 
+      name: 'High Tech', 
+      description: 'Cutting-edge solutions for technology companies. From SaaS platforms to hardware integration, we support high-tech innovation.', 
+      imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop' 
+    },
+    { 
+      id: 'government', 
+      name: 'Government', 
+      description: 'Secure and transparent digital solutions for government services. Improve citizen engagement and operational efficiency.', 
+      imageUrl: 'https://images.unsplash.com/photo-1523292562811-8fa7962a78c8?q=80&w=1200&auto=format&fit=crop' 
+    },
   ];
 
   const whyChooseUsFeatures = [
-    { title: "AI-First Innovation", description: "Building intelligent software powered by emerging technologies." },
-    { title: "Enterprise Expertise", description: "Scalable digital solutions designed for growing businesses." },
-    { title: "Experienced Team", description: "Designers, engineers, AI specialists working together." },
-    { title: "End-to-End Delivery", description: "From strategy to deployment and long-term support." }
+    { title: "AI-First Innovation", description: "Building intelligent software powered by emerging technologies. We leverage AI to create smarter, more efficient solutions." },
+    { title: "Experienced Team", description: "Designers, engineers, AI specialists working together. Our multidisciplinary team brings diverse expertise to every project." },
+    { title: "Enterprise Expertise", description: "Scalable digital solutions designed for growing businesses. We understand enterprise challenges and build accordingly." },
+    { title: "End-to-End Delivery", description: "From strategy to deployment and long-term support. We are with you at every stage of your digital journey." },
+    { title: "Client-Centric Approach", description: "Your success is our success. We prioritize your business goals and deliver solutions that drive real results." },
+    { title: "Proven Track Record", description: "200+ projects delivered with 98% client satisfaction. Our results speak for themselves." }
   ];
 
   const processSteps = [
-    { num: "01", title: "Discover", description: "Understanding your business goals, challenges, and market context." },
-    { num: "02", title: "Design", description: "Creating user-focused experiences grounded in research." },
-    { num: "03", title: "Develop", description: "Building scalable digital products with modern technology stacks." },
-    { num: "04", title: "Test", description: "Ensuring quality, security, and performance at every layer." },
-    { num: "05", title: "Deploy", description: "Launching with confidence through automated CI/CD pipelines." },
-    { num: "06", title: "Support", description: "Continuous improvement, monitoring, and long-term maintenance." }
+    { num: "01", title: "Discover", description: "We take time to understand your business goals, challenges, and market context before we build anything." },
+    { num: "02", title: "Design", description: "We create user-focused experiences that are grounded in research and real user needs." },
+    { num: "03", title: "Develop", description: "We build scalable digital products using modern and reliable technology stacks." },
+    { num: "04", title: "Test", description: "We ensure quality, security, and performance at every layer of development." },
+    { num: "05", title: "Deploy", description: "We launch with confidence using automated CI/CD pipelines for smooth delivery." },
+    { num: "06", title: "Support", description: "We provide continuous improvement, monitoring, and long-term maintenance support." }
   ];
 
-  // State to track which industry is currently selected
+  const faqs = [
+    { q: "What does Capyngen do?", a: "Capyngen is a leading IT company that provides custom software development, AI solutions, cloud services, and digital transformation consulting to businesses across industries." },
+    { q: "Where is Capyngen located?", a: "Capyngen is a trusted IT company in Gurugram, serving clients across India and international markets." },
+    { q: "What industries does Capyngen serve?", a: "We serve banking, healthcare, manufacturing, education, retail, real estate, insurance, logistics, high tech, and government sectors." },
+    { q: "Is Capyngen a good IT company for startups?", a: "Yes, we are a preferred IT company for startups, offering cost-effective and scalable solutions for new businesses." },
+    { q: "What software development services do you offer?", a: "We offer custom web, mobile, and enterprise application development with end-to-end delivery from architecture to launch." },
+    { q: "Does Capyngen provide AI solutions?", a: "Yes, we build intelligent solutions powered by machine learning and generative AI to automate operations and personalize at scale." },
+    { q: "What cloud services do you offer?", a: "We provide modern cloud architecture, DevOps pipelines, infrastructure-as-code, and cloud migration services." },
+    { q: "How is Capyngen different from other IT companies?", a: "We combine deep technology expertise with business acumen to build digital products that win in the market, not just work." },
+    { q: "Do you offer IT consulting services?", a: "Yes, we are a full-service IT consulting and services company providing strategic technology guidance to businesses." },
+    { q: "Can Capyngen help with digital transformation?", a: "Absolutely. We guide businesses through every step of their digital transformation journey with tailored solutions." },
+    { q: "What is the typical project delivery time?", a: "Project timelines vary based on scope. We provide clear timelines during initial discussions and deliver on time." },
+    { q: "Do you provide post-launch support?", a: "Yes, we offer continuous improvement, monitoring, and long-term maintenance through automated CI/CD pipelines." },
+    { q: "Is Capyngen a reliable IT services company?", a: "Yes, with 200+ projects delivered and 98% client satisfaction, we are a reliable IT services company." },
+    { q: "How can I start a project with Capyngen?", a: "Simply contact us for a free consultation. We will understand your goals and design a tailored technology roadmap." },
+    { q: "Does Capyngen offer career opportunities?", a: "Yes, we are always looking for talented engineers, designers, marketers, and AI specialists. Explore careers on our website." }
+  ];
+
+  // States
   const [activeIndustryId, setActiveIndustryId] = useState(industries[0].id);
   const activeIndustry = industries.find(ind => ind.id === activeIndustryId) || industries[0];
+  
+  // State for Accordion FAQ
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0); // Default open first item
 
   return (
     <div className="w-full bg-white font-sans text-slate-900">
@@ -124,9 +222,9 @@ const HomePage: React.FC = () => {
         </div>
 
         <div className="relative z-10 mx-auto flex h-full min-h-[75vh] w-full max-w-[1400px] flex-col justify-between px-6 lg:px-12 xl:px-16">
-          <div className="max-w-4xl pt-12 md:pt-24">
+          <div className="max-w-4xl pt-12 md:pt-1">
             <p className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-[#00e5ff] sm:text-sm">
-              Building the future of digital business
+              Building the Future of Digital Business
             </p>
             <h1 className="mb-6 font-['Syne',sans-serif] text-[48px] font-normal leading-[1.2] text-white md:text-[72px] md:leading-[77.8px] tracking-[0px]">
               AI. Software.<br />
@@ -134,7 +232,7 @@ const HomePage: React.FC = () => {
               Everything Your Business Needs to Grow.
             </h1>
             <p className="mb-10 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg lg:text-xl">
-              we build intelligent digital experiences that help businesses innovate, scale, and lead.
+              We create smart digital solutions that empower businesses to innovate, grow, and stay ahead of the competition. As a leading IT Company, we combine deep technical expertise with business understanding to deliver results that truly matter.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <button className="flex items-center justify-center gap-2 rounded-sm bg-[#2563eb] px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700">
@@ -180,7 +278,7 @@ const HomePage: React.FC = () => {
               Latest at Capyngen
             </h2>
             <p className="text-base text-slate-500 sm:text-lg">
-              Stay updated with our newest innovations, technology insights, product launches, success stories, and company announcements.
+              Keep up with our latest breakthroughs, tech insights, product releases, client success stories, and official company updates. As a leading information technology company in India, we continuously push the boundaries of what's possible.
             </p>
           </div>
           <div className="flex shrink-0 gap-3">
@@ -250,6 +348,49 @@ const HomePage: React.FC = () => {
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-[#3b82f6] text-white transition-transform group-hover:translate-x-1">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                     </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================
+          SUCCESS STORIES
+          ========================================= */}
+      <section className="w-full bg-white py-20 px-6 lg:px-12 xl:px-16 border-t border-slate-100">
+        <div className="mx-auto w-full max-w-[1400px]">
+          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <h2 className="font-['Syne',sans-serif] text-4xl font-semibold text-slate-900 md:text-5xl">
+              Success Stories
+            </h2>
+            <div className="flex shrink-0 gap-3">
+              <button onClick={() => scrollSuccessStories('left')} className="flex h-12 w-12 items-center justify-center bg-white border border-slate-200 text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900 focus:outline-none shadow-sm">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+              </button>
+              <button onClick={() => scrollSuccessStories('right')} className="flex h-12 w-12 items-center justify-center bg-white border border-slate-200 text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900 focus:outline-none shadow-sm">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+              </button>
+            </div>
+          </div>
+
+          <div ref={successStoriesContainerRef} className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
+            {successStories.map((story) => (
+              <div key={story.id} className="group flex w-[300px] shrink-0 snap-start cursor-pointer flex-col bg-white border border-slate-200 transition-all hover:shadow-xl sm:w-[320px] md:w-[350px]">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
+                  <img src={story.imageUrl} alt={story.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <div className="flex flex-1 flex-col p-6 lg:p-8">
+                  <span className="mb-3 text-[11px] font-bold tracking-widest text-[#2563eb] uppercase">{story.category}</span>
+                  <h3 className="mb-3 text-xl font-bold leading-snug text-slate-900">{story.title}</h3>
+                  <p className="flex-1 text-sm leading-relaxed text-slate-500">{story.description}</p>
+                  <div className="my-5 h-[1px] w-full bg-slate-100"></div>
+                  <div className="flex w-full items-center justify-between">
+                    <span className="text-sm font-bold text-slate-900">Read more</span>
+                    <svg className="text-[#2563eb] transition-transform group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -333,34 +474,52 @@ const HomePage: React.FC = () => {
               Trusted Across Industries
             </h2>
 
+            {/* Accordion-Style Industry List */}
             <div className="flex flex-col">
               {industries.map((industry) => {
                 const isActive = activeIndustryId === industry.id;
                 
                 return (
-                  <button
-                    key={industry.id}
-                    onClick={() => setActiveIndustryId(industry.id)}
-                    className={`group flex items-center justify-between border-b py-5 text-left transition-all duration-300 ${
+                  <div 
+                    key={industry.id} 
+                    className={`border-b transition-colors duration-300 ${
                       isActive ? 'border-blue-300' : 'border-slate-100 hover:border-slate-300'
                     }`}
                   >
-                    <span 
-                      className={`text-base font-medium md:text-lg transition-colors ${
-                        isActive ? 'text-[#2563eb]' : 'text-slate-600 group-hover:text-slate-900'
+                    <button
+                      onClick={() => setActiveIndustryId(industry.id)}
+                      className="group flex w-full items-center justify-between py-5 text-left transition-all duration-300 focus:outline-none"
+                    >
+                      <span 
+                        className={`text-base font-medium md:text-lg transition-colors ${
+                          isActive ? 'text-[#2563eb]' : 'text-slate-600 group-hover:text-slate-900'
+                        }`}
+                      >
+                        {industry.name}
+                      </span>
+                      <svg 
+                        className={`transition-transform duration-300 ${
+                          isActive ? 'rotate-90 text-[#2563eb]' : 'text-slate-300 group-hover:text-slate-400'
+                        }`} 
+                        width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                      >
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </button>
+                    
+                    {/* Smooth height transition utilizing CSS Grid */}
+                    <div
+                      className={`grid transition-all duration-300 ease-in-out ${
+                        isActive ? 'grid-rows-[1fr] opacity-100 pb-5' : 'grid-rows-[0fr] opacity-0 pb-0'
                       }`}
                     >
-                      {industry.name}
-                    </span>
-                    <svg 
-                      className={`transition-colors ${
-                        isActive ? 'text-[#2563eb]' : 'text-slate-300 group-hover:text-slate-400'
-                      }`} 
-                      width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </button>
+                      <div className="overflow-hidden pr-8 md:pr-12">
+                        <p className="text-sm leading-relaxed text-slate-500 md:text-base">
+                          {industry.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 );
               })}
             </div>
@@ -381,11 +540,11 @@ const HomePage: React.FC = () => {
                 Why Choose Capyngen
               </span>
               <h2 className="mb-6 font-['Syne',sans-serif] text-4xl font-semibold leading-tight md:text-5xl">
-                Built Different.<br />
-                Delivered Different.
+                Built Differently.<br />
+                Delivered Differently.
               </h2>
               <p className="mb-10 max-w-lg text-base leading-relaxed text-slate-400 md:text-lg">
-                We combine deep technology expertise with business acumen to build digital products that don't just work — they win in the market.
+                We bring together deep technical knowledge and sharp business insight to create digital products that don't just function—they dominate the market. As a leading IT Company, we are committed to your success.
               </p>
               <button className="flex w-fit items-center gap-2 rounded-sm bg-[#2563eb] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700">
                 Learn more
@@ -474,7 +633,7 @@ const HomePage: React.FC = () => {
             </h2>
             
             <p className="mb-10 text-base leading-relaxed text-slate-300 md:text-lg">
-              Join talented engineers, designers, marketers, AI specialists, and innovators creating technology that makes a real-world impact.
+              Become part of a team of skilled engineers, creative designers, strategic marketers, AI experts, and forward-thinking innovators who are building technology that creates meaningful change in the real world. As a leading software IT Company, we offer exciting career opportunities.
             </p>
             
             <button className="flex w-fit items-center justify-center gap-3 rounded-sm bg-[#2563eb] px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700">
@@ -488,7 +647,67 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================
-          CTA SECTION (Ready to Transform) (New)
+          FAQ SECTION
+          ========================================= */}
+      <section className="w-full bg-white py-24 px-6 lg:px-12 xl:px-16">
+        <div className="mx-auto w-full max-w-4xl">
+          
+          {/* Header with Background Blur */}
+          <div className="relative mb-16 flex justify-center py-6">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-24 w-48 rounded-full bg-[#3b82f6]/30 blur-[50px]"></div>
+            <h2 className="relative z-10 font-['Syne',sans-serif] text-5xl font-bold text-slate-800 md:text-6xl tracking-tight">
+              FAQs
+            </h2>
+          </div>
+
+          {/* Accordion List */}
+          <div className="flex flex-col">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaqIndex === index;
+              return (
+                <div key={index} className="border-b border-slate-200 py-6">
+                  <button
+                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                    className="group flex w-full items-center justify-between text-left focus:outline-none"
+                  >
+                    <span
+                      className={`pr-6 text-base font-semibold transition-colors sm:text-lg ${
+                        isOpen ? 'text-[#0ea5e9]' : 'text-slate-700 group-hover:text-slate-900'
+                      }`}
+                    >
+                      {faq.q}
+                    </span>
+                    <span
+                      className={`flex-shrink-0 text-2xl font-light transition-colors ${
+                        isOpen ? 'text-[#0ea5e9]' : 'text-slate-400 group-hover:text-slate-600'
+                      }`}
+                    >
+                      {isOpen ? '−' : '+'}
+                    </span>
+                  </button>
+                  
+                  {/* Smooth height transition utilizing CSS Grid */}
+                  <div
+                    className={`grid transition-all duration-300 ease-in-out ${
+                      isOpen ? 'mt-4 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                    }`}
+                  >
+                    <div className="overflow-hidden pr-8 sm:pr-12">
+                      <p className="text-sm leading-relaxed text-slate-500 sm:text-base">
+                        {faq.a}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          
+        </div>
+      </section>
+
+      {/* =========================================
+          CTA SECTION (Ready to Transform)
           ========================================= */}
       <section className="w-full bg-[#050b14] py-24 px-6 lg:px-12 xl:px-16">
         <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center justify-between gap-16 lg:flex-row lg:gap-20">
@@ -501,7 +720,7 @@ const HomePage: React.FC = () => {
             </h2>
             
             <p className="mb-10 text-base leading-relaxed text-slate-400 md:text-lg">
-              Let's build intelligent digital products together. Our experts are ready to understand your goals and design a tailored technology roadmap.
+              Let's collaborate to build intelligent digital solutions that drive results. Our team is ready to listen to your vision, understand your objectives, and craft a customized technology strategy that moves your business forward. As a full service IT Comapny, we provide end-to-end solutions for your business needs.
             </p>
             
             <button className="flex w-fit items-center justify-center gap-3 rounded-sm bg-[#3b82f6] px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-blue-600">

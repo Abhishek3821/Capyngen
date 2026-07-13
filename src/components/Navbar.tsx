@@ -151,6 +151,29 @@ const Navbar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<string | null>(null);
 
+  // --- Scroll state logic ---
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Close mobile menu or dropdowns when scrolling down to keep UI clean
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setIsVisible(false);
+        setActiveDropdown(null);
+        if (mobileOpen) setMobileOpen(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY, mobileOpen]);
+
   // Close everything whenever the route changes.
   useEffect(() => {
     setActiveDropdown(null);
@@ -187,28 +210,29 @@ const Navbar: React.FC = () => {
 
   return (
     <header
-      className="sticky top-0 z-50 font-sans bg-white shadow-sm"
+      className={`sticky top-0 z-50 font-sans bg-white shadow-sm transition-transform duration-300 ease-in-out ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
       onMouseLeave={() => setActiveDropdown(null)}
     >
       {/* Top Navbar */}
-      <nav className="relative z-20 mx-auto flex w-full max-w-[1400px] items-center justify-between gap-6 bg-white px-5 lg:px-8">
+      <nav className="relative z-20 mx-auto flex w-full max-w-[1400px] items-center justify-between gap-4 sm:gap-6 bg-white px-4 sm:px-6 lg:px-8 py-3 lg:py-0">
         
-        {/* Logo */}
+        {/* Responsive Logo Container */}
         <Link
           to="/"
-          className="flex items-center gap-2 py-4 text-xl font-bold tracking-tight text-gray-900"
+          className="flex items-center gap-2 lg:py-4 flex-shrink-0"
           onMouseEnter={() => setActiveDropdown(null)}
         >
           <img 
             src={Logo} 
             alt="Capyngen Logo" 
-            className="h-8 w-auto object-contain" 
+            className="h-7 xs:h-8 sm:h-9 md:h-10 lg:h-10 xl:h-11 w-auto object-contain transition-all duration-200" 
           />
-        
         </Link>
 
-        {/* Center Links (desktop) */}
-        <div className="hidden items-center gap-8 lg:flex">
+        {/* Center Links (desktop / large screens) */}
+        <div className="hidden items-center gap-6 xl:gap-8 lg:flex flex-grow justify-center">
           {mainLinks.map((item) =>
             item.dropdown ? (
               <button
@@ -241,23 +265,23 @@ const Navbar: React.FC = () => {
           )}
         </div>
 
-        {/* Right side */}
-        <div className="flex items-center gap-4">
+        {/* Right side (Contact Us + Mobile Toggle) */}
+        <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
           <Link
             to="/contact-us"
             onMouseEnter={() => setActiveDropdown(null)}
-            className="hidden rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 sm:block"
+            className="hidden rounded-full bg-blue-600 px-4 sm:px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 md:block whitespace-nowrap"
           >
             Contact Us
           </Link>
 
-          {/* Mobile toggle */}
+          {/* Mobile toggle (visible below lg) */}
           <button
             type="button"
             aria-label="Toggle navigation"
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((open) => !open)}
-            className="rounded-md p-2 text-gray-800 hover:bg-gray-100 lg:hidden"
+            className="rounded-md p-2 text-gray-800 hover:bg-gray-100 lg:hidden focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <MenuIcon open={mobileOpen} />
           </button>
@@ -432,7 +456,7 @@ const Navbar: React.FC = () => {
               </NavLink>
             ))}
 
-          <div className="px-5 py-4">
+          <div className="px-5 py-4 mb-4">
             <Link
               to="/contact-us"
               className="block rounded-full bg-blue-600 px-5 py-2.5 text-center text-sm font-semibold text-white hover:bg-blue-700"

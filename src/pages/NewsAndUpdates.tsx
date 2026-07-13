@@ -1,110 +1,13 @@
-import { useState } from 'react';
-
-// --- MOCK DATA ---
-const newsData = [
-  {
-    id: 1,
-    label: 'NEWS ALERT',
-    title: 'Capynge deepens partnership with AWS to power AI-native autonomous enterprises',
-    type: 'News Alert',
-    date: '24 Apr 2026',
-    image: '/api/placeholder/400/250'
-  },
-  {
-    id: 2,
-    label: 'NEWS ALERT',
-    title: 'Capynge study reveals higher education at a digital crossroads: 61% of universities lag in digital maturity',
-    type: 'News Alert',
-    date: '23 Mar 2026',
-    image: '/api/placeholder/400/250'
-  },
-  {
-    id: 3,
-    label: 'NEWS ALERT',
-    title: 'Fortune Names Capynge to World\'s Most Admired Companies™ List for Second Straight Year',
-    type: 'News Alert',
-    date: '03 Mar 2026',
-    image: '/api/placeholder/400/250'
-  },
-  {
-    id: 4,
-    label: 'NEWS ALERT',
-    title: '22-year-old from Brazil wins Capynge CodeSprint™ 2026 as Capynge sets new records for world\'s largest coding competition',
-    type: 'News Alert',
-    date: '27 Feb 2026',
-    image: '/api/placeholder/400/250'
-  },
-  {
-    id: 5,
-    label: 'NEWS ALERT',
-    title: 'Capynge Youth Innovation Hackathon sees 2,000 students build 1,200 working prototypes in 90 minutes at Global AI Impact Summit 2026',
-    type: 'News Alert',
-    date: '18 Feb 2026',
-    image: '/api/placeholder/400/250'
-  },
-  {
-    id: 6,
-    label: 'NEWS ALERT',
-    title: 'Capynge AI Empowerment Program trains 2,100 rural women entrepreneurs at the Global AI Impact Summit',
-    type: 'News Alert',
-    date: '17 Feb 2026',
-    image: '/api/placeholder/400/250'
-  },
-  {
-    id: 7,
-    label: 'NEWS ALERT',
-    title: 'Capynge and Microsoft Collaborate to Enhance Autonomous Operations for Buildings and Industries with AI',
-    type: 'News Alert',
-    date: '11 Feb 2026',
-    image: '/api/placeholder/400/250'
-  },
-  {
-    id: 8,
-    label: 'NEWS ALERT',
-    title: 'Capynge Ranks No. 1 in Customer Satisfaction among Europe\'s Leading Large IT Services Providers',
-    type: 'News Alert',
-    date: '02 Feb 2026',
-    image: '/api/placeholder/400/250'
-  },
-  {
-    id: 9,
-    label: 'NEWS ALERT',
-    title: 'Capynge Named Top Employer in Europe for the 8th Consecutive Year by the Top Employers Institute',
-    type: 'News Alert',
-    date: '28 Jan 2026',
-    image: '/api/placeholder/400/250'
-  },
-  {
-    id: 10,
-    label: 'PRESS RELEASE',
-    title: 'Capynge Automotive Digital Intelligence Platform launched at CES 2026',
-    type: 'Press Release',
-    date: '16 Jan 2026',
-    image: '/api/placeholder/400/250'
-  },
-  {
-    id: 11,
-    label: 'NEWS ALERT',
-    title: 'Newsweek Names Capynge America\'s Most Reliable IT Services Company in 2026 Ranking',
-    type: 'News Alert',
-    date: '16 Jan 2026',
-    image: '/api/placeholder/400/250'
-  },
-  {
-    id: 12,
-    label: 'NEWS ALERT',
-    title: 'Capynge Partners with Workday to Unlock Power of Human Capital and Supercharge Workplaces with AI',
-    type: 'News Alert',
-    date: '19 Dec 2025',
-    image: '/api/placeholder/400/250'
-  }
-];
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { BlogService, formatBlogDate, type Blog } from '../services/blogService';
+import { createSlug } from '../utils/slug';
 
 // --- HERO COMPONENT ---
 const NewsHero = () => {
   return (
-    <section className="relative w-full h-[60vh] min-h-[450px] xl:min-h-[600px] overflow-hidden flex items-center">
-      <div 
+    <section className="relative w-full h-[50vh] min-h-[400px] xl:min-h-[500px] overflow-hidden flex items-center">
+      <div
         className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url('/image_341766.jpg')` }}
       />
@@ -112,19 +15,19 @@ const NewsHero = () => {
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <nav className="flex items-center text-xs sm:text-sm font-medium tracking-[0.2em] text-slate-300 mb-6 sm:mb-8">
+          <nav className="flex items-center text-xs sm:text-sm font-semibold tracking-widest text-slate-300 mb-6 sm:mb-8 uppercase">
             <a href="/who-we-are" className="hover:text-white transition-colors duration-300">
-              WHO WE ARE
+              Who We Are
             </a>
-            <svg className="w-4 h-4 mx-2 sm:mx-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 mx-2 sm:mx-3 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-            <span className="text-white">NEWSROOM</span>
+            <span className="text-white">Newsroom</span>
           </nav>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-semibold text-white tracking-tight mb-4 sm:mb-6 leading-none">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-semibold text-white tracking-tight mb-4 sm:mb-6 leading-none">
             News Alerts
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-slate-200 font-light leading-relaxed max-w-lg md:max-w-xl">
+          <p className="text-base sm:text-lg md:text-xl text-slate-300 font-light leading-relaxed max-w-lg">
             Get the latest news, events, and announcements about Capynge
           </p>
         </div>
@@ -135,79 +38,136 @@ const NewsHero = () => {
 
 // --- GRID COMPONENT ---
 const NewsGrid = () => {
+  const navigate = useNavigate();
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('All');
-  const filters = ['All', 'News Alert', 'Events'];
+
+  // Fetch blogs from the API
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        setLoading(true);
+        const list = await BlogService.listAll();
+        setBlogs(list);
+      } catch (err) {
+        console.error('Blog fetch failed', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, []);
+
+  // Filters are built from the categories that exist in the API data
+  const filters = useMemo(() => {
+    const categories = new Set<string>();
+    blogs.forEach((item) => {
+      if (item.category) categories.add(item.category);
+    });
+    return ['All', ...Array.from(categories)];
+  }, [blogs]);
 
   // Basic filtering logic
-  const filteredData = newsData.filter(item => {
+  const filteredData = blogs.filter((item) => {
     if (activeFilter === 'All') return true;
-    return item.type === activeFilter || item.label.toLowerCase().includes(activeFilter.toLowerCase());
+    return item.category === activeFilter || item.tags?.includes(activeFilter);
   });
 
+  const openBlog = (blog: Blog) => {
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
+
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <section className="w-full bg-white pb-16 lg:pb-24">
       
-      {/* Filters */}
-      <div className="flex items-center space-x-3 sm:space-x-4 mb-10 overflow-x-auto pb-2 scrollbar-hide">
-        <span className="text-xs font-semibold tracking-widest text-slate-500 uppercase mr-2">
-          Filters
-        </span>
-        {filters.map(filter => (
-          <button
-            key={filter}
-            onClick={() => setActiveFilter(filter)}
-            className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
-              activeFilter === filter 
-                ? 'bg-[#0a1128] text-white shadow-md' 
-                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-            }`}
-          >
-            {filter}
-          </button>
-        ))}
+      {/* Full-width Filter Bar */}
+      <div className="w-full border-b border-gray-100 bg-white sticky top-0 z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center space-x-4 sm:space-x-6 overflow-x-auto scrollbar-hide">
+          <span className="text-[11px] font-semibold tracking-[0.15em] text-gray-400 uppercase whitespace-nowrap">
+            Filters
+          </span>
+          <div className="flex space-x-3">
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors duration-200 ${
+                  activeFilter === filter
+                    ? 'bg-[#0a1128] text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* Section Title */}
-      <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-10 tracking-tight">
-        Discover Capynge News Alerts
-      </h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 lg:pt-14">
+        {/* Section Title */}
+        <h2 className="text-3xl md:text-[2.5rem] font-medium text-gray-900 mb-10 tracking-tight">
+          Discover Capynge News Alerts
+        </h2>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-        {filteredData.map((item) => (
-          <article key={item.id} className="group flex flex-col cursor-pointer h-full">
-            {/* Image */}
-            <div className="w-full h-48 md:h-40 lg:h-48 mb-5 overflow-hidden rounded-xl">
-              <img 
-                src={item.image} 
-                alt={item.title}
-                className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            
-            {/* Meta Label */}
-            <span className="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-500 mb-3 uppercase">
-              {item.label}
-            </span>
-            
-            {/* Title */}
-            <h3 className="text-base sm:text-lg font-semibold text-slate-900 leading-snug mb-3 group-hover:text-blue-700 transition-colors line-clamp-4">
-              {item.title}
-            </h3>
-            
-            {/* Footer */}
-            <div className="mt-auto pt-4 flex items-center text-xs text-slate-500">
-              <span className="font-medium">{item.type}</span>
-              <span className="mx-2">|</span>
-              <span>{item.date}</span>
-            </div>
-          </article>
-        ))}
-      </div>
+        {loading ? (
+          /* Skeleton Loader Grid */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="animate-pulse flex flex-col h-full">
+                <div className="w-full h-48 bg-gray-200 rounded-xl mb-4"></div>
+                <div className="w-24 h-3 bg-gray-200 rounded mb-3"></div>
+                <div className="w-full h-5 bg-gray-200 rounded mb-2"></div>
+                <div className="w-3/4 h-5 bg-gray-200 rounded mb-4"></div>
+                <div className="w-32 h-3 bg-gray-200 rounded mt-auto"></div>
+              </div>
+            ))}
+          </div>
+        ) : filteredData.length === 0 ? (
+          /* Empty State */
+          <div className="text-center py-20">
+            <p className="text-lg text-gray-500">No news found for this category.</p>
+          </div>
+        ) : (
+          /* News Grid */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
+            {filteredData.map((item) => (
+              <article
+                key={item._id}
+                onClick={() => openBlog(item)}
+                className="group flex flex-col cursor-pointer h-full"
+              >
+                {/* Image Container */}
+                <div className="w-full h-48 mb-4 overflow-hidden rounded-xl bg-gray-100">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
 
-      {/* Bottom Results Count */}
-      <div className="mt-16 pt-6 border-t border-slate-200 flex items-center text-sm text-slate-500">
-        <p>{filteredData.length} results</p>
+                {/* Meta Label */}
+                <span className="text-[10px] font-semibold tracking-widest text-gray-400 mb-2 uppercase">
+                  {item.group || item.category || 'News Alert'}
+                </span>
+
+                {/* Title */}
+                <h3 className="text-base font-semibold text-gray-900 leading-snug mb-3 group-hover:text-blue-700 transition-colors line-clamp-4">
+                  {item.title}
+                </h3>
+
+                {/* Footer */}
+                <div className="mt-auto pt-1 flex items-center text-[11px] font-medium text-gray-400">
+                  <span>{item.category || 'News Alert'}</span>
+                  <span className="mx-1.5">|</span>
+                  <span>{formatBlogDate(item.date || item.createdAt)}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
