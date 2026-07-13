@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { type FormEvent } from 'react';
 
 const ContactUsFullScreen: React.FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
