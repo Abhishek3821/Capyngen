@@ -207,7 +207,7 @@ const HomePage: React.FC = () => {
       {/* =========================================
           HERO SECTION
           ========================================= */}
-      <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-slate-950 pt-20 pb-16">
+      <section className="relative flex min-h-[calc(100vh-80px)] w-full items-center justify-center overflow-hidden bg-slate-950 pt-10 pb-16 md:pt-16">
         <div
           className="absolute inset-0 z-0"
           style={{
@@ -222,7 +222,7 @@ const HomePage: React.FC = () => {
         </div>
 
         <div className="relative z-10 mx-auto flex h-full min-h-[75vh] w-full max-w-[1400px] flex-col justify-between px-6 lg:px-12 xl:px-16">
-          <div className="max-w-4xl pt-12 md:pt-1">
+          <div className="max-w-4xl">
             <p className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-[#00e5ff] sm:text-sm">
               Building the Future of Digital Business
             </p>
