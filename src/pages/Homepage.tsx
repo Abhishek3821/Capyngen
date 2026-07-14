@@ -467,10 +467,13 @@ const HomePage: React.FC = () => {
           </div>
 
           <div className="flex flex-col pt-4">
-            <span className="mb-4 text-xs font-bold tracking-widest text-[#2563eb] uppercase">
-              INDUSTRIES WE SERVE
-            </span>
-            <h2 className="mb-10 font-['Syne',sans-serif] text-4xl font-semibold text-slate-900 md:text-5xl">
+            {/* UPDATED: "INDUSTRIES WE SERVE" acts as the main heading (h2) structurally while keeping its eyebrow/kicker style, and "Trusted Across Industries" acts as the subheading visual layout below it. */}
+            
+            <p className="mb-10 font-['Syne',sans-serif] text-4xl font-semibold text-slate-900 md:text-5xl lg:text-[56px] leading-[1.1]">
+             INDUSTRIES WE SERVE 
+              
+            </p>
+            <h2 className="mb-4 text-xs font-bold tracking-widest text-[#2563eb] uppercase">
               Trusted Across Industries
             </h2>
 

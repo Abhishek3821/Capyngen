@@ -1,3 +1,5 @@
+import React, { useRef } from 'react';
+
 // --- Section 1: E-commerce Hero ---
 const EcommerceHero = () => {
   return (
@@ -14,20 +16,18 @@ const EcommerceHero = () => {
           
           {/* Eyebrow / Category */}
           <div className="text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase mb-4 text-gray-300 border-b border-gray-500 pb-2 inline-block">
-            INDUSTRIES / E-COMMERCE
+            E-Commerce
           </div>
 
           {/* Headline */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 tracking-tight">
-            Powering the Next Era of Digital <br className="hidden md:block" />
-            Commerce
+            Building the Future of Digital Retail with <br className="hidden md:block" />
+            AI-Powered Solutions
           </h1>
 
           {/* Sub-headline */}
           <p className="text-sm md:text-base text-gray-300 mb-10 max-w-xl leading-relaxed">
-            Capyngen helps e-commerce businesses scale intelligently—personalizing 
-            every customer interaction, optimizing fulfillment, and transforming data into 
-            competitive advantage through AI-first digital platforms.
+            Capyngen empowers e-commerce solutions businesses to scale intelligently—delivering personalized shopping experiences, streamlining supply chain operations, and unlocking actionable insights through AI-first digital platforms.
           </p>
 
           {/* Call to Action Buttons */}
@@ -59,20 +59,16 @@ const AIDrivenCommerce = () => {
           {/* Left Column: Text Content */}
           <div className="flex flex-col justify-center text-white">
             <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold leading-tight mb-6 tracking-tight">
-              AI-Driven Commerce: Personalization <br className="hidden lg:block"/>
-              at Every Touchpoint
+              AI-Powered Commerce: Personalization <br className="hidden lg:block"/>
+              Across Every Channel
             </h2>
             
             <p className="text-white/90 text-sm md:text-base leading-relaxed mb-8">
-              Modern commerce demands real-time personalization, frictionless checkout, and 
-              lightning-fast fulfillment. Capyngen's AI engines power hyper-personalized product 
-              recommendations, dynamic pricing strategies, and intelligent order management 
-              systems—enabling retailers to convert more, retain longer, and grow profitably 
-              across digital and physical channels.
+              Today's shoppers expect tailored experiences, seamless checkout processes, and rapid delivery. As a leading ecommerce development company, we create platforms that drive intelligent product suggestions, adaptive pricing models, and automated order routing through cutting-edge e-commerce solutions.
             </p>
 
             <a href="#" className="flex items-center text-white font-medium text-sm hover:text-blue-100 transition-colors w-fit group border-b border-white pb-1">
-              Explore solutions 
+              Explore Solutions 
               <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -96,17 +92,41 @@ const AIDrivenCommerce = () => {
 
 // --- Section 3: E-Commerce Insights ---
 const EcommerceInsights = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = scrollRef.current.clientWidth;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const insights = [
     {
-      title: "Hyper-Personalization with AI Recommendation Engines",
+      title: "AI-Driven Product Recommendations",
       image: "image_e0dc3f_card1.jpg", 
     },
     {
-      title: "Dynamic Pricing in a Competitive Marketplace",
+      title: "Smart Pricing in Competitive Markets",
       image: "image_e0dc3f_card2.jpg", 
     },
     {
-      title: "Conversational Commerce and AI-Powered Chatbots",
+      title: "AI-Powered Shopping Assistants",
+      image: "image_e0dc3f_card3.jpg", 
+    },
+    {
+      title: "Behavioral Customer Analytics",
+      image: "image_e0dc3f_card1.jpg", 
+    },
+    {
+      title: "Omnichannel Shopping Experience",
+      image: "image_e0dc3f_card2.jpg", 
+    },
+    {
+      title: "Ethical Commerce & Transparency",
       image: "image_e0dc3f_card3.jpg", 
     }
   ];
@@ -115,17 +135,40 @@ const EcommerceInsights = () => {
     <section className="bg-white py-16 md:py-24 w-full">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
-        {/* Header */}
-        <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-black mb-10 tracking-tight">
-          E-Commerce Insights
-        </h2>
+        {/* Header with Navigation Buttons */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+          <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-black tracking-tight">
+            E-Commerce Insights
+          </h2>
+          
+          {/* Scroll Buttons */}
+          <div className="flex gap-2">
+            <button 
+              onClick={() => scroll('left')} 
+              className="w-10 h-10 border border-gray-200 bg-white flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors cursor-pointer"
+              aria-label="Scroll left"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button 
+              onClick={() => scroll('right')} 
+              className="w-10 h-10 border border-gray-200 bg-white flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors cursor-pointer"
+              aria-label="Scroll right"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+        </div>
 
-        {/* Grid Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {/* Scrollable Container */}
+        <div 
+          ref={scrollRef}
+          className="flex overflow-x-auto gap-6 lg:gap-8 pb-8 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        >
           {insights.map((card, index) => (
             <div 
               key={index} 
-              className="relative group rounded-lg overflow-hidden h-[420px] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer bg-gray-100"
+              className="relative group rounded-lg overflow-hidden h-[420px] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer bg-gray-100 flex-none w-[85vw] md:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4rem)/3)] snap-start"
             >
               {/* Background Image */}
               <div 
@@ -159,21 +202,43 @@ const EcommerceInsights = () => {
 
 // --- Section 4: Solutions ---
 const EcommerceSolutions = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = scrollRef.current.clientWidth;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const solutions = [
     {
-      title: "Commerce Intelligence Suite",
-      description: "UNIFY CUSTOMER DATA TO DRIVE PERSONALIZED JOURNEYS ACROSS EVERY DIGITAL CHANNEL.",
+      title: "Intelligent Commerce Data Platform",
+      description: "Our ecommerce website developmnt services ensure every customer interaction is captured effectively.",
       image: "image_e0df68_card1.jpg"
     },
     {
-      title: "Fulfillment & Inventory AI",
-      description: "OPTIMIZE STOCK POSITIONING AND ORDER ROUTING TO MEET CUSTOMER SLAS PROFITABLY.",
+      title: "Smart Inventory & Fulfillment Engine",
+      description: "Optimizes warehouse positioning and delivery routing to meet customer expectations profitably.",
       image: "image_e0df68_card2.jpg"
     },
     {
-      title: "Fraud & Risk Prevention Platform",
-      description: "PROTECT REVENUE WITH REAL-TIME TRANSACTION SCORING AND ADAPTIVE FRAUD MODELS.",
+      title: "Advanced Fraud Protection System",
+      description: "Our fraud protection system protects revenue",
       image: "image_e0df68_card3.jpg"
+    },
+    {
+      title: "Decoupled Commerce Architecture",
+      description: "We build flexible, API-driven commerce platforms that separate presentation and operations for faster innovation.",
+      image: "image_e0df68_card1.jpg"
+    },
+    {
+      title: "Recurring Revenue & Subscription Management",
+      description: "We help you launch and manage subscription.",
+      image: "image_e0df68_card2.jpg"
     }
   ];
 
@@ -181,17 +246,40 @@ const EcommerceSolutions = () => {
     <section className="bg-white pb-16 md:pb-24 pt-8 w-full">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
-        {/* Header */}
-        <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-black mb-10 tracking-tight">
-          Solutions
-        </h2>
+        {/* Header with Navigation Buttons */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+          <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-black tracking-tight">
+            Solutions
+          </h2>
+          
+          {/* Scroll Buttons */}
+          <div className="flex gap-2">
+            <button 
+              onClick={() => scroll('left')} 
+              className="w-10 h-10 border border-gray-200 bg-white flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors cursor-pointer"
+              aria-label="Scroll left"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button 
+              onClick={() => scroll('right')} 
+              className="w-10 h-10 border border-gray-200 bg-white flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors cursor-pointer"
+              aria-label="Scroll right"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+        </div>
 
-        {/* Grid Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {/* Scrollable Container */}
+        <div 
+          ref={scrollRef}
+          className="flex overflow-x-auto gap-6 lg:gap-8 pb-8 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        >
           {solutions.map((card, index) => (
             <div 
               key={index} 
-              className="relative group rounded-lg overflow-hidden h-[400px] md:h-[480px] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer bg-gray-100"
+              className="relative group rounded-lg overflow-hidden h-[400px] md:h-[480px] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer bg-gray-100 flex-none w-[85vw] md:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4rem)/3)] snap-start"
             >
               {/* Background Image */}
               <div 
@@ -239,14 +327,11 @@ const FutureOfAIDigitalCommerce = () => {
           {/* Right Column: Text Content */}
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-gray-900 leading-tight mb-6 tracking-tight">
-              The Future of AI in Digital Commerce
+              The Evolution of AI in Digital Retail
             </h2>
             
             <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-              Commerce is evolving at unprecedented speed—from social shopping to voice 
-              commerce and AI-generated storefronts. Capyngen equips digital businesses with 
-              the intelligence infrastructure needed to capitalize on emerging channels, predict 
-              customer lifetime value, and build loyalty at scale without increasing headcount.
+              Retail is transforming rapidly—from social shopping and voice-enabled purchasing to AI-generated store experiences. As a leading ecommerce platform provider, Capyngen provides digital retailers with the intelligence infrastructure needed to leverage emerging channels, and foster loyalty at scale without expanding teams. 
             </p>
           </div>
 
@@ -275,13 +360,11 @@ const AcceleratingRevenue = () => {
           {/* Right Column: Text Content */}
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-white leading-tight mb-6 tracking-tight">
-              Accelerating Revenue with<br className="hidden lg:block"/> Intelligent Commerce Platforms
+              Driving Revenue with<br className="hidden lg:block"/> Intelligent Commerce Platforms
             </h2>
             
             <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8">
-              Explore how Capyngen's AI-native commerce platform helps businesses increase 
-              conversion, reduce cart abandonment, and grow average order value through 
-              smarter personalization, pricing, and fulfillment strategies.
+              Discover how Capyngen's AI-native commerce platform helps businesses increase conversion rates, minimize cart abandonment, and grow average order value through smarter personalization, pricing, and fulfillment approaches. Our e-commerce solutions are designed to deliver measurable ROI.
             </p>
 
             <button className="flex items-center text-white font-medium text-sm hover:text-gray-300 transition-colors w-fit group border-b border-gray-400 pb-1 hover:border-gray-300">
@@ -315,12 +398,12 @@ const EcommerceTestimonial = () => {
           {/* Quote Text & Attribution */}
           <div className="flex flex-col w-full">
             <h3 className="text-xl md:text-2xl lg:text-[28px] text-[#4285F4] font-semibold leading-relaxed mb-10">
-              With Capyngen's AI personalization engine, our conversion rate increased by 28% and repeat purchase rate climbed significantly within the first quarter. The ROI was undeniable.
+              "Working with Capyngen's AI personalization engine, we achieved a 28% increase in conversion rates and a significant boost in repeat purchases within the first quarter. The return on investment was exceptional."
             </h3>
             
             <div className="self-end text-right max-w-[250px]">
               <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-[#2a2c35] leading-relaxed">
-                VP DIGITAL COMMERCE, LEADING ONLINE RETAILER
+                VP Digital Commerce, Leading Online Retailer
               </p>
             </div>
           </div>
@@ -331,7 +414,53 @@ const EcommerceTestimonial = () => {
   );
 };
 
-// --- Section 8: CTA (Accelerate Your E-Commerce Growth) ---
+// --- Section 8: Frequently Asked Questions ---
+const EcommerceFAQ = () => {
+  const faqs = [
+    { q: "Q1. What do e-commerce solutions include?", a: "E-commerce solutions encompass technology platforms and services for online selling, including website development, payment processing, inventory management, and customer engagement tools." },
+    { q: "Q2. Why partner with Capyngen for ecommerce development services?", a: "Capyngen combines AI expertise, industry knowledge, and a client-focused approach to build scalable, secure, and intelligent commerce platforms that deliver growth through exceptional ecommerce development services." },
+    { q: "Q3. What defines a leading ecommerce platform?", a: "A leading ecommerce platform offers robust features, high-volume transaction support, advanced personalization, multi-channel capabilities, and seamless integrations." },
+    { q: "Q4. How does AI enhance e-commerce performance?", a: "AI enhances e-commerce through personalized product suggestions, dynamic pricing, fraud detection, inventory optimization, and intelligent customer service automation using advanced e-commerce solutions." },
+    { q: "Q5. What is involved in ecommerce website development?", a: "Ecommerce website development involves building a fully functional online store with product catalogs, shopping carts, secure payment processing, and order management systems." },
+    { q: "Q6. What are e-commerce software solutions?", a: "E-commerce software solutions are applications that power online retail operations, including shopping cart platforms, inventory systems, analytics dashboards, and marketing automation tools." },
+    { q: "Q7. How long does ecommerce website development typically take?", a: "Timelines vary by complexity. A basic store requires 4-8 weeks, while enterprise platforms may take 3-6 months or longer." },
+    { q: "Q8. Is Capyngen a reliable ecommerce development company?", a: "Yes, Capyngen is a leading ecommerce development company with proven expertise in AI-driven commerce, scalable architectures, and tailored industry solutions." },
+    { q: "Q9. Which industries does Capyngen serve?", a: "We serve retail, fashion, consumer electronics, grocery, D2C brands, B2B wholesalers, and subscription-based businesses." },
+    { q: "Q10. How does fulfillment optimization benefit my business?", a: "Fulfillment optimization uses AI to direct orders to optimal warehouses, forecast demand, and maintain ideal inventory levels to reduce shipping costs and delivery times." },
+    { q: "Q11. What is decoupled commerce?", a: "Decoupled commerce separates the customer-facing frontend from the operational backend, enabling faster updates, enhanced personalization, and seamless multi-channel selling." },
+    { q: "Q12. How do you ensure data security?", a: "We implement PCI-compliant payment processing, data encryption, fraud detection systems, and regular security assessments." },
+    { q: "Q13. Can you integrate with my existing business systems?", a: "Yes, we integrate with ERPs, CRMs, payment gateways, logistics providers, and marketing platforms." },
+    { q: "Q14. What is conversational commerce?", a: "Conversational commerce uses AI-powered chatbots and voice interfaces to engage customers, answer questions, and complete purchases through natural interactions." },
+    { q: "Q15. How do I begin working with Capyngen?", a: "Contact us for a complimentary consultation. We'll understand your objectives and design a customized e-commerce strategy." }
+  ];
+
+  return (
+    <section className="bg-gray-50 py-16 md:py-24 w-full">
+      <div className="max-w-4xl mx-auto px-6 md:px-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-black mb-12 text-center tracking-tight">
+          Frequently Asked Questions
+        </h2>
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <details key={index} className="group border border-gray-200 bg-white rounded-lg p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer shadow-sm">
+              <summary className="flex items-center justify-between font-semibold text-gray-900 md:text-lg">
+                {faq.q}
+                <span className="transition group-open:rotate-180 text-blue-600">
+                  <svg fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <p className="text-gray-600 mt-4 leading-relaxed font-medium">
+                {faq.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- Section 9: CTA (Accelerate Your E-Commerce Growth) ---
 const EcommerceCTA = () => {
   return (
     <section className="bg-[#050510] py-20 md:py-28 w-full flex flex-col items-center justify-center text-center px-6">
@@ -342,8 +471,7 @@ const EcommerceCTA = () => {
         </h2>
         
         <p className="text-gray-400 text-sm md:text-[16px] mb-10 leading-relaxed max-w-[650px]">
-          Deploy intelligent commerce solutions that personalize at scale, optimize 
-          fulfillment, and turn customer data into your most powerful competitive asset.
+          Whether you need ecommerce development services for a new venture or want to modernize an existing store, Capyngen is your strategic partner offering world-class ecommerce website development and e-commerce solutions.
         </p>
 
         <button className="bg-[#1f2128] hover:bg-[#2a2d36] border border-gray-600 text-white text-[14px] font-medium py-3 px-8 rounded-sm flex justify-center items-center transition-all duration-300">
@@ -368,6 +496,7 @@ const EcommercePage = () => {
       <FutureOfAIDigitalCommerce />
       <AcceleratingRevenue />
       <EcommerceTestimonial />
+      <EcommerceFAQ />
       <EcommerceCTA />
     </div>
   );
