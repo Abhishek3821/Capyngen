@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import  { useState, useRef } from 'react';
 
 // --- 1. Hero Section ---
 const MediaInformationHero = () => {

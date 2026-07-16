@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import  { useRef } from 'react';
 
 // --- Section 1: E-commerce Hero ---
 const EcommerceHero = () => {

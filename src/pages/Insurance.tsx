@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import  { useState, useRef } from 'react';
 
 const Insurance = () => {
   // State for FAQs (Accordion)
