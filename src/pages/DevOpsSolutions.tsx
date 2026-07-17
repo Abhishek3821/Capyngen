@@ -1,51 +1,98 @@
-
+import { useState } from 'react';
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
 
 const DevOpsPage = () => {
+  const [activeOfferingTab, setActiveOfferingTab] = useState('Service Offerings');
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  const happenings = [
+    { tag: "Whitepaper", title: "Scaling CI/CD for Global Banking Infrastructures", link: "Read More " },
+    { tag: "Recognition", title: "Capyngen Named Leader in Gartner Magic for Cloud DevOps Services", link: "Read More " },
+    { tag: "Case Study", title: "Reducing Deployment Lead Time by 70% for Logistics Giant", link: "Read More " },
+    { tag: "Whitepaper", title: "Zero-Downtime Deployments: A Blueprint for Regulated Industries", link: "Read More" },
+    { tag: "Case Study", title: "Cutting Infrastructure Costs by 40% for a Healthcare Platform", link: "Read More" }
+  ];
+
+  const offeringsData: Record<string, { title: string, desc: string }[]> = {
+    'Service Offerings': [
+      { title: "Infrastructure as Code", desc: "We use Terraform and Pulumi to automate how your cloud resources get set up, so your infrastructure stays consistent every time." },
+      { title: "CI/CD Pipelines", desc: "Capyngen’s automated pipelines make deployments faster, safer, and easy to repeat with CI/CD pipeline development services." },
+      { title: "Cloud Security (DevSecOps)", desc: "We build security scans and compliance checks into your DevOps development services process, not as an afterthought." },
+      { title: "Monitoring & Observability", desc: "You get real-time performance data and logging, so your team can spot issues and act before they turn into bigger problems." }
+    ],
+    'Industry Solutions': [
+      { title: "Banking & Financial Services", desc: "We build DevOps pipelines that hold up under strict regulatory and audit requirements." },
+      { title: "Healthcare", desc: "Our infrastructure is built HIPAA-ready, with compliance checks running automatically on every release." },
+      { title: "Retail & E-commerce", desc: "Capyngen builds deployment systems that scale up easily, so your site stays smooth even during your shopping seasons." },
+      { title: "Logistics & Supply Chain", desc: "Capyngen keeps tracking and enhancing systems running with real-time monitoring and reliable deployment." }
+    ]
+  };
+
+  const whyChooseData = [
+    { title: "Security & Compliance", desc: "We offer Security testing, and compliance validation.", link: "Know More " },
+    { title: "Proven DevOps Expertise", desc: "Implementing reliable, business CI/CD services solutions.", link: "Know More " },
+    { title: "Streamline Development", desc: "AI Smart Delivery with Operational Stability.", link: "Know More " },
+    { title: "Expand After Deployment", desc: "Durable Collaboration and Enhanced Optimization.", link: "Know More " }
+  ];
+
+  const faqsData = [
+    { question: "What are DevOps solutions services?", answer: "DevOps solutions services bring development and operations teams together with smart AI frameworks, CI/CD services, and secure operation." },
+    { question: "What makes you a custom DevOps service provider?", answer: "We don't hand you a one-size-fits-all package. We've worked with banks, hospitals, retailers, and logistics firms, and each one needed something different, so that's how we build." },
+    { question: "How long does it take to set up a CI/CD pipeline?", answer: "It depends on where you're starting from. A basic pipeline can be live in a few weeks. Bigger, messier systems take a bit longer to untangle." },
+    { question: "Can you work with our existing cloud provider?", answer: "Yes. AWS, Azure, Google Cloud, or whatever you're already on, we build around it instead of asking you to start fresh." },
+    { question: "How do you handle compliance for regulated industries like banking?", answer: "We write compliance checks straight into the pipeline. Every release gets tested against your industry's rules automatically." },
+    { question: "Does Capyngen have a plan for failed deployments?", answer: "Our pipelines catch problems early and roll back on their own. Your users won't even notice." },
+    { question: "How does Capyngen approach zero-downtime deployments?", answer: "We lean on techniques like blue-green deployments and canary releases. Your updates go live quietly in the background, so nobody using your product even notices a change." },
+    { question: "How to start with the Capyngen DevOps application service?", answer: "Book a quick 15-minute call. We'll talk through where you stand today and map out where to go next with DevOps Implementation Services." }
+  ];
+
   return (
     <div className="font-sans text-slate-900 bg-white">
       
       {/* Hero Section */}
       <section className="bg-[#f8f9fa] py-24 px-6 md:px-12 lg:px-24 flex flex-col items-center justify-center text-center min-h-[60vh]">
-        <div className="bg-[#0a1526] text-white text-[10px] font-bold px-3 py-1 mb-8 tracking-widest uppercase">
-          DEVOPS SERVICES
+        <div className="bg-[#0a1526] text-white text-[10px] font-bold px-3 py-1 mb-6 tracking-widest uppercase">
+          DEVOPS SOLUTIONS
+        </div>
+        <div className="text-sm font-semibold tracking-wide text-slate-600 mb-6 uppercase">
+          Services {'>'} DevOps 
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 max-w-4xl leading-tight">
-          Accelerating Delivery with <br /> DevOps
+          Enhancing IT Delivery with <br /> DevOps
         </h1>
         <p className="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">
-          Modernizing IT delivery through robust automation, continuous CI/CD engineering, and scalable infrastructure transformation.
+          Rebuilding IT delivery with cloud-native DevOps automation services, accurate CI/CD development, and security-first lifestyle innovation.
         </p>
         <button className="bg-[#0a1526] hover:bg-slate-800 text-white font-medium py-3 px-8 transition-colors flex items-center gap-2 text-sm tracking-wide">
-          EXPLORE DEVOPS <ArrowUpRight className="w-4 h-4" />
+          Explore Here <ArrowUpRight className="w-4 h-4" />
         </button>
       </section>
 
-      {/* Empowering the Autonomous Enterprise Section */}
+      {/* Empowering Section */}
       <section className="py-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24 items-start">
           <div className="col-span-1">
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight">
-              Empowering the <br className="hidden md:block" /> Autonomous Enterprise
+              Strengthening the <br className="hidden md:block" /> Self-Authorized Company
             </h2>
           </div>
           <div className="col-span-1 md:col-span-2 space-y-6">
             <p className="text-slate-600 text-base md:text-lg leading-relaxed">
-              To compete in today's rapid market landscape, software delivery needs to be seamless, secure, and fast. We help enterprises break down silos, bridge development and operations, and implement intelligent automation across the entire lifecycle.
+              Capyngen helps large organizations move away from old ways of working and turn them into teams. It can easily ship your updates quickly and confidently with DevOps solutions services, using a high-end cloud framework.
             </p>
             <p className="text-slate-600 text-base md:text-lg leading-relaxed">
-              Our DevOps practice brings together culture, practices, and tools to increase your organization's ability to deliver applications and services at high velocity, evolving and improving products at a faster pace than organizations using traditional software development processes.
+              We build Continuous Integration and Continuous Deployment (CI/CD) right into how your organization works day to day. That means every code commit goes through real security and quality checks before it ever reaches production. We're not just handing you new tools. We're helping your teams work differently.
             </p>
           </div>
         </div>
       </section>
 
       {/* What's Happening Section */}
-      <section className="bg-[#2563eb] py-24 px-6 md:px-12 lg:px-24">
+      <section className="bg-[#2563eb] py-24 px-6 md:px-12 lg:px-24 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">What's Happening</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">What's Happening?</h2>
             </div>
             <div className="flex gap-2">
               <button className="w-10 h-10 flex items-center justify-center bg-transparent border border-blue-400 hover:bg-blue-600 transition-colors">
@@ -57,129 +104,69 @@ const DevOpsPage = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Card 1 */}
-            <div className="bg-white flex flex-col group cursor-pointer shadow-lg hover:-translate-y-1 transition-transform duration-300">
-              <div className="h-48 bg-slate-100 w-full overflow-hidden relative">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100 via-slate-200 to-slate-300 opacity-80"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                   <div className="w-32 h-32 bg-blue-900/10 rounded-full flex items-center justify-center">
-                      <div className="w-16 h-16 bg-blue-900/20 rounded-full"></div>
-                   </div>
+          <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide">
+            {happenings.map((item, index) => (
+              <div key={index} className="bg-white flex flex-col group cursor-pointer shadow-lg hover:-translate-y-1 transition-transform duration-300 min-w-[280px] sm:min-w-[320px] snap-start flex-shrink-0">
+                <div className="h-48 bg-slate-100 w-full overflow-hidden relative">
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100 via-slate-200 to-slate-300 opacity-80"></div>
+                </div>
+                <div className="p-8 flex-1 flex flex-col">
+                  <span className="text-[#2563eb] text-[9px] font-bold uppercase tracking-wider mb-3">{item.tag}</span>
+                  <h3 className="text-xl font-bold text-slate-900 mb-6 group-hover:text-[#2563eb] transition-colors leading-snug flex-1">
+                    {item.title}
+                  </h3>
+                  <div className="flex items-center text-xs font-bold text-[#2563eb] gap-2">
+                    {item.link} <ArrowRight className="w-4 h-4" />
+                  </div>
                 </div>
               </div>
-              <div className="p-8 flex-1 flex flex-col">
-                <span className="text-[#2563eb] text-[9px] font-bold uppercase tracking-wider mb-3">CASE STUDY</span>
-                <h3 className="text-xl font-bold text-slate-900 mb-6 group-hover:text-[#2563eb] transition-colors leading-snug flex-1">
-                  Scaling CI/CD for Global Banking Infrastructures
-                </h3>
-                <div className="flex items-center text-xs font-bold text-[#2563eb] gap-2">
-                  READ MORE <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-white flex flex-col group cursor-pointer shadow-lg hover:-translate-y-1 transition-transform duration-300">
-              <div className="h-48 bg-slate-100 w-full overflow-hidden relative">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-amber-100 via-slate-200 to-slate-300 opacity-80"></div>
-                 <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-full h-12 bg-amber-600/10 skew-y-12"></div>
-                 </div>
-              </div>
-              <div className="p-8 flex-1 flex flex-col">
-                <span className="text-[#2563eb] text-[9px] font-bold uppercase tracking-wider mb-3">NEWS</span>
-                <h3 className="text-xl font-bold text-slate-900 mb-6 group-hover:text-[#2563eb] transition-colors leading-snug flex-1">
-                  Causality Named Leader in Gartner Magic Quadrant for Cloud DevOps
-                </h3>
-                <div className="flex items-center text-xs font-bold text-[#2563eb] gap-2">
-                  READ MORE <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-white flex flex-col group cursor-pointer shadow-lg hover:-translate-y-1 transition-transform duration-300">
-              <div className="h-48 bg-slate-100 w-full overflow-hidden relative">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right_bottom,_var(--tw-gradient-stops))] from-blue-200 via-slate-200 to-slate-300 opacity-80"></div>
-                <div className="absolute inset-0 flex items-center justify-center p-6">
-                    <div className="w-full h-full border border-blue-900/10 bg-blue-900/5 grid grid-cols-4 gap-1 p-2">
-                       {Array.from({length: 16}).map((_, i) => <div key={i} className="bg-blue-900/10 rounded-sm"></div>)}
-                    </div>
-                </div>
-              </div>
-              <div className="p-8 flex-1 flex flex-col">
-                <span className="text-[#2563eb] text-[9px] font-bold uppercase tracking-wider mb-3">CASE STUDY</span>
-                <h3 className="text-xl font-bold text-slate-900 mb-6 group-hover:text-[#2563eb] transition-colors leading-snug flex-1">
-                  Reducing Deployment Lead Time by 75% for Logistics Giant
-                </h3>
-                <div className="flex items-center text-xs font-bold text-[#2563eb] gap-2">
-                  READ MORE <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
+          <style dangerouslySetInnerHTML={{__html: `
+            .scrollbar-hide::-webkit-scrollbar { display: none; }
+            .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+          `}} />
         </div>
       </section>
 
-      {/* Our DevOps Offerings Section */}
+      {/* DevOps Consulting Services Section */}
       <section className="bg-[#f4f6f8] py-24 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <div className="bg-white shadow-xl flex flex-col lg:flex-row overflow-hidden min-h-[500px]">
             
             {/* Left Column (Tabs) */}
             <div className="lg:w-2/5 p-10 md:p-14 border-r border-slate-100 bg-white flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Our DevOps <br/> Offerings</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">DevOps Consulting Services</h2>
               <p className="text-slate-500 mb-12 text-sm leading-relaxed max-w-sm">
-                A comprehensive suite of cloud-native and DevOps capabilities to accelerate your digital transformation journey.
+                Capyngen offers a full set of capabilities built to speed up your software delivery and make your systems more reliable.
               </p>
 
               <div className="flex flex-col mb-16">
-                <div className="bg-[#0056b3] text-white px-6 py-4 w-full max-w-md cursor-pointer flex justify-between items-center shadow-md">
-                  <span className="font-bold text-sm tracking-wide">Select Offerings</span>
-                  <ChevronDown className="w-4 h-4" />
-                </div>
-                <div className="px-6 py-4 w-full max-w-md cursor-pointer hover:bg-slate-50 transition-colors border border-slate-100 border-t-0">
-                  <span className="text-slate-500 font-bold text-sm tracking-wide">Industry Solutions</span>
-                </div>
+                {Object.keys(offeringsData).map((tab) => (
+                  <div 
+                    key={tab}
+                    onClick={() => setActiveOfferingTab(tab)}
+                    className={`${activeOfferingTab === tab ? 'bg-[#0056b3] text-white shadow-md' : 'hover:bg-slate-50 border border-slate-100 border-t-0 text-slate-500'} px-6 py-4 w-full max-w-md cursor-pointer flex justify-between items-center transition-colors`}
+                  >
+                    <span className="font-bold text-sm tracking-wide">{tab}</span>
+                    {activeOfferingTab === tab && <ChevronDown className="w-4 h-4" />}
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* Right Column (Grid) */}
             <div className="lg:w-3/5 p-10 md:p-14 bg-white flex items-center">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-12 w-full">
-                {/* Offering 1 */}
-                <div className="border-t border-slate-200 pt-4">
-                  <span className="text-[#0056b3] font-mono text-[10px] font-bold block mb-2">01.</span>
-                  <h5 className="font-bold text-slate-900 text-base mb-3">Infrastructure as Code</h5>
-                  <p className="text-slate-500 text-xs leading-relaxed">
-                    Automate provisioning and configuration to manage infrastructure consistently and reliably.
-                  </p>
-                </div>
-                {/* Offering 2 */}
-                <div className="border-t border-slate-200 pt-4">
-                  <span className="text-[#0056b3] font-mono text-[10px] font-bold block mb-2">02.</span>
-                  <h5 className="font-bold text-slate-900 text-base mb-3">CI/CD Pipelines</h5>
-                  <p className="text-slate-500 text-xs leading-relaxed">
-                    Build, test, and deploy applications rapidly and securely with automated release management.
-                  </p>
-                </div>
-                {/* Offering 3 */}
-                <div className="border-t border-slate-200 pt-4">
-                  <span className="text-[#0056b3] font-mono text-[10px] font-bold block mb-2">03.</span>
-                  <h5 className="font-bold text-slate-900 text-base mb-3">Cloud Security (DevSecOps)</h5>
-                  <p className="text-slate-500 text-xs leading-relaxed">
-                    Integrate security protocols natively into every phase of the software delivery lifecycle.
-                  </p>
-                </div>
-                {/* Offering 4 */}
-                <div className="border-t border-slate-200 pt-4">
-                  <span className="text-[#0056b3] font-mono text-[10px] font-bold block mb-2">04.</span>
-                  <h5 className="font-bold text-slate-900 text-base mb-3">Monitoring & Observability</h5>
-                  <p className="text-slate-500 text-xs leading-relaxed">
-                    Gain deep real-time insights into system performance to resolve issues proactively.
-                  </p>
-                </div>
+                {offeringsData[activeOfferingTab].map((item, index) => (
+                  <div key={index} className="border-t border-slate-200 pt-4">
+                    <span className="text-[#0056b3] font-mono text-[10px] font-bold block mb-2">0{index + 1}.</span>
+                    <h5 className="font-bold text-slate-900 text-base mb-3">{item.title}</h5>
+                    <p className="text-slate-500 text-xs leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -187,70 +174,56 @@ const DevOpsPage = () => {
         </div>
       </section>
 
-      {/* Leadership Section */}
+      {/* Why Choose Capyngen Section */}
       <section className="bg-[#f8f9fa] py-24 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-2">Leadership</h2>
-            <p className="text-slate-500 text-sm">Meet the experts driving our DevOps practices.</p>
+            <h2 className="text-3xl font-bold text-slate-900 mb-2">Why Choose Capyngen?</h2>
+            <p className="text-slate-500 text-sm">At Capyngen, we provide high-end security services, expertise, and streamlined development solutions.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Profile 1 */}
-            <div className="group">
-              <div className="h-64 bg-slate-300 w-full overflow-hidden mb-4">
-                 <div className="w-full h-full bg-slate-200 grayscale group-hover:grayscale-0 transition-all duration-300"></div>
-              </div>
-              <div>
-                <h4 className="text-base font-bold text-slate-900 leading-tight mb-1">David Sterling</h4>
-                <p className="text-slate-500 text-[10px] mb-3 uppercase tracking-wide">Global Head of Cloud & DevOps</p>
-                <div className="flex items-center text-[10px] font-bold text-[#0056b3] gap-1 cursor-pointer">
-                  BIO <ArrowRight className="w-3 h-3" />
+            {whyChooseData.map((item, index) => (
+              <div key={index} className="group cursor-pointer bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="h-48 bg-slate-300 w-full overflow-hidden mb-6">
+                   <div className="w-full h-full bg-slate-200 grayscale group-hover:grayscale-0 transition-all duration-300"></div>
+                </div>
+                <div>
+                  <h4 className="text-base font-bold text-slate-900 leading-tight mb-2">{item.title}</h4>
+                  <p className="text-slate-500 text-[11px] mb-4 tracking-wide leading-relaxed">{item.desc}</p>
+                  <div className="flex items-center text-[10px] font-bold text-[#0056b3] gap-1 uppercase">
+                    {item.link} <ArrowRight className="w-3 h-3" />
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* Profile 2 */}
-            <div className="group">
-              <div className="h-64 bg-slate-300 w-full overflow-hidden mb-4">
-                 <div className="w-full h-full bg-slate-200 grayscale group-hover:grayscale-0 transition-all duration-300"></div>
+      {/* FAQs Section */}
+      <section className="bg-white py-24 px-6 md:px-12 lg:px-24">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12 text-center">FAQs</h2>
+          <div className="space-y-4">
+            {faqsData.map((faq, index) => (
+              <div key={index} className="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
+                  className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none hover:bg-slate-100 transition-colors"
+                >
+                  <span className="font-semibold text-slate-900 pr-8">{faq.question}</span>
+                  <span className="text-[#2563eb] text-2xl leading-none">
+                    {openFaqIndex === index ? '−' : '+'}
+                  </span>
+                </button>
+                {openFaqIndex === index && (
+                  <div className="px-6 pb-5 pt-2 text-slate-600 text-sm leading-relaxed">
+                    {faq.answer}
+                  </div>
+                )}
               </div>
-              <div>
-                <h4 className="text-base font-bold text-slate-900 leading-tight mb-1">Sarah Chen</h4>
-                <p className="text-slate-500 text-[10px] mb-3 uppercase tracking-wide">Chief Automation Architect</p>
-                <div className="flex items-center text-[10px] font-bold text-[#0056b3] gap-1 cursor-pointer">
-                  BIO <ArrowRight className="w-3 h-3" />
-                </div>
-              </div>
-            </div>
-
-            {/* Profile 3 */}
-            <div className="group">
-              <div className="h-64 bg-slate-300 w-full overflow-hidden mb-4">
-                 <div className="w-full h-full bg-slate-200 grayscale group-hover:grayscale-0 transition-all duration-300"></div>
-              </div>
-              <div>
-                <h4 className="text-base font-bold text-slate-900 leading-tight mb-1">Marcus Thorne</h4>
-                <p className="text-slate-500 text-[10px] mb-3 uppercase tracking-wide">Managing Partner, DevSecOps</p>
-                <div className="flex items-center text-[10px] font-bold text-[#0056b3] gap-1 cursor-pointer">
-                  BIO <ArrowRight className="w-3 h-3" />
-                </div>
-              </div>
-            </div>
-
-            {/* Profile 4 */}
-            <div className="group">
-              <div className="h-64 bg-slate-300 w-full overflow-hidden mb-4">
-                 <div className="w-full h-full bg-slate-200 grayscale group-hover:grayscale-0 transition-all duration-300"></div>
-              </div>
-              <div>
-                <h4 className="text-base font-bold text-slate-900 leading-tight mb-1">Alex Rodriguez</h4>
-                <p className="text-slate-500 text-[10px] mb-3 uppercase tracking-wide">VP, Site Reliability Engineering</p>
-                <div className="flex items-center text-[10px] font-bold text-[#0056b3] gap-1 cursor-pointer">
-                  BIO <ArrowRight className="w-3 h-3" />
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -260,9 +233,12 @@ const DevOpsPage = () => {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
           
           <div className="lg:w-5/12 text-white pr-0 lg:pr-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">Request for <br/> DevOps Services</h2>
-            <p className="text-slate-300 text-sm leading-relaxed max-w-md">
-              Discover how our DevOps solutions can help your organization streamline development, enhance security, and accelerate time-to-market. Connect with our engineering experts to start your transformation.
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">Apply For Services</h2>
+            <p className="text-slate-300 text-sm leading-relaxed max-w-md mb-6">
+              Want to know more about how Capyngen can help your organization move forward? Connect with us and get the proper framework for your ideas and DevOps solutions services with post-launch solutions.
+            </p>
+            <p className="text-slate-400 text-xs uppercase tracking-widest font-semibold border-l-2 border-blue-500 pl-3">
+              Got any specific question?<br/> Book a 15-minute chat with one of our experts.
             </p>
           </div>
 
@@ -299,12 +275,12 @@ const DevOpsPage = () => {
                 <div className="flex items-start gap-3 pt-4">
                   <input type="checkbox" className="mt-0.5 w-3.5 h-3.5 border-slate-300 rounded-sm cursor-pointer" />
                   <p className="text-[10px] text-slate-500 leading-relaxed">
-                    I have read and accept the <a href="#" className="text-[#0056b3] underline">Privacy Policy</a> and consent to having my data processed.
+                    Sign up to get Capyngen's mobile insights and marketing updates.<br /> I agree to the Privacy Statement.*
                   </p>
                 </div>
 
                 <button type="submit" className="bg-[#0a1526] hover:bg-slate-800 text-white font-medium py-3 px-10 transition-colors text-xs tracking-widest uppercase">
-                  SUBMIT REQUEST
+                  Confirm
                 </button>
               </form>
             </div>

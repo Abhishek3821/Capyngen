@@ -22,27 +22,24 @@ const GamingHero = () => {
 
         {/* Headline */}
         <h1 className="text-4xl md:text-5xl lg:text-[56px] font-bold text-white leading-tight mb-6 tracking-tight max-w-3xl">
-          Winning in the Age of AI-Powered <br className="hidden md:block" />
-          Gaming
+          Victory in the Generation of AI Gaming
         </h1>
 
         {/* Description Text */}
         <p className="text-sm md:text-base text-gray-300 mb-10 max-w-2xl leading-relaxed">
-          Capyngen equips gaming studios and platform operators with cutting-edge AI 
-          to enhance player experiences, optimize live-ops, prevent fraud, and scale 
-          cloud gaming infrastructure for the next billion players.
+          Capyngen supplies gaming software development space and functions along with cutting-edge Artificial intelligence to advance gamer experiences, upgrade live services, prevent scam, and enhance cloud gaming framework for the next generations gamers.
         </p>
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <button className="bg-[#3b82f6] hover:bg-[#2563eb] text-white text-sm font-medium py-3 px-8 rounded-sm flex justify-center items-center transition-colors duration-300">
-            Learn More
+            Explore More 
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </button>
           <button className="bg-transparent hover:bg-white/10 border border-gray-400 text-white text-sm font-medium py-3 px-8 rounded-sm flex justify-center items-center transition-all duration-300">
-            Contact Us
+            Contact Us 
           </button>
         </div>
 
@@ -70,20 +67,15 @@ const PlayerIntelligence = () => {
           {/* Right Column: Text Content Block */}
           <div className="flex flex-col justify-center text-white">
             <h2 className="text-3xl md:text-4xl lg:text-[38px] font-bold leading-tight mb-6 tracking-tight">
-              Player Intelligence: AI at the Heart of <br className="hidden lg:block"/>
-              Game Operations
+              Gamer Brilliance: AI With The Core of Gaming Functions
             </h2>
             
             <p className="text-white/80 text-sm md:text-base leading-relaxed mb-8">
-              Games are no longer products—they are living ecosystems that require constant 
-              intelligence. Capyngen delivers AI models that personalize in-game experiences, 
-              predict player churn, optimize virtual economy balancing, and power adaptive 
-              difficulty systems—helping studios monetize ethically, retain players longer, and build 
-              communities that last across generations.
+              Games are no longer just products, but a living legacy for the eco-logical and sustained intelligence. Capyngen serves AI versions that customize in-game experiences, forecast gamers inactivation, enhance digital economy stability, and potential versatile complication structure— supporting gaming studios with moral monetization, engaging game players for a long duration, and building gamer communities that extend over many generations.
             </p>
 
             <a href="#" className="flex items-center text-white font-medium text-[13px] md:text-sm hover:text-blue-200 transition-colors w-fit group border-b border-white/50 hover:border-white pb-1">
-              Level up with AI 
+              Level up with Us
               <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -100,20 +92,24 @@ const PlayerIntelligence = () => {
 const GamingInsights = () => {
   const insightCards = [
     {
-      title: "Player Behavior Modeling and Churn Prediction",
+      title: "Tracking Player Habits and Predicting Churn",
       image: "image_ee0780_1.jpg", 
     },
     {
-      title: "Adaptive Difficulty Systems Powered by AI",
+      title: "AI Smart Difficulty That Adjusts to You",
       image: "image_ee0780_2.jpg",
     },
     {
-      title: "AI-Generated Game Worlds and Procedural Content",
+      title: "AI-Built Game Worlds and Random Content",
       image: "image_ee0780_3.jpg",
     },
     {
-      title: "Anti-Cheat and Fraud Prevention in Online Gaming",
+      title: "Anti-Cheating and Prevent Fraud in Games",
       image: "image_ee0780_4.jpg",
+    },
+    {
+      title: "AI-Driven Game Design and Level Creation",
+      image: "image_ee0780_1.jpg", // Reusing image placeholder
     },
   ];
 
@@ -124,7 +120,7 @@ const GamingInsights = () => {
         {/* Header Block with Navigation Arrows */}
         <div className="flex justify-between items-center mb-10">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-950 tracking-tight">
-            Gaming Industry Insights
+            Gaming Sector Analysis
           </h2>
           <div className="flex items-center gap-2">
             <button className="p-2 border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors duration-200" aria-label="Previous insight">
@@ -141,11 +137,11 @@ const GamingInsights = () => {
         </div>
 
         {/* Responsive Insights Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
           {insightCards.map((card, idx) => (
             <div 
               key={idx}
-              className="relative group h-[420px] rounded-lg overflow-hidden flex flex-col justify-end p-6 cursor-pointer bg-black"
+              className="relative group h-[420px] w-[280px] sm:w-[300px] flex-shrink-0 rounded-lg overflow-hidden flex flex-col justify-end p-6 cursor-pointer bg-black snap-start"
             >
               {/* Card Background Image with Subtle Scale Effect on Hover */}
               <img 
@@ -164,13 +160,16 @@ const GamingInsights = () => {
                 </h3>
                 
                 <div className="flex items-center text-white/80 font-semibold tracking-wider text-[10px] uppercase group-hover:text-white transition-colors">
-                  <span className="mr-1.5 font-sans">→</span> READ MORE
+                  <span className="mr-1.5 font-sans">→</span> Read more
                 </div>
               </div>
             </div>
           ))}
         </div>
-
+        <style dangerouslySetInnerHTML={{__html: `
+          .scrollbar-hide::-webkit-scrollbar { display: none; }
+          .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        `}} />
       </div>
     </section>
   );
@@ -178,32 +177,71 @@ const GamingInsights = () => {
 
 // --- 4. Gaming Solutions Section ---
 const GamingSolutions = () => {
-  const [activeTab, setActiveTab] = useState('Industry');
-  const tabs = ['Industry', 'Technology', 'Products & Platforms'];
+  type TabKey = 'Industry' | 'Technology' | 'Products & Platforms';
+  const [activeTab, setActiveTab] = useState<TabKey>('Industry');
+  const tabs: TabKey[] = ['Industry', 'Technology', 'Products & Platforms'];
 
-  const solutionCards = [
-    {
-      title: "Player Engagement AI",
-      description: "LEVERAGE BEHAVIORAL DATA TO DELIVER PERSONALIZED IN-GAME EVENTS AND TARGETED LIVE-OPS CAMPAIGNS.",
-      image: "image_ee0ae3_1.jpg",
-    },
-    {
-      title: "Game Economy Intelligence",
-      description: "BALANCE VIRTUAL ECONOMIES AND OPTIMIZE IN-APP PURCHASE FLOWS WITH AI-DRIVEN PRICING MODELS.",
-      image: "image_ee0ae3_2.jpg",
-    },
-    {
-      title: "Cloud Gaming Infrastructure Platform",
-      description: "SCALE LOW-LATENCY GAME STREAMING GLOBALLY WITH INTELLIGENT RESOURCE ALLOCATION AND EDGE COMPUTE.",
-      image: "image_ee0ae3_3.jpg",
-    }
-  ];
+  const allSolutions: Record<TabKey, { title: string, description: string, image: string }[]> = {
+    'Industry': [
+      {
+        title: "Smart Gamer Engagement",
+        description: "Use behavioral data to create customized in-game experience and targeted live-server projects.",
+        image: "image_ee0ae3_1.jpg",
+      },
+      {
+        title: "Game Ecosystem Intelligence",
+        description: "Keep digital economies balanced and improve in-app purchase flows with smart AI pricing models.",
+        image: "image_ee0ae3_2.jpg",
+      },
+      {
+        title: "Cloud Gaming Software Development",
+        description: "Progress with real-time response in game streaming worldwide with smart resource issuance and edge computation.",
+        image: "image_ee0ae3_3.jpg",
+      }
+    ],
+    'Technology': [
+      {
+        title: "Neural Network Rendering Engine",
+        description: "Get stunning, real-time graphics powered by smart AI rendering and lighting techniques.",
+        image: "image_ee0ae3_1.jpg",
+      },
+      {
+        title: "Step-by-Step Audio Generation System",
+        description: "Build a soundscape and music that shift based on wha i's happening in-game in an instant.",
+        image: "image_ee0ae3_2.jpg",
+      },
+      {
+        title: "Cross-Device Save Sync Tech",
+        description: "Allow players jump back into progress across phones, consoles, and PCs, with no time taking process.",
+        image: "image_ee0ae3_3.jpg",
+      }
+    ],
+    'Products & Platforms': [
+      {
+        title: "In-Game Marketplace Platform",
+        description: "Make trading virtual goods and skins safe and easy with built-in fraud protection.",
+        image: "image_ee0ae3_1.jpg",
+      },
+      {
+        title: "Player Identity and Login Suite",
+        description: "Make account setup and cross-game identity simple with fast, secure single sign-on.",
+        image: "image_ee0ae3_2.jpg",
+      },
+      {
+        title: "Community Engagement Toolkit",
+        description: "Bring in-game chat, guilds, and social features that keep players connected and active.",
+        image: "image_ee0ae3_3.jpg",
+      }
+    ]
+  };
+
+  const solutionCards = allSolutions[activeTab];
 
   return (
     <section className="bg-white pt-16 md:pt-24 pb-8 w-full">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <h2 className="text-3xl md:text-[36px] font-bold text-gray-950 mb-8 tracking-tight">
-          Solutions
+          Solutions We Follow
         </h2>
 
         {/* Tab Navigation */}
@@ -241,7 +279,7 @@ const GamingSolutions = () => {
                 <h3 className="text-white text-lg md:text-xl font-bold leading-snug mb-3">
                   {card.title}
                 </h3>
-                <p className="text-gray-300 text-[10px] md:text-xs leading-relaxed tracking-wider font-medium uppercase">
+                <p className="text-gray-300 text-[10px] md:text-xs leading-relaxed tracking-wider font-medium">
                   {card.description}
                 </p>
               </div>
@@ -267,10 +305,7 @@ const FutureOfAIGaming = () => {
               The Future of AI in Interactive <br className="hidden lg:block"/> Entertainment
             </h2>
             <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-              Generative AI is redefining game creation—from NPC dialogue to infinite procedural 
-              worlds. Capyngen helps studios harness AI responsibly and strategically, creating 
-              differentiated experiences that capture attention in an era of infinite entertainment 
-              options while protecting player trust and community health.
+              Generative AI is now changing how games get made, from NPC dialogue to limitless procedural worlds. Capyngen supports studios to use AI the right way, building standout experiences that grab attention in a world full of entertainment choices, all while protecting player trust and community health.
             </p>
           </div>
 
@@ -313,14 +348,11 @@ const IntelligentGamesAI = () => {
             </h2>
             
             <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 max-w-xl">
-              Explore how Capyngen helps gaming companies apply machine learning, real-time 
-              analytics, and generative AI to create deeper player experiences, operate more 
-              profitable live games, and build platforms that define the future of interactive 
-              entertainment.
+              See how Capyngen helps gaming companies use machine learning, real-time analytics, and generative AI to build deeper player experiences, run more profitable live games, and create platforms that shape the future of interactive entertainment.
             </p>
 
             <a href="#" className="flex items-center text-white font-medium text-[13px] md:text-sm transition-colors w-fit group border-b border-gray-400 hover:border-white pb-1">
-              Read Blog 
+              Read More 
               <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -342,7 +374,7 @@ const GamingTestimonial = () => {
         {/* Author Info Column */}
         <div className="w-full md:w-1/4 flex flex-col shrink-0">
           <h3 className="text-[#3b82f6] text-lg font-bold tracking-wide uppercase mb-1">
-            Alex Nakamura
+            ALEX NAKAMURA
           </h3>
           <p className="text-[#4b5563] text-[10px] font-bold tracking-widest uppercase leading-snug">
             VP Live Operations,<br />Leading Mobile Gaming<br />Studio
@@ -357,7 +389,7 @@ const GamingTestimonial = () => {
             </svg>
           </div>
           <p className="text-[#3b82f6] text-lg md:text-xl font-bold leading-relaxed">
-            Capyngen's player intelligence platform helped us cut 30-day churn by 22% and grow our ARPDAU significantly. The AI models for event personalization are unlike anything else on the market.
+            "Capyngen's gaming intelligence platform helped us cut the 30-day long duration by 22% and grow our ARPDAU significantly within just a few months. The AI models they built for event personalization are unlike anything else we've seen on the market, and the results show why they are the top game development company." 
           </p>
         </div>
 
@@ -366,21 +398,99 @@ const GamingTestimonial = () => {
   );
 };
 
-// --- 8. Gaming Call To Action ---
+// --- 8. Gaming FAQs ---
+const GamingFAQs = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      question: "What is a custom gaming software development company?",
+      answer: "IT services companies work on custom game ideas to enhance them into what gamers can use. This covers the design, the art, the code, and everything in between."
+    },
+    {
+      question: "Why Choose Capyngen to build your game software development?",
+      answer: "Capyngen has spent years providing game software services and combining it with AI and data that know how to make games that run well and keep players engaged & hooked."
+    },
+    {
+      question: "Is it possible to get a custom game development for my studio?",
+      answer: "Yes. We shape everything around your studio's style, your target platform, and what you're trying to achieve as a business."
+    },
+    {
+      question: "What are gaming technology solutions?",
+      answer: "These are tools and systems, like AI, cloud infrastructure, and analytics, that power modern games behind the scenes."
+    },
+    {
+      question: "Does Capyngen offer mobile game development?",
+      answer: "Yes, we provide services for both iPhone and Android game development, build a engaging framework to run hassle-free."
+    },
+    {
+      question: "Does Capyngen provide PC game development services?",
+      answer: "Yes. Capyngen as a game development company— offer PC game development with strong visuals, multiplayer quality, and tools setups services."
+    },
+    {
+      question: "Does Capyngen build AR and VR games?",
+      answer: "Yes. We build AR and VR experiences for gaming software development, and also for training and other hands-on uses."
+    },
+    {
+      question: "Does your organization manage iOS game development?",
+      answer: "Yes, Capyngen builds and manages games for iPhone and iPad, following Apple's App Store guidelines, enhancing their upcoming version and providing post-launch support."
+    },
+    {
+      question: "Do you also offer support post-launch games service?",
+      answer: "Yes. Capyngen stays around for updates, upcoming features, and general live support and provides the best post-launch service."
+    },
+    {
+      question: "How do I start a project with Capyngen?",
+      answer: "To start your project, all you need to do is contact us through our contact page and we'll take it from there."
+    }
+  ];
+
+  return (
+    <section className="bg-gray-50 py-16 md:py-24 w-full">
+      <div className="max-w-4xl mx-auto px-6 md:px-12">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-12 text-center">
+          FAQs
+        </h2>
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="border border-gray-200 bg-white rounded-md shadow-sm overflow-hidden">
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-gray-100 transition-colors"
+              >
+                <span className="font-semibold text-gray-900 text-base md:text-lg pr-4">
+                  {faq.question}
+                </span>
+                <span className="text-blue-600 text-2xl flex-shrink-0">
+                  {openIndex === index ? '−' : '+'}
+                </span>
+              </button>
+              {openIndex === index && (
+                <div className="p-5 pt-0 text-gray-700 text-sm md:text-base leading-relaxed border-t border-gray-100">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- 9. Gaming Call To Action ---
 const GamingCTA = () => {
   return (
     <section className="bg-[#05050f] py-24 w-full flex justify-center">
       <div className="max-w-4xl mx-auto px-6 md:px-12 text-center flex flex-col items-center">
         <h2 className="text-3xl md:text-4xl lg:text-[44px] font-bold text-white leading-tight mb-6">
-          Level Up Your Gaming Business <br className="hidden md:block" /> with Capyngen
+          Enhance Your Gaming Sector with Capyngen
         </h2>
         <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl">
-          Deploy AI-powered player intelligence, economy management, and cloud 
-          infrastructure solutions designed to help gaming companies grow faster, retain 
-          players longer, and operate smarter.
+          Get AI-powered player intelligence, economy management, and cloud infrastructure solutions built to help gaming companies grow faster, keep players engaged and playing longer, and run their operations smarter and more efficiently across every stage of the game lifecycle.
         </p>
         <button className="bg-[#272927] hover:bg-[#343634] border border-gray-600 text-white text-sm font-medium py-3 px-8 transition-colors duration-300 flex items-center gap-2">
-          Start Your Project
+          Get Your Project Here
           <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
@@ -401,6 +511,7 @@ const GamingPage = () => {
       <FutureOfAIGaming />
       <IntelligentGamesAI />
       <GamingTestimonial />
+      <GamingFAQs />
       <GamingCTA />
     </div>
   );

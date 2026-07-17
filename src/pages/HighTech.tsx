@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 // --- Section 1: High Tech Hero ---
 const HighTechHero = () => {
   return (
@@ -19,7 +21,7 @@ const HighTechHero = () => {
 
           {/* Sub-eyebrow */}
           <div className="text-xs md:text-sm font-semibold tracking-wider uppercase mb-6 text-gray-300">
-            INNOVATE. ENGINEER. TRANSFORM.
+            Create. Develop. Reshape.
           </div>
 
           {/* Headline */}
@@ -30,14 +32,13 @@ const HighTechHero = () => {
 
           {/* Sub-headline */}
           <p className="text-base md:text-lg text-gray-300 mb-10 max-w-md leading-relaxed">
-            We build intelligent, secure, and scalable high-tech 
-            solutions that drive innovation and accelerate growth.
+            Capyngen offers high-end intelligence, safe, and scalable IT solutions that innovate and increase growth. 
           </p>
 
           {/* Call to Action */}
           <button className="flex items-center gap-4 group focus:outline-none">
             <span className="text-white text-base font-medium group-hover:text-gray-300 transition-colors duration-300">
-              Let's talk
+              Explore Now
             </span>
             <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300 shadow-lg">
               <svg 
@@ -77,22 +78,16 @@ const IntelligentMobility = () => {
           {/* Right Column: Text Content */}
           <div className="flex flex-col justify-center text-white">
             <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold leading-tight mb-8">
-              Intelligent Mobility.<br />
-              Limitless Possibilities.
+              Smart Versatality.<br />
+              Endless Choices.
             </h2>
             
             <div className="text-white/90 text-base md:text-lg leading-relaxed space-y-6">
               <p>
-                From next-gen cloud architectures to autonomous AI agents — 
-                we help enterprises move beyond isolated pilots and achieve 
-                true operational transformation. Our frameworks are engineered 
-                for resilience, scale, and measurable business outcomes.
+                From future generation cloud structure to self determining AI agents , Capyngen support industries move forward and execute fact-based functional innovation. Our core foundations are built for adoptability, flexible, and calculated profit outcomes.
               </p>
               <p>
-                With 180,000+ professionals across 40 countries, Capynge 
-                brings unmatched depth to every engagement — translating 
-                complex technology into competitive advantage at every layer of 
-                the stack.
+                With 180,000+ experts across 40 nations. We offer exclusive insight to each contract and deals. We provide interpreting multiplex high-end tech with determined benefit at each overlap of the stack. 
               </p>
             </div>
           </div>
@@ -103,20 +98,24 @@ const IntelligentMobility = () => {
   );
 };
 
-// --- Section 3: In Focus ---
-const InFocus = () => {
-  const focusItems = [
+// --- Section 3: Trending ---
+const Trending = () => {
+  const trendingItems = [
     {
-      title: "The Future of AI: Building Responsible and Scalable Systems",
+      title: "Creating Reliable and Flexible Structure: Future With AI",
       image: "image_df7b04_card1.jpg", 
     },
     {
-      title: "Edge Computing: Powering the Next Wave of Innovation",
+      title: "Enhanced Computing: Building the Upcoming Wave of Transformation",
       image: "image_df7b04_card2.jpg", 
     },
     {
-      title: "Cybersecurity in the Age of Intelligent Everything",
+      title: "IT Security in the Era of AI Adoptablity",
       image: "image_df7b04_card3.jpg", 
+    },
+    {
+      title: "Advanced Tech Used by AI Solution Providers",
+      image: "image_df7b04_card1.jpg", 
     }
   ];
 
@@ -125,11 +124,11 @@ const InFocus = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-black mb-10 tracking-tight">
-          In Focus
+          Trending
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {focusItems.map((item, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {trendingItems.map((item, index) => (
             <div 
               key={index} 
               className="relative group rounded-md overflow-hidden h-[420px] md:h-[480px] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
@@ -145,14 +144,14 @@ const InFocus = () => {
               
               {/* Card Content */}
               <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end text-white">
-                <h3 className="text-2xl md:text-[26px] font-bold leading-tight mb-4 pr-4">
+                <h3 className="text-xl md:text-[22px] font-bold leading-tight mb-4 pr-4">
                   {item.title}
                 </h3>
                 <div className="text-[11px] font-semibold tracking-widest uppercase flex items-center gap-2 opacity-90 group-hover:opacity-100 transition-opacity">
                   <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
-                  READ MORE
+                  Read more
                 </div>
               </div>
             </div>
@@ -188,19 +187,13 @@ const HighTechInnovation = () => {
           {/* Left Column: Text Content */}
           <div className="lg:col-span-7 flex flex-col justify-center text-white pr-0 lg:pr-10">
             <h2 className="text-xl md:text-2xl lg:text-[22px] font-bold leading-relaxed mb-6 uppercase tracking-wide">
-              THE HIGH-TECH INDUSTRY THRIVES ON INNOVATION,<br className="hidden lg:block"/> 
-              SPEED, AND PRECISION.
+              The digital frontier pulses with invention,<br className="hidden lg:block"/> 
+              Fast Track, and Innovation.
             </h2>
             
             <div className="text-[#c1c6d4] text-base md:text-lg leading-relaxed space-y-6">
               <p>
-                Businesses need solutions that are agile, intelligent, and built for the
-                future.
-              </p>
-              <p>
-                Capyngen helps high-tech companies design, develop, and scale
-                advanced digital products, platforms, and experiences using
-                emerging technologies and modern engineering practices.
+                The future belongs to businesses bold enough to move fast, think sharp, and build smart. Capyngen partners with high-tech companies to shape, grow, and scale digital products, platforms, and experiences powered by tomorrow's technology and today's best engineering craft.
               </p>
             </div>
           </div>
@@ -224,18 +217,18 @@ const HighTechInnovation = () => {
 const HighTechSolutions = () => {
   const solutions = [
     {
-      title: "Product engineering and R&D solution",
-      description: "END TO END PRODUCT LIFE CYCLE SERVICES FROM ADDITION TO LAUNCH BUILD FOR FAST",
+      title: "Engineering and R&D Capabilities",
+      description: "Full-cycle product engineering support, guiding your idea from concept to successful market launch.",
       image: "image_df86a7_card1.jpg", 
     },
     {
-      title: "AI /ML solution",
-      description: "AIAI LARGE LANGUAGE MODEL AND INTELLIGENCE AUTOMATION DEPLOYED@ENTERPRISE SCALE",
+      title: "Intelligent Automation Solutions",
+      description: "Advanced AI and machine learning automation, built for enterprise-scale deployment.",
       image: "image_df86a7_card2.jpg", 
     },
     {
-      title: "Cloud native development and modernisation",
-      description: "MIGRATE MODERNISE AND MANAGE CLOUD NATIVE SYSTEM WITH ZERO DOWNTIME AND MAXIMUM EFFICIENCY",
+      title: "Enhanced Cloud Modernisation Services",
+      description: "Migrate, modernise and manage cloud native systems with zero downtime and maximum efficiency.",
       image: "image_df86a7_card3.jpg", 
     }
   ];
@@ -286,7 +279,7 @@ const HighTechSolutions = () => {
         <div className="flex justify-end gap-4 mt-8">
           <button className="text-gray-300 hover:text-black transition-colors" aria-label="Previous">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7-7h18" />
             </svg>
           </button>
           <button className="text-black hover:text-gray-600 transition-colors" aria-label="Next">
@@ -312,7 +305,7 @@ const HighTechMetricsTestimonial = () => {
             {/* Left Column: Bold Metrics */}
             <div className="w-full lg:w-5/12 flex flex-col">
               <h3 className="text-xs font-bold tracking-[0.15em] uppercase text-gray-700 mb-8">
-                BOLD METRICS
+                Bold Metrics
               </h3>
               
               <div className="grid grid-cols-2 gap-y-10 gap-x-6">
@@ -323,7 +316,7 @@ const HighTechMetricsTestimonial = () => {
                     180K+
                   </div>
                   <div className="text-sm text-gray-700">
-                    Engineering professionals
+                    Engineering Experts
                   </div>
                 </div>
 
@@ -343,7 +336,7 @@ const HighTechMetricsTestimonial = () => {
                     98%
                   </div>
                   <div className="text-sm text-gray-700">
-                    Client retention rate
+                    Client Engagement Ratio
                   </div>
                 </div>
 
@@ -369,12 +362,12 @@ const HighTechMetricsTestimonial = () => {
               </div>
               
               <blockquote className="text-xl md:text-2xl lg:text-[26px] text-gray-900 leading-relaxed font-medium italic mb-8">
-                "Capynge's deep technology expertise and commitment to innovation have helped us accelerate our product roadmap at a pace we never thought possible. They are more than a vendor, they are a true engineering partner."
+                "Capyngen has provided us with technology expertise and genuine commitment to innovation helped us accelerate our product roadmap at a pace we honestly never thought possible. What really stands out is that they don't operate like a typical vendor — they take the time to understand our goals and think like true engineering partners invested in our success."
               </blockquote>
               
               <div className="text-right w-full">
                 <p className="text-sm font-medium text-gray-700">
-                  - CTO, NovaBridge Financial
+                  - CTO, NovaBridge Financial 
                 </p>
               </div>
             </div>
@@ -386,22 +379,101 @@ const HighTechMetricsTestimonial = () => {
   );
 };
 
-// --- Section 7: CTA (Adaptability starts here) ---
+// --- Section 7: FAQs ---
+const FAQsSection = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      question: "How do you handle bigger enterprise software projects?",
+      answer: "Same care, bigger scale. We think about how it'll hold up with lots of users, how it plugs into your other systems, and what compliance rules apply."
+    },
+    {
+      question: "Can you fix an old, outdated system instead of replacing it?",
+      answer: "Yes — that's software modernization. We can update the guts of an old system without shutting the business down while we do it."
+    },
+    {
+      question: "How long does a typical project take?",
+      answer: "Most first versions take somewhere between 3 and 9 months, depending on how big the idea is. Then we keep improving it after launch."
+    },
+    {
+      question: "Can you connect new software to systems we already use?",
+      answer: "Yes. Hooking new software into your existing CRM, ERP, or old databases is something we do often."
+    },
+    {
+      question: "Do you build software specifically for SaaS companies?",
+      answer: "Yes — we help SaaS companies handle things like multiple customer accounts, subscriptions, billing, and usage tracking, all built into the product properly."
+    },
+    {
+      question: "Do you work with small startups or only big companies?",
+      answer: "Both. We've helped startups get their first version of a product out the door, and we've helped big enterprises run massive systems without things falling over."
+    },
+    {
+      question: "What's your general approach to building software?",
+      answer: "Build in small steps, show progress often, and always tie what we're building back to a real business goal — not just a feature checklist."
+    },
+    {
+      question: "Do you handle the whole project, start to finish?",
+      answer: "Yes. Planning, design, building, testing, launching, and supporting it afterward — one team, one point of contact."
+    },
+    {
+      question: "What makes Capyngen different?",
+      answer: "A lot of technology software development firms just take orders and code. We actually dig into your business problem first, then build something that solves it — not just something that 'works.'"
+    },
+    {
+      question: "What industries does Capyngen work with?",
+      answer: "Fintech, healthcare, logistics, retail, manufacturing, SaaS — you name it. Our high-tech IT services flex to fit whatever rules and systems your industry already has."
+    }
+  ];
+
+  return (
+    <section className="bg-gray-50 py-16 md:py-24 w-full">
+      <div className="max-w-4xl mx-auto px-6 md:px-12">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-12 text-center">
+          FAQs
+        </h2>
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="border border-gray-200 bg-white rounded-md shadow-sm overflow-hidden">
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-gray-100 transition-colors"
+              >
+                <span className="font-semibold text-gray-900 text-base md:text-lg pr-4">
+                  {faq.question}
+                </span>
+                <span className="text-blue-600 text-2xl flex-shrink-0">
+                  {openIndex === index ? '−' : '+'}
+                </span>
+              </button>
+              {openIndex === index && (
+                <div className="p-5 pt-0 text-gray-700 text-sm md:text-base leading-relaxed border-t border-gray-100">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- Section 8: CTA (Adaptability starts here) ---
 const AdaptabilityCTA = () => {
   return (
     <section className="bg-[#05050f] py-20 md:py-28 w-full flex flex-col items-center justify-center text-center px-6">
       <div className="max-w-3xl mx-auto flex flex-col items-center">
         <h2 className="text-3xl md:text-4xl lg:text-[44px] font-bold text-white mb-6 tracking-wide">
-          Adaptability starts here
+          Adoptability Begin Today
         </h2>
         
         <p className="text-gray-300 text-base md:text-[17px] mb-10 leading-relaxed max-w-[600px]">
-          Ready to begin your journey towards a greater future? Get in touch 
-          to discover how we can help.
+          Ready to take the next step toward a brighter future? Reach out Capyngen and learn how we can support you.
         </p>
 
         <button className="bg-[#22242b] hover:bg-[#2d3039] border border-gray-600 text-white text-[15px] font-medium py-3.5 px-8 rounded-full flex justify-center items-center transition-all duration-300">
-          Connect with us
+          Contact Us Now
         </button>
       </div>
     </section>
@@ -414,10 +486,11 @@ const HighTechPage = () => {
     <div className="w-full min-h-screen font-sans antialiased flex flex-col bg-white">
       <HighTechHero />
       <IntelligentMobility />
-      <InFocus />
+      <Trending />
       <HighTechInnovation />
       <HighTechSolutions />
       <HighTechMetricsTestimonial />
+      <FAQsSection />
       <AdaptabilityCTA />
     </div>
   );

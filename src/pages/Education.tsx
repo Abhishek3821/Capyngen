@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 // --- Section 1: Hero ---
 const EducationHero = () => {
   return (
@@ -10,31 +12,29 @@ const EducationHero = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
         <div className="max-w-2xl flex flex-col items-start text-white">
           <div className="flex items-center gap-2 text-xs md:text-sm font-medium tracking-widest text-gray-300 mb-2 uppercase">
-            <span>Industries</span>
-            <span>|</span>
-            <span>Education</span>
+            <span>INDUSTRIES | EDUCATION</span>
           </div>
           <div className="text-xs md:text-sm font-bold tracking-widest mb-6 uppercase">
-            AI-Powered Digital Learning
+            Education Software Development
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            Shaping the Future of Education Through Technology
+            Reshaping the future of Education Management with Artifical Intelligence.
           </h1>
 
           <p className="text-base md:text-lg text-gray-200 mb-8 leading-relaxed">
-            Empower educational institutions with AI-powered learning platforms, digital campus solutions, student management systems, and immersive learning experiences that inspire innovation, collaboration, and lifelong learning.
+            Transform learning institutions with AI in education platform, student information system, school management software, and exclusive learning experience that encourage modernisation, collaborations and long-term online learning platform.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded flex justify-center items-center transition-colors duration-300">
-              Talk to Education Experts 
+              Connect with Our Experts 
               <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>
             <button className="bg-transparent border border-gray-400 hover:border-white text-white font-medium py-3 px-6 rounded flex justify-center items-center transition-colors duration-300">
-              Explore Education Solutions
+              Explore Custom Education Software
               <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -54,20 +54,14 @@ const DigitalEducationTransformation = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           <div className="flex flex-col justify-center">
             <h2 className="text-sm md:text-base font-bold tracking-widest uppercase text-black mb-6">
-              Digital Education Transformation
+              eLearning Software Development
             </h2>
             <div className="text-gray-800 text-base md:text-lg leading-relaxed space-y-6">
               <p>
-                Education is evolving beyond traditional classrooms. Today's
-                institutions require intelligent digital ecosystems that support hybrid
-                learning, personalized education, student engagement, and efficient
-                campus operations.
+                Education has always been centered around traditional classrooms. Today, however, institutions require digital education solutions that support hybrid learning, personalized online experiences, enhanced student engagement, and efficient campus management. 
               </p>
               <p>
-                Capyngen partners with schools, universities, EdTech companies, and
-                training organizations to build scalable digital learning platforms
-                powered by AI, cloud technologies, automation, and data-driven
-                insights.
+                Capyngen provides school management, university management software, EdTech software, and offers training to innovate adoptable online learning platforms powered by AI, cloud tech solutions, smart technology, and fact-based vision. 
               </p>
             </div>
           </div>
@@ -92,19 +86,14 @@ const AIEducationTransformation = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           <div className="flex flex-col justify-center text-white">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
-              AI is Transforming Modern Education
+              AI is Reshaping Latest Education
             </h2>
             <div className="text-white text-base md:text-lg leading-relaxed space-y-4">
               <p>
-                Artificial Intelligence is redefining education
-                by enabling personalized learning, intelligent
-                tutoring, automated assessments, and
-                predictive student analytics.
+                AI is redefining traditional education by enabling customized online learning, tutoring, AI evalutions, and precise student analytics.
               </p>
               <p>
-                Capyngen develops AI-driven education
-                solutions that improve learning outcomes
-                while simplifying academic administration.
+                Capyngen offers education mobile app development that can build a LMS development company, solutions that enhance learning outcomes while building intelligible education management software.
               </p>
             </div>
           </div>
@@ -125,7 +114,7 @@ const AIEducationTransformation = () => {
 const EducationSolutions = () => {
   const solutions = [
     {
-      title: "Learning Management Systems (LMS)",
+      title: "Education Technology Solutions",
       image: "image_121eb9_lms.jpg",
     },
     {
@@ -133,7 +122,7 @@ const EducationSolutions = () => {
       image: "image_121eb9_sis.jpg",
     },
     {
-      title: "AI Virtual Learning Assistants",
+      title: "Learning Management System Development",
       image: "image_121eb9_ai.jpg", 
     },
   ];
@@ -142,7 +131,7 @@ const EducationSolutions = () => {
     <section className="bg-white py-16 md:py-24 w-full">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black mb-12 uppercase">
-          Education Solutions
+          Education IT Services We Offer
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {solutions.map((item, index) => (
@@ -160,7 +149,7 @@ const EducationSolutions = () => {
                   {item.title}
                 </h3>
                 <div className="text-xs font-bold tracking-widest uppercase flex items-center gap-1 opacity-90 group-hover:opacity-100 group-hover:underline">
-                  Read More
+                  Know More
                   <svg className="w-3 h-3 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -188,18 +177,14 @@ const ClientTestimonial = () => {
             </div>
             <div className="flex flex-col w-full">
               <p className="text-xl md:text-2xl text-gray-900 leading-relaxed font-medium">
-                Capyngen's digital learning solutions transformed the way we
-                deliver education. From AI-powered learning experiences to
-                streamlined campus management, their technology has
-                significantly improved student engagement and operational
-                efficiency."
+                “Capyngen's built our fully transformed education software development company the way we needed for our education system. From AI-powered learning to modernized campus management, their high-end technology services significantly advanced student engagement and efficiency.”
               </p>
               <div className="flex flex-col items-end mt-8 w-full">
                 <h4 className="text-blue-600 text-xl md:text-2xl font-bold uppercase tracking-wide mb-1">
-                  Client Testimonial
+                  CLIENT TESTIMONIAL
                 </h4>
                 <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-black">
-                  — Director of Digital Learning
+                  — Director of Digital Learning 
                 </p>
               </div>
             </div>
@@ -214,20 +199,28 @@ const ClientTestimonial = () => {
 const EducationInsights = () => {
   const insights = [
     {
-      title: "Personalized Learning with AI",
+      title: "Customised Learning with Artificial Intelligence",
       image: "image_122235_card1.jpg", 
     },
     {
-      title: "Smart Digital Campuses",
+      title: "Online Univeristy Campuses Development",
       image: "image_122235_card2.jpg", 
     },
     {
-      title: "Learning Analytics",
+      title: "Online Learning Platform Development",
       image: "image_122235_card3.jpg", 
     },
     {
-      title: "Future of EdTech",
+      title: "Education ERP Software",
       image: "image_122235_card4.jpg", 
+    },
+    {
+      title: "Learning Management System Development",
+      image: "image_122235_card1.jpg", 
+    },
+    {
+      title: "EdTech Software Development",
+      image: "image_122235_card2.jpg", 
     }
   ];
 
@@ -235,7 +228,7 @@ const EducationInsights = () => {
     <section className="bg-[#111827] py-16 md:py-24 w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
-          Education Insights
+          Digital Education Overview
         </h2>
         <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar">
           {insights.map((insight, index) => (
@@ -253,7 +246,7 @@ const EducationInsights = () => {
                   {insight.title}
                 </h3>
                 <div className="text-xs font-semibold tracking-widest uppercase flex items-center gap-2 opacity-90 group-hover:opacity-100">
-                  READ MORE
+                  Know More
                   <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
@@ -292,19 +285,24 @@ const EducationInsights = () => {
 const WhyCapyngen = () => {
   const cards = [
     {
-      title: "AI-Driven Innovation",
-      description: "CREATING INTELLIGENT LEARNING EXPERIENCES FOR EVERY STUDENT.",
+      title: "Custom Education Software",
+      description: "We offer high-end IT services for custom education websites.",
       image: "image_1c0402_card1.jpg"
     },
     {
-      title: "Student-Centric Design",
-      description: "BUILDING ENGAGING DIGITAL PLATFORMS FOCUSED ON USABILITY AND ACCESSIBILITY.",
+      title: "EdTech Software Development",
+      description: "Build your EdTech Software with our expert teams of developers and designers.",
       image: "image_1c0402_card2.jpg"
     },
     {
-      title: "Scalable Cloud Infrastructure",
-      description: "SECURE CLOUD-NATIVE SOLUTIONS THAT GROW WITH EDUCATIONAL INSTITUTIONS.",
+      title: "Education ERP Software",
+      description: "Get your ERP software with us and manage academic administrative, financial and learning functions.",
       image: "image_1c0402_card3.jpg"
+    },
+    {
+      title: "Education Mobile App Development",
+      description: "Capyngen offers you reliable, smooth and customized mobile apps for education services.",
+      image: "image_1c0402_card1.jpg"
     }
   ];
 
@@ -313,10 +311,10 @@ const WhyCapyngen = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="mb-12 flex flex-col items-start">
           <h2 className="text-3xl md:text-4xl font-bold text-black mb-2 uppercase tracking-wide">
-            WHY CAPYNGEN
+            Why Choose Capyngen?
           </h2>
           <p className="text-lg md:text-xl text-gray-800 font-medium">
-            Technology That Powers Future Learning
+            Advanced Technology That Build Future 
           </p>
         </div>
         <div className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory hide-scrollbar">
@@ -361,10 +359,10 @@ const WhyCapyngen = () => {
 // --- Section 8: Transforming Digital Learning ---
 const TransformingDigitalLearning = () => {
   const results = [
-    "65% Increase in Student Engagement",
-    "50% Faster Administrative Processes",
-    "Improved Faculty Collaboration",
-    "Enhanced Learning Experience"
+    "Student Information & Campus Management Systems",
+    "Mobile Learning Applications",
+    "Learning Analytics & Performance Dashboards",
+    "Ongoing Support, Maintenance & Platform Optimization"
   ];
 
   return (
@@ -373,15 +371,13 @@ const TransformingDigitalLearning = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6 leading-tight">
-              Transforming Digital<br className="hidden md:block" /> Learning
+              Rebuilding Your Online<br className="hidden md:block" /> Learning Platform
             </h2>
             <p className="text-gray-900 text-lg md:text-xl leading-relaxed mb-6">
-              Capyngen partnered with a leading university 
-              to modernize its digital learning ecosystem 
-              and streamline campus operations.
+              Capyngen builds and designs modern learning solutions that offer best educational experiences, latest academic functions, and upgrades for the future.
             </p>
-            <div className="text-gray-900 text-lg md:text-xl mb-4">
-              Results
+            <div className="text-gray-900 text-lg md:text-xl mb-4 font-semibold">
+              Our Capabilities 
             </div>
             <ul className="space-y-3">
               {results.map((item, index) => (
@@ -405,24 +401,114 @@ const TransformingDigitalLearning = () => {
   );
 };
 
-// --- Section 9: Call to Action ---
+// --- Section 9: FAQs ---
+const EducationFAQs = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      question: "How scalable are education technology services?",
+      answer: "Education tech is highly scable and flexible, offering simplified content delivery and automated tools with human-led instruction."
+    },
+    {
+      question: "Can education software development support online universities?",
+      answer: "Yes, it can strengthen the virtual classroom, student management and admin system to smoothly run online universities without any physical campus. "
+    },
+    {
+      question: "Why choose a software development company for education?",
+      answer: "Choosing the right software development company and expertise for your institution will benefit you with compliance, scalability, and security."
+    },
+    {
+      question: "How do education IT services benefit schools?",
+      answer: "An education IT service would help you workload, improve teaching through digital tools and keep your system secure & reliable. "
+    },
+    {
+      question: "What sectors profit from education software development?",
+      answer: "Higher education, online univerisities, K-12 schools, ed-tech startups, tutoring services, public education and all skill training providers benefit from education software. "
+    },
+    {
+      question: "How secure is education software for student data?",
+      answer: "Education software ensures security for regular audits, encryption, and keeps student data genuinely safe."
+    },
+    {
+      question: "Does education software service include analytics dashboards?",
+      answer: "Yes, most IT companies include analytical dashboards in their education software services."
+    },
+    {
+      question: "How education software development support customized learning?",
+      answer: "Education software uses data on each student's pace, and automatically balances content difficulty, suggest resources, and adapt to feedback."
+    },
+    {
+      question: "Can EdTech software development support multilingual learning?",
+      answer: "Yes. EdTech supports multilingual learning through translation, and language-switching interfaces to help the students learn in their selected language."
+    },
+    {
+      question: "Why choose Capyngen as your education software development company?",
+      answer: "Selecting an education software company is overwhelming, but with Capyngen’s proven experience in combining services with a client-focused approach, and building secure software solutions, it assures that the decision will give you a positive outcome. "
+    },
+    {
+      question: "What education technology solutions Capyngen offers?",
+      answer: "We offer LMS software, administration platform, virtual classroom & eLearning solutions, and analytical dashboard to track student’s performance regularly. "
+    },
+    {
+      question: "Can we develop custom education software for schools and universities?",
+      answer: "Yes. With Capyngen’s expert team, you can get your customized education software for schools or universities. It includes student information systems, e-learning portals, and mobile learning apps service solutions."
+    },
+    {
+      question: "How Capyngen combines AI into education software?",
+      answer: "Capyngen uses AI to automate daily tasks, speed up the manual processes, and support features like personalized learning, grading, and data-driven insights."
+    }
+  ];
+
+  return (
+    <section className="bg-gray-50 py-16 md:py-24 w-full">
+      <div className="max-w-4xl mx-auto px-6 md:px-12">
+        <h2 className="text-2xl md:text-3xl font-bold tracking-widest text-black mb-12 text-center uppercase">
+          FAQs
+        </h2>
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="border border-gray-200 bg-white rounded-md shadow-sm overflow-hidden">
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-gray-100 transition-colors"
+              >
+                <span className="font-semibold text-gray-900 text-base md:text-lg pr-4">
+                  {faq.question}
+                </span>
+                <span className="text-blue-600 text-2xl flex-shrink-0">
+                  {openIndex === index ? '−' : '+'}
+                </span>
+              </button>
+              {openIndex === index && (
+                <div className="p-5 pt-0 text-gray-700 text-sm md:text-base leading-relaxed border-t border-gray-100">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- Section 10: Call to Action ---
 const EducationCTA = () => {
   return (
     <section className="bg-[#0B0A1E] py-20 md:py-32 w-full flex justify-center items-center">
       <div className="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
         
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
-          Build the Future of Education with Capyngen
+          Shape the Future of Education with Capyngen 
         </h2>
         
         <p className="text-base md:text-xl text-gray-200 mb-10 max-w-2xl leading-relaxed">
-          Create intelligent learning environments, improve student success,
-          and accelerate digital transformation with AI-powered education
-          solutions.
+          Capyngen offers high-tech intelligent learning environments, enhancing student success, and advancing digital innovation with AI-powered education solutions. We provide reliable guidance, post-lauch support and a dedicated team of experts, supporting the future of Education in the virtual world. 
         </p>
         
         <button className="bg-[#1f2025] hover:bg-gray-800 border border-gray-500 text-white font-medium py-3 px-8 rounded-full flex justify-center items-center transition-colors duration-300">
-          Start Your Education Project
+          Contact Us for Education Project
           <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
@@ -445,6 +531,7 @@ const EducationPage = () => {
       <EducationInsights />
       <WhyCapyngen />
       <TransformingDigitalLearning />
+      <EducationFAQs />
       <EducationCTA />
     </div>
   );
