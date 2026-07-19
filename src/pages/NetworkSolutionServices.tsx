@@ -1,18 +1,88 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   ArrowRight, 
   Wifi, 
   Network, 
   ShieldCheck, 
   Cloud, 
-  PhoneCall, 
   Mail, 
   Server,
   Activity,
-  ChevronRight
+  ChevronRight,
+  ChevronDown,
+  MapPin
 } from 'lucide-react';
 
 const NetworkInfrastructureLandingPage: React.FC = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      question: "Q1. What are Network Solutions Services?",
+      answer: "Network Solutions Services involve the layout, setup, administration, and fine-tuning of enterprise networks to boost business connectivity and functionality."
+    },
+    {
+      question: "Q2. Why are Network Infrastructure Solutions important?",
+      answer: "Network Infrastructure Solutions provide a secure and scalable foundation to enable business applications, communications and digital transformation."
+    },
+    {
+      question: "Q3. What are some of the features of the Network Management Services?",
+      answer: "Network Management Services include monitoring, maintenance, configuration management, performance optimization, and issue resolution."
+    },
+    {
+      question: "Q4. What makes the Managed Network Services so successful?",
+      answer: "Managed Network Services simplify operations, enhance network reliability, ensure minimal downtime, and offer around-the-clock expert assistance."
+    },
+    {
+      question: "Q5. What are Enterprise Network Solutions?",
+      answer: "Enterprise Network Solutions are bespoke networks tailored to meet the specific needs of large businesses, offering secure, scalable, and high-performance connections."
+    },
+    {
+      question: "Q6. What are the advantages of Cloud Networking Services to businesses?",
+      answer: "Cloud Networking Services provide benefits in providing flexibility, ease of remote access, scalability, and support modern cloud applications."
+    },
+    {
+      question: "Q7. What makes Network Security Solutions a must-have?",
+      answer: "Network Security Solutions defend enterprise data, users, applications and devices from cyber threats and unauthorized access."
+    },
+    {
+      question: "Q8. What is the difference between IT Network Solutions?",
+      answer: "IT Network Solutions encompass hardware, software and security services, integration with cloud infrastructure, and services to manage your enterprise's technology environment."
+    },
+    {
+      question: "Q9. Network Consulting Services offer what?",
+      answer: "Network Consulting Services enable businesses to assess their current network, forecast future needs, and execute effective networking solutions for the future."
+    },
+    {
+      question: "Q10. What are Network Support Services?",
+      answer: "Network Support Services offer technical support, trouble shooting, maintenance, software updates, and continuous monitoring of the network."
+    },
+    {
+      question: "Q11. What are some ways in which Business Network Solutions can enhance productivity?",
+      answer: "Business Network Solutions facilitate rapid communication, secure collaboration, performance of applications and better operational efficiency."
+    },
+    {
+      question: "Q12. Does Capyngen offer any tailored networking solutions?",
+      answer: "Yes. Capyngen offers tailored Network Solutions Services aligned with each organization's business objectives, infrastructure, and business needs."
+    },
+    {
+      question: "Q13. Can Capyngen modernise existing enterprise networks?",
+      answer: "Yes. We modernize legacy infrastructure by integrating with the cloud, automating intelligently and networking to scale."
+    },
+    {
+      question: "Q14. How does optimization of a network help in improving the performance?",
+      answer: "Optimizing the network helps maximize bandwidth, minimize latency, increase application responsiveness and provide reliable connectivity."
+    },
+    {
+      question: "Q15. What are the reasons to use Capyngen for Network Solutions Services?",
+      answer: "With industry knowledge, innovative technologies, Network Consulting Services, Managed Network Services, and enterprise solutions, Capyngen provides secure, scalable and future-proof business networks."
+    }
+  ];
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-600">
       
@@ -30,17 +100,17 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
           <p className="text-blue-300 font-semibold text-xs uppercase tracking-[0.2em] mb-6">
-            Connectivity At Scale
+            ADVANCED CONNECTIVITY SOLUTIONS
           </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
-            Next-Generation Network<br />Infrastructure
+            Intelligent Enterprise<br />Networking
           </h1>
           <div className="flex flex-wrap justify-center gap-4">
             <button className="bg-white hover:bg-slate-100 text-[#0a192f] px-8 py-3.5 font-bold transition-colors shadow-lg text-sm tracking-wide">
-              START A PROJECT
+              TALK TO OUR SPECIALISTS
             </button>
             <button className="bg-transparent hover:bg-white/10 text-white border border-white/40 px-8 py-3.5 font-bold transition-colors text-sm tracking-wide">
-              VIEW OUR SOLUTIONS
+              DISCOVER SERVICES
             </button>
           </div>
         </div>
@@ -53,33 +123,18 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
             
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold text-[#08538c] mb-6 leading-tight max-w-sm">
-                Architecting the Backbone of Digital Transformation
+                Creating reliable networks for modern businesses
               </h2>
               <div className="w-12 h-1 bg-[#08538c] mb-8"></div>
             </div>
             
             <div>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                As enterprises scale globally, legacy networks struggle to maintain agility. We design, 
-                deploy, and manage intelligent network architectures that adapt to dynamic workloads 
-                while securing data across the expanded perimeter.
+                Today's Digital Economy requires connectivity beyond the traditional. Your network is the backbone that supports business operations, collaboration and innovation. At Capyngen, we provide value-added Network Solutions Services to support businesses in creating a secure, scalable, and future-proof digital environment. 
               </p>
               <p className="text-slate-600 mb-12 leading-relaxed">
-                Our approach merges software-defined flexibility with robust physical infrastructure, 
-                ensuring that your connectivity accelerates business objectives rather than creating 
-                bottlenecks.
+                Our experts deliver trusted connectivity, through proven Network Infrastructure Solutions and sophisticated Cloud Networking Services, to distributed workplaces from central data centers. 
               </p>
-              
-              <div className="grid grid-cols-2 gap-8">
-                <div>
-                  <p className="text-4xl font-bold text-[#08538c] mb-2">99.99%</p>
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Service Uptime Guarantee</p>
-                </div>
-                <div>
-                  <p className="text-4xl font-bold text-[#08538c] mb-2">500+</p>
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Enterprise Deployments</p>
-                </div>
-              </div>
             </div>
             
           </div>
@@ -90,8 +145,8 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
       <section className="bg-[#f4f7fb] py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
-            <p className="text-[#08538c] font-semibold mb-2 uppercase tracking-wider text-xs">Latest Insights</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">Pioneering Industry Trends</h2>
+            <p className="text-[#08538c] font-semibold mb-2 uppercase tracking-wider text-xs">INDUSTRY INSIGHTS</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">Emerging Networking Innovations</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-6">
@@ -101,9 +156,10 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
                 <div className="text-[#08538c] mb-6">
                   <Wifi className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">The Convergence of 5G and Enterprise Edge</h3>
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">INSIGHT 01</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Intelligent Edge Connectivity</h3>
                 <p className="text-slate-600 max-w-lg">
-                  Utilizing ultra-low latency wireless frameworks to process data at the edge, reducing backhaul strain and enabling real-time IoT deployments.
+                  Providing enhanced secure Enterprise Network Solutions that bring more applications and real-time processing closer to users and connected devices.
                 </p>
               </div>
               <div className="mt-8 flex justify-end">
@@ -119,9 +175,9 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
                 <div className="text-[#08538c] mb-6">
                   <Activity className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">SD-WAN Evolution</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">AI-Driven WAN Management</h3>
                 <p className="text-slate-600 text-sm">
-                  Transitioning from basic routing to AI-driven traffic steering for optimal cloud application performance.
+                  Improved visibility of networks with intelligent automation, predictive monitoring and optimized traffic distribution with modern Network Management Services.
                 </p>
               </div>
               <div className="mt-8 w-1/3 h-1 bg-slate-100 group-hover:bg-[#08538c] transition-colors"></div>
@@ -133,9 +189,9 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
                 <div className="text-[#08538c] mb-6">
                   <ShieldCheck className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">SASE Integration</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Unified Secure Access</h3>
                 <p className="text-slate-600 text-sm">
-                  Merging network connectivity with unified security services into a single cloud-native architecture.
+                  Advanced networking solutions and Network Security Solutions for ease of secure access in hybrid working environments.
                 </p>
               </div>
             </div>
@@ -143,9 +199,9 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
             {/* Card 4: Wide Bottom Right */}
             <div className="md:col-span-2 bg-white p-8 sm:p-10 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden border-t-2 border-transparent hover:border-[#08538c]">
               <div className="relative z-10">
-                <h3 className="text-xl font-bold text-slate-900 mb-3">Network Sustainability</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Green Network Architecture</h3>
                 <p className="text-slate-600 max-w-lg">
-                  Implementing energy-efficient hardware and dynamic capacity scaling to reduce corporate carbon footprints.
+                  Creating environmentally friendly Network Infrastructure solutions that are resource efficient to minimize operational costs in support of sustainability programs.
                 </p>
               </div>
               <div className="absolute -bottom-6 -right-6 text-slate-100 opacity-50 z-0">
@@ -161,14 +217,11 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-2xl">
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#08538c] mb-4">Our Core Offerings</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#08538c] mb-4">Our Specialized Services</h2>
               <p className="text-slate-600">
-                End-to-end solutions designed to modernize your network infrastructure and prepare it for future scalability.
+                In-depth Network Solutions Services to boost performance and aid business growth.
               </p>
             </div>
-            <a href="#" className="flex items-center text-[#08538c] font-semibold hover:text-[#063f6a] transition-colors whitespace-nowrap">
-              View All Services <ArrowRight className="ml-2 w-4 h-4" />
-            </a>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -177,13 +230,13 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
               <div className="mb-5 text-[#08538c]">
                 <Network className="w-7 h-7 stroke-[1.5]" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Network Transformation</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Enterprise Network Modernization</h3>
               <p className="text-sm text-slate-600 mb-6 flex-1">
-                Overhauling legacy architectures with agile, software-defined LAN and WAN solutions.
+                Smart transformation of the existing environment in the form of Cloud Networking Services.
               </p>
               <ul className="text-xs text-slate-500 space-y-2">
-                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Route Optimization</li>
-                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Hardware Refresh</li>
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Cloud Integration</li>
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Infrastructure Assessment</li>
               </ul>
             </div>
             
@@ -192,13 +245,13 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
               <div className="mb-5 text-[#08538c]">
                 <Wifi className="w-7 h-7 stroke-[1.5]" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Wireless Solutions</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Wireless Network Deployment</h3>
               <p className="text-sm text-slate-600 mb-6 flex-1">
-                High-density Wi-Fi 6 design, Private 5G deployments, and unified wireless management.
+                Providing enterprise-wide high speed Wi-Fi 6E and private wireless solutions that enable reliable Business Network Solutions.
               </p>
               <ul className="text-xs text-slate-500 space-y-2">
-                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Site Surveys</li>
-                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Coverage Heatmaps</li>
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Coverage Planning</li>
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Private Wireless</li>
               </ul>
             </div>
             
@@ -207,13 +260,13 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
               <div className="mb-5 text-[#08538c]">
                 <Cloud className="w-7 h-7 stroke-[1.5]" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Cloud Infrastructure</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Network Performance Enhancement</h3>
               <p className="text-sm text-slate-600 mb-6 flex-1">
-                Establishing secure, low-latency direct connections to major public cloud providers (AWS, Azure).
+                Smart monitoring along with Network Management Services, to improve application responsiveness.
               </p>
               <ul className="text-xs text-slate-500 space-y-2">
-                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> ExpressRoute Setup</li>
-                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Multi-Cloud Routing</li>
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Traffic Optimization</li>
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Bandwidth Control</li>
               </ul>
             </div>
             
@@ -222,68 +275,109 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
               <div className="mb-5 text-[#08538c]">
                 <ShieldCheck className="w-7 h-7 stroke-[1.5]" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">SASE & Edge Security</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Integrated Network Protection</h3>
               <p className="text-sm text-slate-600 mb-6 flex-1">
-                Zero Trust Network Access (ZTNA), secure web gateways, and centralized policy enforcement.
+                Enabling enterprise connectivity with advanced Network Security Solutions to ensure business critical data security.
               </p>
               <ul className="text-xs text-slate-500 space-y-2">
-                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Threat Prevention</li>
-                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Policy Auditing</li>
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Identity Verification</li>
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Continuous Security Monitoring</li>
               </ul>
+            </div>
+
+            {/* Offering 5 */}
+            <div className="flex flex-col h-full border-t border-slate-200 pt-6">
+              <div className="mb-5 text-[#08538c]">
+                <Activity className="w-7 h-7 stroke-[1.5]" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Managed Network Operations</h3>
+              <p className="text-sm text-slate-600 mb-6 flex-1">
+                Managed Network Services proactively, ensuring maximum uptime with continuous monitoring expert Network Support Services.
+              </p>
+              <ul className="text-xs text-slate-500 space-y-2">
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> 24/7 Network Monitoring</li>
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Incident Response</li>
+              </ul>
+            </div>
+
+            {/* Offering 6 */}
+            <div className="flex flex-col h-full border-t border-slate-200 pt-6">
+              <div className="mb-5 text-[#08538c]">
+                <Network className="w-7 h-7 stroke-[1.5]" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Network Strategy & Consulting</h3>
+              <p className="text-sm text-slate-600 mb-6 flex-1">
+                Enabling organizations to create a scalable IT Network Solutions by providing Network Consulting Services.
+              </p>
+              <ul className="text-xs text-slate-500 space-y-2">
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Network Assessment</li>
+                <li className="flex items-center"><ChevronRight className="w-3 h-3 mr-1 text-[#08538c]" /> Technology Roadmap</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Team Section / Why Choose Us */}
+      <section className="bg-[#1b232c] py-20 lg:py-28 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Why Choose Capyngen?</h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Collaborate with Capyngen to implement smart Network Solutions Services for security, scalability and business value.
+            </p>
+          </div>
+          
+          <div className="grid sm:grid-cols-4 gap-8">
+            <div className="group text-center">
+              <h3 className="text-lg font-bold text-white mb-2">Proven Industry Expertise</h3>
+              <p className="text-slate-400 text-sm">Our experts provide you with guaranteed Enterprise Network Solutions to meet your business objectives.</p>
+            </div>
+
+            <div className="group text-center">
+              <h3 className="text-lg font-bold text-white mb-2">End-to-End Managed Services</h3>
+              <p className="text-slate-400 text-sm">We can help you manage your entire Network life cycle from planning and deployment through to Managed Network Services.</p>
+            </div>
+
+            <div className="group text-center">
+              <h3 className="text-lg font-bold text-white mb-2">Secure & Future-Ready Technology</h3>
+              <p className="text-slate-400 text-sm">The strength of our Network Security Solutions enables us to create resilient solutions to support future business growth.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. Team Section */}
-      <section className="bg-[#1b232c] py-20 lg:py-28 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* FAQ Section */}
+      <section className="bg-[#f4f7fb] py-20 lg:py-28">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Our Engineering Leads</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">
-              A collective of certified network architects dedicated to constructing robust enterprise systems.
-            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
           </div>
-          
-          <div className="grid sm:grid-cols-3 gap-8">
-            {/* Team Member 1 */}
-            <div className="group">
-              <div className="overflow-hidden mb-4 bg-slate-800">
-                <img 
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600" 
-                  alt="David Vance" 
-                  className="w-full h-80 object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                />
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div 
+                key={index} 
+                className="bg-white shadow-sm border border-slate-100 overflow-hidden"
+              >
+                <button 
+                  onClick={() => toggleFaq(index)}
+                  className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none"
+                >
+                  <span className="font-bold text-slate-900 text-lg pr-8">{faq.question}</span>
+                  <ChevronDown 
+                    className={`w-5 h-5 text-[#08538c] transition-transform duration-300 flex-shrink-0 ${openFaq === index ? 'rotate-180' : ''}`} 
+                  />
+                </button>
+                <div 
+                  className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-96 pb-5 opacity-100' : 'max-h-0 opacity-0'}`}
+                >
+                  <p className="text-slate-600 leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-lg font-bold text-white">David Vance</h3>
-              <p className="text-blue-400 text-xs font-semibold uppercase tracking-wider">Chief Network Architect</p>
-            </div>
-
-            {/* Team Member 2 */}
-            <div className="group">
-              <div className="overflow-hidden mb-4 bg-slate-800">
-                <img 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600" 
-                  alt="Sarah Chen" 
-                  className="w-full h-80 object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                />
-              </div>
-              <h3 className="text-lg font-bold text-white">Sarah Chen</h3>
-              <p className="text-blue-400 text-xs font-semibold uppercase tracking-wider">VP of Cloud Infrastructure</p>
-            </div>
-
-            {/* Team Member 3 */}
-            <div className="group">
-              <div className="overflow-hidden mb-4 bg-slate-800">
-                <img 
-                  src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=600" 
-                  alt="Marcus Hoffman" 
-                  className="w-full h-80 object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                />
-              </div>
-              <h3 className="text-lg font-bold text-white">Marcus Hoffman</h3>
-              <p className="text-blue-400 text-xs font-semibold uppercase tracking-wider">Lead Security Engineer (SASE)</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -295,9 +389,9 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
             
             {/* Left Side - Info */}
             <div className="lg:pr-8">
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#08538c] mb-6">Ready to Optimize Your Infrastructure?</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#08538c] mb-6">Looking to Strengthen Your Network?</h2>
               <p className="text-slate-600 mb-10 leading-relaxed">
-                Connect with our technical team for a comprehensive network assessment. We'll evaluate your current architecture and chart a modernization path aligned with your strategic goals.
+                Our experienced consultants evaluate your existing infrastructure, and create a customized Network Solutions Services that supports your organization's future growth.
               </p>
               
               <div className="space-y-6">
@@ -305,13 +399,13 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
                   <div className="w-10 h-10 bg-[#f4f7fb] rounded-full flex items-center justify-center mr-4">
                     <Mail className="w-5 h-5 text-[#08538c]" />
                   </div>
-                  <a href="mailto:solutions@netinfra.com" className="hover:text-[#08538c] transition-colors font-medium">solutions@netinfra.com</a>
+                  <a href="mailto:solutions@capyngen.com" className="hover:text-[#08538c] transition-colors font-medium">EMAIL US: solutions@capyngen.com</a>
                 </div>
                 <div className="flex items-center text-slate-700">
                   <div className="w-10 h-10 bg-[#f4f7fb] rounded-full flex items-center justify-center mr-4">
-                    <PhoneCall className="w-5 h-5 text-[#08538c]" />
+                    <MapPin className="w-5 h-5 text-[#08538c]" />
                   </div>
-                  <span className="font-medium">+1 (800) 555-0199</span>
+                  <span className="font-medium">Company: Global HQ</span>
                 </div>
               </div>
             </div>
@@ -348,10 +442,12 @@ const NetworkInfrastructureLandingPage: React.FC = () => {
                     defaultValue=""
                   >
                     <option value="" disabled>Select an option...</option>
-                    <option value="transformation">Network Transformation (SD-WAN)</option>
-                    <option value="wireless">Wireless Solutions (Wi-Fi 6 / 5G)</option>
-                    <option value="cloud">Cloud Infrastructure</option>
-                    <option value="security">SASE & Edge Security</option>
+                    <option value="transformation">Enterprise Network Modernization</option>
+                    <option value="wireless">Wireless Network Deployment</option>
+                    <option value="cloud">Network Performance Enhancement</option>
+                    <option value="security">Integrated Network Protection</option>
+                    <option value="managed">Managed Network Operations</option>
+                    <option value="consulting">Network Strategy & Consulting</option>
                   </select>
                 </div>
                 

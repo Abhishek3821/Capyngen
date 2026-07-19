@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   ArrowRight, 
   Database, 
   Settings2, 
   BarChart3, 
   Network,
-  Mail
+  Mail,
+  ChevronDown
 } from 'lucide-react';
 
 // Custom SVG component for the removed Lucide LinkedIn icon
@@ -27,6 +28,47 @@ const Linkedin: React.FC<{ className?: string }> = ({ className }) => (
 );
 
 const DataAnalyticsLandingPage: React.FC = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      question: "What exactly do data analytics services cover?",
+      answer: "At Capyngen, we usually start by figuring out where your data actually lives and how fragmented it is, then build from there."
+    },
+    {
+      question: "What's the difference between data analytics services and just hiring a BI tool vendor?",
+      answer: "A BI tool gives you software. Data analytics consulting gives you a strategy for how to actually use it—what to measure, how to structure your data, and how to get your teams to trust and act on the insights."
+    },
+    {
+      question: "How long does it typically take to see results from business intelligence services?",
+      answer: "It depends on how fragmented your current data setup is, but most clients start seeing clearer reporting within the first couple of months. Full-scale business intelligence services—with predictive modeling and self-service dashboards—usually take a bit longer to mature fully."
+    },
+    {
+      question: "What are data analytics services for business actually built to solve?",
+      answer: "Most commonly, it's the gap between having data and being able to act on it quickly. Good data analytics solutions for business turn scattered, siloed information into something leadership can actually use to make decisions in real time, not weeks later."
+    },
+    {
+      question: "Do you work with big data or just standard business reporting?",
+      answer: "Both, honestly. We scope the work based on what your data volume and complexity actually require."
+    },
+    {
+      question: "What does your data engineering work actually involve?",
+      answer: "Our data engineering work covers pipeline automation, data lakehouse design, and real-time processing—basically, the plumbing that makes sure clean, usable data reaches your analytics and BI tools without breaking."
+    },
+    {
+      question: "What's involved in your master data management work?",
+      answer: "This is where a lot of the \"why doesn't this number match\" problems get solved. Our master data management work covers data governance, quality checks, and golden record matching, so different departments are finally working from the same accurate source of truth."
+    },
+    {
+      question: "How do I find the right data analytics consulting partner for a large, multi-national business?",
+      answer: "As a data analytics consulting partner, we've worked through that kind of complexity with Fortune 500 clients, so we know where things typically break."
+    }
+  ];
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
   return (
     <div className="min-h-screen bg-[#f8f9fc] font-sans text-slate-700">
       
@@ -45,10 +87,10 @@ const DataAnalyticsLandingPage: React.FC = () => {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-md">
-            Data-Driven Decision<br />Excellence
+            Smarter Data-Driven Decisions
           </h1>
           <p className="text-lg text-blue-100 mb-10 leading-relaxed max-w-2xl mx-auto font-medium drop-shadow-md">
-            We transform raw information into actionable intelligence, engineering data ecosystems that drive enterprise strategy.
+            Capyngen is a leading data service provider for data analytics services, offering advanced global enterprise growth and building lasting operational resilience. 
           </p>
         </div>
       </section>
@@ -59,23 +101,24 @@ const DataAnalyticsLandingPage: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             
             <div className="lg:pr-8">
-              <p className="text-[#0e6ba8] font-bold text-xs uppercase tracking-widest mb-4">Our Philosophy</p>
+              <p className="text-[#0e6ba8] font-bold text-xs uppercase tracking-widest mb-4">OUR PHILOSOPHY</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                Precision in Complexity
+                Finding Clarity in Complexity
               </h2>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                In an era defined by information velocity, the challenge isn't acquiring data—it's distilling clarity from noise. We architect environments that process vast streams into unified, strategic frameworks.
+                As the volume of business information continues to grow, the real challenge is making sense of it, not just collecting it. At Capyngen, we help turn scattered data systems into reliable, well-organized assets.
               </p>
               <p className="text-slate-600 leading-relaxed">
-                By synthesizing disparate systems into structured data lakes and deploying advanced predictive models, we enable enterprise leaders to move beyond reactive reporting to proactive, algorithmic foresight.
+                Our approach connects raw information with practical, usable insight. We use proven analytical methods to give your leadership team the clarity needed to make informed decisions in changing global markets. 
               </p>
             </div>
             
             <div className="bg-white p-10 sm:p-14 shadow-xl border border-slate-100 rounded-sm">
               <p className="text-6xl font-bold text-[#0e6ba8] mb-4">94%</p>
-              <p className="text-slate-900 font-bold mb-2">Predictive Accuracy Rate</p>
+              <p className="text-slate-900 font-bold mb-2">CLIENT EFFICIENCY BENEFIT</p>
               <p className="text-sm text-slate-500 leading-relaxed">
-                Our machine learning models consistently out-perform baseline forecasting, minimizing operational risk across logistics and financial modeling.
+                "Capyngen's data fabric integration transformed our operational baseline in under two quarters." 
+                <br /><br />— F500 CTO
               </p>
             </div>
             
@@ -88,11 +131,11 @@ const DataAnalyticsLandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <p className="text-[#0e6ba8] font-bold text-xs uppercase tracking-widest mb-2">Knowledge Base</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">The Intelligence Pulse</h2>
+              <p className="text-[#0e6ba8] font-bold text-xs uppercase tracking-widest mb-2">MARKET INTELLIGENCE</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">The Insight Pulse</h2>
             </div>
             <a href="#" className="hidden sm:flex items-center text-[#0e6ba8] font-bold text-sm tracking-wider uppercase hover:text-[#0a4d7a] transition-colors">
-              View All Articles <ArrowRight className="ml-2 w-4 h-4" />
+              EXPLORE INSIGHTS <ArrowRight className="ml-2 w-4 h-4" />
             </a>
           </div>
           
@@ -106,12 +149,12 @@ const DataAnalyticsLandingPage: React.FC = () => {
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
-              <p className="text-[#0e6ba8] text-xs font-bold uppercase tracking-wider mb-2">Predictive Analytics</p>
+              <p className="text-[#0e6ba8] text-xs font-bold uppercase tracking-wider mb-2">REAL-TIME ANALYTICS</p>
               <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0e6ba8] transition-colors">
                 Decisions at the Speed of Data
               </h3>
               <p className="text-slate-600 text-sm line-clamp-3">
-                Moving beyond standard reporting dashboards to implement real-time prescriptive analytics for supply chain logistics.
+                Moving past historical reporting into predictive, live-streaming intelligence systems for faster, more agile response.
               </p>
             </div>
             
@@ -124,12 +167,12 @@ const DataAnalyticsLandingPage: React.FC = () => {
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
-              <p className="text-[#0e6ba8] text-xs font-bold uppercase tracking-wider mb-2">Data Engineering</p>
+              <p className="text-[#0e6ba8] text-xs font-bold uppercase tracking-wider mb-2">DATA FABRIC</p>
               <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0e6ba8] transition-colors">
                 The Unified Architecture
               </h3>
               <p className="text-slate-600 text-sm line-clamp-3">
-                How modern data meshes are breaking down silos and enabling decentralized, domain-specific data products.
+                How centralized metadata management is solving the siloed data problem for multinational organizations.
               </p>
             </div>
 
@@ -142,12 +185,12 @@ const DataAnalyticsLandingPage: React.FC = () => {
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
-              <p className="text-[#0e6ba8] text-xs font-bold uppercase tracking-wider mb-2">BI & Strategy</p>
+              <p className="text-[#0e6ba8] text-xs font-bold uppercase tracking-wider mb-2">BI STRATEGY</p>
               <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0e6ba8] transition-colors">
                 Strategic Visual Storytelling
               </h3>
               <p className="text-slate-600 text-sm line-clamp-3">
-                Connecting complex datasets to executive action through intuitive, narrative-driven dashboard design.
+                Improving the final step of data delivery to ensure executive buy-in and data analytics company-wide alignment.
               </p>
             </div>
           </div>
@@ -158,8 +201,8 @@ const DataAnalyticsLandingPage: React.FC = () => {
       <section className="bg-[#f8f9fc] py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="text-[#0e6ba8] font-bold text-xs uppercase tracking-widest mb-4">Core Competencies</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">Scalable Data Ecosystems</h2>
+            <p className="text-[#0e6ba8] font-bold text-xs uppercase tracking-widest mb-4">CORE COMPETENCIES</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">Data Ecosystems Built to Scale</h2>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -170,9 +213,9 @@ const DataAnalyticsLandingPage: React.FC = () => {
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-4">Big Data Solutions</h3>
               <ul className="text-sm text-slate-600 space-y-2">
-                <li>• Cloud Data Warehousing</li>
-                <li>• Enterprise Data Lakes</li>
-                <li>• Scalable ETL Pipelines</li>
+                <li>• Distributed Computing Power</li>
+                <li>• Cloud-Based Data Warehousing</li>
+                <li>• Scalable Data Pipelines</li>
               </ul>
             </div>
             
@@ -183,9 +226,9 @@ const DataAnalyticsLandingPage: React.FC = () => {
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-4">Data Engineering</h3>
               <ul className="text-sm text-slate-600 space-y-2">
-                <li>• Pipeline Automation</li>
-                <li>• Architecture Design</li>
-                <li>• Real-time Processing</li>
+                <li>• Automated Data Pipelines</li>
+                <li>• Data Lakehouse Architecture</li>
+                <li>• Real-Time Data Processing</li>
               </ul>
             </div>
             
@@ -196,9 +239,9 @@ const DataAnalyticsLandingPage: React.FC = () => {
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-4">Business Intelligence</h3>
               <ul className="text-sm text-slate-600 space-y-2">
-                <li>• Custom Dashboards</li>
-                <li>• Predictive Modeling</li>
-                <li>• Self-Serve BI</li>
+                <li>• Executive Reporting Dashboards</li>
+                <li>• Predictive Data Modeling</li>
+                <li>• Self-Service BI Tools</li>
               </ul>
             </div>
             
@@ -207,73 +250,85 @@ const DataAnalyticsLandingPage: React.FC = () => {
               <div className="mb-6 text-[#0e6ba8]">
                 <Network className="w-8 h-8 stroke-[1.5]" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-4">Master Data Mgmt</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-4">Master Data Management</h3>
               <ul className="text-sm text-slate-600 space-y-2">
-                <li>• Data Governance</li>
-                <li>• Quality Assurance</li>
-                <li>• System Consolidation</li>
+                <li>• Data Governance Frameworks</li>
+                <li>• Data Quality Assurance</li>
+                <li>• Golden Record Matching</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. Team Section */}
+      {/* 5. Team Section replaced with "Why Choose Us" mapping to similar grid structure */}
       <section className="bg-[#242b35] py-20 lg:py-28 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-16">
-            <p className="text-[#64b5f6] font-bold text-xs uppercase tracking-widest mb-4">Leadership</p>
-            <h2 className="text-3xl sm:text-4xl font-bold">Our Analytics Practice Leads</h2>
+          <div className="mb-16 max-w-3xl">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-6">Why Choose Us?</h2>
+            <p className="text-slate-400 text-lg leading-relaxed">
+              Choosing the right analytics partner determines whether your data becomes a real advantage or just another dashboard nobody checks. 
+            </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-12">
             {/* Profile 1 */}
-            <div className="group">
-              <div className="overflow-hidden mb-6 rounded-sm">
-                <img 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600" 
-                  alt="Dr. Elena Vance" 
-                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-1">Dr. Elena Vance</h3>
-              <p className="text-[#64b5f6] text-sm font-medium mb-4">Chief Data Scientist</p>
-              <p className="text-slate-400 text-sm line-clamp-3">
-                Ph.D. in Computational Statistics. Pioneer in developing unsupervised learning models for enterprise risk assessment.
+            <div className="group border-t border-slate-700 pt-6">
+              <h3 className="text-xl font-bold text-white mb-3">Proven Analytics Expertise</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                We have built data platforms, pipelines, and BI systems for Fortune 500 and multinational clients.
               </p>
             </div>
 
             {/* Profile 2 */}
-            <div className="group">
-              <div className="overflow-hidden mb-6 rounded-sm">
-                <img 
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600" 
-                  alt="Marcus Thorne" 
-                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-1">Marcus Thorne</h3>
-              <p className="text-[#64b5f6] text-sm font-medium mb-4">Head of Data Engineering</p>
-              <p className="text-slate-400 text-sm line-clamp-3">
-                Former principal engineer at major tech firms. Specializes in building highly scalable, fault-tolerant data pipelines.
+            <div className="group border-t border-slate-700 pt-6">
+              <h3 className="text-xl font-bold text-white mb-3">Custom Data Analytical</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                We build every dashboard around your existing systems and business questions.
               </p>
             </div>
 
             {/* Profile 3 */}
-            <div className="group">
-              <div className="overflow-hidden mb-6 rounded-sm">
-                <img 
-                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=600" 
-                  alt="Sarah Jenkins" 
-                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-1">Sarah Jenkins</h3>
-              <p className="text-[#64b5f6] text-sm font-medium mb-4">Director of Business Intelligence</p>
-              <p className="text-slate-400 text-sm line-clamp-3">
-                Translates complex data structures into intuitive, actionable dashboards for C-suite decision making.
+            <div className="group border-t border-slate-700 pt-6">
+              <h3 className="text-xl font-bold text-white mb-3">Outcomes You Can Measure</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Our focus stays on results that show up in your operations and decisions.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs Section */}
+      <section className="bg-[#eff2f9] py-16 lg:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">FAQs</h2>
+          </div>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div 
+                key={index} 
+                className="bg-white rounded-sm shadow-sm border border-slate-100 overflow-hidden"
+              >
+                <button 
+                  onClick={() => toggleFaq(index)}
+                  className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none"
+                >
+                  <span className="font-bold text-slate-900 text-lg pr-8">{faq.question}</span>
+                  <ChevronDown 
+                    className={`w-5 h-5 text-[#0e6ba8] transition-transform duration-300 flex-shrink-0 ${openFaq === index ? 'rotate-180' : ''}`} 
+                  />
+                </button>
+                <div 
+                  className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-96 pb-5 opacity-100' : 'max-h-0 opacity-0'}`}
+                >
+                  <p className="text-slate-600 leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -285,10 +340,10 @@ const DataAnalyticsLandingPage: React.FC = () => {
             
             {/* Left Side - Info */}
             <div className="lg:pr-8">
-              <p className="text-[#0e6ba8] font-bold text-xs uppercase tracking-widest mb-4">Get in Touch</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">Empower Your Enterprise</h2>
+              <p className="text-[#0e6ba8] font-bold text-xs uppercase tracking-widest mb-4">GET STARTED</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">Empower Your Business</h2>
               <p className="text-slate-600 mb-10 leading-relaxed">
-                Connect with our data strategy team to discuss a comprehensive audit of your data maturity and discover pathways to algorithmic decision-making.
+                Innovate your data into a strategic benefit to your enterprise? Book your consultation chat or call with our expert leads to discuss your current data.
               </p>
               
               <div className="space-y-6">

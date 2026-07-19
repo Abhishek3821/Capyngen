@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
-  ArrowRight, 
   Shield, 
   Lock, 
   Search, 
   AlertOctagon, 
   ShieldAlert, 
   Mail, 
-  PhoneCall
+  PhoneCall,
+  ChevronDown
 } from 'lucide-react';
 
 const CyberSecurityLandingPage: React.FC = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const faqs = [
+    { q: "Q1. What do cyber security services entail?", a: "Cybersecurity services include protection strategies, monitoring, threat detection, and response solutions to safeguard digital assets from cyber threats." },
+    { q: "Q2. What are Managed cybersecurity services?", a: "Managed cyber security services are the security services that are outsourced to experts that monitor, detect and respond to cyber threats around the clock." },
+    { q: "Q3. What is Capyngen's strategy for cybersecurity?", a: "Our cybersecurity solutions include the implementation of Zero-Trust frameworks, leveraging AI for detection, and ongoing monitoring to safeguard your business against emerging threats." },
+    { q: "Q4. What are cybersecurity solutions?", a: "Cybersecurity solutions consist of tools and technologies and strategies used to safeguard networks, data, and systems from cyber attacks." },
+    { q: "Q5. What do cybersecurity consulting services entail?", a: "Cybersecurity consulting services are expert advice on cybersecurity strategy, risk assessment, compliance, and implementation of security measures." },
+    { q: "Q6. What is a cybersecurity Risk assessment?", a: "A cybersecurity risk assessment is a thorough investigation of your security situation that helps uncover vulnerabilities and make recommendations to improve security." },
+    { q: "Q7. What are the network security services?", a: "Your network security services will help keep your network infrastructure safe from unauthorized access, misuse, and cyber threats." },
+    { q: "Q8. What are the cloud security services?", a: "Cloud security services guard data, applications and infrastructure in cloud environments against cyber threats." },
+    { q: "Q9. Why Capyngen for your cybersecurity company?", a: "As a trusted cybersecurity company, we mix the latest technology, expertise and proactive monitoring to provide enterprise-class security solutions." },
+    { q: "Q10. What is Zero Trust Security?", a: "As part of our enterprise cybersecurity solutions, Zero-Trust is a security model that verifies every user, device and request before allowing access to resources." },
+    { q: "Q11. What are the applications of AI in Cyber security?", a: "Through our IT security services, AI detects patterns, identifies anomalies, and predicts threats in real-time, thus avoiding threats sooner, and in better time, with more accurate threat response." },
+    { q: "Q12. What is a Security Operations Center (SOC)?", a: "Managed cybersecurity services include a SOC that is dedicated to monitoring, detecting, and responding to security incidents 24/7." },
+    { q: "Q13. How does Capyngen ensure that it is compliant?", a: "Our cybersecurity consulting services ensure that security frameworks align with GDPR, HIPAA, ISO 27001 and other international regulations, making compliance easier." },
+    { q: "Q14. What does incident recovery mean?", a: "It includes rapid threat containment, forensic investigation and recovery planning to restore operations quickly following a security breach with the use of our cyber security solutions." },
+    { q: "Q15. Which industries does Capyngen work in?", a: "As one of the top cybersecurity service providers, we provide customized cybersecurity solutions to industries such as banking, healthcare, manufacturing, retail, technology, and government." }
+  ];
+
   return (
     <div className="min-h-screen bg-[#f7f9fc] font-sans text-slate-700">
       
@@ -29,16 +49,16 @@ const CyberSecurityLandingPage: React.FC = () => {
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 flex flex-col items-center">
           <Shield className="w-16 h-16 text-blue-300/50 absolute -top-8 -z-10" strokeWidth={1} />
           <p className="text-blue-200 font-semibold text-[10px] uppercase tracking-[0.2em] mb-4">
-            Next-Generation Protection
+            CYBERSECURITY SERVICES
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight mb-4 drop-shadow-md">
-            Resilient Enterprise Security
+            Intelligent Digital Protection
           </h1>
           <p className="text-sm text-blue-50 mb-8 leading-relaxed max-w-2xl mx-auto font-medium drop-shadow-md">
-            Defending digital assets with advanced threat intelligence and Zero Trust architecture for global organizations.
+            Implement Capyngen's Cybersecurity Services to power a robust digital environment, providing proactive defense, and Zero-Trust protection for modern enterprises.
           </p>
           <button className="bg-transparent hover:bg-white/10 text-white border border-white px-8 py-3 text-sm font-semibold transition-colors uppercase tracking-widest backdrop-blur-sm">
-            Request Assessment
+            DISCOVER OUR SOLUTIONS →
           </button>
         </div>
       </section>
@@ -50,23 +70,23 @@ const CyberSecurityLandingPage: React.FC = () => {
             
             <div className="lg:pr-8">
               <h2 className="text-3xl font-bold text-[#084887] mb-6 leading-tight">
-                Proactive Threat<br />Intelligence
+                Intelligent Threat<br />Prevention
               </h2>
               <p className="text-sm text-slate-600 mb-6 leading-relaxed">
-                In an era where cyber threats evolve rapidly, traditional perimeter defense is insufficient. We architect robust, dynamic defenses around a Zero Trust framework, ensuring that every access request is authenticated and continuously validated.
+                The pace of cyber attacks continues to accelerate, and traditional protection strategies are proving to be ineffective against them. Capyngen, as a trusted Cybersecurity Company, provides advanced Cybersecurity Solutions based on the Zero-Trust approach, which means that everyone, all applications and workloads that want to access the network must be verified in order to do so.
               </p>
               <p className="text-sm text-slate-600 mb-8 leading-relaxed">
-                Our approach shifts the paradigm from reactive to proactive. By leveraging predictive analytics and global threat feeds, we identify and neutralize vulnerabilities before they can be exploited.
+                We leverage predictive threat intelligence with ongoing monitoring to increase business resilience. Our Cybersecurity Consulting Services enable enterprises to discover the weaknesses, minimize cyber threats, and safeguard essential digital resources with professional guidance.
               </p>
               
               <ul className="space-y-6 border-l-2 border-[#084887]/20 pl-6">
                 <li>
-                  <h4 className="text-sm font-bold text-[#084887] mb-1">Predictive Analytics</h4>
-                  <p className="text-xs text-slate-500">Machine learning models that anticipate attack vectors.</p>
+                  <h4 className="text-sm font-bold text-[#084887] mb-1">AI-POWERED DETECTION</h4>
+                  <p className="text-xs text-slate-500">Our advanced Network Security Services detect suspicious activities and mitigate security risks before they become a problem using machine learning models.</p>
                 </li>
                 <li>
-                  <h4 className="text-sm font-bold text-[#084887] mb-1">Zero Trust Core</h4>
-                  <p className="text-xs text-slate-500">Comprehensive identity verification across all network touchpoints.</p>
+                  <h4 className="text-sm font-bold text-[#084887] mb-1">RAPID THREAT RESPONSE</h4>
+                  <p className="text-xs text-slate-500">With our Managed Cybersecurity Services, automated security workflows isolate compromised systems in seconds, reducing business disruption.</p>
                 </li>
               </ul>
             </div>
@@ -79,14 +99,6 @@ const CyberSecurityLandingPage: React.FC = () => {
                   className="w-full h-auto object-cover opacity-90"
                 />
               </div>
-              
-              {/* Overlay Stat Box */}
-              <div className="absolute -bottom-6 -left-6 bg-[#084887] text-white p-8 shadow-xl max-w-[200px]">
-                <p className="text-4xl font-bold mb-2">99.9%</p>
-                <p className="text-xs font-medium leading-relaxed uppercase tracking-wider text-blue-200">
-                  Threat Mitigation Rate
-                </p>
-              </div>
             </div>
             
           </div>
@@ -97,7 +109,7 @@ const CyberSecurityLandingPage: React.FC = () => {
       <section className="bg-white py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold text-[#084887] mb-4">Core Security Capabilities</h2>
+            <h2 className="text-3xl font-bold text-[#084887] mb-4">Enterprise Security Services</h2>
             <div className="w-16 h-1 bg-[#084887] mx-auto"></div>
           </div>
           
@@ -108,13 +120,13 @@ const CyberSecurityLandingPage: React.FC = () => {
                 <div className="mb-4 text-[#084887]">
                   <Shield className="w-8 h-8 stroke-[1.5]" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">Managed Security Services</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Managed Cybersecurity</h3>
                 <p className="text-sm text-slate-600 max-w-lg mb-6 leading-relaxed">
-                  24/7/365 Security Operations Center (SOC) monitoring. We detect, investigate, and respond to threats in real-time, providing continuous oversight of your digital infrastructure.
+                  We have a 24/7 Security Operations Center (SOC) that provides proactively monitoring, vulnerability management, and enterprise-grade Managed Cybersecurity Services that are designed to support modern organizations with reliable IT Security Services.
                 </p>
               </div>
               <a href="#" className="inline-flex items-center text-xs font-bold text-[#084887] uppercase tracking-wider hover:text-[#063361]">
-                Explore SOC Services <ArrowRight className="ml-1 w-3 h-3" />
+                EXPLORE SECURITY SERVICES →
               </a>
             </div>
             
@@ -123,9 +135,9 @@ const CyberSecurityLandingPage: React.FC = () => {
               <div className="mb-4 text-blue-200">
                 <Lock className="w-8 h-8 stroke-[1.5]" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Identity & Access<br />Management</h3>
+              <h3 className="text-xl font-bold mb-3">Identity & Access Security</h3>
               <p className="text-sm text-blue-100 flex-1 leading-relaxed">
-                Ensure the right people have the right access. Implementing SSO, MFA, and robust lifecycle management to protect sensitive data.
+                Secure identity management, privileged access controls and advanced authentication for enterprise security to protect employees, applications and digital assets.
               </p>
             </div>
             
@@ -134,9 +146,9 @@ const CyberSecurityLandingPage: React.FC = () => {
               <div className="mb-4 text-[#084887]">
                 <Search className="w-8 h-8 stroke-[1.5]" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Risk & Compliance</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Governance & Compliance</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
-                Navigating complex regulatory frameworks. We ensure your security posture aligns with industry standards and legal requirements.
+                Ensure compliance with global standards through automated governance frameworks that comply with GDPR, HIPAA, ISO 27001 and industry best practices.
               </p>
             </div>
             
@@ -146,9 +158,9 @@ const CyberSecurityLandingPage: React.FC = () => {
                 <div className="mb-4 text-[#084887]">
                   <AlertOctagon className="w-8 h-8 stroke-[1.5]" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">Incident Response</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Digital Incident Recovery</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  Rapid deployment containment teams. When a breach occurs, swift action is critical to limit exposure and initiate forensic recovery.
+                  Our cybersecurity experts deliver fast threat containment, forensic investigations, disaster recovery planning and business continuity assistance to help reduce downtime.
                 </p>
               </div>
               <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 opacity-5 pointer-events-none">
@@ -164,12 +176,9 @@ const CyberSecurityLandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-[#084887] mb-2">Intelligence & Insights</h2>
-              <p className="text-sm text-slate-500">Threat analysis and industry strategy.</p>
+              <h2 className="text-3xl font-bold text-[#084887] mb-2">Security Knowledge Center</h2>
+              <p className="text-sm text-slate-500">Newest developments, strategies, and best practices from cybersecurity experts for businesses that are resilient.</p>
             </div>
-            <a href="#" className="hidden sm:inline-flex items-center text-xs font-bold text-[#084887] uppercase tracking-wider hover:text-[#063361] border-b border-[#084887] pb-1">
-              View All Insights
-            </a>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -183,12 +192,11 @@ const CyberSecurityLandingPage: React.FC = () => {
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
-                <p className="text-[#084887] text-[10px] font-bold uppercase tracking-wider mb-2">Case Study</p>
                 <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
-                  Advanced Ransomware Prevention for Global Logistics
+                  Preventing Advanced Ransomware Attacks
                 </h3>
                 <p className="text-slate-600 text-xs flex-1 leading-relaxed">
-                  How implementing micro-segmentation halted lateral movement during a sophisticated attack on a Fortune 500 supply chain.
+                  Learn how Capyngen adds another layer of security, and enables proactive defense against complex ransomware attacks to your Enterprise Cybersecurity Solutions.
                 </p>
               </div>
             </div>
@@ -203,12 +211,11 @@ const CyberSecurityLandingPage: React.FC = () => {
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
-                <p className="text-[#084887] text-[10px] font-bold uppercase tracking-wider mb-2">Whitepaper</p>
                 <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
-                  Securing the Multi-Cloud Enterprise
+                  Securing Hybrid & Multi Cloud Infrastructure
                 </h3>
                 <p className="text-slate-600 text-xs flex-1 leading-relaxed">
-                  Strategies for maintaining consistent security policy and visibility across AWS, Azure, and Google Cloud environments.
+                  Discover how our cloud security services enable organizations to secure workloads, and ensure uniform protection of workloads across AWS, Microsoft Azure and Google Cloud.
                 </p>
               </div>
             </div>
@@ -223,12 +230,68 @@ const CyberSecurityLandingPage: React.FC = () => {
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
-                <p className="text-[#084887] text-[10px] font-bold uppercase tracking-wider mb-2">Advisory</p>
                 <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
-                  Compliance as a Competitive Asset
+                  Establishing Security Governance and Confidence
                 </h3>
                 <p className="text-slate-600 text-xs flex-1 leading-relaxed">
-                  Transforming regulatory mandates (GDPR, HIPAA, SOC 2) from operational burdens into trust-building market differentiators.
+                  Discover how proactive governance, automation and frequent Cybersecurity Risk Assessment can enhance customer confidence, and business resilience.
+                </p>
+              </div>
+            </div>
+            
+            {/* Insight 4 */}
+            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div className="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=600" 
+                  alt="Code on screen" 
+                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+              </div>
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
+                  Zero-Trust Architecture Implementation
+                </h3>
+                <p className="text-slate-600 text-xs flex-1 leading-relaxed">
+                  Know how Capyngen applies Zero-Trust frameworks to constantly verify all users, apps, and devices throughout all digital infrastructure.
+                </p>
+              </div>
+            </div>
+
+            {/* Insight 5 */}
+            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div className="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600" 
+                  alt="Circuit board" 
+                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+              </div>
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
+                  AI-Powered Threat Intelligence
+                </h3>
+                <p className="text-slate-600 text-xs flex-1 leading-relaxed">
+                  Explore how AI enhances modern Cybersecurity Services by detecting evolving threats, and preventing attacks before they impact operations.
+                </p>
+              </div>
+            </div>
+
+            {/* Insight 6 */}
+            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div className="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&q=80&w=600" 
+                  alt="Meeting" 
+                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+              </div>
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
+                  Security Awareness Training
+                </h3>
+                <p className="text-slate-600 text-xs flex-1 leading-relaxed">
+                  Gain insight into the role employee security awareness programs play in bolstering your organization's resiliency and how it fits into our full suite of Cybersecurity Solutions and enterprise security protection strategies.
                 </p>
               </div>
             </div>
@@ -236,96 +299,99 @@ const CyberSecurityLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. Team Section */}
+      {/* 5. Team Section (Why Choose Us) */}
       <section className="bg-white py-20 lg:py-24 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-[#084887] mb-4">Strategic Counsel</h2>
-            <p className="text-sm text-slate-500">Expert leadership guiding your security posture.</p>
+            <h2 className="text-3xl font-bold text-[#084887] mb-4">Why Choose Capyngen?</h2>
+            <p className="text-sm text-slate-500">Trust a Cybersecurity Partner for your business, take proactive steps to protect, and secure your business for the future, no matter how it grows.</p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-            {/* Team Member 1 */}
-            <div className="text-center group">
-              <div className="overflow-hidden mb-4 rounded-sm bg-slate-100">
-                <img 
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" 
-                  alt="Dr. Arthur Thorne" 
-                  className="w-full aspect-[4/5] object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                />
-              </div>
-              <h3 className="text-sm font-bold text-slate-900 mb-1">Dr. Arthur Thorne</h3>
-              <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Chief Information Security Officer</p>
+            <div className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
+              <h3 className="text-sm font-bold text-slate-900 mb-2">Certified Security Experts</h3>
+              <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Adept professionals to provide trustworthy cybersecurity solutions to all industries.</p>
             </div>
 
-            {/* Team Member 2 */}
-            <div className="text-center group">
-              <div className="overflow-hidden mb-4 rounded-sm bg-slate-100">
-                <img 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" 
-                  alt="Elena Rodriguez" 
-                  className="w-full aspect-[4/5] object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                />
-              </div>
-              <h3 className="text-sm font-bold text-slate-900 mb-1">Elena Rodriguez</h3>
-              <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Head of Threat Intelligence</p>
+            <div className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
+              <h3 className="text-sm font-bold text-slate-900 mb-2">24/7 Threat Monitoring</h3>
+              <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Real-time monitoring for preventing and blocking cyber threats.</p>
             </div>
 
-            {/* Team Member 3 */}
-            <div className="text-center group">
-              <div className="overflow-hidden mb-4 rounded-sm bg-slate-100">
-                <img 
-                  src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400" 
-                  alt="Marcus Vance" 
-                  className="w-full aspect-[4/5] object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                />
-              </div>
-              <h3 className="text-sm font-bold text-slate-900 mb-1">Marcus Vance</h3>
-              <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Director of SOC Operations</p>
+            <div className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
+              <h3 className="text-sm font-bold text-slate-900 mb-2">Tailored Security Strategies</h3>
+              <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Tailored security solutions to suit your business needs.</p>
             </div>
 
-            {/* Team Member 4 */}
-            <div className="text-center group">
-              <div className="overflow-hidden mb-4 rounded-sm bg-slate-100">
-                <img 
-                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400" 
-                  alt="Sarah Jenkins" 
-                  className="w-full aspect-[4/5] object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                />
-              </div>
-              <h3 className="text-sm font-bold text-slate-900 mb-1">Sarah Jenkins</h3>
-              <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Lead Compliance Auditor</p>
+            <div className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
+              <h3 className="text-sm font-bold text-slate-900 mb-2">Scalable Enterprise Protection</h3>
+              <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Smart, secure and resilient infrastructure for future growth and business.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6. Form Section */}
+      {/* FAQ Section */}
       <section className="bg-[#f7f9fc] py-20 lg:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-[#084887] mb-4">Frequently Asked Questions</h2>
+          </div>
+          
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div 
+                key={index} 
+                className="bg-white rounded-md shadow-sm border border-slate-100 overflow-hidden"
+              >
+                <button 
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"
+                >
+                  <span className="font-bold text-slate-900 text-sm md:text-base pr-8">{faq.q}</span>
+                  <ChevronDown 
+                    className={`w-5 h-5 text-[#084887] transition-transform duration-300 flex-shrink-0 ${openFaq === index ? 'rotate-180' : ''}`} 
+                  />
+                </button>
+                <div 
+                  className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-96 pb-4 opacity-100' : 'max-h-0 opacity-0'}`}
+                >
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Form Section */}
+      <section className="bg-white py-20 lg:py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             
             {/* Left Side - Info */}
             <div className="lg:col-span-5">
-              <h2 className="text-3xl font-bold text-[#084887] mb-6">Fortify Your<br />Enterprise</h2>
+              <h2 className="text-3xl font-bold text-[#084887] mb-6">Secure Your Digital Future</h2>
               <p className="text-sm text-slate-600 mb-10 leading-relaxed">
-                Connect with our security architects to schedule a comprehensive vulnerability assessment and discuss a tailored defense strategy for your organization.
+                Work with a trusted Cybersecurity Service Provider like Capyngen to gain access to a complete suite of Cybersecurity Consulting Services, and Customized Enterprise Cybersecurity Solutions that will protect your business now and in the future.
               </p>
               
               <div className="space-y-6">
                 <div className="flex items-center text-slate-700 bg-white p-4 shadow-sm border border-slate-100">
                   <Mail className="w-5 h-5 mr-4 text-[#084887]" />
-                  <a href="mailto:defense@securityfirm.com" className="text-sm font-semibold hover:text-[#084887] transition-colors">defense@securityfirm.com</a>
+                  <a href="mailto:cybersecurity@capyngen.com" className="text-sm font-semibold hover:text-[#084887] transition-colors">cybersecurity@capyngen.com</a>
                 </div>
                 <div className="flex items-center text-slate-700 bg-white p-4 shadow-sm border border-slate-100">
                   <PhoneCall className="w-5 h-5 mr-4 text-[#084887]" />
-                  <span className="text-sm font-semibold">+1 (800) 555-0199</span>
+                  <span className="text-sm font-semibold">+1 (800) CAPYNGEN</span>
                 </div>
               </div>
             </div>
             
             {/* Right Side - Form */}
-            <div className="lg:col-span-7 bg-white p-8 sm:p-10 shadow-lg border border-slate-100">
+            <div className="lg:col-span-7 bg-[#f7f9fc] p-8 sm:p-10 shadow-lg border border-slate-100">
               <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>

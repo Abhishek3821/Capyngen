@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
-  ArrowRight, 
   Brain, 
   Layout, 
   Palette, 
@@ -8,10 +7,31 @@ import {
   Search,
   Mail,
   Phone,
-  MapPin
+  MapPin,
+  ChevronDown
 } from 'lucide-react';
 
 const UIUXLandingPage: React.FC = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const faqs = [
+    { q: "Q1. What are UI/UX design services?", a: "The UI/UX design services are dedicated to making digital experiences more intuitive, visually appealing, and user-friendly, which helps to enhance customer interaction and business effectiveness." },
+    { q: "Q2. Why is Capyngen the UI UX design company I should choose?", a: "Capyngen is a blend of research, innovation and business strategy, providing scalable and user-friendly digital solutions." },
+    { q: "Q3. What is the role of a UI/UX Design Agency?", a: "UI/UX design agency designs user interfaces, improves user experience, does research, makes prototypes and makes digital products easier to use." },
+    { q: "Q4. How many people do you serve?", a: "We deliver UI/UX solutions to healthcare, financial, retail, educational, manufacturing, SaaS and enterprise companies." },
+    { q: "Q5. Do you provide custom UI/UX design services?", a: "Yes, we build UI/UX designs based on your business needs, audience and digital products." },
+    { q: "Q6. What are the benefits of user interface design services?", a: "UI design services are dedicated to creating visually appealing layouts, interactive elements, and user-consistent design elements." },
+    { q: "Q7. What are user experience design services?", a: "User experience design services are used to enhance the usability by conducting research, wireframing, prototyping, testing and optimizing the user journey." },
+    { q: "Q8. Can you redesign an existing application?", a: "Yes, we update the existing websites and applications to further enhance their usability, performance and consistency." },
+    { q: "Q9.  Do you design mobile applications?", a: "Yes, we create user-friendly Android and iOS mobile app experiences." },
+    { q: "Q10. What is your UI/UX design process?", a: "We provide discovery, research, wire framing, prototyping, UI design, usability testing and support for final implementation." },
+    { q: "Q11. Do you conduct usability testing?", a: "Yes, we do usability testing to find out what needs fixing and to check our design decisions are correct before the development process begins." },
+    { q: "Q12. Can your designs support business growth?", a: "Yes, our user-centric approach contributes to enhancing engagement, conversion rates, and customer satisfaction." },
+    { q: "Q13. Do you create responsive designs?", a: "Yes, all interfaces are designed to work on desktop, tablet, and mobile." },
+    { q: "Q14. So what is the importance of UX research?", a: "UX research is used to gain insight into user behavior, to minimize the friction, and to build products that customers would expect." },
+    { q: "Q15. How do I get started with Capyngen's UI/UX design services?", a: "Simply contact our design team to discuss your project requirements, and we'll create a tailored strategy for your business." }
+  ];
+
   return (
     <div className="min-h-screen bg-[#f8f9fa] font-sans text-slate-600">
       
@@ -19,19 +39,19 @@ const UIUXLandingPage: React.FC = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="max-w-2xl">
-            <p className="text-blue-700 font-semibold mb-4 uppercase tracking-wider text-sm">Digital Strategy</p>
+            <p className="text-blue-700 font-semibold mb-4 uppercase tracking-wider text-sm">DIGITAL INNOVATION</p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
-              Human-Centric<br />UI/UX Design
+              UI/UX Solutions
             </h1>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              We engineer user interfaces that transform interactions into a seamless blend of psychology and technology. Our design philosophy centers on making complex systems feel intuitive, accessible, and engaging.
+              Capyngen, we provide UI/UX design services based on creative strategy and cutting-edge technology. We are a reliable UI UX design firm that builds user-friendly interfaces that enhance the customer experience, make things easier to use and help businesses thrive in the long run.
             </p>
             <div className="flex flex-wrap gap-4">
               <button className="bg-blue-700 hover:bg-blue-800 text-white px-8 py-3.5 rounded font-medium transition-colors">
-                Start a Project
+                Discover Our Process
               </button>
               <button className="bg-transparent hover:bg-blue-50 text-blue-700 border border-blue-700 px-8 py-3.5 rounded font-medium transition-colors">
-                View Our Work
+                Book a Consultation
               </button>
             </div>
           </div>
@@ -52,37 +72,37 @@ const UIUXLandingPage: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
-                Mastering the User<br />Experience
+                Building Exceptional<br />Digital Experiences
               </h2>
               <p className="text-slate-600 mb-8 leading-relaxed">
-                Exceptional design goes beyond aesthetics. It requires a deep understanding of cognitive load, accessibility standards, and behavioral psychology.
+                Great experiences result in tackling real user challenges. Research, innovation and ongoing improvement is the basis for all design decisions at Capyngen. We specialize in user experience design, which involves crafting digital products that are enhance the overall customer experience.
               </p>
               
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <span className="w-1.5 h-1.5 bg-blue-700 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span className="text-slate-700 font-medium">Strategic user journey alignment</span>
+                  <span className="text-slate-700 font-medium">User-first discovery workshops</span>
                 </li>
                 <li className="flex items-start">
                   <span className="w-1.5 h-1.5 bg-blue-700 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span className="text-slate-700 font-medium">Data-backed interaction models</span>
+                  <span className="text-slate-700 font-medium">Research-based decision making</span>
                 </li>
                 <li className="flex items-start">
                   <span className="w-1.5 h-1.5 bg-blue-700 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span className="text-slate-700 font-medium">Heuristic evaluation and refinement</span>
+                  <span className="text-slate-700 font-medium">Creating a flexible design system.</span>
                 </li>
                 <li className="flex items-start">
                   <span className="w-1.5 h-1.5 bg-blue-700 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span className="text-slate-700 font-medium">Comprehensive cognitive load balancing</span>
+                  <span className="text-slate-700 font-medium">Interactive prototypes validated throughout the process.</span>
                 </li>
               </ul>
             </div>
             
             <div className="bg-[#eef3fb] p-10 rounded-xl relative overflow-hidden">
               <Brain className="absolute top-6 right-6 w-24 h-24 text-blue-100 opacity-50" strokeWidth={1} />
-              <h3 className="text-2xl font-bold text-slate-900 mb-4 relative z-10">Strategic Design Thinking</h3>
+              <h3 className="text-2xl font-bold text-slate-900 mb-4 relative z-10">Purpose-Led Design Strategy</h3>
               <p className="text-slate-600 leading-relaxed relative z-10">
-                We don't just build interfaces; we architect experiences. By anticipating user needs and removing friction points, we turn casual visitors into loyal advocates for your digital products.
+                Attractive graphics are not enough. We are the leading UI/UX design company that creates digital products that cut down on user journeys, solve business problems, and provide a consistent user experience at each touchpoint with the product via consistent UI/UX design services.
               </p>
             </div>
           </div>
@@ -94,12 +114,9 @@ const UIUXLandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-10">
             <div>
-              <p className="text-blue-700 font-semibold mb-2 uppercase tracking-wider text-sm">Blog</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">What's Happening</h2>
+              <p className="text-blue-700 font-semibold mb-2 uppercase tracking-wider text-sm">INSIGHTS</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">Industry Perspectives</h2>
             </div>
-            <a href="#" className="hidden sm:flex items-center text-blue-700 font-medium hover:text-blue-800">
-              View All Articles <ArrowRight className="ml-2 w-4 h-4" />
-            </a>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -111,9 +128,8 @@ const UIUXLandingPage: React.FC = () => {
                 className="w-full h-48 object-cover"
               />
               <div className="p-6 flex-1 flex flex-col">
-                <p className="text-slate-500 text-xs uppercase tracking-wider mb-2">October 12, 2023</p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">The Evolution of AI in Enterprise UX</h3>
-                <p className="text-slate-600 text-sm flex-1">Exploring how generative AI is automating micro-interactions and reshaping expectations in B2B software.</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">AI-Powered User Experiences</h3>
+                <p className="text-slate-600 text-sm flex-1">Discover how smarter technologies are reshaping the product design and how they assist the businesses in delivering smarter digital interactions.</p>
               </div>
             </div>
             
@@ -125,9 +141,8 @@ const UIUXLandingPage: React.FC = () => {
                 className="w-full h-48 object-cover"
               />
               <div className="p-6 flex-1 flex flex-col">
-                <p className="text-slate-500 text-xs uppercase tracking-wider mb-2">October 05, 2023</p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Accessibility First: A Global Standard</h3>
-                <p className="text-slate-600 text-sm flex-1">Why inclusive design is no longer a checklist item, but a foundational requirement for modern applications.</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Inclusive Design for Modern Businesses</h3>
+                <p className="text-slate-600 text-sm flex-1">Recognise the importance of accessible digital products on the basis of customer satisfaction and according to the changing global usability requirements.</p>
               </div>
             </div>
 
@@ -139,11 +154,50 @@ const UIUXLandingPage: React.FC = () => {
                 className="w-full h-48 object-cover"
               />
               <div className="p-6 flex-1 flex flex-col">
-                <p className="text-slate-500 text-xs uppercase tracking-wider mb-2">September 28, 2023</p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Micro-interactions in Banking UX</h3>
-                <p className="text-slate-600 text-sm flex-1">How subtle animations and feedback loops build trust and reduce anxiety in financial interfaces.</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Creating Meaningful Digital Moments</h3>
+                <p className="text-slate-600 text-sm flex-1">Learn how attention to interface details and interactions can boost engagement on websites and apps.</p>
               </div>
             </div>
+
+            {/* Article 4 */}
+            <div className="group cursor-pointer flex flex-col h-full bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+              <img 
+                src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=80&w=600" 
+                alt="Mobile-First" 
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Mobile-First Experience Design</h3>
+                <p className="text-slate-600 text-sm flex-1">Discuss the benefits of responsive, mobile-first approaches to increasing usability on mobile devices like smart phones and tablets, as well as today's other types of digital devices.</p>
+              </div>
+            </div>
+
+            {/* Article 5 */}
+            <div className="group cursor-pointer flex flex-col h-full bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+              <img 
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600" 
+                alt="Data-Driven" 
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Data-Driven UX Optimization</h3>
+                <p className="text-slate-600 text-sm flex-1">Know the role that analytics, usability testing, and understanding customer behavior can play in enhancing product performance and user satisfaction.</p>
+              </div>
+            </div>
+
+            {/* Article 6 */}
+            <div className="group cursor-pointer flex flex-col h-full bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+              <img 
+                src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=600" 
+                alt="Design Systems" 
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Design Systems for Consistency</h3>
+                <p className="text-slate-600 text-sm flex-1">Understand the value of scalable design systems for businesses in terms of their ability to ensure brand consistency and speed up product development.</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -152,8 +206,8 @@ const UIUXLandingPage: React.FC = () => {
       <section className="bg-[#f8f9fa] py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-blue-700 font-semibold mb-2 uppercase tracking-wider text-sm">Services</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Our Offerings</h2>
+            <p className="text-blue-700 font-semibold mb-2 uppercase tracking-wider text-sm">CAPABILITIES</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">What We Deliver</h2>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -162,8 +216,8 @@ const UIUXLandingPage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-700">
                 <Layout className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Experience Strategy</h3>
-              <p className="text-sm text-slate-600">Mapping the user journey from discovery to advocacy, ensuring every touchpoint drives value.</p>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">UX Strategy</h3>
+              <p className="text-sm text-slate-600">Developing user-centric product strategies that align with business goals, for long-term digital success with the help of professional UI/UX design services.</p>
             </div>
             
             {/* Card 2 */}
@@ -171,8 +225,8 @@ const UIUXLandingPage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-700">
                 <Palette className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Visual Design</h3>
-              <p className="text-sm text-slate-600">Crafting cohesive, accessible design systems that elevate your brand and establish trust instantly.</p>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Interface Design</h3>
+              <p className="text-sm text-slate-600">Creating eye-catching designs that align with your brand identity throughout your online interactions with top-notch user interface design services.</p>
             </div>
             
             {/* Card 3 */}
@@ -180,8 +234,8 @@ const UIUXLandingPage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-700">
                 <Pointer className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Interaction Design</h3>
-              <p className="text-sm text-slate-600">Designing intuitive flows and prototypes that guide users seamlessly toward their goals.</p>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Experience Design</h3>
+              <p className="text-sm text-slate-600">Creating intuitive user flows that simplify, and make digital platforms easy and fun for all users with dependable user experience design services.</p>
             </div>
             
             {/* Card 4 */}
@@ -189,51 +243,78 @@ const UIUXLandingPage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-700">
                 <Search className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">User Research</h3>
-              <p className="text-sm text-slate-600">Validating assumptions through qualitative and quantitative analysis to mitigate product risk.</p>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">UX Research</h3>
+              <p className="text-sm text-slate-600">Gathering actionable user insights with detailed research, and ongoing testing to enhance digital experiences with our UI UX design company.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. Expert Leadership Section */}
+      {/* 5. Expert Leadership Section / Why Choose Us */}
       <section className="bg-[#eef3fb] py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Expert Leadership</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">WHY CHOOSE CAPYNGEN</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Our strategy practice is guided by industry veterans who have shaped digital experiences at some of the world's most innovative companies.
+              Collaborate with Capyngen to create innovative UI/UX solutions with a blend of creativity, strategy, and technology, resulting in tangible business outcomes.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Profile 1 */}
-            <div className="bg-white p-6 rounded-xl shadow-sm flex items-start gap-4">
-              <img 
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200" 
-                alt="Elena Vance" 
-                className="w-20 h-20 rounded-lg object-cover"
-              />
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-xl shadow-sm flex flex-col gap-4">
               <div>
-                <h3 className="text-lg font-bold text-slate-900">Elena Vance</h3>
-                <p className="text-blue-700 text-sm font-medium mb-2">Head of Product Design</p>
-                <p className="text-slate-500 text-sm">15+ years managing enterprise design systems and leading global UX teams.</p>
+                <h3 className="text-lg font-bold text-slate-900">User-Centered Design Approach</h3>
+                <p className="text-slate-500 text-sm">We are an established UI UX design brand and design intuitive digital solutions, as a result of user research, usability testing and business goals.</p>
               </div>
             </div>
 
-            {/* Profile 2 */}
-            <div className="bg-white p-6 rounded-xl shadow-sm flex items-start gap-4">
-              <img 
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200" 
-                alt="Marcus Chen" 
-                className="w-20 h-20 rounded-lg object-cover"
-              />
+            <div className="bg-white p-6 rounded-xl shadow-sm flex flex-col gap-4">
               <div>
-                <h3 className="text-lg font-bold text-slate-900">Marcus Chen</h3>
-                <p className="text-blue-700 text-sm font-medium mb-2">Lead UX Researcher</p>
-                <p className="text-slate-500 text-sm">Ph.D. in Cognitive Psychology. Expert in behavioral analytics and human-computer interaction.</p>
+                <h3 className="text-lg font-bold text-slate-900">Tailored Design Solutions</h3>
+                <p className="text-slate-500 text-sm">Custom UI/UX design services are built with your distinct objectives in mind, making sure that each interface is unique to your brand and boosts user interaction.</p>
               </div>
             </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-sm flex flex-col gap-4">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900">End-to-End Design Expertise</h3>
+                <p className="text-slate-500 text-sm">Our team provides research and wireframing services, user interface design services, and user experience design services, all of which are scalable to support long-term growth.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="bg-white py-16 lg:py-24 border-y border-slate-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Frequently Asked Questions (FAQs)</h2>
+          </div>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div 
+                key={index} 
+                className="bg-[#f8f9fa] rounded-xl shadow-sm overflow-hidden"
+              >
+                <button 
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none"
+                >
+                  <span className="font-bold text-slate-900 pr-8">{faq.q}</span>
+                  <ChevronDown 
+                    className={`w-5 h-5 text-blue-700 transition-transform duration-300 flex-shrink-0 ${openFaq === index ? 'rotate-180' : ''}`} 
+                  />
+                </button>
+                <div 
+                  className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-96 pb-5 opacity-100' : 'max-h-0 opacity-0'}`}
+                >
+                  <p className="text-slate-600 leading-relaxed">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -245,23 +326,23 @@ const UIUXLandingPage: React.FC = () => {
             
             {/* Contact Info */}
             <div className="lg:pr-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">Let's Design the<br />Future Together</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">Let's Create Your Next<br />Digital Experience</h2>
               <p className="text-slate-600 mb-10 leading-relaxed">
-                Ready to elevate your digital presence? Connect with our design experts to discuss your project requirements and strategic goals.
+                Collaborate with a reputable UI/UX design company, Capyngen, to create captivating digital products aligned with business goals. 
               </p>
               
               <div className="space-y-6">
                 <div className="flex items-center text-slate-700">
                   <Mail className="w-5 h-5 text-blue-700 mr-4 flex-shrink-0" />
-                  <a href="mailto:hello@designagency.co" className="hover:text-blue-700 transition-colors">hello@designagency.co</a>
+                  <a href="mailto:design@capyngen.com" className="hover:text-blue-700 transition-colors">design@capyngen.com</a>
                 </div>
                 <div className="flex items-center text-slate-700">
                   <Phone className="w-5 h-5 text-blue-700 mr-4 flex-shrink-0" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+1 (800) 555-0198</span>
                 </div>
                 <div className="flex items-start text-slate-700">
                   <MapPin className="w-5 h-5 text-blue-700 mr-4 flex-shrink-0 mt-1" />
-                  <span>100 Innovation Avenue, Suite 400<br />San Francisco, CA 94107</span>
+                  <span>Global HQ New York, NY</span>
                 </div>
               </div>
             </div>

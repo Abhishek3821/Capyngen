@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   ArrowRight, 
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
+  ChevronUp,
   BrainCircuit, 
   MessageSquareText, 
   Eye, 
@@ -13,6 +15,47 @@ import {
 } from 'lucide-react';
 
 const AILandingPage: React.FC = () => {
+  // Carousel Scroll Reference and Handler
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 350; // Scroll distance
+      if (direction === 'left') {
+        scrollContainerRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      } else {
+        scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }
+  };
+
+  // FAQ Accordion State
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Form Submission Handler
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Thank you! Your request for services has been submitted successfully.");
+  };
+
+  const faqs = [
+    { q: "Q1. What are Artificial Intelligence Services?", a: "Artificial Intelligence Services enable businesses to leverage cutting-edge AI tools and technologies to streamline processes, analyze data, enhance decision-making, and create intelligent digital solutions." },
+    { q: "Q2. What kind of AI Development Services does Capyngen offer?", a: "Capyngen has AI Development Services such as machine learning, NLP, computer vision, intelligent automation and custom AI application development." },
+    { q: "Q3. What is an AI Solution?", a: "AI Solutions are tailored technologies that leverage AI to address business problems by automating tasks, forecasting and decision-making." },
+    { q: "Q4. What’s the benefit of Custom AI Development?", a: "Unlike the use of generic software, Custom AI Development builds solutions that fit within your business processes, objectives, and industry needs." },
+    { q: "Q5. What is the purpose of AI Consulting Services?", a: "AI Consulting Services guide organizations in identifying AI opportunities, assessing business readiness, and creating AI implementation strategies." },
+    { q: "Q6. What are Generative AI Services?", a: "Generative AI Services are dedicated to building intelligent systems that can produce text, images, code, documents and business content, leveraging the power of advanced AI models." },
+    { q: "Q7. What are Machine Learning Services?", a: "Machine Learning Services create predictive models based on data that they learn from in order to enhance forecasting, automation and business intelligence." },
+    { q: "Q8. How is AI Software Development different from traditional software development?", a: "AI Software Development is the process of creating and developing intelligent software programs with AI functionalities that are integrated into systems used by businesses." },
+    { q: "Q9. What are Enterprise AI Solutions?", a: "Enterprise AI Solutions can enable large entities to automate workflows, boost efficiency, and deliver customer experiences." },
+    { q: "Q10. What are the benefits of AI Automation Services for businesses?", a: "AI Automation Services streamline business processes, minimize manual responsibilities, enhance accuracy, and boost productivity in various departments." },
+    { q: "Q11. What are the industries that can be helped by Artificial Intelligence Services?", a: "AI technologies have the potential to be applied across various sectors, including healthcare, finance, retail, manufacturing, education, logistics, real estate, and more." },
+    { q: "Q12. Why is Capyngen the perfect Artificial Intelligence Development Company?", a: "Capyngen provides scalable, secure, and business-focused AI solutions with experienced AI experts and consultants." },
+    { q: "Q13. Does AI Solutions support integration with existing software?", a: "Yes. Our AI solutions integrate with CRM, ERP, cloud platforms, mobile applications and enterprise systems." },
+    { q: "Q14. How long does it take to implement AI?", a: "The timeline varies depending on the complexity of the project, the business objectives, the resources that are available and integration needs." },
+    { q: "Q15. What is the starting point to use Capyngen's Artificial Intelligence Services?", a: "Talk to the Capyngen AI experts today and discover how to leverage AI for your business, how to see opportunities, and how to develop a plan for implementing AI in your business." }
+  ];
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800">
       
@@ -31,20 +74,26 @@ const AILandingPage: React.FC = () => {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
           <p className="text-blue-300 font-semibold text-xs uppercase tracking-[0.2em] mb-6">
-            Enterprise Transformation
+            ARTIFICIAL INTELLIGENCE
           </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Intelligent Automation & AI<br />Solutions
+            Artificial Intelligence Services for Future-Ready Businesses
           </h1>
           <p className="text-lg text-blue-100 mb-10 leading-relaxed max-w-2xl mx-auto font-light">
-            We unlock the power of artificial intelligence to optimize operations, automate complex workflows, and drive unprecedented growth.
+            Empowering organizations to be more productive and innovative with advanced Artificial Intelligence Services.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-[#0056b3] hover:bg-[#004494] text-white px-8 py-3.5 rounded-sm font-semibold transition-colors text-sm tracking-wide">
-              DISCOVER SOLUTIONS
+            <button 
+              onClick={() => window.scrollTo({ top: 700, behavior: 'smooth' })}
+              className="bg-[#0056b3] hover:bg-[#004494] text-white px-8 py-3.5 rounded-sm font-semibold transition-colors text-sm tracking-wide active:scale-95"
+            >
+              DISCOVER SERVICES
             </button>
-            <button className="bg-transparent hover:bg-white/10 text-white border border-white/50 px-8 py-3.5 rounded-sm font-semibold transition-colors text-sm tracking-wide">
-              BOOK A CONSULTATION
+            <button 
+              onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
+              className="bg-transparent hover:bg-white/10 text-white border border-white/50 px-8 py-3.5 rounded-sm font-semibold transition-colors text-sm tracking-wide active:scale-95"
+            >
+              EXPERT CONSULTATION
             </button>
           </div>
         </div>
@@ -57,25 +106,14 @@ const AILandingPage: React.FC = () => {
             
             <div className="lg:pr-8">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                Integrating Artificial Intelligence
+                Bringing Data to Business Value
               </h2>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                Beyond the hype lies practical, transformative value. We design and deploy AI systems that augment human capabilities, automate mundane tasks, and extract deep insights from your data infrastructure.
+                The amount of information businesses produce every day is huge but to be successful, the information needs to be turned into measurable outcomes. At Capyngen, we deliver AI Development Services that transform business data into valuable insights for smarter decision-making.
               </p>
               <p className="text-slate-600 mb-10 leading-relaxed">
-                Our approach bridges the gap between advanced machine learning algorithms and real-world business challenges. We don't just build models; we architect intelligent workflows that integrate seamlessly into your existing operations.
+                Our team integrates Machine Learning Services to create solutions that will be easily implementable in the current business operations. As an Artificial Intelligence Development Company, we help organizations improve efficiency, and achieve sustainable growth.
               </p>
-              
-              <div className="grid grid-cols-2 gap-8">
-                <div>
-                  <p className="text-4xl font-bold text-[#0056b3] mb-2">94%</p>
-                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Process Efficiency</p>
-                </div>
-                <div>
-                  <p className="text-4xl font-bold text-[#0056b3] mb-2">10M+</p>
-                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Datapoints Analyzed</p>
-                </div>
-              </div>
             </div>
             
             <div className="relative bg-[#f8fafd] p-8 rounded-sm">
@@ -98,86 +136,117 @@ const AILandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">Intelligence Insights</h2>
-              <p className="text-sm text-slate-500">Latest thoughts from our AI Strategy practice.</p>
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">Insights & Innovation</h2>
+              <p className="text-sm text-slate-500">Discussing new technology that is transforming intelligent business.</p>
             </div>
             <div className="hidden sm:flex gap-2">
-              <button className="w-10 h-10 border border-slate-300 rounded flex items-center justify-center hover:bg-white transition-colors">
+              <button 
+                onClick={() => handleScroll('left')}
+                className="w-10 h-10 border border-slate-300 rounded flex items-center justify-center hover:bg-white transition-colors active:bg-slate-200"
+              >
                 <ChevronLeft className="w-5 h-5 text-slate-600" />
               </button>
-              <button className="w-10 h-10 border border-slate-300 rounded flex items-center justify-center hover:bg-white transition-colors">
+              <button 
+                onClick={() => handleScroll('right')}
+                className="w-10 h-10 border border-slate-300 rounded flex items-center justify-center hover:bg-white transition-colors active:bg-slate-200"
+              >
                 <ChevronRight className="w-5 h-5 text-slate-600" />
               </button>
             </div>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div 
+            ref={scrollContainerRef}
+            className="flex gap-8 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+            style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
+          >
+            <style dangerouslySetInnerHTML={{__html: `.scrollbar-hide::-webkit-scrollbar { display: none; }`}} />
+            
             {/* Card 1 */}
-            <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
               <div className="overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1614064641913-6b71a2b02319?auto=format&fit=crop&q=80&w=600" 
-                  alt="Abstract Data Waves" 
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  alt="Generative AI" 
+                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
-              <div className="p-6">
-                <p className="text-[#0056b3] text-[10px] font-bold uppercase tracking-wider mb-2">Deep Learning</p>
+              <div className="p-6 flex flex-col flex-1">
                 <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#0056b3] transition-colors leading-snug">
-                  The Future of Generative Models
+                  Generative AI for Modern Businesses
                 </h3>
-                <p className="text-slate-600 text-sm mb-6 line-clamp-2">
-                  Exploring how large language models are transforming content creation and complex problem solving across enterprise sectors.
+                <p className="text-slate-600 text-sm mb-6 flex-1">
+                  Discover how Generative AI Services are transforming content creation, customer engagement, and accelerating innovation in various departments.
                 </p>
-                <a href="#" className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
+                <div className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
                   Read Article <ArrowRight className="ml-1 w-3 h-3" />
-                </a>
+                </div>
               </div>
             </div>
             
             {/* Card 2 */}
-            <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
               <div className="overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=600" 
-                  alt="Server Tech" 
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  alt="Enterprise AI" 
+                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
-              <div className="p-6">
-                <p className="text-[#0056b3] text-[10px] font-bold uppercase tracking-wider mb-2">Case Study</p>
+              <div className="p-6 flex flex-col flex-1">
                 <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#0056b3] transition-colors leading-snug">
-                  Automating Supply Chain Logistics
+                  Enterprise AI Solutions
                 </h3>
-                <p className="text-slate-600 text-sm mb-6 line-clamp-2">
-                  How a global retailer used predictive algorithms to reduce inventory waste by 40% and optimize delivery routes.
+                <p className="text-slate-600 text-sm mb-6 flex-1">
+                  Learn how Enterprise AI Solutions can help businesses streamline processes, gain insights into operations, and make quick, informed decisions.
                 </p>
-                <a href="#" className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
+                <div className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
                   Read Article <ArrowRight className="ml-1 w-3 h-3" />
-                </a>
+                </div>
               </div>
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
               <div className="overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1528297506728-9533d2ac3fa4?auto=format&fit=crop&q=80&w=600" 
-                  alt="Chess Pieces" 
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  alt="AI Consulting" 
+                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
-              <div className="p-6">
-                <p className="text-[#0056b3] text-[10px] font-bold uppercase tracking-wider mb-2">Governance</p>
+              <div className="p-6 flex flex-col flex-1">
                 <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#0056b3] transition-colors leading-snug">
-                  Ethical AI Frameworks in Practice
+                  AI Consulting Services
                 </h3>
-                <p className="text-slate-600 text-sm mb-6 line-clamp-2">
-                  Establishing robust guidelines to ensure machine learning deployments remain transparent, fair, and accountable.
+                <p className="text-slate-600 text-sm mb-6 flex-1">
+                  Learn about strategic AI Consulting Services and how they can assist organizations in finding opportunities for AI, creating implementation plans, and maximizing the value of AI in the long run.
                 </p>
-                <a href="#" className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
+                <div className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
                   Read Article <ArrowRight className="ml-1 w-3 h-3" />
-                </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 4 */}
+            <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
+              <div className="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" 
+                  alt="Automation" 
+                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-1">
+                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#0056b3] transition-colors leading-snug">
+                  Intelligent Business Automation
+                </h3>
+                <p className="text-slate-600 text-sm mb-6 flex-1">
+                  Discover how AI Automation Services use intelligent automation technologies to streamline repetitive tasks, cut down on expenses and boost productivity.
+                </p>
+                <div className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
+                  Read Article <ArrowRight className="ml-1 w-3 h-3" />
+                </div>
               </div>
             </div>
           </div>
@@ -188,8 +257,8 @@ const AILandingPage: React.FC = () => {
       <section className="bg-white py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Capabilities</h2>
-            <p className="text-sm text-slate-500">Comprehensive AI solutions tailored for enterprise challenges.</p>
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Our AI Capabilities</h2>
+            <p className="text-sm text-slate-500">Flexible AI solutions, designed for changing business needs.</p>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -199,15 +268,15 @@ const AILandingPage: React.FC = () => {
                 <BrainCircuit className="w-8 h-8 stroke-[1.5]" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-4">Machine Learning</h3>
-              <ul className="text-sm text-slate-600 space-y-3">
+              <p className="text-sm text-slate-600 mb-5">
+                We build intelligent models for prediction, and data analysis based on business-specific data with our Machine Learning Services.
+              </p>
+              <ul className="text-sm text-slate-600 space-y-3 font-semibold">
                 <li className="flex items-start">
                   <span className="mr-2 text-[#0056b3]">•</span> Predictive Modeling
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2 text-[#0056b3]">•</span> Neural Networks
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-[#0056b3]">•</span> Anomaly Detection
+                  <span className="mr-2 text-[#0056b3]">•</span> Smart Automation
                 </li>
               </ul>
             </div>
@@ -218,15 +287,15 @@ const AILandingPage: React.FC = () => {
                 <MessageSquareText className="w-8 h-8 stroke-[1.5]" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-4">Natural Language Processing</h3>
-              <ul className="text-sm text-slate-600 space-y-3">
+              <p className="text-sm text-slate-600 mb-5">
+                Our AI Development Services create NLP-powered applications that understand human language through intelligent search, and multilingual communication.
+              </p>
+              <ul className="text-sm text-slate-600 space-y-3 font-semibold">
                 <li className="flex items-start">
-                  <span className="mr-2 text-[#0056b3]">•</span> Text Analytics
+                  <span className="mr-2 text-[#0056b3]">•</span> Language Analytics
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2 text-[#0056b3]">•</span> Conversational AI
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-[#0056b3]">•</span> Sentiment Analysis
+                  <span className="mr-2 text-[#0056b3]">•</span> AI Assistants
                 </li>
               </ul>
             </div>
@@ -237,15 +306,15 @@ const AILandingPage: React.FC = () => {
                 <Eye className="w-8 h-8 stroke-[1.5]" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-4">Computer Vision</h3>
-              <ul className="text-sm text-slate-600 space-y-3">
+              <p className="text-sm text-slate-600 mb-5">
+                Our AI Solutions leverage cutting edge computer vision capabilities to identify images, and increase the level of accuracy in our operations.
+              </p>
+              <ul className="text-sm text-slate-600 space-y-3 font-semibold">
                 <li className="flex items-start">
-                  <span className="mr-2 text-[#0056b3]">•</span> Object Recognition
+                  <span className="mr-2 text-[#0056b3]">•</span> Image Analysis
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2 text-[#0056b3]">•</span> Image Classification
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-[#0056b3]">•</span> Video Analytics
+                  <span className="mr-2 text-[#0056b3]">•</span> Visual Automation
                 </li>
               </ul>
             </div>
@@ -255,16 +324,16 @@ const AILandingPage: React.FC = () => {
               <div className="mb-6 text-[#0056b3]">
                 <GitMerge className="w-8 h-8 stroke-[1.5]" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-4">AI Strategy</h3>
-              <ul className="text-sm text-slate-600 space-y-3">
+              <h3 className="text-lg font-bold text-slate-900 mb-4">AI Consulting</h3>
+              <p className="text-sm text-slate-600 mb-5">
+                Your AI Strategy and roadmap are crafted by our AI Consulting Services, designed to boost your business's AI readiness.
+              </p>
+              <ul className="text-sm text-slate-600 space-y-3 font-semibold">
                 <li className="flex items-start">
-                  <span className="mr-2 text-[#0056b3]">•</span> Roadmap Planning
+                  <span className="mr-2 text-[#0056b3]">•</span> AI Readiness Review 
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2 text-[#0056b3]">•</span> Technology Evaluation
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-[#0056b3]">•</span> Governance Models
+                  <span className="mr-2 text-[#0056b3]">•</span> Digital Strategy Planning
                 </li>
               </ul>
             </div>
@@ -272,62 +341,76 @@ const AILandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. Team Section */}
+      {/* 5. Why Choose Capyngen? (Replaced Team section) */}
       <section className="bg-[#f8fafd] py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Thought Leadership</h2>
-            <p className="text-sm text-slate-500">Pioneers steering our research and enterprise implementations.</p>
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Why Choose Capyngen?</h2>
+            <p className="text-sm text-slate-500">Providing businesses with intelligent AI solutions to help them grow confidently.</p>
           </div>
           
           <div className="grid sm:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Team Member 1 */}
-            <div className="text-center group">
-              <div className="overflow-hidden mb-6 bg-white shadow-sm border border-slate-100">
-                <img 
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" 
-                  alt="Dr. Aria Thorne" 
-                  className="w-full aspect-square object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                />
+            {/* Point 1 */}
+            <div className="text-center group bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+              <div className="overflow-hidden mb-6 mx-auto w-24 h-24 rounded-full bg-[#f0f5fb] flex items-center justify-center text-[#0056b3]">
+                <Activity className="w-10 h-10" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-1">Dr. Aria Thorne</h3>
-              <p className="text-[#0056b3] text-[10px] font-bold uppercase tracking-wider mb-4">Chief AI Scientist</p>
-              <p className="text-xs text-slate-500 leading-relaxed px-4">
-                Former head of AI Research at a leading tech giant, specializing in neural network architectures.
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Industry-Focused Expertise</h3>
+              <p className="text-sm text-slate-500 leading-relaxed px-4">
+                AI solutions tailored for your business needs.
               </p>
             </div>
 
-            {/* Team Member 2 */}
-            <div className="text-center group">
-              <div className="overflow-hidden mb-6 bg-white shadow-sm border border-slate-100">
-                <img 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" 
-                  alt="Sarah Chen" 
-                  className="w-full aspect-square object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                />
+            {/* Point 2 */}
+            <div className="text-center group bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+              <div className="overflow-hidden mb-6 mx-auto w-24 h-24 rounded-full bg-[#f0f5fb] flex items-center justify-center text-[#0056b3]">
+                <GitMerge className="w-10 h-10" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-1">Sarah Chen</h3>
-              <p className="text-[#0056b3] text-[10px] font-bold uppercase tracking-wider mb-4">VP Data Engineering</p>
-              <p className="text-xs text-slate-500 leading-relaxed px-4">
-                Expert in building scalable data pipelines and integrating machine learning models into production environments.
+              <h3 className="text-lg font-bold text-slate-900 mb-3">End-to-End AI Development</h3>
+              <p className="text-sm text-slate-500 leading-relaxed px-4">
+                Strategies to deployment and optimization.
               </p>
             </div>
 
-            {/* Team Member 3 */}
-            <div className="text-center group">
-              <div className="overflow-hidden mb-6 bg-white shadow-sm border border-slate-100">
-                <img 
-                  src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400" 
-                  alt="Marcus Vance" 
-                  className="w-full aspect-square object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                />
+            {/* Point 3 */}
+            <div className="text-center group bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+              <div className="overflow-hidden mb-6 mx-auto w-24 h-24 rounded-full bg-[#f0f5fb] flex items-center justify-center text-[#0056b3]">
+                <BrainCircuit className="w-10 h-10" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-1">Marcus Vance</h3>
-              <p className="text-[#0056b3] text-[10px] font-bold uppercase tracking-wider mb-4">Head of Applied AI</p>
-              <p className="text-xs text-slate-500 leading-relaxed px-4">
-                Specializes in bridging the gap between theoretical AI research and practical business applications.
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Scalable & Secure Solutions</h3>
+              <p className="text-sm text-slate-500 leading-relaxed px-4">
+                Designed for high performance, security and growth.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs Section */}
+      <section className="py-20 lg:py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
+          </div>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div key={index} className="border border-slate-200 rounded-lg overflow-hidden bg-slate-50 transition-colors hover:bg-slate-100">
+                <button 
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none"
+                >
+                  <h4 className="font-bold text-slate-900 text-sm md:text-base pr-8">{faq.q}</h4>
+                  <span className="text-[#0056b3] shrink-0">
+                    {openFaq === index ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                  </span>
+                </button>
+                {openFaq === index && (
+                  <div className="px-6 pb-5 pt-2 text-slate-600 text-sm leading-relaxed animate-in slide-in-from-top-2 duration-200">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -339,9 +422,9 @@ const AILandingPage: React.FC = () => {
             
             {/* Left Side - Info */}
             <div>
-              <h2 className="text-3xl font-bold mb-6">Engineered for Scale</h2>
+              <h2 className="text-3xl font-bold mb-6">Request for an AI Services</h2>
               <p className="text-sm text-slate-400 mb-12 leading-relaxed max-w-md">
-                Connect with our technical team to discuss your operational challenges and discover how custom AI solutions can accelerate your business objectives.
+                Always have a partner for the most reliable Artificial Intelligence Services, that will enhance the operational efficiency and help in the long-term digital transformation. Our AI experts are on hand to grasp your business goals and design an AI strategy to match.
               </p>
               
               <div className="space-y-8">
@@ -350,8 +433,8 @@ const AILandingPage: React.FC = () => {
                     <Mail className="w-5 h-5 text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Email Us</p>
-                    <a href="mailto:solutions@ai-enterprise.com" className="text-sm font-medium hover:text-blue-300 transition-colors">solutions@ai-enterprise.com</a>
+                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">EMAIL US</p>
+                    <a href="mailto:ai.solutions@capyngen.com" className="text-sm font-medium hover:text-blue-300 transition-colors">ai.solutions@capyngen.com</a>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -359,9 +442,9 @@ const AILandingPage: React.FC = () => {
                     <MapPin className="w-5 h-5 text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Headquarters</p>
+                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">GLOBAL HQ</p>
                     <p className="text-sm font-medium leading-relaxed">
-                      Innovation District, Building A<br />San Francisco, CA 94105
+                      New York | London | Singapore
                     </p>
                   </div>
                 </div>
@@ -370,11 +453,12 @@ const AILandingPage: React.FC = () => {
             
             {/* Right Side - Form */}
             <div className="bg-white p-8 sm:p-10 rounded-sm">
-              <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+              <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="firstName" className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">First Name</label>
                     <input 
+                      required
                       type="text" 
                       id="firstName"
                       className="w-full px-0 py-2 text-sm border-b border-slate-200 focus:border-[#0056b3] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-300"
@@ -384,6 +468,7 @@ const AILandingPage: React.FC = () => {
                   <div>
                     <label htmlFor="lastName" className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Last Name</label>
                     <input 
+                      required
                       type="text" 
                       id="lastName"
                       className="w-full px-0 py-2 text-sm border-b border-slate-200 focus:border-[#0056b3] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-300"
@@ -395,6 +480,7 @@ const AILandingPage: React.FC = () => {
                 <div>
                   <label htmlFor="workEmail" className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Work Email</label>
                   <input 
+                    required
                     type="email" 
                     id="workEmail"
                     className="w-full px-0 py-2 text-sm border-b border-slate-200 focus:border-[#0056b3] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-300"
@@ -410,10 +496,10 @@ const AILandingPage: React.FC = () => {
                     defaultValue=""
                   >
                     <option value="" disabled>Select an area...</option>
-                    <option value="ml">Machine Learning Models</option>
-                    <option value="nlp">NLP & Conversational AI</option>
+                    <option value="ml">Machine Learning</option>
+                    <option value="nlp">Natural Language Processing</option>
                     <option value="cv">Computer Vision</option>
-                    <option value="strategy">Strategic Consulting</option>
+                    <option value="strategy">AI Consulting</option>
                   </select>
                 </div>
                 
@@ -429,7 +515,7 @@ const AILandingPage: React.FC = () => {
                 
                 <button 
                   type="submit" 
-                  className="w-full bg-[#0056b3] hover:bg-[#004494] text-white font-bold py-4 transition-colors mt-2 text-[11px] tracking-[0.2em] uppercase rounded-sm"
+                  className="w-full bg-[#0056b3] hover:bg-[#004494] text-white font-bold py-4 transition-colors mt-2 text-[11px] tracking-[0.2em] uppercase rounded-sm active:scale-95"
                 >
                   Submit Request
                 </button>
