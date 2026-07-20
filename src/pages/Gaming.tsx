@@ -1,11 +1,94 @@
-import { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import image1 from '../assets/gaming/01.png';
+import image2 from '../assets/gaming/02.png';
+import image3 from '../assets/gaming/03.png';
+import image4 from '../assets/gaming/04.png';
+import image5 from '../assets/gaming/05.png';
+import image6 from '../assets/gaming/06.png';
+import image7 from '../assets/gaming/07.png';
+import image8 from '../assets/gaming/08.png';
+import image9 from '../assets/gaming/09.png';
+import image10 from '../assets/gaming/10.png';
+import image11 from '../assets/gaming/11.png';
+import image12 from '../assets/gaming/12.png';
+import image13 from '../assets/gaming/13.png';
+import image14 from '../assets/gaming/14.png';
+import image15 from '../assets/gaming/15.png';
+import image16 from '../assets/gaming/16.png';
+import image17 from '../assets/gaming/17.png';
+import image18 from '../assets/gaming/18.png';
+
+// --- Scroll Animation Wrapper Component ---
+interface RevealOnScrollProps {
+  children: React.ReactNode;
+  className?: string;
+  direction?: "up" | "down" | "left" | "right" | "none";
+  delay?: number;
+}
+
+const RevealOnScroll: React.FC<RevealOnScrollProps> = ({ 
+  children, 
+  className = "", 
+  direction = "up", 
+  delay = 0 
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            setIsVisible(true);
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [delay]);
+
+  const baseClass = "transition-all duration-1000 ease-out";
+  const hiddenClass = {
+    up: "opacity-0 translate-y-12",
+    down: "opacity-0 -translate-y-12",
+    left: "opacity-0 translate-x-12",
+    right: "opacity-0 -translate-x-12",
+    none: "opacity-0"
+  }[direction];
+
+  return (
+    <div
+      ref={ref}
+      className={`${baseClass} ${isVisible ? "opacity-100 translate-y-0 translate-x-0" : hiddenClass} ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Global scroll helpers
+const scrollToSection = (id: string) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+const handleMailTo = () => {
+  window.location.href = "mailto:hello@capyngen.com";
+};
 
 // --- 1. Gaming Hero Section ---
 const GamingHero = () => {
   return (
     <section 
       className="relative w-full h-[600px] lg:h-[700px] flex items-center bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url('image_ee037f.jpg')` }} 
+      style={{ backgroundImage: `url(${image1})` }} 
     >
       {/* Dark Overlay - gradient for text readability on the left */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/20"></div>
@@ -13,35 +96,43 @@ const GamingHero = () => {
       {/* Main Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col items-start text-left">
         
-        {/* Eyebrow / Tag */}
-        <div className="border border-white/30 backdrop-blur-sm px-3 py-1 mb-6 rounded-sm">
-          <span className="text-[10px] md:text-xs font-semibold tracking-[0.15em] uppercase text-gray-200">
-            GAMING
-          </span>
-        </div>
+        <RevealOnScroll direction="up">
+          {/* Eyebrow / Tag */}
+          <div className="border border-white/30 backdrop-blur-sm px-3 py-1 mb-6 rounded-sm w-fit">
+            <span className="text-[10px] md:text-xs font-semibold tracking-[0.15em] uppercase text-gray-200">
+              GAMING
+            </span>
+          </div>
 
-        {/* Headline */}
-        <h1 className="text-4xl md:text-5xl lg:text-[56px] font-bold text-white leading-tight mb-6 tracking-tight max-w-3xl">
-          Victory in the Generation of AI Gaming
-        </h1>
+          {/* Headline */}
+          <h1 className="text-4xl md:text-5xl lg:text-[56px] font-bold text-white leading-tight mb-6 tracking-tight max-w-3xl">
+            Victory in the Generation of AI Gaming
+          </h1>
 
-        {/* Description Text */}
-        <p className="text-sm md:text-base text-gray-300 mb-10 max-w-2xl leading-relaxed">
-          Capyngen supplies gaming software development space and functions along with cutting-edge Artificial intelligence to advance gamer experiences, upgrade live services, prevent scam, and enhance cloud gaming framework for the next generations gamers.
-        </p>
+          {/* Description Text */}
+          <p className="text-sm md:text-base text-gray-300 mb-10 max-w-2xl leading-relaxed">
+            Capyngen supplies gaming software development space and functions along with cutting-edge Artificial intelligence to advance gamer experiences, upgrade live services, prevent scam, and enhance cloud gaming framework for the next generations gamers.
+          </p>
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <button className="bg-[#3b82f6] hover:bg-[#2563eb] text-white text-sm font-medium py-3 px-8 rounded-sm flex justify-center items-center transition-colors duration-300">
-            Explore More 
-            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </button>
-          <button className="bg-transparent hover:bg-white/10 border border-gray-400 text-white text-sm font-medium py-3 px-8 rounded-sm flex justify-center items-center transition-all duration-300">
-            Contact Us 
-          </button>
-        </div>
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <button 
+              onClick={() => scrollToSection('solutions')}
+              className="bg-[#3b82f6] hover:bg-[#2563eb] text-white text-sm font-medium py-3 px-8 rounded-sm flex justify-center items-center transition-colors duration-300"
+            >
+              Explore More 
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="bg-transparent hover:bg-white/10 border border-gray-400 text-white text-sm font-medium py-3 px-8 rounded-sm flex justify-center items-center transition-all duration-300"
+            >
+              Contact Us 
+            </button>
+          </div>
+        </RevealOnScroll>
 
       </div>
     </section>
@@ -51,21 +142,21 @@ const GamingHero = () => {
 // --- 2. Player Intelligence Feature Section ---
 const PlayerIntelligence = () => {
   return (
-    <section className="bg-[#243e8c] py-16 md:py-24 w-full">
+    <section className="bg-[#243e8c] py-16 md:py-24 w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Image */}
-          <div className="w-full flex justify-center lg:justify-start">
+          <RevealOnScroll direction="right" className="w-full flex justify-center lg:justify-start">
             <img 
-              src="image_ee06e2.png" 
+              src={image2} 
               alt="Neon lit gaming setup room with monitor and PC tower" 
               className="w-full max-w-lg lg:max-w-full h-auto object-cover rounded-2xl shadow-lg"
             />
-          </div>
+          </RevealOnScroll>
 
           {/* Right Column: Text Content Block */}
-          <div className="flex flex-col justify-center text-white">
+          <RevealOnScroll direction="left" className="flex flex-col justify-center text-white">
             <h2 className="text-3xl md:text-4xl lg:text-[38px] font-bold leading-tight mb-6 tracking-tight">
               Gamer Brilliance: AI With The Core of Gaming Functions
             </h2>
@@ -74,13 +165,16 @@ const PlayerIntelligence = () => {
               Games are no longer just products, but a living legacy for the eco-logical and sustained intelligence. Capyngen serves AI versions that customize in-game experiences, forecast gamers inactivation, enhance digital economy stability, and potential versatile complication structure— supporting gaming studios with moral monetization, engaging game players for a long duration, and building gamer communities that extend over many generations.
             </p>
 
-            <a href="#" className="flex items-center text-white font-medium text-[13px] md:text-sm hover:text-blue-200 transition-colors w-fit group border-b border-white/50 hover:border-white pb-1">
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="flex items-center text-white font-medium text-[13px] md:text-sm hover:text-blue-200 transition-colors w-fit group border-b border-white/50 hover:border-white pb-1"
+            >
               Level up with Us
               <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-            </a>
-          </div>
+            </button>
+          </RevealOnScroll>
 
         </div>
       </div>
@@ -90,32 +184,44 @@ const PlayerIntelligence = () => {
 
 // --- 3. Gaming Industry Insights Section ---
 const GamingInsights = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = scrollRef.current.clientWidth;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const insightCards = [
     {
       title: "Tracking Player Habits and Predicting Churn",
-      image: "image_ee0780_1.jpg", 
+      image: image3, 
     },
     {
       title: "AI Smart Difficulty That Adjusts to You",
-      image: "image_ee0780_2.jpg",
+      image: image4,
     },
     {
       title: "AI-Built Game Worlds and Random Content",
-      image: "image_ee0780_3.jpg",
+      image: image5,
     },
     {
       title: "Anti-Cheating and Prevent Fraud in Games",
-      image: "image_ee0780_4.jpg",
+      image: image6,
     },
     {
       title: "AI-Driven Game Design and Level Creation",
-      image: "image_ee0780_1.jpg", // Reusing image placeholder
+      image: image7,
     },
   ];
 
   return (
     <section className="bg-white py-16 md:py-24 w-full">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <RevealOnScroll className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Header Block with Navigation Arrows */}
         <div className="flex justify-between items-center mb-10">
@@ -123,12 +229,12 @@ const GamingInsights = () => {
             Gaming Sector Analysis
           </h2>
           <div className="flex items-center gap-2">
-            <button className="p-2 border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors duration-200" aria-label="Previous insight">
+            <button onClick={() => scroll('left')} className="p-2 border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors duration-200" aria-label="Previous insight">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
-            <button className="p-2 border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors duration-200" aria-label="Next insight">
+            <button onClick={() => scroll('right')} className="p-2 border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors duration-200" aria-label="Next insight">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -137,11 +243,14 @@ const GamingInsights = () => {
         </div>
 
         {/* Responsive Insights Grid */}
-        <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+        <div 
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-smooth"
+        >
           {insightCards.map((card, idx) => (
             <div 
               key={idx}
-              className="relative group h-[420px] w-[280px] sm:w-[300px] flex-shrink-0 rounded-lg overflow-hidden flex flex-col justify-end p-6 cursor-pointer bg-black snap-start"
+              className="relative group h-[420px] w-[280px] sm:w-[300px] flex-shrink-0 rounded-lg overflow-hidden flex flex-col justify-end p-6 bg-black snap-start"
             >
               {/* Card Background Image with Subtle Scale Effect on Hover */}
               <img 
@@ -159,9 +268,12 @@ const GamingInsights = () => {
                   {card.title}
                 </h3>
                 
-                <div className="flex items-center text-white/80 font-semibold tracking-wider text-[10px] uppercase group-hover:text-white transition-colors">
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="flex items-center text-white/80 font-semibold tracking-wider text-[10px] uppercase group-hover:text-white transition-colors"
+                >
                   <span className="mr-1.5 font-sans">→</span> Read more
-                </div>
+                </button>
               </div>
             </div>
           ))}
@@ -170,7 +282,7 @@ const GamingInsights = () => {
           .scrollbar-hide::-webkit-scrollbar { display: none; }
           .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         `}} />
-      </div>
+      </RevealOnScroll>
     </section>
   );
 };
@@ -186,51 +298,51 @@ const GamingSolutions = () => {
       {
         title: "Smart Gamer Engagement",
         description: "Use behavioral data to create customized in-game experience and targeted live-server projects.",
-        image: "image_ee0ae3_1.jpg",
+        image: image8,
       },
       {
         title: "Game Ecosystem Intelligence",
         description: "Keep digital economies balanced and improve in-app purchase flows with smart AI pricing models.",
-        image: "image_ee0ae3_2.jpg",
+        image: image9,
       },
       {
         title: "Cloud Gaming Software Development",
         description: "Progress with real-time response in game streaming worldwide with smart resource issuance and edge computation.",
-        image: "image_ee0ae3_3.jpg",
+        image: image10,
       }
     ],
     'Technology': [
       {
         title: "Neural Network Rendering Engine",
         description: "Get stunning, real-time graphics powered by smart AI rendering and lighting techniques.",
-        image: "image_ee0ae3_1.jpg",
+        image: image11,
       },
       {
         title: "Step-by-Step Audio Generation System",
         description: "Build a soundscape and music that shift based on wha i's happening in-game in an instant.",
-        image: "image_ee0ae3_2.jpg",
+        image: image12,
       },
       {
         title: "Cross-Device Save Sync Tech",
         description: "Allow players jump back into progress across phones, consoles, and PCs, with no time taking process.",
-        image: "image_ee0ae3_3.jpg",
+        image: image13,
       }
     ],
     'Products & Platforms': [
       {
         title: "In-Game Marketplace Platform",
         description: "Make trading virtual goods and skins safe and easy with built-in fraud protection.",
-        image: "image_ee0ae3_1.jpg",
+        image: image14,
       },
       {
         title: "Player Identity and Login Suite",
         description: "Make account setup and cross-game identity simple with fast, secure single sign-on.",
-        image: "image_ee0ae3_2.jpg",
+        image: image15,
       },
       {
         title: "Community Engagement Toolkit",
         description: "Bring in-game chat, guilds, and social features that keep players connected and active.",
-        image: "image_ee0ae3_3.jpg",
+        image: image16,
       }
     ]
   };
@@ -238,8 +350,8 @@ const GamingSolutions = () => {
   const solutionCards = allSolutions[activeTab];
 
   return (
-    <section className="bg-white pt-16 md:pt-24 pb-8 w-full">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <section id="solutions" className="bg-white pt-16 md:pt-24 pb-8 w-full scroll-mt-20">
+      <RevealOnScroll className="max-w-7xl mx-auto px-6 md:px-12">
         <h2 className="text-3xl md:text-[36px] font-bold text-gray-950 mb-8 tracking-tight">
           Solutions We Follow
         </h2>
@@ -271,7 +383,7 @@ const GamingSolutions = () => {
               <img 
                 src={card.image} 
                 alt={card.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-102 transition-transform duration-500 ease-out"
+                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
               
@@ -287,7 +399,7 @@ const GamingSolutions = () => {
           ))}
         </div>
 
-      </div>
+      </RevealOnScroll>
     </section>
   );
 };
@@ -295,28 +407,28 @@ const GamingSolutions = () => {
 // --- 5. Future of AI in Interactive Entertainment ---
 const FutureOfAIGaming = () => {
   return (
-    <section className="bg-[#f8f9fc] py-16 md:py-24 w-full">
+    <section className="bg-[#f8f9fc] py-16 md:py-24 w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Text Content */}
-          <div className="flex flex-col justify-center">
+          <RevealOnScroll direction="right" className="flex flex-col justify-center">
             <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-gray-950 leading-tight mb-6 tracking-tight">
               The Future of AI in Interactive <br className="hidden lg:block"/> Entertainment
             </h2>
             <p className="text-gray-600 text-sm md:text-base leading-relaxed">
               Generative AI is now changing how games get made, from NPC dialogue to limitless procedural worlds. Capyngen supports studios to use AI the right way, building standout experiences that grab attention in a world full of entertainment choices, all while protecting player trust and community health.
             </p>
-          </div>
+          </RevealOnScroll>
 
           {/* Right Column: Image */}
-          <div className="w-full flex justify-center lg:justify-end">
+          <RevealOnScroll direction="left" className="w-full flex justify-center lg:justify-end">
             <img 
-              src="image_ee0b5c.png" 
+              src={image17} 
               alt="Neon lit gaming setup room" 
               className="w-full max-w-lg lg:max-w-full h-auto object-cover rounded-2xl shadow-sm"
             />
-          </div>
+          </RevealOnScroll>
 
         </div>
       </div>
@@ -327,21 +439,21 @@ const FutureOfAIGaming = () => {
 // --- 6. Building the Next Generation ---
 const IntelligentGamesAI = () => {
   return (
-    <section className="bg-[#121621] py-16 md:py-24 w-full">
+    <section className="bg-[#121621] py-16 md:py-24 w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Image */}
-          <div className="w-full flex justify-center lg:justify-start">
+          <RevealOnScroll direction="right" className="w-full flex justify-center lg:justify-start">
             <img 
-              src="image_ee0ea7.png" 
+              src={image18} 
               alt="High-end gaming PC setup with RGB lighting" 
               className="w-full max-w-lg lg:max-w-full h-auto object-cover rounded-2xl shadow-lg"
             />
-          </div>
+          </RevealOnScroll>
 
           {/* Right Column: Text Content */}
-          <div className="flex flex-col justify-center text-white">
+          <RevealOnScroll direction="left" className="flex flex-col justify-center text-white">
             <h2 className="text-3xl md:text-4xl lg:text-[38px] font-bold leading-tight mb-6 tracking-tight">
               Building the Next Generation of <br className="hidden lg:block"/>
               Intelligent Games with AI
@@ -351,13 +463,16 @@ const IntelligentGamesAI = () => {
               See how Capyngen helps gaming companies use machine learning, real-time analytics, and generative AI to build deeper player experiences, run more profitable live games, and create platforms that shape the future of interactive entertainment.
             </p>
 
-            <a href="#" className="flex items-center text-white font-medium text-[13px] md:text-sm transition-colors w-fit group border-b border-gray-400 hover:border-white pb-1">
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="flex items-center text-white font-medium text-[13px] md:text-sm transition-colors w-fit group border-b border-gray-400 hover:border-white pb-1"
+            >
               Read More 
               <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-            </a>
-          </div>
+            </button>
+          </RevealOnScroll>
 
         </div>
       </div>
@@ -369,7 +484,7 @@ const IntelligentGamesAI = () => {
 const GamingTestimonial = () => {
   return (
     <section className="bg-white py-16 w-full border-t border-b border-gray-100">
-      <div className="max-w-6xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12">
+      <RevealOnScroll className="max-w-6xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12">
         
         {/* Author Info Column */}
         <div className="w-full md:w-1/4 flex flex-col shrink-0">
@@ -393,7 +508,7 @@ const GamingTestimonial = () => {
           </p>
         </div>
 
-      </div>
+      </RevealOnScroll>
     </section>
   );
 };
@@ -447,7 +562,7 @@ const GamingFAQs = () => {
 
   return (
     <section className="bg-gray-50 py-16 md:py-24 w-full">
-      <div className="max-w-4xl mx-auto px-6 md:px-12">
+      <RevealOnScroll className="max-w-4xl mx-auto px-6 md:px-12">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-12 text-center">
           FAQs
         </h2>
@@ -465,15 +580,19 @@ const GamingFAQs = () => {
                   {openIndex === index ? '−' : '+'}
                 </span>
               </button>
-              {openIndex === index && (
+              <div 
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
                 <div className="p-5 pt-0 text-gray-700 text-sm md:text-base leading-relaxed border-t border-gray-100">
                   {faq.answer}
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
-      </div>
+      </RevealOnScroll>
     </section>
   );
 };
@@ -481,21 +600,24 @@ const GamingFAQs = () => {
 // --- 9. Gaming Call To Action ---
 const GamingCTA = () => {
   return (
-    <section className="bg-[#05050f] py-24 w-full flex justify-center">
-      <div className="max-w-4xl mx-auto px-6 md:px-12 text-center flex flex-col items-center">
+    <section id="contact" className="bg-[#05050f] py-24 w-full flex justify-center scroll-mt-10">
+      <RevealOnScroll className="max-w-4xl mx-auto px-6 md:px-12 text-center flex flex-col items-center">
         <h2 className="text-3xl md:text-4xl lg:text-[44px] font-bold text-white leading-tight mb-6">
           Enhance Your Gaming Sector with Capyngen
         </h2>
         <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl">
           Get AI-powered player intelligence, economy management, and cloud infrastructure solutions built to help gaming companies grow faster, keep players engaged and playing longer, and run their operations smarter and more efficiently across every stage of the game lifecycle.
         </p>
-        <button className="bg-[#272927] hover:bg-[#343634] border border-gray-600 text-white text-sm font-medium py-3 px-8 transition-colors duration-300 flex items-center gap-2">
+        <button 
+          onClick={handleMailTo}
+          className="bg-[#272927] hover:bg-[#343634] border border-gray-600 text-white text-sm font-medium py-3 px-8 transition-colors duration-300 flex items-center gap-2"
+        >
           Get Your Project Here
           <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </button>
-      </div>
+      </RevealOnScroll>
     </section>
   );
 };

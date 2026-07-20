@@ -1,4 +1,73 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import image1 from "../assets/Healthcare/1.png"
+import image2 from "../assets/Healthcare/2.png"
+import image3 from "../assets/Healthcare/3.png"
+import image4 from "../assets/Healthcare/4.png"
+import image5 from "../assets/Healthcare/5.png"
+import image6 from "../assets/Healthcare/6.png"
+import image7 from "../assets/Healthcare/7.png"
+import image8 from "../assets/Healthcare/8.png"
+import image9 from "../assets/Healthcare/9.png"
+import image10 from "../assets/Healthcare/10.png"
+import image11 from "../assets/Healthcare/11.png"
+import image12 from "../assets/Healthcare/12.png"
+import image13 from "../assets/Healthcare/13.png"
+import image14 from "../assets/Healthcare/14.png"
+import image15 from "../assets/Healthcare/15.png"
+import image16 from "../assets/Healthcare/16.png"
+
+// --- Scroll Animation Wrapper Component ---
+interface RevealOnScrollProps {
+  children: React.ReactNode;
+  className?: string;
+  direction?: "up" | "down" | "left" | "right" | "none";
+  delay?: number;
+}
+
+const RevealOnScroll: React.FC<RevealOnScrollProps> = ({ 
+  children, 
+  className = "", 
+  direction = "up", 
+  delay = 0 
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            setIsVisible(true);
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [delay]);
+
+  const baseClass = "transition-all duration-1000 ease-out";
+  const hiddenClass = {
+    up: "opacity-0 translate-y-12",
+    down: "opacity-0 -translate-y-12",
+    left: "opacity-0 translate-x-12",
+    right: "opacity-0 -translate-x-12",
+    none: "opacity-0"
+  }[direction];
+
+  return (
+    <div
+      ref={ref}
+      className={`${baseClass} ${isVisible ? "opacity-100 translate-y-0 translate-x-0" : hiddenClass} ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
 
 const HealthcarePage = () => {
   // State for FAQs (Accordion)
@@ -16,6 +85,19 @@ const HealthcarePage = () => {
         behavior: 'smooth'
       });
     }
+  };
+
+  // Button Action Handlers
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleContactClick = () => {
+    // Standard action to make the final CTA button "work" without routing
+    window.location.href = "mailto:hello@capyngen.com";
   };
 
   const faqData = [
@@ -45,8 +127,7 @@ const HealthcarePage = () => {
           <div 
             className="w-full h-full bg-cover bg-center bg-no-repeat bg-slate-900"
             style={{
-              // Developer: Replace this with the actual path to your healthcare background image
-              backgroundImage: `url('/path-to-your-healthcare-bg.jpg')`, 
+              backgroundImage: `url(${image1})`, 
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#03152f] via-[#03152f]/90 to-transparent"></div>
@@ -54,14 +135,11 @@ const HealthcarePage = () => {
         </div>
 
         <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10 w-full">
-          <div className="max-w-3xl space-y-6">
+          <RevealOnScroll direction="up" className="max-w-3xl space-y-6">
             <div>
               <span className="block text-[#3b82f6] text-sm md:text-base font-bold tracking-widest uppercase mb-2">
                 Revolutionizing Patient Care Through Smart Technology
               </span>
-              {/* <span className="block text-gray-300 text-xs md:text-sm font-semibold tracking-[0.2em] uppercase">
-                AI-POWERED HEALTHCARE SOLUTIONS
-              </span> */}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-[56px] font-bold text-white leading-tight">
               Intelligent Healthcare Solutions for the Digital Age
@@ -70,27 +148,33 @@ const HealthcarePage = () => {
               As a leading healthcare software company, Capyngen empower healthcare providers with AI-driven digital solutions that improve patient experiences, streamline clinical operations, enhance diagnostics, and enable secure, connected healthcare ecosystems.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
-              <button className="flex items-center justify-center gap-2 bg-[#0d5cf5] hover:bg-blue-600 text-white font-medium py-3.5 px-6 rounded-md transition-colors text-base">
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="flex items-center justify-center gap-2 bg-[#0d5cf5] hover:bg-blue-600 text-white font-medium py-3.5 px-6 rounded-md transition-colors text-base"
+              >
                 Talk to Healthcare Experts
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </button>
 
-              <button className="flex items-center justify-center gap-2 bg-transparent hover:bg-white/10 border border-gray-400 hover:border-white text-white font-medium py-3.5 px-6 rounded-md transition-all text-base">
+              <button 
+                onClick={() => scrollToSection('solutions')}
+                className="flex items-center justify-center gap-2 bg-transparent hover:bg-white/10 border border-gray-400 hover:border-white text-white font-medium py-3.5 px-6 rounded-md transition-all text-base"
+              >
                 Explore Healthcare Solutions
                 <svg className="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </button>
             </div>
-          </div>
+          </RevealOnScroll>
         </div>
       </section>
 
       {/* 2. Text Content Section */}
       <section className="bg-white py-20 px-6 md:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto lg:ml-[8%]">
+        <RevealOnScroll className="max-w-6xl mx-auto lg:ml-[8%]">
           <h2 className="text-lg md:text-xl font-bold tracking-wide uppercase text-black mb-8 leading-snug">
             Better Patient Outcomes. Smarter Healthcare Delivery.
           </h2>
@@ -102,20 +186,20 @@ const HealthcarePage = () => {
               With our healthcare IT solutions, Capyngen helps healthcare organizations modernize their digital infrastructure with scalable software, AI-powered analytics, patient engagement platforms, and secure cloud solutions.
             </p>
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
       {/* 3. AI is Reshaping Modern Healthcare Section */}
-      <section className="bg-[#0b1221] py-20 px-6 md:px-12 lg:px-24">
+      <section className="bg-[#0b1221] py-20 px-6 md:px-12 lg:px-24 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="w-full flex justify-center md:justify-start">
+          <RevealOnScroll direction="right" className="w-full flex justify-center md:justify-start">
             <img 
-              src="/path-to-patient-care-image.jpg" 
+              src={image2} 
               alt="Caregiver holding patient's hand" 
               className="w-full h-auto object-cover min-h-[300px] bg-slate-800 shadow-lg rounded-sm"
             />
-          </div>
-          <div className="flex flex-col justify-center">
+          </RevealOnScroll>
+          <RevealOnScroll direction="left" className="flex flex-col justify-center">
             <h2 className="text-3xl md:text-4xl lg:text-[42px] font-bold leading-tight text-white mb-6">
               How Artificial Intelligence is Reshaping Healthcare
             </h2>
@@ -127,13 +211,13 @@ const HealthcarePage = () => {
                 Capyngen develops intelligent healthcare platforms that help providers deliver better care while reducing administrative workload and operational costs with our healthcare technology solutions.
               </p>
             </div>
-          </div>
+          </RevealOnScroll>
         </div>
       </section>
 
       {/* 4. Healthcare Insights Section */}
       <section className="bg-white py-24 px-6 md:px-12 lg:px-24">
-        <div className="max-w-7xl mx-auto">
+        <RevealOnScroll className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-12 gap-4">
             <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-black">
               Key Healthcare Technology Insights
@@ -159,38 +243,41 @@ const HealthcarePage = () => {
 
           <div 
             ref={insightScrollRef}
-            className="flex gap-8 overflow-x-auto pb-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex gap-8 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           >
             
             {[
-              { title: "AI-Assisted\nDiagnostics", img: "/path-to-ai-diagnostics.jpg" },
-              { title: "Telemedicine\nPlatforms", img: "/path-to-telemedicine.jpg" },
-              { title: "Electronic Health\nRecords (EHR)", img: "/path-to-ehr.jpg" },
-              { title: "Remote Patient\nMonitoring", img: "/path-to-remote-monitoring.jpg" },
-              { title: "Predictive Healthcare\nAnalytics", img: "/path-to-analytics.jpg" },
-              { title: "Healthcare Workflow\nAutomation", img: "/path-to-automation.jpg" }
+              { title: "AI-Assisted\nDiagnostics", img: image3 },
+              { title: "Telemedicine\nPlatforms", img: image4 },
+              { title: "Electronic Health\nRecords (EHR)", img: image5 },
+              { title: "Remote Patient\nMonitoring", img: image6 },
+              { title: "Predictive Healthcare\nAnalytics", img: image7 },
+              { title: "Healthcare Workflow\nAutomation", img: image8 }
             ].map((insight, index) => (
-              <div key={index} className="relative h-[420px] min-w-[320px] w-full md:w-[calc(33.333%-1.5rem)] shrink-0 snap-start rounded-lg overflow-hidden group cursor-pointer shadow-md bg-gray-200">
+              <div key={index} className="relative h-[420px] min-w-[320px] w-full md:w-[calc(33.333%-1.5rem)] shrink-0 snap-start rounded-lg overflow-hidden group shadow-md bg-gray-200">
                 <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url('${insight.img}')` }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-8 w-full flex flex-col justify-end">
                   <h3 className="text-[26px] font-bold text-white mb-6 leading-tight whitespace-pre-line">{insight.title}</h3>
-                  <div className="flex items-center gap-2 text-xs font-bold text-gray-300 tracking-[0.2em] uppercase group-hover:text-white transition-colors">
+                  <button 
+                    onClick={() => scrollToSection('contact')}
+                    className="flex items-center gap-2 text-xs font-bold text-gray-300 tracking-[0.2em] uppercase group-hover:text-white transition-colors text-left"
+                  >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                     READ MORE
-                  </div>
+                  </button>
                 </div>
               </div>
             ))}
 
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
       {/* 5. AI Clinical Decisions Section */}
-      <section className="bg-[#2f64ed] text-white py-20 px-6 md:px-12 lg:px-24">
+      <section className="bg-[#2f64ed] text-white py-20 px-6 md:px-12 lg:px-24 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="space-y-6">
+          <RevealOnScroll direction="right" className="space-y-6">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
               AI-Powered Decision Support for Clinicians
             </h2>
@@ -202,20 +289,20 @@ const HealthcarePage = () => {
                 Our AI-powered solutions improve efficiency while allowing medical teams to focus on patient care. From reducing documentation time to providing treatment recommendations, our technology empowers healthcare professionals.
               </p>
             </div>
-          </div>
-          <div className="w-full flex justify-center md:justify-end">
+          </RevealOnScroll>
+          <RevealOnScroll direction="left" className="w-full flex justify-center md:justify-end">
             <img 
-              src="/path-to-clinical-decisions-image.jpg" 
+              src={image9} 
               alt="Nurse checking blood pressure of an elderly patient" 
               className="w-full h-auto object-cover min-h-[300px] shadow-lg rounded-sm bg-blue-800"
             />
-          </div>
+          </RevealOnScroll>
         </div>
       </section>
 
       {/* 6. Healthcare Solutions Carousel Section */}
-      <section className="bg-white py-20 px-6 md:px-12 lg:px-24">
-        <div className="max-w-[1400px] mx-auto">
+      <section id="solutions" className="bg-white py-20 px-6 md:px-12 lg:px-24 scroll-mt-20">
+        <RevealOnScroll className="max-w-[1400px] mx-auto">
           
           <div className="mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-[42px] font-bold text-black uppercase tracking-wide">
@@ -225,15 +312,15 @@ const HealthcarePage = () => {
 
           <div 
             ref={solutionsScrollRef}
-            className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           >
             {[
-              { title: "Hospital\nManagement\nSystems", desc: "DIGITIZE OPERATIONS, APPOINTMENTS, BILLING, AND PATIENT MANAGEMENT.", img: "/path-to-hospital-management.jpg" },
-              { title: "Telemedicine\nSolutions", desc: "SECURE VIRTUAL CONSULTATIONS WITH VIDEO, CHAT, AND DIGITAL PRESCRIPTIONS.", img: "/path-to-telemedicine-solutions.jpg" },
-              { title: "AI\nDiagnostics", desc: "SUPPORT CLINICIANS WITH IMAGE ANALYSIS AND PREDICTIVE HEALTHCARE INSIGHTS.", img: "/path-to-ai-diagnostics-card.jpg" },
-              { title: "Patient Engagement\nPlatforms", desc: "EMPOWER PATIENTS TO MANAGE APPOINTMENTS AND ACCESS RECORDS.", img: "/path-to-patient-engagement.jpg" },
-              { title: "Healthcare Data\nAnalytics", desc: "GAIN ACTIONABLE INSIGHTS FROM PATIENT DATA FOR BETTER DECISIONS.", img: "/path-to-data-analytics.jpg" },
-              { title: "Healthcare App\nDevelopment", desc: "CREATE CUSTOM MOBILE APPLICATIONS WITH INTUITIVE INTERFACES. OUR HEALTHCARE APP DEVELOPMENT SERVICES DELIVER USER-FRIENDLY SOLUTIONS.", img: "/path-to-app-dev.jpg" }
+              { title: "Hospital\nManagement\nSystems", desc: "DIGITIZE OPERATIONS, APPOINTMENTS, BILLING, AND PATIENT MANAGEMENT.", img: image10 },
+              { title: "Telemedicine\nSolutions", desc: "SECURE VIRTUAL CONSULTATIONS WITH VIDEO, CHAT, AND DIGITAL PRESCRIPTIONS.", img: image11 },
+              { title: "AI\nDiagnostics", desc: "SUPPORT CLINICIANS WITH IMAGE ANALYSIS AND PREDICTIVE HEALTHCARE INSIGHTS.", img: image12 },
+              { title: "Patient Engagement\nPlatforms", desc: "EMPOWER PATIENTS TO MANAGE APPOINTMENTS AND ACCESS RECORDS.", img: image13 },
+              { title: "Healthcare Data\nAnalytics", desc: "GAIN ACTIONABLE INSIGHTS FROM PATIENT DATA FOR BETTER DECISIONS.", img: image14 },
+              { title: "Healthcare App\nDevelopment", desc: "CREATE CUSTOM MOBILE APPLICATIONS WITH INTUITIVE INTERFACES. OUR HEALTHCARE APP DEVELOPMENT SERVICES DELIVER USER-FRIENDLY SOLUTIONS.", img: image15 }
             ].map((solution, index) => (
               <div key={index} className="relative h-[450px] min-w-[320px] w-full md:w-[calc(33.333%-1rem)] shrink-0 snap-start rounded-lg overflow-hidden group shadow-md border border-gray-100 bg-gray-200">
                 <div 
@@ -270,20 +357,20 @@ const HealthcarePage = () => {
             </button>
           </div>
 
-        </div>
+        </RevealOnScroll>
       </section>
 
       {/* 7. Case Study: Modernizing Patient Care */}
-      <section className="bg-[#0b1221] text-white py-20 px-6 md:px-12 lg:px-24">
+      <section className="bg-[#0b1221] text-white py-20 px-6 md:px-12 lg:px-24 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="w-full">
+          <RevealOnScroll direction="right" className="w-full">
             <img 
-              src="/path-to-patient-care-case-study.jpg" 
+              src={image16} 
               alt="Nurse and elderly patient smiling together" 
               className="w-full h-auto min-h-[300px] object-cover shadow-lg rounded-sm bg-slate-800" 
             />
-          </div>
-          <div className="space-y-6">
+          </RevealOnScroll>
+          <RevealOnScroll direction="left" className="space-y-6">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
               Real-World Impact: Modernizing Patient Care Delivery
             </h2>
@@ -310,13 +397,13 @@ const HealthcarePage = () => {
                 ))}
               </ul>
             </div>
-          </div>
+          </RevealOnScroll>
         </div>
       </section>
 
       {/* 8. Frequently Asked Questions Section */}
       <section className="bg-white py-24 px-6 md:px-16 lg:px-24">
-        <div className="max-w-4xl mx-auto">
+        <RevealOnScroll className="max-w-4xl mx-auto">
           <div className="text-center mb-16 relative">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-24 bg-blue-100 rounded-full blur-[40px] -z-10 opacity-70"></div>
             <h2 className="text-5xl md:text-6xl font-bold text-[#1e293b] tracking-wide">FAQs</h2>
@@ -337,26 +424,30 @@ const HealthcarePage = () => {
                       {isOpen ? '−' : '+'}
                     </span>
                   </button>
-                  {isOpen && (
-                    <div className="mt-4 pr-12 animate-fadeIn">
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      isOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="pr-12">
                       <p className="text-slate-500 leading-relaxed font-normal">
                         {faq.a}
                       </p>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
       {/* 9. Call to Action (CTA) Section */}
-      <section className="bg-[#050510] py-24 px-6 md:px-12 lg:px-24 relative overflow-hidden text-white">
+      <section id="contact" className="bg-[#050510] py-24 px-6 md:px-12 lg:px-24 relative overflow-hidden text-white scroll-mt-10">
         <div className="max-w-7xl mx-auto flex flex-col relative z-10">
           
           {/* Left Text Content */}
-          <div className="max-w-2xl space-y-8">
+          <RevealOnScroll direction="up" className="max-w-2xl space-y-8">
             <h2 className="text-4xl md:text-5xl lg:text-[50px] font-bold leading-tight tracking-wide">
               Partner with Capyngen to Build the Future of Healthcare
             </h2>
@@ -364,19 +455,22 @@ const HealthcarePage = () => {
               Whether you need healthcare software development services, healthcare app development, or healthcare IT solutions, we are here to help. We also offer fitness app development services for wellness brands and fitness organizations.
             </p>
             <div className="pt-2">
-              <button className="flex items-center justify-center gap-2 bg-[#1f2023] hover:bg-[#2a2b2f] border border-gray-600 text-white font-medium py-3.5 px-8 rounded-full transition-colors text-base">
+              <button 
+                onClick={handleContactClick}
+                className="flex items-center justify-center gap-2 bg-[#1f2023] hover:bg-[#2a2b2f] border border-gray-600 text-white font-medium py-3.5 px-8 rounded-full transition-colors text-base"
+              >
                 Connect with Healthcare Experts
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </button>
             </div>
-          </div>
+          </RevealOnScroll>
 
         </div>
 
         {/* Right Side Abstract Graphic (Inline SVG) */}
-        <div className="hidden lg:flex absolute right-0 bottom-0 top-0 w-1/2 pointer-events-none opacity-80 items-end justify-end">
+        <RevealOnScroll direction="left" delay={200} className="hidden lg:flex absolute right-0 bottom-0 top-0 w-1/2 pointer-events-none opacity-80 items-end justify-end">
           <svg 
             viewBox="0 0 500 400" 
             fill="none" 
@@ -400,7 +494,7 @@ const HealthcarePage = () => {
             <polyline points="475,145 475,-50" stroke="white" strokeWidth="1" opacity="0.6" />
             <polyline points="485,155 485,-50" stroke="white" strokeWidth="1" opacity="0.6" />
           </svg>
-        </div>
+        </RevealOnScroll>
       </section>
 
     </div>
