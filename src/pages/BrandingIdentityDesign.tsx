@@ -5,9 +5,7 @@ import {
   Target, 
   Monitor, 
   BookOpen, 
-  Phone,
   Mail,
-  MapPin,
   ChevronDown
 } from 'lucide-react';
 

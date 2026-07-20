@@ -9,24 +9,6 @@ import {
   ChevronDown
 } from 'lucide-react';
 
-// Custom SVG component for the removed Lucide LinkedIn icon
-const Linkedin: React.FC<{ className?: string }> = ({ className }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    className={className}
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect width="4" height="12" x="2" y="9" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
-
 const DataAnalyticsLandingPage: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -349,7 +331,7 @@ const DataAnalyticsLandingPage: React.FC = () => {
               <div className="space-y-6">
                 <div className="flex items-center text-slate-700">
                   <Mail className="w-5 h-5 mr-4 text-[#0e6ba8]" />
-                  <a href="mailto:solutions@capyngen.com" className="font-medium hover:text-[#0e6ba8] transition-colors">solutions@capyn	gen.com</a>
+                  <a href="mailto:solutions@capyngen.com" className="font-medium hover:text-[#0e6ba8] transition-colors">solutions@capyngen.com</a>
                 </div>
               </div>
             </div>
