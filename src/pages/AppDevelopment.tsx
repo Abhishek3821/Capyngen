@@ -410,9 +410,15 @@ const AppDevelopmentPage = () => {
                   <textarea rows={4} className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-50 resize-none"></textarea>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <input type="checkbox" required className="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300" />
-                  <p className="text-sm text-slate-500">Sign up to get Capyngen's mobile insights and marketing updates. I agree to the <a href="#" className="text-slate-900 underline">Privacy Statement</a> *</p>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-start gap-3">
+                    <input type="checkbox" className="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300 cursor-pointer" />
+                    <p className="text-sm text-slate-500">Sign up to get Capyngen's mobile insights and marketing updates.</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <input type="checkbox" required className="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300 cursor-pointer" />
+                    <p className="text-sm text-slate-500">I agree to the <a href="#" className="text-slate-900 underline">Privacy Statement</a> *</p>
+                  </div>
                 </div>
 
                 <button type="submit" className="w-full bg-[#0f172a] hover:bg-slate-800 text-white font-semibold py-4 rounded-lg transition-colors">

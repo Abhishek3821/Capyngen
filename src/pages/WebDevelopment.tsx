@@ -79,7 +79,7 @@ const WebDevelopmentPage = () => {
 
   const faqs = [
     {
-      question: "What is Web Engineering Services?",
+      question: "What are Web Engineering Services?",
       answer: "Web Development application link strategy and execution beyond the entire virtual durability, by using cloud-centric approach, technical expertise and global team of experts."
     },
     {
@@ -136,12 +136,12 @@ const WebDevelopmentPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="col-span-1">
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight">
-              What is Web Engineering Services?
+              What are Web Engineering Services?
             </h2>
           </div>
           <div className="col-span-1 md:col-span-2">
             <p className="text-slate-600 text-lg leading-relaxed">
-              Capyngen's Web application development link strategy and execution beyond the entire virtual durability. With a cloud-centric, exclusive structural expertise, and a global team of specialists, we help industries enhance from antiquated technology to responsive website development, high performance web development company, smarter, and measurable ROI at every accomplishment. 
+              Capyngen's web application development link strategy and execution beyond the entire virtual durability. With a cloud-centric, exclusive structural expertise, and a global team of specialists, we help industries enhance from antiquated technology to responsive website development, high performance web development company, smarter, and measurable ROI at every accomplishment. 
             </p>
           </div>
         </div>
@@ -338,11 +338,19 @@ const WebDevelopmentPage = () => {
                   <textarea rows={4} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-400 resize-none"></textarea>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <input type="checkbox" className="mt-1 w-4 h-4 bg-slate-50 border-slate-300 focus:ring-slate-500 rounded-none cursor-pointer" />
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    Sign up to get Capyngen's mobile insights and marketing updates.<br/> I agree to the Privacy Statement *
-                  </p>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-start gap-3">
+                    <input type="checkbox" className="mt-1 w-4 h-4 bg-slate-50 border-slate-300 focus:ring-slate-500 rounded-none cursor-pointer" />
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      Sign up to get Capyngen's mobile insights and marketing updates.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <input type="checkbox" required className="mt-1 w-4 h-4 bg-slate-50 border-slate-300 focus:ring-slate-500 rounded-none cursor-pointer" />
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      I agree to the Privacy Statement *
+                    </p>
+                  </div>
                 </div>
 
                 <button type="submit" className="bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 px-8 transition-colors text-sm">

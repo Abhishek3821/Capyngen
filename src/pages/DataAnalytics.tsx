@@ -349,11 +349,7 @@ const DataAnalyticsLandingPage: React.FC = () => {
               <div className="space-y-6">
                 <div className="flex items-center text-slate-700">
                   <Mail className="w-5 h-5 mr-4 text-[#0e6ba8]" />
-                  <a href="mailto:strategy@datafirm.com" className="font-medium hover:text-[#0e6ba8] transition-colors">strategy@datafirm.com</a>
-                </div>
-                <div className="flex items-center text-slate-700">
-                  <Linkedin className="w-5 h-5 mr-4 text-[#0e6ba8]" />
-                  <a href="#" className="font-medium hover:text-[#0e6ba8] transition-colors">Follow our insights on LinkedIn</a>
+                  <a href="mailto:solutions@capyngen.com" className="font-medium hover:text-[#0e6ba8] transition-colors">solutions@capyn	gen.com</a>
                 </div>
               </div>
             </div>

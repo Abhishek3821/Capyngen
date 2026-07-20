@@ -59,9 +59,8 @@ const WebsiteDesignLandingPage: React.FC = () => {
       {/* 1. Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
         <div className="max-w-3xl">
-          <p className="text-[#0066cc] font-semibold mb-3 uppercase tracking-wider text-xs">Adoptable & Custom Website Design Services</p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0f3b68] leading-tight mb-6">
-            Scalable & Intuitive<br />Website Design
+            Adoptable & Custom Website Design Services
           </h1>
           <p className="text-lg text-slate-600 mb-10 leading-relaxed max-w-2xl">
             At Capyngen, we transform your complex business requirements into high-performance digital foundations that bring institutional growth and industry authority.
@@ -125,7 +124,6 @@ const WebsiteDesignLandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-10">
             <div>
-              <p className="text-[#0066cc] font-semibold mb-2 uppercase tracking-wider text-xs">Knowledge Base</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-[#0f3b68]">Trending Events</h2>
               <p className="text-slate-500 mt-2">Fresh design trends and smart tactics to grow your business online.</p>
             </div>

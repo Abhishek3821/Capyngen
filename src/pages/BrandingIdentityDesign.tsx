@@ -357,17 +357,10 @@ const BrandLandingPage: React.FC = () => {
               
               <div className="space-y-6">
                 <div className="flex items-center text-slate-300">
-                  <Phone className="w-5 h-5 text-[#4da6ff] mr-4 flex-shrink-0" />
-                  <span>+1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center text-slate-300">
                   <Mail className="w-5 h-5 text-[#4da6ff] mr-4 flex-shrink-0" />
-                  <a href="mailto:hello@brandagency.com" className="hover:text-white transition-colors">hello@brandagency.com</a>
+                  <a href="mailto:solutions@capyngen.com" className="hover:text-white transition-colors">solutions@capyngen.com</a>
                 </div>
-                <div className="flex items-start text-slate-300 mt-4">
-                  <MapPin className="w-5 h-5 text-[#4da6ff] mr-4 flex-shrink-0 mt-1" />
-                  <span>400 Market Street, Suite 250<br />San Francisco, CA 94111</span>
-                </div>
+                
               </div>
             </div>
             

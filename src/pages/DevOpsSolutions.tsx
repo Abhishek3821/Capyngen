@@ -272,11 +272,19 @@ const DevOpsPage = () => {
                   <textarea rows={2} className="w-full bg-transparent focus:outline-none text-sm text-slate-900 resize-none"></textarea>
                 </div>
 
-                <div className="flex items-start gap-3 pt-4">
-                  <input type="checkbox" className="mt-0.5 w-3.5 h-3.5 border-slate-300 rounded-sm cursor-pointer" />
-                  <p className="text-[10px] text-slate-500 leading-relaxed">
-                    Sign up to get Capyngen's mobile insights and marketing updates.<br /> I agree to the Privacy Statement.*
-                  </p>
+                <div className="flex flex-col gap-3 pt-4">
+                  <div className="flex items-start gap-3">
+                    <input type="checkbox" className="mt-0.5 w-3.5 h-3.5 border-slate-300 rounded-sm cursor-pointer" />
+                    <p className="text-[10px] text-slate-500 leading-relaxed">
+                      Sign up to get Capyngen's mobile insights and marketing updates.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <input type="checkbox" required className="mt-0.5 w-3.5 h-3.5 border-slate-300 rounded-sm cursor-pointer" />
+                    <p className="text-[10px] text-slate-500 leading-relaxed">
+                      I agree to the Privacy Statement.*
+                    </p>
+                  </div>
                 </div>
 
                 <button type="submit" className="bg-[#0a1526] hover:bg-slate-800 text-white font-medium py-3 px-10 transition-colors text-xs tracking-widest uppercase">
