@@ -70,8 +70,7 @@ const Footer: React.FC = () => {
           <ul className="text-gray-400 text-sm space-y-4">
             <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
             <li><Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link></li>
-            <li><a href="#" className="hover:text-white transition-colors">FAQs</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
+            
           </ul>
         </div>
 

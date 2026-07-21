@@ -21,8 +21,8 @@ const MAX_PREVIEW_ROLES = 3;
 
 const whyCards = [
   {
-    title: 'Learning & Development',
-    body: 'Continuous learning through mentorship, workshops, certifications, and real-world projects.',
+    title: 'Tech Innovation',
+    body: 'Explore advanced technologies, smart AI tools, and modern software frameworks daily.',
     icon: (
       <svg className="w-20 h-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 20a8 8 0 1 0-8-8c0 3 2.5 5 2.5 8z" />
@@ -32,8 +32,8 @@ const whyCards = [
     ),
   },
   {
-    title: 'Innovation Culture',
-    body: 'Experiment with new technologies, AI tools, and modern software frameworks.',
+    title: 'Balanced Work-Life',
+    body: 'Get your work-life balanced with remote work, flexible work hour and team coordination.',
     icon: (
       <svg className="w-20 h-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5" />
@@ -43,8 +43,8 @@ const whyCards = [
     ),
   },
   {
-    title: 'Work-Life Balance',
-    body: 'Flexible work culture designed to support productivity, collaboration, and well-being.',
+    title: 'Skills Learning & Progress',
+    body: 'Ongoing learning through mentorship, workshops, certifications, and high-end projects.',
     icon: (
       <svg className="w-20 h-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 10l6-6 6 6" />
@@ -56,8 +56,8 @@ const whyCards = [
     ),
   },
   {
-    title: 'Career Growth',
-    body: 'Clear career paths, performance recognition, and opportunities to lead impactful projects.',
+    title: 'Growth in Career',
+    body: 'Get a clear career path, achievement recognition, and opportunities to lead impactful projects.',
     icon: (
       <svg className="w-20 h-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
@@ -68,10 +68,10 @@ const whyCards = [
 ];
 
 const stats = [
-  { value: '100+', title: <>Successful Projects<br />Delivered</>, body: 'Helping businesses accelerate digital transformation.' },
-  { value: '50+', title: 'Technology Experts', body: 'A multidisciplinary team of developers, designers, AI specialists, and consultants.' },
-  { value: '100+', title: 'Industries Served', body: 'Delivering tailored solutions across healthcare, finance, retail, logistics, education, manufacturing, and more.' },
-  { value: '98%', title: 'Client Satisfaction', body: 'Building lasting partnerships through quality, innovation, and trust.' },
+  { value: '', title: 'Proven Projects Experience', body: 'Empowering businesses to accelerate their digital transformation.' },
+  { value: '', title: 'High-Tech Specialist', body: 'A collaborative team of developers, designers, AI experts, and strategic consultants.' },
+  { value: '', title: 'Industries Supported', body: 'Caoyngen adapts services across healthcare, finance, retail, logistics, education, manufacturing, and other main industries.' },
+  { value: '', title: 'Proven Client Success', body: 'Build partnerships that last years with premium quality, static innovation, and mutual trust.' },
 ];
 
 export default function CapyngenCareers() {
@@ -199,12 +199,12 @@ export default function CapyngenCareers() {
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] font-bold text-white leading-[1.1] mb-6 sm:mb-8 drop-shadow-sm">
-              Build the Future <br className="hidden sm:block" /> With Capyngen
+              Shape Your Future <br className="hidden sm:block" /> With Us
             </h1>
 
             {/* Subheadline / Paragraph */}
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed sm:leading-normal max-w-3xl">
-              Join a team of innovators, designers, developers, and problem-solvers building AI-powered software, enterprise solutions, and digital products that transform businesses across the globe.
+              Come work with the creators, designers, developers, and problem-solvers building AI software, enterprise platforms, and digital products that transform global businesses.
             </p>
           </div>
         </div>
@@ -226,17 +226,17 @@ export default function CapyngenCareers() {
                 Join Us
               </p>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-6 sm:mb-8">
-                Set the Standard for Innovation
+                Raise the Bar for Innovation
               </h2>
               <div className="space-y-4 text-base sm:text-lg text-gray-800 font-medium leading-relaxed">
                 <p>
-                  At Capyngen, we don't just build software—we create intelligent digital experiences that help businesses grow, automate, and innovate.
+                  Capyngen does more than build software, we create smart digital experiences that help businesses grow, automate, and innovate every day.
                 </p>
                 <p>
-                  Whether you're a developer, designer, AI engineer, marketer, or strategist, you'll work alongside passionate professionals solving real-world challenges using modern technologies.
+                  Coordinate with skilled experts on exclusive projects using smart tech—as a designer, developer, AI engineer, or strategist.
                 </p>
                 <p>
-                  Here, every idea matters, every contribution counts, and every career has the opportunity to grow.
+                  Capyngen gives every career an equal chance to grow, we believe effort leads to success, and we support your full potential.
                 </p>
               </div>
             </div>
@@ -358,13 +358,13 @@ export default function CapyngenCareers() {
         </div>
       </section>
 
-      {/* Why People Love Working Here Section */}
+      {/* Why People Prefer Working Here Section */}
       <section className="w-full bg-white pb-16 sm:pb-24 lg:pb-32">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="border-t border-gray-200 pt-12 sm:pt-16">
             <h2 className="inline-flex items-center gap-3 text-xs sm:text-sm font-semibold tracking-[0.15em] text-black uppercase mb-10 sm:mb-12">
               <span className="inline-block w-8 h-[2px] bg-[#0070c9]"></span>
-              Why People Love Working Here
+              Why People Prefer Working Here
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -389,7 +389,7 @@ export default function CapyngenCareers() {
         </div>
       </section>
 
-      {/* Our Culture Section (Overlapping Layout) */}
+      {/* Know Our Culture Section (Overlapping Layout) */}
       <section className="w-full bg-white pb-16 sm:pb-24 lg:pb-32">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative flex flex-col lg:flex-row items-center justify-start">
@@ -407,13 +407,13 @@ export default function CapyngenCareers() {
                         lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2">
               <p className="inline-flex items-center gap-3 text-xs sm:text-sm font-semibold tracking-[0.15em] text-gray-500 uppercase mb-4 sm:mb-6">
                 <span className="inline-block w-8 h-[2px] bg-[#0070c9]"></span>
-                Our Culture
+                Know Our Culture
               </p>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-black leading-tight mb-6 sm:mb-8">
-                Growing Together Beyond Work
+                Building Reliable <br className="hidden lg:block" /> Solution Beyond Work
               </h2>
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-light">
-                Great ideas come from great people. At Capyngen, we foster a culture of collaboration, creativity, and continuous learning where every individual is empowered to innovate, share ideas, and make a meaningful impact.
+                Excellent people bring impressive concepts. Capyngen makes sure to build a space for collaboration, creativity, and ongoing learning where you are fully empowered to launch, share fact-based data, and build a real impact.
               </p>
             </div>
           </div>
@@ -441,7 +441,7 @@ export default function CapyngenCareers() {
                   </svg>
                 </div>
                 <p className="text-xl sm:text-2xl lg:text-[1.75rem] italic font-normal text-black leading-relaxed">
-                  "Innovation starts with people. At Capyngen, we empower passionate minds to build transformative digital solutions, embrace continuous learning, and create technology that drives real business impact."
+                  “Transformation comes from people, and we empower bright minds to build game-changing digital solutions, embrace nonstop learning, and craft technology that drives real business results.”
                 </p>
               </div>
             </div>
@@ -449,13 +449,13 @@ export default function CapyngenCareers() {
         </div>
       </section>
 
-      {/* What Sets Us Apart Section */}
+      {/* What Makes Us Different Section */}
       <section className="w-full bg-white pb-16 sm:pb-24 lg:pb-32">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="border-y border-gray-200 py-12 sm:py-16">
             <h2 className="inline-flex items-center gap-3 text-xs sm:text-sm font-semibold tracking-[0.15em] text-black uppercase mb-10 sm:mb-12">
               <span className="inline-block w-8 h-[2px] bg-[#0070c9]"></span>
-              What Sets Us Apart
+              What Makes Us Different
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -489,10 +489,10 @@ export default function CapyngenCareers() {
         <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium text-white mb-6 sm:mb-8">
-              Join us
+              Join Us
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed mb-8 sm:mb-12">
-              Whether you're beginning your career or looking for your next challenge, Capyngen offers an environment where you can learn, innovate, and build technology that creates lasting impact.
+              Whether you're launching your career or working on your next big breakthrough, Capyngen provides you the perfect room to learn, innovate, and develop high tech that brings long-term growth.
             </p>
             <a href="#" className="group inline-flex items-center gap-3 px-8 sm:px-10 py-3 sm:py-4 rounded-full border border-gray-500 bg-[#1e1e1e] text-white text-sm sm:text-base font-medium hover:bg-white hover:text-[#090914] hover:border-white transition-all duration-300">
               Click here

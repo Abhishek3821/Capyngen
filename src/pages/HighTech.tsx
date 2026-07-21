@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { motion, type Variants } from 'framer-motion';
 
 // Serial Image Imports from Folder

@@ -59,52 +59,52 @@ const regionData = [
 
 const perksData = [
   {
-    title: 'Learn Every Day',
-    description: 'Work with experienced mentors, AI technologies, and modern development practices',
-    linkText: 'DISCOVER MORE',
+    title: 'Everyday Learning',
+    description: 'Grow with expert mentors, AI technologies, and current development practices',
+    linkText: 'EXPLORE HERE',
     image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
   },
   {
-    title: 'Build Real Products',
-    description: 'From HRMS to CRM and AI platforms, your work impacts real businesses.',
-    linkText: 'READ MORE',
+    title: 'Quality Products Building',
+    description: "Behind every HRMS, CRM, or AI platform we build, there's a real business counting on it.",
+    linkText: 'VIEW MORE ',
     image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
   },
   {
-    title: 'Flexible Work Culture',
-    description: 'Enjoy hybrid work, collaborative teams, and a healthy work-life balance.',
-    linkText: 'ABOUT CODEVITA',
+    title: 'Work Culture Built For You',
+    description: 'Get access to remote work, supportive team members, and refreshing work-life stability.',
+    linkText: 'ABOUT Us',
     image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
   }
 ];
 
 const whyCapyngenData = [
   {
-    id: 'innovation',
-    title: 'Innovation',
-    heading: 'Innovation',
-    description: 'Work on AI-powered products, SaaS platforms, and scalable enterprise solutions using modern technologies.',
+    id: 'renovation',
+    title: 'Renovation',
+    heading: 'Renovation',
+    description: 'Build machine-learning platforms, SaaS systems, and company-grade solutions with smart AI tools.',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
   },
   {
-    id: 'learning',
-    title: 'Learning',
-    heading: 'Learning',
-    description: 'Access workshops, certifications, mentoring, and hands-on experience with cutting-edge tools.',
+    id: 'skills_learning',
+    title: 'Skills Learning',
+    heading: 'Skills Learning',
+    description: 'Enhance your skills with structured sessions, certifications, and one-on-one mentoring workshops.',
     image: 'https://images.unsplash.com/photo-1531496730074-83b638c0a7ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
   },
   {
-    id: 'culture',
-    title: 'Culture',
-    heading: 'Culture',
-    description: 'We believe in collaboration, creativity, ownership, and continuous improvement.',
+    id: 'office_culture',
+    title: 'Office Culture',
+    heading: 'Office Culture',
+    description: 'Get an opportunity to join a dedicated team and enhance creativity with continuous growth guidance.',
     image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
   },
   {
     id: 'growth',
     title: 'Growth',
     heading: 'Growth',
-    description: 'Your career evolves with challenging projects, leadership opportunities, and meaningful feedback.',
+    description: 'We shape your career growth through providing meaningful projects, leadership roles, and real feedback.',
     image: 'https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
   }
 ];
@@ -148,10 +148,10 @@ const Careers = () => {
             <div className="h-[1px] w-full bg-white/30 mt-3 md:mt-4"></div>
           </div>
           <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] mb-4 md:mb-6 max-w-3xl drop-shadow-sm">
-            Build Products That <br className="hidden sm:block" /> Power Tomorrow
+            Create Products That <br className="hidden sm:block" /> Shape Tomorrow
           </h1>
           <p className="text-gray-200 text-base sm:text-lg md:text-xl font-light mb-10 md:mb-12 max-w-2xl">
-            Build the Future with Capyngen
+            Create Tomorrow's Tech with Capyngen
           </p>
         
         </div>
@@ -174,14 +174,14 @@ const Careers = () => {
               Join Us
             </h3>
             <h2 className="text-black text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8">
-              Build Solutions That Matter
+              We Create Solutions That Matter
             </h2>
             <div className="text-gray-900 text-base sm:text-lg md:text-xl leading-relaxed md:leading-relaxed space-y-4 font-medium">
               <p>
-                At Capyngen, every project is an opportunity to solve real business problems through AI, cloud technology, enterprise software, and exceptional user experiences.
+                At Capyngen, every project is a chance to solve real business problems using AI, cloud tech, enterprise software, and great user experiences.
               </p>
               <p>
-                We empower passionate designers, developers, marketers, and innovators to create products used by businesses worldwide.
+                We back passionate designers, developers, marketers, and innovators to build products used by businesses around the world.
               </p>
             </div>
           </div>
@@ -266,7 +266,7 @@ const Careers = () => {
       <section className="w-full bg-white pb-20 md:pb-32">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
           <h2 className="text-black text-3xl sm:text-4xl md:text-5xl font-medium mb-10 md:mb-14">
-            Why You'll Love Working at Capyngen
+            Why Working at Capyngen Feel Right?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {perksData.map((perk, index) => (
@@ -302,7 +302,7 @@ const Careers = () => {
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
 
           <h2 className="text-white text-4xl sm:text-5xl md:text-6xl font-medium mb-12 md:mb-16">
-            Why Capyngen
+            Why Join Capyngen 
           </h2>
 
           <div className="flex w-full overflow-x-auto pb-4 mb-10 md:mb-16 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
@@ -377,7 +377,7 @@ const Careers = () => {
           </div>
 
           <blockquote className="text-2xl sm:text-3xl md:text-[2.5rem] leading-snug md:leading-normal font-normal text-[#5182c4] mb-10 md:mb-12">
-            At Capyngen, innovation begins with people. We foster curiosity, encourage ownership, and create opportunities where talented individuals can build solutions that make a real impact.
+            “Our growth always begins with our people. At Capyngen, we fuel curiosity, encourage ownership, and give talented individuals the freedom to deliver results that truly matter.”
           </blockquote>
 
           <div className="h-[1px] w-full bg-gray-200 mb-6 md:mb-8"></div>
@@ -385,7 +385,7 @@ const Careers = () => {
           <div className="flex items-center gap-4">
             <span className="block w-10 h-[2px] bg-[#2A61F5]"></span>
             <p className="text-black font-semibold text-sm sm:text-base md:text-lg tracking-wide">
-              Leadership Team, Capyngen
+              Leadership Team, Capyngen 
             </p>
           </div>
 
@@ -404,16 +404,16 @@ const Careers = () => {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
           <div className="max-w-2xl border-l-[3px] border-[#2A61F5] pl-6 md:pl-10">
             <span className="block text-white text-xs sm:text-sm font-bold tracking-widest uppercase mb-6 md:mb-8">
-              A Belief in Diversity
+              Capyngen Believes in Diversity
             </span>
             <h2 className="text-white text-4xl sm:text-5xl md:text-[3.5rem] font-bold leading-[1.15] mb-6 md:mb-8">
-              Great Teams Build <br className="hidden sm:block" /> Great Technology
+              Strong Teams Build <br className="hidden sm:block" /> Enhanced Technology 
             </h2>
             <p className="text-gray-300 text-base sm:text-lg md:text-xl font-light leading-relaxed mb-10 md:mb-12 pr-4">
-              Innovation thrives when people from different backgrounds, experiences, and ideas work together. At Capyngen, every voice contributes to creating better digital products.
+              At Capyngen, we make sure every voice is heard and given the opportunity to help build better digital products every day. We know that strong teams happen only when people with different backgrounds and creativity come together. 
             </p>
             <a href="#" className="group inline-flex items-center gap-3 text-white text-sm sm:text-base md:text-lg font-medium hover:text-[#2A61F5] transition-colors duration-300">
-              Learn more about us
+              Explore About Capyngen
               <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -441,12 +441,12 @@ const Careers = () => {
         {/* Right Content Side */}
         <div className="w-full lg:w-1/2 bg-[#101524] flex flex-col justify-center px-8 py-16 sm:px-12 md:px-16 lg:px-20 xl:px-28">
           <h2 className="text-white text-4xl sm:text-5xl md:text-6xl font-semibold leading-[1.2] mb-8">
-            Your Next Big <br className="hidden lg:block" />
-            Opportunity Starts <br className="hidden lg:block" />
-            Here
+            Start Your <br className="hidden lg:block" />
+            Journey With <br className="hidden lg:block" />
+            Us
           </h2>
           <p className="text-gray-300 text-base sm:text-lg font-light leading-relaxed max-w-xl mb-12">
-            Whether you're a designer, developer, marketer, or AI enthusiast, join a team that values creativity, collaboration, and continuous growth.
+            If you develop websites, build code, run digital campaigns, or work with AI, join Capyngen today—come thrive with a team where your creativity and growth truly matter.
           </p>
           
         </div>

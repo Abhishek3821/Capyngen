@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   ArrowRight, 
   Palette, 
@@ -8,9 +8,23 @@ import {
   Mail,
   ChevronDown
 } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
+
+// Serial-wise imports matching your VS Code structure
+import img2 from "../assets/Building Bold Brand Identities/2.png";
+import img3 from "../assets/Building Bold Brand Identities/3.png";
+import img4 from "../assets/Building Bold Brand Identities/4.png";
+import img5 from "../assets/Building Bold Brand Identities/5.png";
+import img6 from "../assets/Building Bold Brand Identities/6.png";
+import img7 from "../assets/Building Bold Brand Identities/7.png";
+import imgHero from "../assets/Building Bold Brand Identities/8.png";
 
 const BrandLandingPage: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Refs for smooth scrolling
+  const portfolioRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
 
   const faqs = [
     {
@@ -59,11 +73,36 @@ const BrandLandingPage: React.FC = () => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  // Fixed the Ref TypeScript issue by accepting the HTMLElement directly
+  const scrollToSection = (element: HTMLElement | null) => {
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Animation variants explicitly typed with `Variants` to fix Framer Motion TS errors
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
+  const staggerContainer: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[#f8f9fc] font-sans text-slate-600">
+    <div className="min-h-screen bg-[#f8f9fc] font-sans text-slate-600 overflow-x-hidden">
       
       {/* 1. Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeUp}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24"
+      >
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="max-w-2xl">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#113a5d] leading-tight mb-6">
@@ -73,10 +112,16 @@ const BrandLandingPage: React.FC = () => {
               We program a strong corporate identity along with a strategic visual system that connects institutional trust with modern-day durability.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-[#0b5c92] hover:bg-[#094a75] text-white px-8 py-3.5 rounded-sm font-medium transition-colors shadow-sm">
+              <button 
+                onClick={() => scrollToSection(contactRef.current)}
+                className="bg-[#0b5c92] hover:bg-[#094a75] text-white px-8 py-3.5 rounded-sm font-medium transition-colors shadow-sm"
+              >
                 Build Brand Here
               </button>
-              <button className="bg-transparent hover:bg-slate-50 text-slate-700 border border-slate-300 px-8 py-3.5 rounded-sm font-medium transition-colors">
+              <button 
+                onClick={() => scrollToSection(portfolioRef.current)}
+                className="bg-transparent hover:bg-slate-50 text-slate-700 border border-slate-300 px-8 py-3.5 rounded-sm font-medium transition-colors"
+              >
                 Explore Portfolio
               </button>
             </div>
@@ -84,30 +129,36 @@ const BrandLandingPage: React.FC = () => {
           
           <div className="relative">
             <img 
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1000" 
+              src={imgHero} 
               alt="Modern Architecture" 
-              className="w-full h-[500px] object-cover rounded-sm shadow-xl"
+              className="w-full h-auto object-contain rounded-sm shadow-xl"
             />
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 2. Strategic Brand Evolution Section */}
-      <section className="bg-white py-16 lg:py-24">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeUp}
+        className="bg-white py-16 lg:py-24"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             
-            {/* Overlapping Images */}
-            <div className="relative h-[400px] hidden sm:block">
+            {/* Overlapping Images adjusted for full height */}
+            <div className="relative min-h-[500px] hidden sm:block">
               <img 
-                src="https://images.unsplash.com/photo-1616628188550-808682f392ce?auto=format&fit=crop&q=80&w=600" 
+                src={img2} 
                 alt="Brand Mark" 
-                className="absolute top-8 left-0 w-3/5 h-64 object-cover rounded-sm shadow-md z-10"
+                className="absolute top-0 left-0 w-3/5 h-auto object-contain rounded-sm shadow-md z-10"
               />
               <img 
-                src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?auto=format&fit=crop&q=80&w=600" 
+                src={img3} 
                 alt="Desktop Workspace" 
-                className="absolute bottom-8 right-4 w-3/5 h-64 object-cover rounded-sm shadow-lg z-20 border-4 border-white"
+                className="absolute top-32 right-4 w-3/5 h-auto object-contain rounded-sm shadow-lg z-20 border-4 border-white"
               />
             </div>
             
@@ -140,28 +191,37 @@ const BrandLandingPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 3. News / Articles Section */}
-      <section className="bg-[#f2f5f9] py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-end mb-10">
+      <section ref={portfolioRef} className="bg-[#f2f5f9] py-16 lg:py-24">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        >
+          <motion.div variants={fadeUp} className="flex justify-between items-end mb-10">
             <div>
               <p className="text-[#0b5c92] font-semibold mb-2 uppercase tracking-wider text-xs">IMPACT REPORTS</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">What's Happening?</h2>
             </div>
-            <a href="#" className="hidden sm:flex items-center text-[#0b5c92] font-medium hover:text-[#094a75]">
+            <button 
+              onClick={() => scrollToSection(contactRef.current)} 
+              className="hidden sm:flex items-center text-[#0b5c92] font-medium hover:text-[#094a75]"
+            >
               Explore Here <ArrowRight className="ml-2 w-4 h-4" />
-            </a>
-          </div>
+            </button>
+          </motion.div>
           
           <div className="grid md:grid-cols-3 gap-8">
             {/* Article 1 */}
-            <div className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+            <motion.div variants={fadeUp} className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
               <img 
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600" 
+                src={img4} 
                 alt="Corporate Office" 
-                className="w-full h-48 object-cover"
+                className="w-full h-auto object-contain bg-slate-100"
               />
               <div className="p-6 flex-1 flex flex-col">
                 <p className="text-[#0b5c92] text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
@@ -170,14 +230,14 @@ const BrandLandingPage: React.FC = () => {
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5c92] transition-colors">Private Equity Firm</h3>
                 <p className="text-slate-600 text-sm flex-1">Modernizing the visual legacy of a 50-year-old investment firm for the digital…</p>
               </div>
-            </div>
+            </motion.div>
             
             {/* Article 2 */}
-            <div className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+            <motion.div variants={fadeUp} className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
               <img 
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=600" 
+                src={img5} 
                 alt="Stationery Mockup" 
-                className="w-full h-48 object-cover"
+                className="w-full h-auto object-contain bg-slate-100"
               />
               <div className="p-6 flex-1 flex flex-col">
                 <p className="text-[#0b5c92] text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
@@ -186,14 +246,14 @@ const BrandLandingPage: React.FC = () => {
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5c92] transition-colors">Medium Mechanics</h3>
                 <p className="text-slate-600 text-sm flex-1">Developing a visual language for the next generation of renewable energy…</p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Article 3 */}
-            <div className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+            <motion.div variants={fadeUp} className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
               <img 
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" 
+                src={img6} 
                 alt="Mobile App" 
-                className="w-full h-48 object-cover"
+                className="w-full h-auto object-contain bg-slate-100"
               />
               <div className="p-6 flex-1 flex flex-col">
                 <p className="text-[#0b5c92] text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
@@ -202,22 +262,28 @@ const BrandLandingPage: React.FC = () => {
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5c92] transition-colors">Nexus Platform</h3>
                 <p className="text-slate-600 text-sm flex-1">Shaping a consistent identity system across 48 global markets and 12 product</p>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* 4. Capabilities Grid */}
-      <section className="bg-white py-16 lg:py-24 border-y border-slate-100">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+        className="bg-white py-16 lg:py-24 border-y border-slate-100"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <motion.div variants={fadeUp} className="text-center max-w-2xl mx-auto mb-16">
             <p className="text-[#0b5c92] font-semibold mb-2 uppercase tracking-wider text-xs">SERVICE CAPABILITIES</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Core Specializations</h2>
-          </div>
+          </motion.div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Card 1 */}
-            <div className="text-left group cursor-default">
+            <motion.div variants={fadeUp} className="text-left group cursor-default">
               <div className="mb-5 text-[#0b5c92]">
                 <Palette className="w-6 h-6 stroke-[1.5]" />
               </div>
@@ -225,10 +291,10 @@ const BrandLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 leading-relaxed">
                 Thorough visual languages crafted for scale, consistency, and worldwide recognition.
               </p>
-            </div>
+            </motion.div>
             
             {/* Card 2 */}
-            <div className="text-left group cursor-default">
+            <motion.div variants={fadeUp} className="text-left group cursor-default">
               <div className="mb-5 text-[#0b5c92]">
                 <Target className="w-6 h-6 stroke-[1.5]" />
               </div>
@@ -236,10 +302,10 @@ const BrandLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 leading-relaxed">
                 Market positioning and brand narratives that define your competitive advantage.
               </p>
-            </div>
+            </motion.div>
             
             {/* Card 3 */}
-            <div className="text-left group cursor-default">
+            <motion.div variants={fadeUp} className="text-left group cursor-default">
               <div className="mb-5 text-[#0b5c92]">
                 <Monitor className="w-6 h-6 stroke-[1.5]" />
               </div>
@@ -247,10 +313,10 @@ const BrandLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 leading-relaxed">
                 We offer timeless logos that turn a complex identity into one simple, strong mark.
               </p>
-            </div>
+            </motion.div>
             
             {/* Card 4 */}
-            <div className="text-left group cursor-default">
+            <motion.div variants={fadeUp} className="text-left group cursor-default">
               <div className="mb-5 text-[#0b5c92]">
                 <BookOpen className="w-6 h-6 stroke-[1.5]" />
               </div>
@@ -258,20 +324,26 @@ const BrandLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 leading-relaxed">
                 Detailed documentation that protects brand integrity across all future media and platforms.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 5. Expert Section */}
-      <section className="bg-[#f8f9fc] py-16 lg:py-24">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeUp}
+        className="bg-[#f8f9fc] py-16 lg:py-24"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="relative overflow-hidden aspect-[4/3] rounded-sm shadow-md max-h-[450px]">
+            <div className="relative rounded-sm shadow-md overflow-hidden bg-white">
               <img 
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800" 
+                src={img7} 
                 alt="Expert Portrait" 
-                className="absolute inset-0 w-full h-full object-cover object-top"
+                className="w-full h-auto object-contain"
               />
             </div>
             
@@ -305,10 +377,16 @@ const BrandLandingPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* FAQs Section */}
-      <section className="bg-white py-16 lg:py-24">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={fadeUp}
+        className="bg-white py-16 lg:py-24"
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">FAQs</h2>
@@ -339,10 +417,17 @@ const BrandLandingPage: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 6. Footer & Contact Form Section */}
-      <section className="bg-[#161e2c] py-16 lg:py-24 text-white">
+      <motion.section 
+        ref={contactRef}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeUp}
+        className="bg-[#161e2c] py-16 lg:py-24 text-white"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             
@@ -364,12 +449,13 @@ const BrandLandingPage: React.FC = () => {
             
             {/* Right side form */}
             <div className="bg-white rounded-sm p-8 sm:p-10 shadow-2xl">
-              <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+              <form onSubmit={(e) => { e.preventDefault(); alert('Consultation Requested!'); }} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Full Name</label>
                   <input 
                     type="text" 
                     id="name"
+                    required
                     className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-400"
                     placeholder="Jane Doe"
                   />
@@ -380,6 +466,7 @@ const BrandLandingPage: React.FC = () => {
                   <input 
                     type="email" 
                     id="email"
+                    required
                     className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-400"
                     placeholder="jane@company.com"
                   />
@@ -389,6 +476,7 @@ const BrandLandingPage: React.FC = () => {
                   <label htmlFor="focus" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Area of Focus</label>
                   <select 
                     id="focus"
+                    required
                     className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent cursor-pointer"
                     defaultValue=""
                   >
@@ -404,6 +492,7 @@ const BrandLandingPage: React.FC = () => {
                   <label htmlFor="message" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Message</label>
                   <textarea 
                     id="message"
+                    required
                     rows={3}
                     className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent resize-none placeholder-slate-400"
                     placeholder="Tell us about your project goals..."
@@ -421,7 +510,7 @@ const BrandLandingPage: React.FC = () => {
             
           </div>
         </div>
-      </section>
+      </motion.section>
       
     </div>
   );
