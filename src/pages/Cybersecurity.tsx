@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Shield, 
   Lock, 
@@ -9,9 +9,43 @@ import {
   PhoneCall,
   ChevronDown
 } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
+
+// Serial Image Imports from the CyberSecurity folder
+import img1 from "../assets/CyberSecurity/1.png";
+import img2 from "../assets/CyberSecurity/2.png";
+import img3 from "../assets/CyberSecurity/3.png";
+import img4 from "../assets/CyberSecurity/4.png";
+import img5 from "../assets/CyberSecurity/5.png";
+import img6 from "../assets/CyberSecurity/6.png";
+import img7 from "../assets/CyberSecurity/7.png";
+import img8 from "../assets/CyberSecurity/8.png";
+
+// Framer Motion Animation Variants
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+};
 
 const CyberSecurityLandingPage: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  
+  // Ref for scrolling to the contact section
+  const contactRef = useRef<HTMLElement>(null);
+
+  const scrollToContact = () => {
+    contactRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Thank you! Your consultation request has been submitted successfully.");
+  };
 
   const faqs = [
     { q: "Q1. What do cyber security services entail?", a: "Cybersecurity services include protection strategies, monitoring, threat detection, and response solutions to safeguard digital assets from cyber threats." },
@@ -35,18 +69,22 @@ const CyberSecurityLandingPage: React.FC = () => {
     <div className="min-h-screen bg-[#f7f9fc] font-sans text-slate-700">
       
       {/* 1. Hero Section */}
-      <section className="relative h-[500px] flex items-center justify-center text-center">
+      <section className="relative min-h-screen flex items-center justify-center text-center">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1920" 
+            src={img1} 
             alt="Cyber Security Network Concept" 
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-[#084887]/80 mix-blend-multiply"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#f7f9fc] via-transparent to-transparent"></div>
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 flex flex-col items-center">
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+          className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 flex flex-col items-center"
+        >
           <Shield className="w-16 h-16 text-blue-300/50 absolute -top-8 -z-10" strokeWidth={1} />
           <p className="text-blue-200 font-semibold text-[10px] uppercase tracking-[0.2em] mb-4">
             CYBERSECURITY SERVICES
@@ -57,10 +95,13 @@ const CyberSecurityLandingPage: React.FC = () => {
           <p className="text-sm text-blue-50 mb-8 leading-relaxed max-w-2xl mx-auto font-medium drop-shadow-md">
             Implement Capyngen's Cybersecurity Services to power a robust digital environment, providing proactive defense, and Zero-Trust protection for modern enterprises.
           </p>
-          <button className="bg-transparent hover:bg-white/10 text-white border border-white px-8 py-3 text-sm font-semibold transition-colors uppercase tracking-widest backdrop-blur-sm">
+          <button 
+            onClick={scrollToContact}
+            className="bg-transparent hover:bg-white/10 text-white border border-white px-8 py-3 text-sm font-semibold transition-colors uppercase tracking-widest backdrop-blur-sm cursor-pointer"
+          >
             DISCOVER OUR SOLUTIONS →
           </button>
-        </div>
+        </motion.div>
       </section>
 
       {/* 2. Intro/Methodology Section */}
@@ -68,7 +109,13 @@ const CyberSecurityLandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             
-            <div className="lg:pr-8">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="lg:pr-8"
+            >
               <h2 className="text-3xl font-bold text-[#084887] mb-6 leading-tight">
                 Intelligent Threat<br />Prevention
               </h2>
@@ -89,17 +136,23 @@ const CyberSecurityLandingPage: React.FC = () => {
                   <p className="text-xs text-slate-500">With our Managed Cybersecurity Services, automated security workflows isolate compromised systems in seconds, reducing business disruption.</p>
                 </li>
               </ul>
-            </div>
+            </motion.div>
             
-            <div className="relative">
-              <div className="bg-white p-4 shadow-xl border border-slate-100">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="bg-white p-4 shadow-xl border border-slate-100 flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800" 
+                  src={img2} 
                   alt="Server Infrastructure" 
-                  className="w-full h-auto object-cover opacity-90"
+                  className="w-full h-auto object-contain opacity-90"
                 />
               </div>
-            </div>
+            </motion.div>
             
           </div>
         </div>
@@ -108,14 +161,26 @@ const CyberSecurityLandingPage: React.FC = () => {
       {/* 3. Core Capabilities (Bento) */}
       <section className="bg-white py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
             <h2 className="text-3xl font-bold text-[#084887] mb-4">Enterprise Security Services</h2>
             <div className="w-16 h-1 bg-[#084887] mx-auto"></div>
-          </div>
+          </motion.div>
           
-          <div className="grid md:grid-cols-3 gap-6">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-3 gap-6"
+          >
             {/* Top Left - Large */}
-            <div className="md:col-span-2 bg-[#f4f7fb] p-8 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow group border border-transparent hover:border-[#084887]/20">
+            <motion.div variants={fadeInUp} className="md:col-span-2 bg-[#f4f7fb] p-8 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow group border border-transparent hover:border-[#084887]/20">
               <div>
                 <div className="mb-4 text-[#084887]">
                   <Shield className="w-8 h-8 stroke-[1.5]" />
@@ -125,13 +190,13 @@ const CyberSecurityLandingPage: React.FC = () => {
                   We have a 24/7 Security Operations Center (SOC) that provides proactively monitoring, vulnerability management, and enterprise-grade Managed Cybersecurity Services that are designed to support modern organizations with reliable IT Security Services.
                 </p>
               </div>
-              <a href="#" className="inline-flex items-center text-xs font-bold text-[#084887] uppercase tracking-wider hover:text-[#063361]">
+              <button onClick={scrollToContact} className="inline-flex items-center text-xs font-bold text-[#084887] uppercase tracking-wider hover:text-[#063361] w-max">
                 EXPLORE SECURITY SERVICES →
-              </a>
-            </div>
+              </button>
+            </motion.div>
             
             {/* Top Right - Solid Color */}
-            <div className="bg-[#084887] p-8 shadow-sm flex flex-col text-white">
+            <motion.div variants={fadeInUp} className="bg-[#084887] p-8 shadow-sm flex flex-col text-white">
               <div className="mb-4 text-blue-200">
                 <Lock className="w-8 h-8 stroke-[1.5]" />
               </div>
@@ -139,10 +204,10 @@ const CyberSecurityLandingPage: React.FC = () => {
               <p className="text-sm text-blue-100 flex-1 leading-relaxed">
                 Secure identity management, privileged access controls and advanced authentication for enterprise security to protect employees, applications and digital assets.
               </p>
-            </div>
+            </motion.div>
             
             {/* Bottom Left - Small */}
-            <div className="bg-[#f4f7fb] p-8 shadow-sm flex flex-col border border-transparent hover:border-[#084887]/20 transition-colors">
+            <motion.div variants={fadeInUp} className="bg-[#f4f7fb] p-8 shadow-sm flex flex-col border border-transparent hover:border-[#084887]/20 transition-colors">
               <div className="mb-4 text-[#084887]">
                 <Search className="w-8 h-8 stroke-[1.5]" />
               </div>
@@ -150,10 +215,10 @@ const CyberSecurityLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 leading-relaxed">
                 Ensure compliance with global standards through automated governance frameworks that comply with GDPR, HIPAA, ISO 27001 and industry best practices.
               </p>
-            </div>
+            </motion.div>
             
             {/* Bottom Right - Wide */}
-            <div className="md:col-span-2 bg-[#f4f7fb] p-8 shadow-sm flex flex-col md:flex-row md:items-center justify-between border border-transparent hover:border-[#084887]/20 transition-colors relative overflow-hidden">
+            <motion.div variants={fadeInUp} className="md:col-span-2 bg-[#f4f7fb] p-8 shadow-sm flex flex-col md:flex-row md:items-center justify-between border border-transparent hover:border-[#084887]/20 transition-colors relative overflow-hidden">
               <div className="relative z-10 md:pr-16">
                 <div className="mb-4 text-[#084887]">
                   <AlertOctagon className="w-8 h-8 stroke-[1.5]" />
@@ -166,29 +231,41 @@ const CyberSecurityLandingPage: React.FC = () => {
               <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 opacity-5 pointer-events-none">
                  <ShieldAlert className="w-64 h-64" />
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* 4. News / Insights Section */}
       <section className="bg-[#f7f9fc] py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-end mb-12">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="flex justify-between items-end mb-12"
+          >
             <div>
               <h2 className="text-3xl font-bold text-[#084887] mb-2">Security Knowledge Center</h2>
               <p className="text-sm text-slate-500">Newest developments, strategies, and best practices from cybersecurity experts for businesses that are resilient.</p>
             </div>
-          </div>
+          </motion.div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-3 gap-8"
+          >
             {/* Insight 1 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden">
+            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=600" 
+                  src={img3} 
                   alt="Network Cables" 
-                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
@@ -199,15 +276,15 @@ const CyberSecurityLandingPage: React.FC = () => {
                   Learn how Capyngen adds another layer of security, and enables proactive defense against complex ransomware attacks to your Enterprise Cybersecurity Solutions.
                 </p>
               </div>
-            </div>
+            </motion.div>
             
             {/* Insight 2 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden bg-[#e9eff6]">
+            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1614064641913-6b71a2b02319?auto=format&fit=crop&q=80&w=600" 
+                  src={img4} 
                   alt="Abstract Cloud Security" 
-                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-700 ease-out mix-blend-multiply opacity-80"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
@@ -218,15 +295,15 @@ const CyberSecurityLandingPage: React.FC = () => {
                   Discover how our cloud security services enable organizations to secure workloads, and ensure uniform protection of workloads across AWS, Microsoft Azure and Google Cloud.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Insight 3 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden">
+            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=600" 
+                  src={img5} 
                   alt="Compliance Documents" 
-                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
@@ -237,15 +314,15 @@ const CyberSecurityLandingPage: React.FC = () => {
                   Discover how proactive governance, automation and frequent Cybersecurity Risk Assessment can enhance customer confidence, and business resilience.
                 </p>
               </div>
-            </div>
+            </motion.div>
             
             {/* Insight 4 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden">
+            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=600" 
+                  src={img6} 
                   alt="Code on screen" 
-                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
@@ -256,15 +333,15 @@ const CyberSecurityLandingPage: React.FC = () => {
                   Know how Capyngen applies Zero-Trust frameworks to constantly verify all users, apps, and devices throughout all digital infrastructure.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Insight 5 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden">
+            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600" 
+                  src={img7} 
                   alt="Circuit board" 
-                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
@@ -275,15 +352,15 @@ const CyberSecurityLandingPage: React.FC = () => {
                   Explore how AI enhances modern Cybersecurity Services by detecting evolving threats, and preventing attacks before they impact operations.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Insight 6 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden">
+            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&q=80&w=600" 
+                  src={img8} 
                   alt="Meeting" 
-                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
@@ -294,59 +371,84 @@ const CyberSecurityLandingPage: React.FC = () => {
                   Gain insight into the role employee security awareness programs play in bolstering your organization's resiliency and how it fits into our full suite of Cybersecurity Solutions and enterprise security protection strategies.
                 </p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* 5. Team Section (Why Choose Us) */}
       <section className="bg-white py-20 lg:py-24 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
             <h2 className="text-3xl font-bold text-[#084887] mb-4">Why Choose Capyngen?</h2>
             <p className="text-sm text-slate-500">Trust a Cybersecurity Partner for your business, take proactive steps to protect, and secure your business for the future, no matter how it grows.</p>
-          </div>
+          </motion.div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-            <div className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8"
+          >
+            <motion.div variants={fadeInUp} className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
               <h3 className="text-sm font-bold text-slate-900 mb-2">Certified Security Experts</h3>
               <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Adept professionals to provide trustworthy cybersecurity solutions to all industries.</p>
-            </div>
+            </motion.div>
 
-            <div className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
+            <motion.div variants={fadeInUp} className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
               <h3 className="text-sm font-bold text-slate-900 mb-2">24/7 Threat Monitoring</h3>
               <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Real-time monitoring for preventing and blocking cyber threats.</p>
-            </div>
+            </motion.div>
 
-            <div className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
+            <motion.div variants={fadeInUp} className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
               <h3 className="text-sm font-bold text-slate-900 mb-2">Tailored Security Strategies</h3>
               <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Tailored security solutions to suit your business needs.</p>
-            </div>
+            </motion.div>
 
-            <div className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
+            <motion.div variants={fadeInUp} className="text-center group border border-slate-100 p-6 rounded-md shadow-sm">
               <h3 className="text-sm font-bold text-slate-900 mb-2">Scalable Enterprise Protection</h3>
               <p className="text-[#084887] text-[10px] font-semibold uppercase tracking-wider">Smart, secure and resilient infrastructure for future growth and business.</p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="bg-[#f7f9fc] py-20 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
             <h2 className="text-3xl font-bold text-[#084887] mb-4">Frequently Asked Questions</h2>
-          </div>
+          </motion.div>
           
-          <div className="space-y-4">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="space-y-4"
+          >
             {faqs.map((faq, index) => (
-              <div 
+              <motion.div 
+                variants={fadeInUp}
                 key={index} 
                 className="bg-white rounded-md shadow-sm border border-slate-100 overflow-hidden"
               >
                 <button 
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"
+                  className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none cursor-pointer"
                 >
                   <span className="font-bold text-slate-900 text-sm md:text-base pr-8">{faq.q}</span>
                   <ChevronDown 
@@ -360,45 +462,58 @@ const CyberSecurityLandingPage: React.FC = () => {
                     {faq.a}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* 6. Form Section */}
-      <section className="bg-white py-20 lg:py-24">
+      <section ref={contactRef} className="bg-white py-20 lg:py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             
             {/* Left Side - Info */}
-            <div className="lg:col-span-5">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="lg:col-span-5"
+            >
               <h2 className="text-3xl font-bold text-[#084887] mb-6">Secure Your Digital Future</h2>
               <p className="text-sm text-slate-600 mb-10 leading-relaxed">
                 Work with a trusted Cybersecurity Service Provider like Capyngen to gain access to a complete suite of Cybersecurity Consulting Services, and Customized Enterprise Cybersecurity Solutions that will protect your business now and in the future.
               </p>
               
               <div className="space-y-6">
-                <div className="flex items-center text-slate-700 bg-white p-4 shadow-sm border border-slate-100">
+                <div className="flex items-center text-slate-700 bg-white p-4 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
                   <Mail className="w-5 h-5 mr-4 text-[#084887]" />
                   <a href="mailto:cybersecurity@capyngen.com" className="text-sm font-semibold hover:text-[#084887] transition-colors">cybersecurity@capyngen.com</a>
                 </div>
-                <div className="flex items-center text-slate-700 bg-white p-4 shadow-sm border border-slate-100">
+                <div className="flex items-center text-slate-700 bg-white p-4 shadow-sm border border-slate-100 hover:shadow-md transition-shadow cursor-pointer">
                   <PhoneCall className="w-5 h-5 mr-4 text-[#084887]" />
                   <span className="text-sm font-semibold">+1 (800) CAPYNGEN</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
             
             {/* Right Side - Form */}
-            <div className="lg:col-span-7 bg-[#f7f9fc] p-8 sm:p-10 shadow-lg border border-slate-100">
-              <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="lg:col-span-7 bg-[#f7f9fc] p-8 sm:p-10 shadow-lg border border-slate-100"
+            >
+              <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="firstName" className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">First Name</label>
                     <input 
                       type="text" 
                       id="firstName"
+                      required
                       className="w-full px-0 py-2 text-sm border-b border-slate-200 focus:border-[#084887] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-300"
                       placeholder="Jane"
                     />
@@ -408,6 +523,7 @@ const CyberSecurityLandingPage: React.FC = () => {
                     <input 
                       type="text" 
                       id="lastName"
+                      required
                       className="w-full px-0 py-2 text-sm border-b border-slate-200 focus:border-[#084887] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-300"
                       placeholder="Doe"
                     />
@@ -419,6 +535,7 @@ const CyberSecurityLandingPage: React.FC = () => {
                   <input 
                     type="email" 
                     id="workEmail"
+                    required
                     className="w-full px-0 py-2 text-sm border-b border-slate-200 focus:border-[#084887] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-300"
                     placeholder="jane@company.com"
                   />
@@ -428,6 +545,7 @@ const CyberSecurityLandingPage: React.FC = () => {
                   <label htmlFor="interest" className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Area of Interest</label>
                   <select 
                     id="interest"
+                    required
                     className="w-full px-0 py-2 text-sm border-b border-slate-200 focus:border-[#084887] outline-none transition-colors text-slate-900 bg-transparent cursor-pointer"
                     defaultValue=""
                   >
@@ -451,12 +569,12 @@ const CyberSecurityLandingPage: React.FC = () => {
                 
                 <button 
                   type="submit" 
-                  className="w-full bg-[#084887] hover:bg-[#063361] text-white font-bold py-4 transition-colors mt-4 text-[11px] tracking-[0.2em] uppercase rounded-sm"
+                  className="w-full bg-[#084887] hover:bg-[#063361] text-white font-bold py-4 transition-colors mt-4 text-[11px] tracking-[0.2em] uppercase rounded-sm cursor-pointer"
                 >
                   Request Consultation
                 </button>
               </form>
-            </div>
+            </motion.div>
             
           </div>
         </div>

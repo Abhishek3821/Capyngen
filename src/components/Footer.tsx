@@ -25,14 +25,14 @@ const Footer: React.FC = () => {
         <div className="md:col-span-2">
           <h3 className="text-sm font-bold tracking-widest uppercase mb-6">Services</h3>
           <ul className="text-gray-400 text-sm space-y-4">
-            <li><a href="#" className="hover:text-white transition-colors">Software Development</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">AI Solutions</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">UI/UX Design</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Cloud Services</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">DevOps</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Digital Marketing</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Enterprise Software</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Consulting</a></li>
+            <li><Link to="/web-development" className="hover:text-white transition-colors">Software Development</Link></li>
+            <li><Link to="/custom-ai-solutions" className="hover:text-white transition-colors">AI Solutions</Link></li>
+            <li><Link to="/ui-ux-design-services" className="hover:text-white transition-colors">UI/UX Design</Link></li>
+            <li><Link to="/network-solutions" className="hover:text-white transition-colors">Cloud Services</Link></li>
+            <li><Link to="/devops-solutions" className="hover:text-white transition-colors">DevOps</Link></li>
+            <li><Link to="/digital-marketing" className="hover:text-white transition-colors">Digital Marketing</Link></li>
+            <li><Link to="/enterprise-solutions" className="hover:text-white transition-colors">Enterprise Software</Link></li>
+            <li><Link to="/consulting" className="hover:text-white transition-colors">Consulting</Link></li>
           </ul>
         </div>
 
@@ -40,14 +40,14 @@ const Footer: React.FC = () => {
         <div className="md:col-span-2">
           <h3 className="text-sm font-bold tracking-widest uppercase mb-6">Industries</h3>
           <ul className="text-gray-400 text-sm space-y-4">
-            <li><a href="#" className="hover:text-white transition-colors">Healthcare</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Banking</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Education</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Retail</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Manufacturing</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Insurance</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Logistics</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Real Estate</a></li>
+            <li><Link to="/industries/healthcare-fitness" className="hover:text-white transition-colors">Healthcare</Link></li>
+            <li><Link to="/industries/banking" className="hover:text-white transition-colors">Banking</Link></li>
+            <li><Link to="/industries/education" className="hover:text-white transition-colors">Education</Link></li>
+            <li><Link to="/industries/e-commerce" className="hover:text-white transition-colors">Retail</Link></li>
+            <li><Link to="/industries/manufacturing-and-automotive" className="hover:text-white transition-colors">Manufacturing</Link></li>
+            <li><Link to="/industries/insurance" className="hover:text-white transition-colors">Insurance</Link></li>
+            <li><Link to="/industries/travel-logistics" className="hover:text-white transition-colors">Logistics</Link></li>
+            <li><Link to="/industries/real-estate" className="hover:text-white transition-colors">Real Estate</Link></li>
           </ul>
         </div>
 
@@ -55,12 +55,11 @@ const Footer: React.FC = () => {
         <div className="md:col-span-2">
           <h3 className="text-sm font-bold tracking-widest uppercase mb-6">Company</h3>
           <ul className="text-gray-400 text-sm space-y-4">
-            <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Case Studies</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">News</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Blogs</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+            <li><Link to="/company-overview" className="hover:text-white transition-colors">About Us</Link></li>
+            <li><Link to="/careers" className="hover:text-white transition-colors">Careers</Link></li>
+            <li><Link to="/news-and-updates" className="hover:text-white transition-colors">News</Link></li>
+            <li><Link to="/news-and-updates" className="hover:text-white transition-colors">Blogs</Link></li>
+            <li><Link to="/contact-us" className="hover:text-white transition-colors">Contact</Link></li>
           </ul>
         </div>
 

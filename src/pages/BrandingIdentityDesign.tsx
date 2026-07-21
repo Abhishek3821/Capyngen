@@ -95,20 +95,26 @@ const BrandLandingPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#f8f9fc] font-sans text-slate-600 overflow-x-hidden">
       
-      {/* 1. Hero Section */}
-      <motion.section 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeUp}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24"
+      {/* 1. Hero Section - Updated with Background Image */}
+      <section 
+        className="relative w-full min-h-[600px] lg:min-h-[700px] flex items-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${imgHero})` }}
       >
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        {/* Light Overlay to ensure text readability while keeping the image visible */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/20"></div>
+
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full"
+        >
           <div className="max-w-2xl">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#113a5d] leading-tight mb-6">
               Building Bold Brand Identities
             </h1>
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg">
+            <p className="text-lg text-slate-700 font-medium mb-8 leading-relaxed max-w-lg">
               We program a strong corporate identity along with a strategic visual system that connects institutional trust with modern-day durability.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -120,22 +126,14 @@ const BrandLandingPage: React.FC = () => {
               </button>
               <button 
                 onClick={() => scrollToSection(portfolioRef.current)}
-                className="bg-transparent hover:bg-slate-50 text-slate-700 border border-slate-300 px-8 py-3.5 rounded-sm font-medium transition-colors"
+                className="bg-white/60 backdrop-blur-sm hover:bg-white text-slate-800 border border-slate-300 px-8 py-3.5 rounded-sm font-medium transition-colors"
               >
                 Explore Portfolio
               </button>
             </div>
           </div>
-          
-          <div className="relative">
-            <img 
-              src={imgHero} 
-              alt="Modern Architecture" 
-              className="w-full h-auto object-contain rounded-sm shadow-xl"
-            />
-          </div>
-        </div>
-      </motion.section>
+        </motion.div>
+      </section>
 
       {/* 2. Strategic Brand Evolution Section */}
       <motion.section 
@@ -194,7 +192,7 @@ const BrandLandingPage: React.FC = () => {
       </motion.section>
 
       {/* 3. News / Articles Section */}
-      <section ref={portfolioRef} className="bg-[#f2f5f9] py-16 lg:py-24">
+      <section ref={portfolioRef} className="bg-[#f2f5f9] py-16 lg:py-24 scroll-mt-10">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -259,7 +257,7 @@ const BrandLandingPage: React.FC = () => {
                 <p className="text-[#0b5c92] text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#0b5c92] mr-2"></span> SaaS Global
                 </p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5c92] transition-colors">Nexus Platform</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5c92] transition-colors">Multi-Platform </h3>
                 <p className="text-slate-600 text-sm flex-1">Shaping a consistent identity system across 48 global markets and 12 product</p>
               </div>
             </motion.div>
@@ -426,7 +424,7 @@ const BrandLandingPage: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeUp}
-        className="bg-[#161e2c] py-16 lg:py-24 text-white"
+        className="bg-[#161e2c] py-16 lg:py-24 text-white scroll-mt-10"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">

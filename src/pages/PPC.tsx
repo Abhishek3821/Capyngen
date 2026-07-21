@@ -85,12 +85,13 @@ const PPCLandingPage: React.FC = () => {
               />
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-100">
                 <div>
-                  <p className="text-sm text-slate-500 font-medium">Conversion Rate</p>
-                  <p className="text-2xl font-bold text-blue-600">+24.6%</p>
+                  <p className="text-m text-slate-500 font-medium">Higher conversions</p>
+                  {/* <p className="text-2xl font-bold text-blue-600">+24.6%</p> */}
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500 font-medium">Cost Per Click</p>
-                  <p className="text-2xl font-bold text-slate-900">-38%</p>
+                  <p className="text-m text-slate-500 font-medium">Lower cost per click
+</p>
+                  {/* <p className="text-2xl font-bold text-slate-900">-38%</p> */}
                 </div>
               </div>
             </div>

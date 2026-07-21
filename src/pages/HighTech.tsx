@@ -123,7 +123,8 @@ const IntelligentMobility = () => {
                 From future generation cloud structure to self determining AI agents , Capyngen support industries move forward and execute fact-based functional innovation. Our core foundations are built for adoptability, flexible, and calculated profit outcomes.
               </p>
               <p>
-                With 180,000+ experts across 40 nations. We offer exclusive insight to each contract and deals. We provide interpreting multiplex high-end tech with determined benefit at each overlap of the stack. 
+                 With plenty of experts across multiple nations. We offer exclusive insight to each contract and deal. We provide multiplex high-end tech interpreting with determined benefits at each overlap of the stack. 
+
               </p>
             </div>
           </div>
@@ -159,7 +160,7 @@ const Trending = () => {
         className="max-w-7xl mx-auto px-6 md:px-12"
       >
         <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-black mb-10 tracking-tight">
-          Trending
+          Trending Blogs
         </h2>
 
         {/* Scrollable Container */}
@@ -259,15 +260,6 @@ const HighTechInnovation = () => {
 
 // --- Section 5: High-Tech Solutions ---
 const HighTechSolutions = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const scrollAmount = 350;
-      scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
-    }
-  };
-
   const solutions = [
     { title: "Engineering and R&D Capabilities", description: "Full-cycle product engineering support, guiding your idea from concept to successful market launch.", image: img8 },
     { title: "Intelligent Automation Solutions", description: "Advanced AI and machine learning automation, built for enterprise-scale deployment.", image: img9 },
@@ -281,12 +273,11 @@ const HighTechSolutions = () => {
         className="max-w-7xl mx-auto px-6 md:px-12"
       >
         <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-black mb-10 tracking-tight">
-          Solutions
+          Our Services
         </h2>
 
         {/* Scrollable Container */}
         <div 
-          ref={scrollRef}
           className="flex gap-6 lg:gap-8 overflow-x-auto snap-x snap-mandatory pb-4"
           style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
         >
@@ -324,20 +315,6 @@ const HighTechSolutions = () => {
           ))}
         </div>
 
-        {/* Navigation Arrows */}
-        <div className="flex justify-end gap-4 mt-8">
-          <button onClick={() => scroll('left')} className="text-gray-300 hover:text-black transition-colors" aria-label="Previous">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-          </button>
-          <button onClick={() => scroll('right')} className="text-black hover:text-gray-600 transition-colors" aria-label="Next">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </button>
-        </div>
-
       </motion.div>
     </section>
   );
@@ -349,24 +326,52 @@ const HighTechMetricsTestimonial = () => {
     <section className="bg-white py-12 md:py-16 w-full">
       <motion.div 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}
-        className="max-w-4xl mx-auto px-6 md:px-12"
+        className="max-w-7xl mx-auto px-6 md:px-12"
       >
-        <div className="border-t border-b border-gray-300 py-16 flex flex-col items-center justify-center text-center">
+        <div className="border-t border-b border-gray-300 py-16 flex flex-col lg:flex-row gap-16 lg:gap-24 items-center lg:items-start justify-between">
           
-          <div className="text-blue-500 mb-6">
-            <svg className="w-16 h-16 fill-current mx-auto" viewBox="0 0 24 24">
-              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-            </svg>
+          {/* Left Side: Bold Metrics */}
+          <div className="w-full lg:w-5/12 flex flex-col">
+            <h3 className="text-[11px] font-bold tracking-[0.15em] text-gray-500 uppercase mb-8">
+              Bold Metrics
+            </h3>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-10">
+              <div className="border-l-2 border-gray-800 pl-4">
+                <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">180K+</div>
+                <div className="text-[11px] md:text-xs text-gray-600 pr-2">Engineering experts across every domain</div>
+              </div>
+              <div className="border-l-2 border-gray-800 pl-4">
+                <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">40</div>
+                <div className="text-[11px] md:text-xs text-gray-600 pr-2">Countries with active client presence</div>
+              </div>
+              <div className="border-l-2 border-gray-800 pl-4">
+                <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">98%</div>
+                <div className="text-[11px] md:text-xs text-gray-600 pr-2">Client engagement across all projects</div>
+              </div>
+              <div className="border-l-2 border-gray-800 pl-4">
+                <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">$8B+</div>
+                <div className="text-[11px] md:text-xs text-gray-600 pr-2">Annual revenue reflecting market trust</div>
+              </div>
+            </div>
           </div>
-          
-          <blockquote className="text-xl md:text-2xl lg:text-[26px] text-gray-900 leading-relaxed font-medium italic mb-8 max-w-3xl">
-            "Capyngen has provided us with technology expertise and genuine commitment to innovation helped us accelerate our product roadmap at a pace we honestly never thought possible. What really stands out is that they don't operate like a typical vendor — they take the time to understand our goals and think like true engineering partners invested in our success."
-          </blockquote>
-          
-          <div>
-            <p className="text-sm font-medium text-gray-700">
-              - CTO, NovaBridge Financial 
-            </p>
+
+          {/* Right Side: Testimonial */}
+          <div className="w-full lg:w-7/12 flex flex-col items-start lg:pl-10">
+            <div className="text-[#598cf4] mb-6">
+              <svg className="w-12 h-12 md:w-16 md:h-16 fill-current" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+            </div>
+            
+            <blockquote className="text-xl md:text-2xl lg:text-[26px] text-gray-900 leading-relaxed font-medium italic mb-8">
+              "Capyngen has provided us with technology expertise and genuine commitment to innovation helped us accelerate our product roadmap at a pace we honestly never thought possible. What really stands out is that they don't operate like a typical vendor — they take the time to understand our goals and think like true engineering partners invested in our success."
+            </blockquote>
+            
+            <div className="w-full flex justify-end">
+              <p className="text-sm font-medium text-gray-500">
+                - CTO, NovaBridge Financial 
+              </p>
+            </div>
           </div>
 
         </div>

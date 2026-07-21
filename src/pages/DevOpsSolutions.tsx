@@ -28,11 +28,11 @@ const DevOpsPage = () => {
     ]
   };
 
-  const whyChooseData = [
-    { title: "Security & Compliance", desc: "We offer Security testing, and compliance validation.", link: "Know More " },
-    { title: "Proven DevOps Expertise", desc: "Implementing reliable, business CI/CD services solutions.", link: "Know More " },
-    { title: "Streamline Development", desc: "AI Smart Delivery with Operational Stability.", link: "Know More " },
-    { title: "Expand After Deployment", desc: "Durable Collaboration and Enhanced Optimization.", link: "Know More " }
+  const whyChooseData: Array<{ title: string; desc: string; link?: string }> = [
+    { title: "Security & Compliance", desc: "We offer Security testing, and compliance validation." },
+    { title: "Proven DevOps Expertise", desc: "Implementing reliable, business CI/CD services solutions." },
+    { title: "Streamline Development", desc: "AI Smart Delivery with Operational Stability." },
+    { title: "Expand After Deployment", desc: "Durable Collaboration and Enhanced Optimization." }
   ];
 
   const faqsData = [

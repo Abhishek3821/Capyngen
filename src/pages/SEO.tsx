@@ -185,7 +185,7 @@ const SEOLandingPage = () => {
                 <p className="text-sm text-slate-500 mb-6 max-w-lg">
                   We offer framework data analysis of your site's setup, from schema markup to indexing speed and mobile performance.
                 </p>
-                <a href="#" className="text-blue-600 text-sm font-semibold hover:underline">View Service </a>
+                {/* <a href="#" className="text-blue-600 text-sm font-semibold hover:underline">View Service </a> */}
               </div>
               
               {/* On-Page Optimization */}
@@ -197,7 +197,7 @@ const SEOLandingPage = () => {
                 <p className="text-sm text-slate-500 mb-6">
                   Improving your content with metadata so your every page shows its real value to search engines clearly and ranks higher.
                 </p>
-                <a href="#" className="text-blue-600 text-sm font-semibold hover:underline">Read More </a>
+                {/* <a href="#" className="text-blue-600 text-sm font-semibold hover:underline">Read More </a> */}
               </div>
 
               {/* Backlink Operation */}
@@ -259,7 +259,7 @@ const SEOLandingPage = () => {
               <div key={i} className="text-center bg-slate-50 p-6 rounded-lg">
                 <h3 className="font-bold text-[#094770] text-lg mb-2">{item.title}</h3>
                 <p className="text-sm text-slate-600 mb-4">{item.desc}</p>
-                <a href="#" className="text-blue-600 text-sm font-semibold hover:underline">Know More </a>
+                {/* <a href="#" className="text-blue-600 text-sm font-semibold hover:underline">Know More </a> */}
               </div>
             ))}
           </div>

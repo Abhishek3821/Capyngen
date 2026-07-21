@@ -255,9 +255,7 @@ const WebDevelopmentPage = () => {
                 <div className="p-5">
                   <h4 className="text-lg font-bold text-slate-900 leading-tight">{item.title}</h4>
                   <p className="text-slate-500 text-xs mb-4 uppercase tracking-wide mt-1">{item.desc}</p>
-                  <div className="flex items-center text-xs font-bold text-slate-900 gap-1 cursor-pointer hover:text-blue-600">
-                    Know More <ArrowRight className="w-3 h-3" />
-                  </div>
+                  
                 </div>
               </div>
             ))}

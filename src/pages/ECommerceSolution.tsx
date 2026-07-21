@@ -78,16 +78,7 @@ const EcommerceLandingPage: React.FC = () => {
               />
               
               {/* Floating Stat Card */}
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-white/50 flex justify-between items-center">
-                <div>
-                  <p className="text-2xl font-bold text-[#0b5a93]">40%</p>
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Growth with multichannel</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-2xl font-bold text-slate-900">99.99%</p>
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Staying Live Uptime</p>
-                </div>
-              </div>
+             
             </div>
           </div>
         </div>
@@ -453,12 +444,12 @@ const EcommerceLandingPage: React.FC = () => {
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 mb-2">Custom E-commerce Solution</h3>
                   <p className="text-sm text-slate-600 mb-2">Online stores customized to your business.</p>
-                  <span className="text-xs font-semibold text-[#0b5a93] uppercase tracking-wider cursor-pointer hover:underline">Know More</span>
+                  {/* <span className="text-xs font-semibold text-[#0b5a93] uppercase tracking-wider cursor-pointer hover:underline">Know More</span> */}
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 mb-2">Scalable Platform Architecture</h3>
                   <p className="text-sm text-slate-600 mb-2">Manage huge amounts of traffic and orders.</p>
-                  <span className="text-xs font-semibold text-[#0b5a93] uppercase tracking-wider cursor-pointer hover:underline">Know More</span>
+                  {/* <span className="text-xs font-semibold text-[#0b5a93] uppercase tracking-wider cursor-pointer hover:underline">Know More</span> */}
                 </div>
               </div>
             </div>
@@ -467,13 +458,13 @@ const EcommerceLandingPage: React.FC = () => {
               <div className="rounded-xl overflow-hidden bg-[#f8f9fc] border border-slate-100 shadow-sm p-6 flex flex-col justify-center h-56">
                 <h3 className="text-lg font-bold text-slate-900 mb-3">Payment and System Integrations</h3>
                 <p className="text-sm text-slate-600 mb-4">Connect your store with payment gateways.</p>
-                <span className="text-[#0b5a93] text-xs font-semibold uppercase tracking-wider cursor-pointer hover:underline">Know More</span>
+                {/* <span className="text-[#0b5a93] text-xs font-semibold uppercase tracking-wider cursor-pointer hover:underline">Know More</span> */}
               </div>
               
               <div className="rounded-xl overflow-hidden bg-[#eef3fb] border border-blue-50 shadow-sm sm:translate-y-8 p-6 flex flex-col justify-center h-56">
                 <h3 className="text-lg font-bold text-slate-900 mb-3">Global E-commerce Solutions</h3>
                 <p className="text-sm text-slate-600 mb-4">Manage operations across the world.</p>
-                <span className="text-[#0b5a93] text-xs font-semibold uppercase tracking-wider cursor-pointer hover:underline">Know More</span>
+                {/* <span className="text-[#0b5a93] text-xs font-semibold uppercase tracking-wider cursor-pointer hover:underline">Know More</span> */}
               </div>
             </div>
             

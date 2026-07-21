@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, ChevronRight, CheckCircle, ArrowRight } from 'lucide-react';
+import { ChevronRight, CheckCircle, ArrowRight } from 'lucide-react';
 
 const AppDevelopmentPage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -84,12 +84,12 @@ const AppDevelopmentPage = () => {
             
             <div className="flex gap-12">
               <div>
-                <h3 className="text-4xl font-bold text-blue-600 mb-2">99.9%</h3>
-                <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Uptime SLA</p>
+                <h3 className="text-4xl font-bold text-blue-600 mb-2">Guaranteed uptime</h3>
+                <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Across all platforms</p>
               </div>
               <div>
-                <h3 className="text-4xl font-bold text-blue-600 mb-2">50M+</h3>
-                <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider">App Downloads </p>
+                <h3 className="text-4xl font-bold text-blue-600 mb-2">App downloads</h3>
+                <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Worldwide </p>
               </div>
             </div>
           </div>
@@ -310,9 +310,6 @@ const AppDevelopmentPage = () => {
                 <h4 className="text-xl font-bold text-slate-900">1. Built for Performance</h4>
               </div>
               <p className="text-slate-600 ml-9 mb-3">Fast track and handle real-world use.</p>
-              <a href="#" className="ml-9 text-blue-600 font-medium flex items-center gap-2 hover:text-blue-800 transition">
-                Know More <ArrowRight className="w-4 h-4" />
-              </a>
             </div>
             
             <div>
@@ -321,9 +318,7 @@ const AppDevelopmentPage = () => {
                 <h4 className="text-xl font-bold text-slate-900">2. Industries-Grade Security</h4>
               </div>
               <p className="text-slate-600 ml-9 mb-3">Secure framework and MDM support.</p>
-              <a href="#" className="ml-9 text-blue-600 font-medium flex items-center gap-2 hover:text-blue-800 transition">
-                Know More <ArrowRight className="w-4 h-4" />
-              </a>
+             
             </div>
 
             <div>
@@ -332,9 +327,7 @@ const AppDevelopmentPage = () => {
                 <h4 className="text-xl font-bold text-slate-900">3. Native and Cross-Platform Expertise</h4>
               </div>
               <p className="text-slate-600 ml-9 mb-3">Cross-platform solutions with Flutter or React Native</p>
-              <a href="#" className="ml-9 text-blue-600 font-medium flex items-center gap-2 hover:text-blue-800 transition">
-                Know More <ArrowRight className="w-4 h-4" />
-              </a>
+              
             </div>
 
             <div>
@@ -343,9 +336,7 @@ const AppDevelopmentPage = () => {
                 <h4 className="text-xl font-bold text-slate-900">4. User-First Design</h4>
               </div>
               <p className="text-slate-600 ml-9 mb-3">Real user behavior, keeping it accessible, and engaging.</p>
-              <a href="#" className="ml-9 text-blue-600 font-medium flex items-center gap-2 hover:text-blue-800 transition">
-                Know More <ArrowRight className="w-4 h-4" />
-              </a>
+              
             </div>
           </div>
         </div>
@@ -362,17 +353,13 @@ const AppDevelopmentPage = () => {
             
             <div className="space-y-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-blue-400" />
-                </div>
+                
                 <div>
                   <p className="text-sm text-slate-400">Got any specific question?</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-blue-400" />
-                </div>
+                
                 <div>
                   <p className="text-sm text-slate-400">Book a 15-minute chat with one of our experts.</p>
                 </div>

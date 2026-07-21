@@ -240,12 +240,7 @@ const EducationSolutions = () => {
                   <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 leading-tight group-hover:text-blue-400 transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <div className="text-xs font-bold tracking-widest uppercase flex items-center gap-1 opacity-90 group-hover:opacity-100 group-hover:underline">
-                    Know More
-                    <svg className="w-3 h-3 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
+                 
                 </div>
               </div>
             </RevealOnScroll>

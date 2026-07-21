@@ -153,7 +153,7 @@ const DigitalMarketingLanding: React.FC = () => {
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
               </div>
               <div>
-                <p className="text-xl font-bold text-slate-900">+142% ROI</p>
+                <p className="text-sm font-bold text-slate-900"> Higher investment returns</p>
                 <p className="text-[10px] text-slate-500 font-medium leading-snug mt-1">The average improvement in conversion rates our enterprise partners see within the first six months of working with us.</p>
               </div>
             </motion.div>
@@ -262,12 +262,6 @@ const DigitalMarketingLanding: React.FC = () => {
                 </div>
                 <h3 className="font-bold text-slate-900 mb-3">{service.title}</h3>
                 <p className="text-sm text-slate-500 mb-6 leading-relaxed flex-grow">{service.desc}</p>
-                <button 
-                  onClick={() => handleButtonClick(`Learn more about ${service.title}`)}
-                  className="text-[#0f4a8a] text-sm font-semibold hover:underline flex items-center gap-1 mt-auto w-fit cursor-pointer bg-transparent border-none p-0"
-                >
-                  Learn more <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                </button>
               </motion.div>
             ))}
           </motion.div>
@@ -310,17 +304,21 @@ const DigitalMarketingLanding: React.FC = () => {
             ].map((post, i) => (
               <motion.div 
                 key={i} 
-                className="group cursor-pointer"
+                className="group cursor-pointer flex flex-col h-full"
                 variants={fadeInUp}
                 onClick={() => handleButtonClick(`Read Event: ${post.title}`)}
               >
-                <div className="overflow-hidden rounded-lg mb-5 bg-slate-100">
+                <div className="overflow-hidden rounded-lg mb-5 bg-slate-100 shrink-0">
                   {/* Updated image to preserve height with object-contain */}
                   <img src={post.img} alt={post.title} className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                 </div>
-                <span className="bg-blue-100 text-[#0f4a8a] text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide mb-3 inline-block">{post.tag}</span>
+                <span className="bg-blue-100 text-[#0f4a8a] text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide mb-3 self-start">{post.tag}</span>
                 <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug group-hover:text-[#0f4a8a] transition-colors">{post.title}</h3>
                 <p className="text-sm text-slate-500 leading-relaxed line-clamp-3">{post.desc}</p>
+                <div className="mt-4 inline-flex items-center text-sm font-bold text-[#0f4a8a] group-hover:text-blue-800 transition-colors">
+                  Read More 
+                  <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                </div>
               </motion.div>
             ))}
           </motion.div>
