@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import img1 from "../assets/SEO.png"; // Ensure this path is correct
 
 const SEOLandingPage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -46,16 +47,22 @@ const SEOLandingPage = () => {
     <div className="font-sans text-slate-800 bg-slate-50 min-h-screen">
       
       {/* Hero Section */}
-      <section className="bg-slate-50 pt-20 pb-16 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <section 
+        className="relative w-full min-h-screen flex items-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${img1})` }}
+      >
+        {/* Overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-slate-50/0"></div>
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-20 pb-16 flex flex-col md:flex-row items-center gap-12">
           <div className="w-full md:w-1/2">
-            <span className="text-[#094770] font-semibold text-xs tracking-wider uppercase mb-4 block">
+            <span className="text-[white] font-semibold text-xs tracking-wider uppercase mb-4 block">
               ENHANCED & SMART SEARCH 
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#094770] mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[white] mb-6 leading-tight">
               Empower Search <br/>with Exclusive SEO 
             </h1>
-            <p className="text-slate-600 mb-8 max-w-lg leading-relaxed text-sm md:text-base">
+            <p className="text-white mb-8 max-w-lg leading-relaxed text-sm md:text-base">
               Upgrade your online influence with fact-based technical optimization and high-quality content strategy. Capyngen brings complex search algorithms and meaningful business growth together in one search engine optimization services.
             </p>
             <div className="flex gap-4">
@@ -65,16 +72,6 @@ const SEOLandingPage = () => {
               <button className="bg-white hover:bg-slate-50 text-[#094770] border border-[#094770] px-6 py-3 rounded-md font-medium transition-colors text-sm">
                 Audit My Site
               </button>
-            </div>
-          </div>
-          
-          <div className="w-full md:w-1/2 relative">
-            <div className="bg-white p-2 rounded-xl shadow-2xl relative z-10">
-              <img 
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                alt="SEO Analytics Dashboard on Laptop" 
-                className="rounded-lg w-full h-auto object-cover"
-              />
             </div>
           </div>
         </div>

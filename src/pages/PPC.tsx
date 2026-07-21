@@ -7,6 +7,8 @@ import {
   TrendingUp, 
   CheckCircle2,
 } from 'lucide-react';
+import img1 from "../assets/ppc/1.png";
+import img2 from "../assets/ppc/2.png";
 
 const PPCLandingPage: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -77,7 +79,7 @@ const PPCLandingPage: React.FC = () => {
           <div className="relative">
             <div className="bg-white p-4 rounded-xl shadow-xl border border-slate-100">
               <img 
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" 
+                src={img1} 
                 alt="Analytics Dashboard" 
                 className="w-full h-auto rounded-lg mb-4"
               />
@@ -256,7 +258,7 @@ const PPCLandingPage: React.FC = () => {
           
           <div className="relative rounded-2xl overflow-hidden aspect-[4/5] max-h-[600px]">
             <img 
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800" 
+              src={img2} 
               alt="Domain Expert" 
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -367,4 +369,4 @@ const PPCLandingPage: React.FC = () => {
   );
 };
 
-export default PPCLandingPage; 
+export default PPCLandingPage;

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { motion, type Variants } from 'framer-motion';
 import { 
   ArrowRight, 
   ChevronLeft,
@@ -14,9 +15,26 @@ import {
   Activity
 } from 'lucide-react';
 
+// Serial Image Imports
+import img1 from "../assets/Artificial Intelligence Service/01.png";
+import img2 from "../assets/Artificial Intelligence Service/02.png";
+import img3 from "../assets/Artificial Intelligence Service/03.png";
+import img4 from "../assets/Artificial Intelligence Service/04.png";
+import img5 from "../assets/Artificial Intelligence Service/05.png";
+import img6 from "../assets/Artificial Intelligence Service/06.png";
+
 const AILandingPage: React.FC = () => {
   // Carousel Scroll Reference and Handler
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Section References for Button Scrolling
+  const servicesRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
+
+  // Broadened type to resolve RefObject TypeScript errors
+  const scrollToSection = (ref: any) => {
+    ref.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const handleScroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
@@ -36,6 +54,20 @@ const AILandingPage: React.FC = () => {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert("Thank you! Your request for services has been submitted successfully.");
+  };
+
+  // Animation Variants typed explicitly to resolve 'ease' assignment error
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
+  const staggerContainer: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
   };
 
   const faqs = [
@@ -60,11 +92,11 @@ const AILandingPage: React.FC = () => {
     <div className="min-h-screen bg-white font-sans text-slate-800">
       
       {/* 1. Hero Section */}
-      <section className="relative h-[600px] flex items-center justify-center text-center overflow-hidden">
+      <section className="relative min-h-[600px] h-auto flex items-center justify-center text-center overflow-hidden py-24">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1920" 
+            src={img1} 
             alt="AI Neural Network Background" 
             className="w-full h-full object-cover"
           />
@@ -72,7 +104,12 @@ const AILandingPage: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a192f]/50 to-white"></div>
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12"
+        >
           <p className="text-blue-300 font-semibold text-xs uppercase tracking-[0.2em] mb-6">
             ARTIFICIAL INTELLIGENCE
           </p>
@@ -84,23 +121,29 @@ const AILandingPage: React.FC = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <button 
-              onClick={() => window.scrollTo({ top: 700, behavior: 'smooth' })}
+              onClick={() => scrollToSection(servicesRef)}
               className="bg-[#0056b3] hover:bg-[#004494] text-white px-8 py-3.5 rounded-sm font-semibold transition-colors text-sm tracking-wide active:scale-95"
             >
               DISCOVER SERVICES
             </button>
             <button 
-              onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
+              onClick={() => scrollToSection(contactRef)}
               className="bg-transparent hover:bg-white/10 text-white border border-white/50 px-8 py-3.5 rounded-sm font-semibold transition-colors text-sm tracking-wide active:scale-95"
             >
               EXPERT CONSULTATION
             </button>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* 2. Philosophy/About Section */}
-      <section className="py-20 lg:py-28 bg-white relative z-20">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeUp}
+        className="py-20 lg:py-28 bg-white relative z-20"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             
@@ -118,9 +161,9 @@ const AILandingPage: React.FC = () => {
             
             <div className="relative bg-[#f8fafd] p-8 rounded-sm">
               <img 
-                src="https://images.unsplash.com/photo-1620825937374-87fc7d628301?auto=format&fit=crop&q=80&w=800" 
+                src={img2} 
                 alt="AI Cube Concept" 
-                className="w-full h-auto shadow-lg object-cover"
+                className="w-full h-auto shadow-lg object-contain"
               />
               <div className="absolute bottom-4 right-4 bg-[#0056b3] text-white p-4 shadow-xl">
                 <Activity className="w-6 h-6" />
@@ -129,10 +172,16 @@ const AILandingPage: React.FC = () => {
             
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 3. Insights / News Section */}
-      <section className="bg-[#f8fafd] py-20 lg:py-24">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeUp}
+        className="bg-[#f8fafd] py-20 lg:py-24"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
@@ -164,11 +213,11 @@ const AILandingPage: React.FC = () => {
             
             {/* Card 1 */}
             <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
-              <div className="overflow-hidden">
+              <div className="overflow-hidden bg-slate-50 flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1614064641913-6b71a2b02319?auto=format&fit=crop&q=80&w=600" 
+                  src={img3} 
                   alt="Generative AI" 
-                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="p-6 flex flex-col flex-1">
@@ -178,19 +227,19 @@ const AILandingPage: React.FC = () => {
                 <p className="text-slate-600 text-sm mb-6 flex-1">
                   Discover how Generative AI Services are transforming content creation, customer engagement, and accelerating innovation in various departments.
                 </p>
-                <div className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
+                <button onClick={() => scrollToSection(contactRef)} className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
                   Read Article <ArrowRight className="ml-1 w-3 h-3" />
-                </div>
+                </button>
               </div>
             </div>
             
             {/* Card 2 */}
             <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
-              <div className="overflow-hidden">
+              <div className="overflow-hidden bg-slate-50 flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=600" 
+                  src={img4} 
                   alt="Enterprise AI" 
-                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="p-6 flex flex-col flex-1">
@@ -200,19 +249,19 @@ const AILandingPage: React.FC = () => {
                 <p className="text-slate-600 text-sm mb-6 flex-1">
                   Learn how Enterprise AI Solutions can help businesses streamline processes, gain insights into operations, and make quick, informed decisions.
                 </p>
-                <div className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
+                <button onClick={() => scrollToSection(contactRef)} className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
                   Read Article <ArrowRight className="ml-1 w-3 h-3" />
-                </div>
+                </button>
               </div>
             </div>
 
             {/* Card 3 */}
             <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
-              <div className="overflow-hidden">
+              <div className="overflow-hidden bg-slate-50 flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1528297506728-9533d2ac3fa4?auto=format&fit=crop&q=80&w=600" 
+                  src={img5} 
                   alt="AI Consulting" 
-                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="p-6 flex flex-col flex-1">
@@ -222,19 +271,19 @@ const AILandingPage: React.FC = () => {
                 <p className="text-slate-600 text-sm mb-6 flex-1">
                   Learn about strategic AI Consulting Services and how they can assist organizations in finding opportunities for AI, creating implementation plans, and maximizing the value of AI in the long run.
                 </p>
-                <div className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
+                <button onClick={() => scrollToSection(contactRef)} className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
                   Read Article <ArrowRight className="ml-1 w-3 h-3" />
-                </div>
+                </button>
               </div>
             </div>
 
             {/* Card 4 */}
             <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
-              <div className="overflow-hidden">
+              <div className="overflow-hidden bg-slate-50 flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" 
+                  src={img6} 
                   alt="Automation" 
-                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
               <div className="p-6 flex flex-col flex-1">
@@ -244,26 +293,33 @@ const AILandingPage: React.FC = () => {
                 <p className="text-slate-600 text-sm mb-6 flex-1">
                   Discover how AI Automation Services use intelligent automation technologies to streamline repetitive tasks, cut down on expenses and boost productivity.
                 </p>
-                <div className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
+                <button onClick={() => scrollToSection(contactRef)} className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
                   Read Article <ArrowRight className="ml-1 w-3 h-3" />
-                </div>
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 4. Capabilities / Services */}
-      <section className="bg-white py-20 lg:py-24">
+      <motion.section 
+        ref={servicesRef}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeUp}
+        className="bg-white py-20 lg:py-24"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Our AI Capabilities</h2>
             <p className="text-sm text-slate-500">Flexible AI solutions, designed for changing business needs.</p>
           </div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div variants={staggerContainer} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Capability 1 */}
-            <div className="bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <motion.div variants={fadeUp} className="bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="mb-6 text-[#0056b3]">
                 <BrainCircuit className="w-8 h-8 stroke-[1.5]" />
               </div>
@@ -279,10 +335,10 @@ const AILandingPage: React.FC = () => {
                   <span className="mr-2 text-[#0056b3]">•</span> Smart Automation
                 </li>
               </ul>
-            </div>
+            </motion.div>
             
             {/* Capability 2 */}
-            <div className="bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <motion.div variants={fadeUp} className="bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="mb-6 text-[#0056b3]">
                 <MessageSquareText className="w-8 h-8 stroke-[1.5]" />
               </div>
@@ -298,10 +354,10 @@ const AILandingPage: React.FC = () => {
                   <span className="mr-2 text-[#0056b3]">•</span> AI Assistants
                 </li>
               </ul>
-            </div>
+            </motion.div>
             
             {/* Capability 3 */}
-            <div className="bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <motion.div variants={fadeUp} className="bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="mb-6 text-[#0056b3]">
                 <Eye className="w-8 h-8 stroke-[1.5]" />
               </div>
@@ -317,10 +373,10 @@ const AILandingPage: React.FC = () => {
                   <span className="mr-2 text-[#0056b3]">•</span> Visual Automation
                 </li>
               </ul>
-            </div>
+            </motion.div>
             
             {/* Capability 4 */}
-            <div className="bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <motion.div variants={fadeUp} className="bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="mb-6 text-[#0056b3]">
                 <GitMerge className="w-8 h-8 stroke-[1.5]" />
               </div>
@@ -336,22 +392,28 @@ const AILandingPage: React.FC = () => {
                   <span className="mr-2 text-[#0056b3]">•</span> Digital Strategy Planning
                 </li>
               </ul>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 5. Why Choose Capyngen? (Replaced Team section) */}
-      <section className="bg-[#f8fafd] py-20 lg:py-24">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeUp}
+        className="bg-[#f8fafd] py-20 lg:py-24"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Why Choose Capyngen?</h2>
             <p className="text-sm text-slate-500">Providing businesses with intelligent AI solutions to help them grow confidently.</p>
           </div>
           
-          <div className="grid sm:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <motion.div variants={staggerContainer} className="grid sm:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {/* Point 1 */}
-            <div className="text-center group bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <motion.div variants={fadeUp} className="text-center group bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="overflow-hidden mb-6 mx-auto w-24 h-24 rounded-full bg-[#f0f5fb] flex items-center justify-center text-[#0056b3]">
                 <Activity className="w-10 h-10" />
               </div>
@@ -359,10 +421,10 @@ const AILandingPage: React.FC = () => {
               <p className="text-sm text-slate-500 leading-relaxed px-4">
                 AI solutions tailored for your business needs.
               </p>
-            </div>
+            </motion.div>
 
             {/* Point 2 */}
-            <div className="text-center group bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <motion.div variants={fadeUp} className="text-center group bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="overflow-hidden mb-6 mx-auto w-24 h-24 rounded-full bg-[#f0f5fb] flex items-center justify-center text-[#0056b3]">
                 <GitMerge className="w-10 h-10" />
               </div>
@@ -370,10 +432,10 @@ const AILandingPage: React.FC = () => {
               <p className="text-sm text-slate-500 leading-relaxed px-4">
                 Strategies to deployment and optimization.
               </p>
-            </div>
+            </motion.div>
 
             {/* Point 3 */}
-            <div className="text-center group bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <motion.div variants={fadeUp} className="text-center group bg-white p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="overflow-hidden mb-6 mx-auto w-24 h-24 rounded-full bg-[#f0f5fb] flex items-center justify-center text-[#0056b3]">
                 <BrainCircuit className="w-10 h-10" />
               </div>
@@ -381,13 +443,19 @@ const AILandingPage: React.FC = () => {
               <p className="text-sm text-slate-500 leading-relaxed px-4">
                 Designed for high performance, security and growth.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* FAQs Section */}
-      <section className="py-20 lg:py-24 bg-white">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeUp}
+        className="py-20 lg:py-24 bg-white"
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
@@ -405,18 +473,29 @@ const AILandingPage: React.FC = () => {
                   </span>
                 </button>
                 {openFaq === index && (
-                  <div className="px-6 pb-5 pt-2 text-slate-600 text-sm leading-relaxed animate-in slide-in-from-top-2 duration-200">
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="px-6 pb-5 pt-2 text-slate-600 text-sm leading-relaxed"
+                  >
                     {faq.a}
-                  </div>
+                  </motion.div>
                 )}
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 6. Footer / Contact Form */}
-      <section className="bg-[#0a192f] py-20 lg:py-24 text-white">
+      <motion.section 
+        ref={contactRef}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeUp}
+        className="bg-[#0a192f] py-20 lg:py-24 text-white"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             
@@ -524,7 +603,7 @@ const AILandingPage: React.FC = () => {
             
           </div>
         </div>
-      </section>
+      </motion.section>
       
     </div>
   );

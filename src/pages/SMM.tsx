@@ -56,35 +56,32 @@ const SMMLandingPage = () => {
     <div className="font-sans text-slate-800 bg-[#f8fafc] min-h-screen">
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 px-6 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          <div className="w-full md:w-1/2 max-w-3xl">
-            <span className="text-[#0066cc] font-bold text-xs tracking-wider uppercase mb-3 block">
+      <section 
+        className="relative w-full min-h-screen flex items-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${img1})` }}
+      >
+        {/* Semi-transparent overlay to ensure content readability */}
+        <div className="absolute inset-0 bg-white/0"></div>
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
+          <div className="max-w-3xl">
+            <span className="text-[white] font-bold text-xs tracking-wider uppercase mb-3 block">
               Build and Influence with SMM
             </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
               Build and Influence with SMM
             </h1>
-            <p className="text-slate-600 mb-8 leading-relaxed text-sm md:text-base max-w-2xl">
+            <p className="text-white mb-8 leading-relaxed text-sm md:text-base max-w-2xl">
               Boost the digital presence of your brand with our social media marketing services with us. At Capyngen, we build smart social strategies that turn your random followers into loyal consumers through data-backed influence.
             </p>
             <div className="flex gap-4">
               <button className="bg-[#0066cc] hover:bg-[#0052a3] text-white px-6 py-2.5 rounded text-sm font-medium transition-colors">
                 Explore Here
               </button>
-              <button className="bg-transparent hover:bg-slate-100 text-[#0066cc] px-6 py-2.5 rounded text-sm font-medium transition-colors border border-[#0066cc]">
+              <button className="bg-transparent hover:bg-white/40 text-[white] px-6 py-2.5 rounded text-sm font-medium transition-colors border border-[#0066cc]">
                 Know More 
               </button>
             </div>
-          </div>
-          
-          {/* Img 1 placed in Hero Section */}
-          <div className="w-full md:w-1/2">
-            <img 
-              src={img1} 
-              alt="Social Media Marketing Hero" 
-              className="w-full h-auto object-contain rounded-lg"
-            />
           </div>
         </div>
       </section>
@@ -93,7 +90,6 @@ const SMMLandingPage = () => {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
           <div className="w-full md:w-1/2">
-            {/* Img 2 placed here, adjusted to object-contain and h-auto to prevent cutting */}
             <img 
               src={img2} 
               alt="Team discussing presentation" 
