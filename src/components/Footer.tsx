@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
@@ -67,8 +68,8 @@ const Footer: React.FC = () => {
         <div className="md:col-span-2">
           <h3 className="text-sm font-bold tracking-widest uppercase mb-6">Resources</h3>
           <ul className="text-gray-400 text-sm space-y-4">
-            <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Terms & Conditions</a></li>
+            <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link></li>
             <li><a href="#" className="hover:text-white transition-colors">FAQs</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
           </ul>

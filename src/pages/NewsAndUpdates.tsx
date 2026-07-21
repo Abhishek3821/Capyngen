@@ -21,7 +21,7 @@ const NewsHero = () => {
             News Alerts
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-slate-300 font-light leading-relaxed max-w-lg">
-            Get the latest news, events, and announcements about Capynge
+            Get the latest news, events, and announcements about Capyngen
           </p>
         </div>
       </div>

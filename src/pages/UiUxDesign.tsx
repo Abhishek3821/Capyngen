@@ -52,9 +52,7 @@ const UIUXLandingPage: React.FC = () => {
                 Capyngen, we provide UI/UX design services based on creative strategy and cutting-edge technology. We are a reliable UI UX design firm that builds user-friendly interfaces that enhance the customer experience, make things easier to use and help businesses thrive in the long run.
               </p>
               <div className="flex flex-wrap gap-4">
-                <button className="bg-blue-700 hover:bg-blue-800 text-white px-8 py-3.5 rounded font-medium transition-colors">
-                  Discover Our Process
-                </button>
+                
                 <button className="bg-transparent hover:bg-blue-50 text-blue-700 border border-blue-700 px-8 py-3.5 rounded font-medium transition-colors">
                   Book a Consultation
                 </button>
