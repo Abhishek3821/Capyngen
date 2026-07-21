@@ -2,28 +2,21 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BlogService, formatBlogDate, type Blog } from '../services/blogService';
 import { createSlug } from '../utils/slug';
+import heroImage from '../assets/news.png'; 
 
 // --- HERO COMPONENT ---
 const NewsHero = () => {
   return (
-    <section className="relative w-full h-[50vh] min-h-[400px] xl:min-h-[500px] overflow-hidden flex items-center">
+    <section className="relative w-full h-screen overflow-hidden flex items-center">
       <div
         className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url('/image_341766.jpg')` }}
+        style={{ backgroundImage: `url(${heroImage})` }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#0a1128]/95 via-[#0a1128]/70 to-transparent" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <nav className="flex items-center text-xs sm:text-sm font-semibold tracking-widest text-slate-300 mb-6 sm:mb-8 uppercase">
-            <a href="/who-we-are" className="hover:text-white transition-colors duration-300">
-              Who We Are
-            </a>
-            <svg className="w-4 h-4 mx-2 sm:mx-3 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-            <span className="text-white">Newsroom</span>
-          </nav>
+          
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-semibold text-white tracking-tight mb-4 sm:mb-6 leading-none">
             News Alerts
           </h1>

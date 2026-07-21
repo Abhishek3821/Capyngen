@@ -6,12 +6,46 @@ import {
   Cloud, 
   Smartphone,
 } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
+
+// Serial image imports from the Website Design folder as shown in the file tree
+import img1 from "../assets/Website Design/1.png";
+import img2 from "../assets/Website Design/2.png";
+import img3 from "../assets/Website Design/3.png";
+import img4 from "../assets/Website Design/4.png";
+import img5 from "../assets/Website Design/5.png";
+import img27 from "../assets/Website Design/27.png";
+
+// Framer Motion Animation Variants for scroll animations
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const fadeInLeft: Variants = {
+  hidden: { opacity: 0, x: 50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const fadeInRight: Variants = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+};
 
 const WebsiteDesignLandingPage: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
+  const handleButtonClick = (actionName: string) => {
+    alert(`${actionName} clicked!`);
   };
 
   const faqs = [
@@ -54,44 +88,75 @@ const WebsiteDesignLandingPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-600">
+    <div className="min-h-screen bg-white font-sans text-slate-600 overflow-hidden">
       
-      {/* 1. Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div className="max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0f3b68] leading-tight mb-6">
-            Adoptable & Custom Website Design Services
-          </h1>
-          <p className="text-lg text-slate-600 mb-10 leading-relaxed max-w-2xl">
-            At Capyngen, we transform your complex business requirements into high-performance digital foundations that bring institutional growth and industry authority.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <button className="bg-[#0066cc] hover:bg-[#0052a3] text-white px-8 py-3.5 rounded-sm font-medium transition-colors">
-              Build Your Project
-            </button>
-            <button className="bg-transparent hover:bg-slate-50 text-[#0066cc] border border-[#0066cc] px-8 py-3.5 rounded-sm font-medium transition-colors">
-              Read Case Studies 
-            </button>
-          </div>
+      {/* 1. Hero Section using img1 as background */}
+      <section 
+        className="relative w-full py-20 lg:py-32 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url('${img1}')` }}
+      >
+        <div className="absolute inset-0 bg-white/40"></div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+          <motion.div 
+            className="max-w-3xl"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInRight}
+          >
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0f3b68] leading-tight mb-6">
+              Adoptable & Custom Website Design Services
+            </h1>
+            <p className="text-lg text-slate-600 mb-10 leading-relaxed max-w-2xl">
+              At Capyngen, we transform your complex business requirements into high-performance digital foundations that bring institutional growth and industry authority.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <button 
+                onClick={() => handleButtonClick('Build Your Project')}
+                className="bg-[#0066cc] hover:bg-[#0052a3] text-white px-8 py-3.5 rounded-sm font-medium transition-colors cursor-pointer"
+              >
+                Build Your Project
+              </button>
+              <button 
+                onClick={() => handleButtonClick('Read Case Studies')}
+                className="bg-white hover:bg-slate-50 text-[#0066cc] border border-[#0066cc] px-8 py-3.5 rounded-sm font-medium transition-colors cursor-pointer"
+              >
+                Read Case Studies 
+              </button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* 2. Architecture / Methodology Section */}
+      {/* 2. Architecture / Methodology Section using img2 */}
       <section className="bg-[#f8fafd] py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             
-            {/* Image with offset background element */}
-            <div className="relative max-w-md mx-auto lg:max-w-none">
+            {/* Image with offset background element (using img2, setting height via object-contain to avoid cutting) */}
+            <motion.div 
+              className="relative max-w-md mx-auto lg:max-w-none w-full"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInRight}
+            >
               <div className="absolute -bottom-6 -right-6 w-2/3 h-2/3 bg-[#e4eff9] rounded-sm hidden sm:block"></div>
               <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800" 
+                src={img2} 
                 alt="Workspace with monitor displaying sitemap" 
-                className="relative z-10 w-full h-auto object-cover rounded-sm shadow-lg border border-slate-100"
+                className="relative z-10 w-full h-auto object-contain rounded-sm shadow-lg border border-slate-100 bg-white"
               />
-            </div>
+            </motion.div>
             
-            <div className="lg:pl-8">
+            <motion.div 
+              className="lg:pl-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInLeft}
+            >
               <p className="text-[#0066cc] font-semibold mb-3 uppercase tracking-wider text-xs">POWERING HIGH-END WEBSITES DESIGN</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-[#0f3b68] mb-6">
                 Developed for Transformation and Brand Identity
@@ -114,50 +179,76 @@ const WebsiteDesignLandingPage: React.FC = () => {
                   <span className="font-medium text-sm">Building fast, flexible websites using the latest coding standards. </span>
                 </li>
               </ul>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* 3. News / Articles Section */}
+      {/* 3. News / Articles Section using img3 and img4 */}
       <section className="bg-white py-16 lg:py-24 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-end mb-10">
+          <motion.div 
+            className="flex justify-between items-end mb-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold text-[#0f3b68]">Trending Events</h2>
               <p className="text-slate-500 mt-2">Fresh design trends and smart tactics to grow your business online.</p>
             </div>
-            <a href="#" className="hidden sm:flex items-center text-[#0066cc] font-medium hover:text-[#0052a3]">
+            <button 
+              onClick={() => handleButtonClick('Explore Here')}
+              className="hidden sm:flex items-center text-[#0066cc] font-medium hover:text-[#0052a3] cursor-pointer bg-transparent border-none p-0"
+            >
               Explore Here <ArrowRight className="ml-2 w-4 h-4" />
-            </a>
-          </div>
+            </button>
+          </motion.div>
           
           <div className="grid lg:grid-cols-12 gap-8">
-            {/* Featured Article (Left) */}
-            <div className="lg:col-span-7 xl:col-span-8 group cursor-pointer">
-              <div className="overflow-hidden rounded-sm mb-5">
+            {/* Featured Article (Left) using img3 */}
+            <motion.div 
+              className="lg:col-span-7 xl:col-span-8 group cursor-pointer"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInRight}
+              onClick={() => handleButtonClick('Featured Article')}
+            >
+              <div className="overflow-hidden rounded-sm mb-5 bg-slate-50">
                 <img 
-                  src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000" 
+                  src={img3} 
                   alt="Network Abstract" 
-                  className="w-full h-[300px] sm:h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-3">Advanced Tech</p>
               <h3 className="text-2xl sm:text-3xl font-bold text-[#0f3b68] mb-3 group-hover:text-[#0066cc] transition-colors">
                 Website Design Company Gurgaon: Using Plug-and-Play Tech. 
               </h3>
-            </div>
+            </motion.div>
             
-            {/* List Articles (Right) */}
-            <div className="lg:col-span-5 xl:col-span-4 flex flex-col gap-6">
+            {/* List Articles (Right) using img4, img5, img27 */}
+            <motion.div 
+              className="lg:col-span-5 xl:col-span-4 flex flex-col gap-6"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
               
               {/* List Item 1 */}
-              <div className="group cursor-pointer flex items-start gap-4 h-full">
-                <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden rounded-sm">
+              <motion.div 
+                className="group cursor-pointer flex items-start gap-4 h-full"
+                variants={fadeInLeft}
+                onClick={() => handleButtonClick('Article 1')}
+              >
+                <div className="w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-sm bg-slate-50">
                   <img 
-                    src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&q=80&w=400" 
+                    src={img4} 
                     alt="Design Wireframes" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="flex flex-col justify-center h-full">
@@ -166,15 +257,19 @@ const WebsiteDesignLandingPage: React.FC = () => {
                     Tiny digital moments that quietly turn casual visitors into buyers. 
                   </h4>
                 </div>
-              </div>
+              </motion.div>
 
               {/* List Item 2 */}
-              <div className="group cursor-pointer flex items-start gap-4 h-full">
-                <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden rounded-sm">
+              <motion.div 
+                className="group cursor-pointer flex items-start gap-4 h-full"
+                variants={fadeInLeft}
+                onClick={() => handleButtonClick('Article 2')}
+              >
+                <div className="w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-sm bg-slate-50">
                   <img 
-                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=400" 
+                    src={img5} 
                     alt="Analytics Dashboard" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="flex flex-col justify-center h-full">
@@ -183,15 +278,19 @@ const WebsiteDesignLandingPage: React.FC = () => {
                     Connecting who you are with how your users experience you. 
                   </h4>
                 </div>
-              </div>
+              </motion.div>
 
               {/* List Item 3 */}
-              <div className="group cursor-pointer flex items-start gap-4 h-full">
-                <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden rounded-sm">
+              <motion.div 
+                className="group cursor-pointer flex items-start gap-4 h-full"
+                variants={fadeInLeft}
+                onClick={() => handleButtonClick('Article 3')}
+              >
+                <div className="w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-sm bg-slate-50">
                   <img 
-                    src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=400" 
+                    src={img27} 
                     alt="Server Room" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="flex flex-col justify-center h-full">
@@ -200,9 +299,9 @@ const WebsiteDesignLandingPage: React.FC = () => {
                     Making your website load faster and feel smoother this year. 
                   </h4>
                 </div>
-              </div>
+              </motion.div>
 
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -210,14 +309,26 @@ const WebsiteDesignLandingPage: React.FC = () => {
       {/* 4. Capabilities / Offerings Grid */}
       <section className="bg-[#f8f9fa] py-16 lg:py-24 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <motion.div 
+            className="text-center max-w-2xl mx-auto mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
             <h2 className="text-3xl sm:text-4xl font-bold text-[#0f3b68] mb-4">Our Special Offers</h2>
             <p className="text-slate-600">Capyngen is a leading website design company in India, offering custom software and website design that keep up with fast-moving businesses. </p>
-          </div>
+          </motion.div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div 
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
             {/* Card 1 */}
-            <div className="bg-white p-8 rounded-sm shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] border border-slate-100 hover:shadow-md transition-shadow">
+            <motion.div variants={fadeInUp} className="bg-white p-8 rounded-sm shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] border border-slate-100 hover:shadow-md transition-shadow">
               <div className="mb-6 text-[#0066cc]">
                 <Network className="w-8 h-8 stroke-[1.5]" />
               </div>
@@ -225,10 +336,10 @@ const WebsiteDesignLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 leading-relaxed">
                 Safe, flexible databases that make managing complex info easy for everyone. 
               </p>
-            </div>
+            </motion.div>
             
             {/* Card 2 */}
-            <div className="bg-white p-8 rounded-sm shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] border border-slate-100 hover:shadow-md transition-shadow">
+            <motion.div variants={fadeInUp} className="bg-white p-8 rounded-sm shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] border border-slate-100 hover:shadow-md transition-shadow">
               <div className="mb-6 text-[#0066cc]">
                 <Megaphone className="w-8 h-8 stroke-[1.5]" />
               </div>
@@ -236,10 +347,10 @@ const WebsiteDesignLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 leading-relaxed">
                 Custom digital spaces built to hook your audience and drive sales.
               </p>
-            </div>
+            </motion.div>
             
             {/* Card 3 */}
-            <div className="bg-white p-8 rounded-sm shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] border border-slate-100 hover:shadow-md transition-shadow">
+            <motion.div variants={fadeInUp} className="bg-white p-8 rounded-sm shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] border border-slate-100 hover:shadow-md transition-shadow">
               <div className="mb-6 text-[#0066cc]">
                 <Cloud className="w-8 h-8 stroke-[1.5]" />
               </div>
@@ -247,10 +358,10 @@ const WebsiteDesignLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 leading-relaxed">
                 Fixing hidden tech issues to make your website load instantly and place higher. 
               </p>
-            </div>
+            </motion.div>
             
             {/* Card 4 */}
-            <div className="bg-white p-8 rounded-sm shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] border border-slate-100 hover:shadow-md transition-shadow">
+            <motion.div variants={fadeInUp} className="bg-white p-8 rounded-sm shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] border border-slate-100 hover:shadow-md transition-shadow">
               <div className="mb-6 text-[#0066cc]">
                 <Smartphone className="w-8 h-8 stroke-[1.5]" />
               </div>
@@ -258,31 +369,55 @@ const WebsiteDesignLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 leading-relaxed">
                 Responsive layouts that stay perfectly intact from phone to desktop. 
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* 5. Why Choose Us Section */}
       <section className="bg-white py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
+        <motion.div 
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+        >
           <h2 className="text-3xl sm:text-4xl font-bold text-[#0f3b68] mb-6">Why Choose Us?</h2>
           <p className="text-slate-600 leading-relaxed text-lg">
             Capyngen is a top tech partner and the best website design company in India, creating powerful web hubs, crafting high-speed portals, and responsive web layouts centered entirely around your users. 
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* FAQs Section */}
       <section className="bg-[#f8fafd] py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#0f3b68] mb-10 text-center">FAQs</h2>
-          <div className="space-y-4">
+          <motion.h2 
+            className="text-3xl sm:text-4xl font-bold text-[#0f3b68] mb-10 text-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            FAQs
+          </motion.h2>
+          <motion.div 
+            className="space-y-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden">
+              <motion.div 
+                key={index} 
+                variants={fadeInUp}
+                className="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden"
+              >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className="w-full text-left px-6 py-4 font-semibold text-[#0f3b68] hover:bg-slate-50 transition-colors flex justify-between items-center focus:outline-none"
+                  className="w-full text-left px-6 py-4 font-semibold text-[#0f3b68] hover:bg-slate-50 transition-colors flex justify-between items-center focus:outline-none cursor-pointer"
                 >
                   <span className="pr-8">{faq.question}</span>
                   <span className="text-[#0066cc] font-bold text-xl leading-none">
@@ -290,13 +425,19 @@ const WebsiteDesignLandingPage: React.FC = () => {
                   </span>
                 </button>
                 {openFaqIndex === index && (
-                  <div className="px-6 pb-4 pt-2 text-slate-600 text-sm leading-relaxed border-t border-slate-50">
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="px-6 pb-4 pt-2 text-slate-600 text-sm leading-relaxed border-t border-slate-50"
+                  >
                     {faq.answer}
-                  </div>
+                  </motion.div>
                 )}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

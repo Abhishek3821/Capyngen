@@ -1,4 +1,74 @@
-import { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+
+// Importing images sequentially as per the provided folder structure
+import img1 from "../assets/public service/01.png";
+import img2 from "../assets/public service/02.png";
+
+// --- Scroll Animation Wrapper Component ---
+interface RevealOnScrollProps {
+  children: React.ReactNode;
+  className?: string;
+  direction?: "up" | "down" | "left" | "right" | "none";
+  delay?: number;
+}
+
+const RevealOnScroll: React.FC<RevealOnScrollProps> = ({ 
+  children, 
+  className = "", 
+  direction = "up", 
+  delay = 0 
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            setIsVisible(true);
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [delay]);
+
+  const baseClass = "transition-all duration-1000 ease-out";
+  const hiddenClass = {
+    up: "opacity-0 translate-y-12",
+    down: "opacity-0 -translate-y-12",
+    left: "opacity-0 translate-x-12",
+    right: "opacity-0 -translate-x-12",
+    none: "opacity-0"
+  }[direction];
+
+  return (
+    <div
+      ref={ref}
+      className={`${baseClass} ${isVisible ? "opacity-100 translate-y-0 translate-x-0" : hiddenClass} ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Global scroll helpers
+const scrollToSection = (id: string) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+const handleContactClick = (e?: React.MouseEvent) => {
+  if (e) e.preventDefault();
+  window.location.href = "mailto:hello@capyngen.com";
+};
 
 // 1. Define specific literal types for the tabs to prevent indexing errors
 type TabName = 
@@ -180,37 +250,42 @@ const PublicServicesLandingPage = () => {
       
       {/* 1. PUBLIC SERVICES HERO SECTION */}
       <section 
-        className="relative w-full min-h-[640px] flex items-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url('image_10c157.jpg')` }}
+        className="relative w-full min-h-[640px] flex items-center bg-cover bg-center bg-no-repeat overflow-hidden"
+        style={{ backgroundImage: `url(${img1})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-[#031530] via-[#031530]/75 to-transparent"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full py-20">
-          <div className="max-w-2xl">
+          <RevealOnScroll direction="up" className="max-w-2xl">
             <span className="text-gray-400 font-semibold text-xs md:text-sm tracking-widest uppercase block mb-4">
               INDUSTRIES | PUBLIC SERVICES
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-[54px] font-bold text-white leading-[1.15] mb-8">
               Making Progressing Communities.<br />Bringing Digital Impact.
             </h1>
-            <p className="text-base md:text-lg text-gray-200 leading-relaxed max-w-xl">
+            <p className="text-base md:text-lg text-gray-200 leading-relaxed max-w-xl mb-8">
               Authorizing governments and civil sector companies to modify, Upgrade native experiences, and deliver a significant transformation in public service software development.
             </p>
-          </div>
+            <div className="flex gap-4">
+              <button onClick={() => scrollToSection('press')} className="bg-[#2563eb] hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-none transition duration-300 flex items-center justify-center gap-2 text-sm">
+                Explore More
+              </button>
+            </div>
+          </RevealOnScroll>
         </div>
       </section>
 
       {/* 2. FORWARD-THINKING STATEMENT SECTION */}
-      <section className="bg-[#f4f6f9] py-20 px-6 lg:px-8">
+      <section className="bg-[#f4f6f9] py-20 px-6 lg:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
-          <div className="lg:col-span-4">
+          <RevealOnScroll direction="right" className="lg:col-span-4">
             <h2 className="text-[#0055ff] text-xl md:text-2xl font-bold uppercase tracking-wider leading-snug">
               STRATEGIC-VISION.<br />
               COMMUNITY-FOCUSED.<br />
               FORWARD-LOOKING.
             </h2>
-          </div>
-          <div className="lg:col-span-8 text-gray-700 text-base md:text-[17px] leading-relaxed space-y-6">
+          </RevealOnScroll>
+          <RevealOnScroll direction="left" className="lg:col-span-8 text-gray-700 text-base md:text-[17px] leading-relaxed space-y-6">
             <p>
               Advanced tech is innovating the way Administration serves the nation with government cloud solutions. By simplifying civil services to enhance principles and functional productivity, digital transformation for government is at the core of High-tech modern nations.
             </p>
@@ -220,20 +295,22 @@ const PublicServicesLandingPage = () => {
             <p className="italic font-medium text-gray-800 pt-2">
               Our Mission: Capyngen has a clear view to support high-tech and master plans to deliver brighter, reactive, and better durable government application development.
             </p>
-          </div>
+          </RevealOnScroll>
         </div>
       </section>
 
       {/* 3. OUR STRATEGIC FOCUS SECTION */}
       <section className="bg-[#edf3f9] py-20 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-center text-2xl md:text-3xl font-bold uppercase tracking-widest text-gray-900 mb-16">
-            Our Strategic Focus
-          </h2>
+          <RevealOnScroll direction="up">
+            <h2 className="text-center text-2xl md:text-3xl font-bold uppercase tracking-widest text-gray-900 mb-16">
+              Our Strategic Focus
+            </h2>
+          </RevealOnScroll>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {impactAreas.map((area, idx) => (
-              <div key={idx} className="bg-white p-8 flex flex-col items-start rounded-none shadow-sm min-h-[240px]">
+              <RevealOnScroll key={idx} direction="up" delay={idx * 100} className="bg-white p-8 flex flex-col items-start rounded-none shadow-sm min-h-[240px] hover:shadow-md transition-shadow">
                 <div className="mb-5 p-1">
                   {area.icon}
                 </div>
@@ -243,7 +320,7 @@ const PublicServicesLandingPage = () => {
                 <p className="text-sm text-gray-600 leading-relaxed">
                   {area.description}
                 </p>
-              </div>
+              </RevealOnScroll>
             ))}
           </div>
         </div>
@@ -251,7 +328,7 @@ const PublicServicesLandingPage = () => {
 
       {/* 4. PUBLIC SECTOR TESTIMONIAL SECTION */}
       <section className="bg-white py-24 px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
+        <RevealOnScroll direction="up" className="max-w-5xl mx-auto">
           <div className="text-[#0055ff] text-7xl font-serif mb-2 leading-none">“</div>
           
           <blockquote className="text-2xl md:text-3xl lg:text-[34px] font-bold text-[#1d64db] leading-snug mb-10">
@@ -266,16 +343,18 @@ const PublicServicesLandingPage = () => {
               - Department of Digital Services
             </p>
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
       {/* 5. PRESS PORTAL SECTION */}
-      <section className="bg-[#0b1424] text-white py-20 px-6 lg:px-8">
+      <section id="press" className="bg-[#0b1424] text-white py-20 px-6 lg:px-8 scroll-mt-10">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">Press Portal</h2>
+          <RevealOnScroll direction="up">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">Press Portal</h2>
+          </RevealOnScroll>
           
           {/* Tabs Navigation */}
-          <div className="flex flex-wrap gap-x-8 gap-y-4 border-b border-gray-800 pb-4 mb-12 text-sm overflow-x-auto whitespace-nowrap scrollbar-hide">
+          <RevealOnScroll direction="up" className="flex flex-wrap gap-x-8 gap-y-4 border-b border-gray-800 pb-4 mb-12 text-sm overflow-x-auto whitespace-nowrap scrollbar-hide">
             {tabs.map((tab) => (
               <button
                 key={tab}
@@ -287,10 +366,10 @@ const PublicServicesLandingPage = () => {
                 {tab}
               </button>
             ))}
-          </div>
+          </RevealOnScroll>
 
           {/* Featured Content Wrapper Block */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch bg-[#070d18] rounded-none overflow-hidden border border-gray-900">
+          <RevealOnScroll direction="up" className="grid grid-cols-1 lg:grid-cols-12 items-stretch bg-[#070d18] rounded-none overflow-hidden border border-gray-900">
             <div className="lg:col-span-5 p-12 lg:p-16 flex flex-col justify-center">
               <span className="text-[#0055ff] font-semibold text-xs tracking-widest uppercase mb-4 block">
                 FEATURED STORY
@@ -298,42 +377,42 @@ const PublicServicesLandingPage = () => {
               <h3 className="text-3xl md:text-4xl font-bold leading-tight mb-8 whitespace-pre-line">
                 {pressPortalContent[activeTab].title}
               </h3>
-              <a href="#read" className="inline-flex items-center text-sm font-semibold text-gray-300 hover:text-white group">
+              <a href="#read" onClick={handleContactClick} className="inline-flex items-center text-sm font-semibold text-gray-300 hover:text-white group">
                 → {pressPortalContent[activeTab].linkText}
                 <span className="ml-2 transform group-hover:translate-x-1 transition duration-200"></span>
               </a>
             </div>
             
-            <div className="lg:col-span-7 relative min-h-[300px] lg:min-h-[460px]">
+            <div className="lg:col-span-7 flex items-center justify-center bg-black/20">
               <img 
-                src="image_10c4a2.jpg" 
+                src={img2} 
                 alt="Capyngen public service delivery team meeting" 
-                className="absolute inset-0 w-full h-full object-cover"
+                className="w-full h-auto block"
               />
             </div>
-          </div>
+          </RevealOnScroll>
 
           {/* Carousel Slider Pagination Indicators */}
-          <div className="flex justify-end gap-3 mt-6">
+          <RevealOnScroll direction="up" className="flex justify-end gap-3 mt-6">
             <button className="w-8 h-8 rounded-none border border-gray-800 flex items-center justify-center text-gray-400 hover:border-gray-600 hover:text-white transition text-xs">
               &lt;
             </button>
             <button className="w-8 h-8 rounded-none border border-gray-800 flex items-center justify-center text-gray-400 hover:border-gray-600 hover:text-white transition text-xs">
               &gt;
             </button>
-          </div>
+          </RevealOnScroll>
         </div>
       </section>
 
       {/* 6. FAQS SECTION */}
       <section className="bg-white py-20 px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+        <RevealOnScroll direction="up" className="max-w-4xl mx-auto">
           <h2 className="text-center text-2xl md:text-3xl font-bold tracking-widest text-gray-900 mb-12">
             FAQs
           </h2>
           <div className="space-y-4">
             {faqsData.map((faq, index) => (
-              <div key={index} className="border border-gray-200 rounded-none">
+              <div key={index} className="border border-gray-200 rounded-none overflow-hidden">
                 <button
                   onClick={() => toggleFaq(index)}
                   className="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-gray-50 transition-colors"
@@ -341,24 +420,28 @@ const PublicServicesLandingPage = () => {
                   <span className="font-semibold text-gray-900 text-base md:text-lg">
                     {faq.question}
                   </span>
-                  <span className="text-[#0055ff] ml-4 text-xl">
+                  <span className="text-[#0055ff] ml-4 text-xl shrink-0">
                     {openFaqIndex === index ? '−' : '+'}
                   </span>
                 </button>
-                {openFaqIndex === index && (
+                <div 
+                  className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                    openFaqIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
                   <div className="p-5 pt-0 text-gray-600 text-sm md:text-base leading-relaxed">
                     {faq.answer}
                   </div>
-                )}
+                </div>
               </div>
             ))}
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
       {/* 7. FINAL TRANSFORMATION CALL TO ACTION */}
       <section className="bg-[#2563eb] text-white py-20 px-6 lg:px-8 text-center">
-        <div className="max-w-4xl mx-auto">
+        <RevealOnScroll direction="up" className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-5">
             Modify Public Sector. <br className="hidden sm:inline" /> Empower Society.
           </h2>
@@ -367,14 +450,14 @@ const PublicServicesLandingPage = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="w-full sm:w-auto bg-white hover:bg-gray-50 text-[#2563eb] font-semibold py-3.5 px-8 rounded-none transition duration-300 flex items-center justify-center gap-2 text-sm">
+            <button onClick={handleContactClick} className="w-full sm:w-auto bg-white hover:bg-gray-50 text-[#2563eb] font-semibold py-3.5 px-8 rounded-none transition duration-300 flex items-center justify-center gap-2 text-sm">
               Transform Your Organizations
             </button>
-            <button className="w-full sm:w-auto bg-transparent border border-white hover:bg-white/10 text-white font-semibold py-3.5 px-8 rounded-none transition duration-300 flex items-center justify-center gap-2 text-sm">
+            <button onClick={handleContactClick} className="w-full sm:w-auto bg-transparent border border-white hover:bg-white/10 text-white font-semibold py-3.5 px-8 rounded-none transition duration-300 flex items-center justify-center gap-2 text-sm">
               Contact Our Experts
             </button>
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
     </div>

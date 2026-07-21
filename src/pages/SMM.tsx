@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import img1 from "../assets/Smm/1.png";
+import img2 from "../assets/Smm/2.png";
 
 const SMMLandingPage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -55,23 +57,34 @@ const SMMLandingPage = () => {
       
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-6 max-w-7xl mx-auto">
-        <div className="max-w-3xl">
-          <span className="text-[#0066cc] font-bold text-xs tracking-wider uppercase mb-3 block">
-            Build and Influence with SMM
-          </span>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-            Build and Influence with SMM
-          </h1>
-          <p className="text-slate-600 mb-8 leading-relaxed text-sm md:text-base max-w-2xl">
-            Boost the digital presence of your brand with our social media marketing services with us. At Capyngen, we build smart social strategies that turn your random followers into loyal consumers through data-backed influence.
-          </p>
-          <div className="flex gap-4">
-            <button className="bg-[#0066cc] hover:bg-[#0052a3] text-white px-6 py-2.5 rounded text-sm font-medium transition-colors">
-              Explore Here
-            </button>
-            <button className="bg-transparent hover:bg-slate-100 text-[#0066cc] px-6 py-2.5 rounded text-sm font-medium transition-colors border border-[#0066cc]">
-              Know More 
-            </button>
+        <div className="flex flex-col md:flex-row items-center gap-12">
+          <div className="w-full md:w-1/2 max-w-3xl">
+            <span className="text-[#0066cc] font-bold text-xs tracking-wider uppercase mb-3 block">
+              Build and Influence with SMM
+            </span>
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+              Build and Influence with SMM
+            </h1>
+            <p className="text-slate-600 mb-8 leading-relaxed text-sm md:text-base max-w-2xl">
+              Boost the digital presence of your brand with our social media marketing services with us. At Capyngen, we build smart social strategies that turn your random followers into loyal consumers through data-backed influence.
+            </p>
+            <div className="flex gap-4">
+              <button className="bg-[#0066cc] hover:bg-[#0052a3] text-white px-6 py-2.5 rounded text-sm font-medium transition-colors">
+                Explore Here
+              </button>
+              <button className="bg-transparent hover:bg-slate-100 text-[#0066cc] px-6 py-2.5 rounded text-sm font-medium transition-colors border border-[#0066cc]">
+                Know More 
+              </button>
+            </div>
+          </div>
+          
+          {/* Img 1 placed in Hero Section */}
+          <div className="w-full md:w-1/2">
+            <img 
+              src={img1} 
+              alt="Social Media Marketing Hero" 
+              className="w-full h-auto object-contain rounded-lg"
+            />
           </div>
         </div>
       </section>
@@ -80,10 +93,11 @@ const SMMLandingPage = () => {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
           <div className="w-full md:w-1/2">
+            {/* Img 2 placed here, adjusted to object-contain and h-auto to prevent cutting */}
             <img 
-              src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+              src={img2} 
               alt="Team discussing presentation" 
-              className="rounded-lg shadow-xl w-full h-auto object-cover"
+              className="rounded-lg shadow-xl w-full h-auto object-contain"
             />
           </div>
           

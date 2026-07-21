@@ -10,6 +10,7 @@ import {
   MapPin,
   ChevronDown
 } from 'lucide-react';
+import heroimg from "../assets/ux.png"
 
 const UIUXLandingPage: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -36,32 +37,29 @@ const UIUXLandingPage: React.FC = () => {
     <div className="min-h-screen bg-[#f8f9fa] font-sans text-slate-600">
       
       {/* 1. Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="max-w-2xl">
-            <p className="text-blue-700 font-semibold mb-4 uppercase tracking-wider text-sm">DIGITAL INNOVATION</p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
-              UI/UX Solutions
-            </h1>
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              Capyngen, we provide UI/UX design services based on creative strategy and cutting-edge technology. We are a reliable UI UX design firm that builds user-friendly interfaces that enhance the customer experience, make things easier to use and help businesses thrive in the long run.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <button className="bg-blue-700 hover:bg-blue-800 text-white px-8 py-3.5 rounded font-medium transition-colors">
-                Discover Our Process
-              </button>
-              <button className="bg-transparent hover:bg-blue-50 text-blue-700 border border-blue-700 px-8 py-3.5 rounded font-medium transition-colors">
-                Book a Consultation
-              </button>
+      <section 
+        className="w-full min-h-[80vh] flex items-center bg-cover bg-center bg-no-repeat relative"
+        style={{ backgroundImage: `url(${heroimg})` }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-36 relative z-10 w-full">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-2xl">
+              <p className="text-blue-700 font-semibold mb-4 uppercase tracking-wider text-sm">DIGITAL INNOVATION</p>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
+                UI/UX Solutions
+              </h1>
+              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                Capyngen, we provide UI/UX design services based on creative strategy and cutting-edge technology. We are a reliable UI UX design firm that builds user-friendly interfaces that enhance the customer experience, make things easier to use and help businesses thrive in the long run.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <button className="bg-blue-700 hover:bg-blue-800 text-white px-8 py-3.5 rounded font-medium transition-colors">
+                  Discover Our Process
+                </button>
+                <button className="bg-transparent hover:bg-blue-50 text-blue-700 border border-blue-700 px-8 py-3.5 rounded font-medium transition-colors">
+                  Book a Consultation
+                </button>
+              </div>
             </div>
-          </div>
-          
-          <div className="relative">
-            <img 
-              src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&q=80&w=1000" 
-              alt="Abstract UI UX Concept" 
-              className="w-full h-48 lg:h-64 object-cover rounded-xl shadow-lg"
-            />
           </div>
         </div>
       </section>

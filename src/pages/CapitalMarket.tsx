@@ -1,4 +1,34 @@
 import React, { useState, useRef } from 'react';
+import { motion, type Variants } from 'framer-motion';
+
+// Serial Image Imports based on the provided folder structure
+import img6 from "../assets/Capital Market Firms/6.png";
+import img7 from "../assets/Capital Market Firms/7.png";
+import img19 from "../assets/Capital Market Firms/image 19.png";
+import img20 from "../assets/Capital Market Firms/image 20.png";
+import img23 from "../assets/Capital Market Firms/image 23.png";
+import img24 from "../assets/Capital Market Firms/image 24.png";
+import img25 from "../assets/Capital Market Firms/image 25.png";
+import img26 from "../assets/Capital Market Firms/image 26.png";
+import img86 from "../assets/Capital Market Firms/image 86.png";
+import img102 from "../assets/Capital Market Firms/image 102.png";
+import img103 from "../assets/Capital Market Firms/image 103.png";
+
+// Animation Variants
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const fadeLeft: Variants = {
+  hidden: { opacity: 0, x: 50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const fadeRight: Variants = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
 
 const CapitalMarketPage: React.FC = () => {
   // State for FAQs (Accordion)
@@ -18,21 +48,25 @@ const CapitalMarketPage: React.FC = () => {
     }
   };
 
+  const handleButtonClick = (action: string) => {
+    alert(`${action} button clicked!`);
+  };
+
   const insightsData = [
-    { title: "AI-Powered Trading\nPlatforms", img: "/path-to-trading-bulb-chart.jpg" },
-    { title: "Wealth\nManagement\nSolutions", img: "/path-to-wealth-management.jpg" },
-    { title: "Risk & Compliance\nAutomation", img: "/path-to-risk-compliance.jpg" },
-    { title: "Predictive Market\nAnalytics", img: "/path-to-predictive-analytics.jpg" },
-    { title: "Fraud Detection\nSystems", img: "/path-to-fraud-detection.jpg" }
+    { title: "AI-Powered Trading\nPlatforms", img: img19 },
+    { title: "Wealth\nManagement\nSolutions", img: img20 },
+    { title: "Risk & Compliance\nAutomation", img: img23 },
+    { title: "Predictive Market\nAnalytics", img: img24 },
+    { title: "Fraud Detection\nSystems", img: img25 }
   ];
 
   const whyData = [
-    { title: "AI-Driven\nInnovation", desc: "INTELLIGENT AUTOMATION AND PREDICTIVE ANALYTICS DESIGNED FOR SMARTER FINANCIAL OPERATIONS.", img: "/path-to-ai-robot-hand.jpg" },
-    { title: "Enterprise Security", desc: "ADVANCED CYBERSECURITY FRAMEWORKS THAT PROTECT IMPORTANT FINANCIAL DATA.", img: "/path-to-enterprise-security.jpg" },
-    { title: "Scalable\nArchitecture", desc: "CLOUD-NATIVE SOLUTIONS ENGINEERED FOR HIGH-PERFORMANCE FINANCIAL SYSTEMS.", img: "/path-to-scalable-architecture.jpg" },
-    { title: "End-to-End\nSupport", desc: "COMPREHENSIVE SERVICES FROM STRATEGY AND DESIGN THROUGH DEVELOPMENT, AND ONGOING OPTIMIZATION.", img: "/path-to-end-to-end.jpg" },
-    { title: "Industry Expertise", desc: "DEEP DOMAIN KNOWLEDGE ACROSS INVESTMENT BANKING, WEALTH MANAGEMENT, AND TRADING.", img: "/path-to-industry-expertise.jpg" },
-    { title: "Regulatory\nCompliance", desc: "BUILT-IN COMPLIANCE FRAMEWORKS THAT ADAPT TO CHANGING FINANCIAL REGULATIONS.", img: "/path-to-regulatory.jpg" }
+    { title: "AI-Driven\nInnovation", desc: "INTELLIGENT AUTOMATION AND PREDICTIVE ANALYTICS DESIGNED FOR SMARTER FINANCIAL OPERATIONS.", img: img102 },
+    { title: "Enterprise Security", desc: "ADVANCED CYBERSECURITY FRAMEWORKS THAT PROTECT IMPORTANT FINANCIAL DATA.", img: img103 },
+    { title: "Scalable\nArchitecture", desc: "CLOUD-NATIVE SOLUTIONS ENGINEERED FOR HIGH-PERFORMANCE FINANCIAL SYSTEMS.", img: img19 },
+    { title: "End-to-End\nSupport", desc: "COMPREHENSIVE SERVICES FROM STRATEGY AND DESIGN THROUGH DEVELOPMENT, AND ONGOING OPTIMIZATION.", img: img20 },
+    { title: "Industry Expertise", desc: "DEEP DOMAIN KNOWLEDGE ACROSS INVESTMENT BANKING, WEALTH MANAGEMENT, AND TRADING.", img: img23 },
+    { title: "Regulatory\nCompliance", desc: "BUILT-IN COMPLIANCE FRAMEWORKS THAT ADAPT TO CHANGING FINANCIAL REGULATIONS.", img: img24 }
   ];
 
   const faqData = [
@@ -54,14 +88,14 @@ const CapitalMarketPage: React.FC = () => {
   ];
 
   return (
-    <div className="w-full font-sans text-gray-900 bg-white">
+    <div className="w-full font-sans text-gray-900 bg-white overflow-x-hidden">
       
       {/* 1. Capital Markets Hero Section */}
       <section className="relative w-full min-h-screen flex items-center overflow-hidden bg-[#0a1122]">
         <div 
           className="absolute inset-0 z-0 bg-slate-900"
           style={{
-            backgroundImage: `url('/path-to-capital-markets-bg.jpg')`, // Replace with actual path
+            backgroundImage: `url('${img6}')`, 
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -72,7 +106,13 @@ const CapitalMarketPage: React.FC = () => {
         </div>
 
         <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10 w-full">
-          <div className="max-w-3xl space-y-8">
+          <motion.div 
+            className="max-w-3xl space-y-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
             <span className="block text-[#3b82f6] text-sm md:text-base font-semibold tracking-widest uppercase">
               AI-POWERED FINANCIAL INNOVATION
             </span>
@@ -83,90 +123,140 @@ const CapitalMarketPage: React.FC = () => {
               As a leading capital market software development company, Capyngen builds intelligent technology that drive digital transformation across investment banking, trading ecosystems, and capital market operations with AI, cloud computing, and enterprise-grade security solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button className="flex items-center justify-center gap-2 bg-[#2563eb] hover:bg-blue-600 text-white font-medium py-3.5 px-8 rounded-md transition-colors text-base">
+              <button onClick={() => handleButtonClick('Talk to Our Experts')} className="flex items-center justify-center gap-2 bg-[#2563eb] hover:bg-blue-600 text-white font-medium py-3.5 px-8 rounded-md transition-colors text-base">
                 Talk to Our Experts
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </button>
-              <button className="flex items-center justify-center bg-transparent hover:bg-white/5 border border-gray-600 hover:border-gray-400 text-white font-medium py-3.5 px-8 rounded-md transition-all text-base">
+              <button onClick={() => handleButtonClick('Explore Capital Market Solutions')} className="flex items-center justify-center bg-transparent hover:bg-white/5 border border-gray-600 hover:border-gray-400 text-white font-medium py-3.5 px-8 rounded-md transition-all text-base">
                 Explore Capital Market Solutions
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* 2. Industry Insight Section */}
-      <section className="relative w-full pt-20 pb-12 md:pb-24 overflow-hidden z-10">
-        <div className="absolute top-0 left-0 w-full h-[65%] md:h-[75%] bg-[#f5f6f9] -z-10"></div>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="relative mt-8 md:mt-0">
-            <div className="absolute -left-12 md:-left-24 top-16 md:top-24 w-32 md:w-48 h-32 md:h-48 text-[#1e66f5] -z-10 opacity-90">
-              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                <path d="M-20,120 H50 V60 H100 V20 H150" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M-10,110 H40 V50 H90 V10 H140" stroke="currentColor" strokeWidth="2" strokeOpacity="0.6" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M-30,130 H60 V70 H110 V30 H160" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.8" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M0,125 H45 V55 H95 V15 H145" stroke="currentColor" strokeWidth="1" strokeOpacity="0.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M-40,115 H55 V65 H105 V25 H155" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.7" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <img 
-              src="/path-to-handshake-image.jpg" 
-              alt="Professionals shaking hands in a meeting" 
-              className="relative z-10 w-full h-auto min-h-[300px] object-cover object-center shadow-lg bg-gray-200"
-            />
-          </div>
-          <div className="flex flex-col justify-center pt-8 md:pt-0">
-            <span className="text-[13px] md:text-sm font-bold tracking-[0.15em] uppercase text-gray-800 mb-4">
-              Industry Insight
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a0a0a] leading-[1.2] mb-6">
-              How AI is Revolutionizing Capital<br className="hidden lg:block" /> Markets
-            </h2>
-            <div className="space-y-4 text-base md:text-lg text-gray-800 font-medium leading-relaxed">
-              <p>
-                The capital markets software development landscape is undergoing a massive shift, with AI driving this transformation.
-              </p>
-              <p>
-                Our intelligent financial solutions help firms automate routine operations, enhance decision-making capabilities, and unlock new revenue opportunities. With our capital markets technology solutions, financial organizations can gain a competitive edge in an increasingly complex market.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 2 & 3. Redesigned Industry Insight & Driving Growth Combined Wrapper for Layout */}
+      <div className="relative w-full overflow-hidden">
+        
+        {/* Light background cutting off halfway to let image bleed over */}
+        <div className="absolute top-0 left-0 w-full h-[60%] md:h-[65%] bg-[#f4f5fa] -z-10"></div>
 
-      {/* 3. Driving Growth Text Section */}
-      <section className="bg-white py-16 px-6 md:px-12 lg:px-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-4xl lg:ml-[8%]">
-            <h2 className="text-[17px] md:text-[19px] font-bold tracking-[0.12em] uppercase text-black mb-8 leading-snug">
-              Driving Growth With Intelligent<br className="hidden md:block" /> Financial Technology
-            </h2>
-            <div className="space-y-4 text-gray-800 text-[16px] md:text-[17px] font-medium leading-relaxed">
-              <p>
-                Capital markets are experiencing rapid evolution through AI integration, digital platforms, intelligent automation, and real-time data analytics. Financial organizations must deliver faster trade execution, strengthen regulatory compliance, manage complex risks, and provide superior investor experiences.
-              </p>
-              <p>
-                Our capital market software development expertise ensures your technology infrastructure is future-ready which empowers financial institutions to modernize outdated systems that support long-term growth.
-              </p>
-            </div>
+        {/* --- Industry Insight Section --- */}
+        <section className="relative w-full pt-20 pb-10 px-6 md:px-12 lg:px-24 z-10">
+          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+            
+            {/* Left: Image with abstract blue scribbles */}
+            <motion.div 
+              className="w-full lg:w-1/2 relative mt-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeRight}
+            >
+              {/* Abstract scribbled step design mimicking the reference image */}
+              <div className="absolute -left-12 md:-left-24 top-20 w-24 md:w-40 h-auto text-[#1e66f5] -z-10 opacity-90">
+                <svg viewBox="0 0 100 120" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg" className="w-full h-full transform -translate-y-6">
+                  {/* Step Lines */}
+                  <path d="M100,20 L60,20 L60,60 L20,60 L20,100 L-10,100" strokeWidth="3" />
+                  <path d="M100,25 L55,25 L55,65 L15,65 L15,105 L-10,105" strokeWidth="1.5" opacity="0.7" />
+                  <path d="M100,15 L65,15 L65,55 L25,55 L25,95 L-10,95" strokeWidth="1" opacity="0.5" />
+                  {/* Scratchy horizontal lines */}
+                  <path d="M50,90 L-10,90" strokeWidth="1" opacity="0.6" />
+                  <path d="M40,85 L-10,85" strokeWidth="1" opacity="0.4" />
+                </svg>
+              </div>
+              
+              {/* Image updated to be a strict square with no rounding, object-cover */}
+              <img 
+                src={img7} 
+                alt="Professionals shaking hands in a meeting" 
+                className="relative z-10 w-full aspect-square object-cover shadow-2xl bg-gray-200"
+              />
+            </motion.div>
+
+            {/* Right: Text Block */}
+            <motion.div 
+              className="w-full lg:w-1/2 flex flex-col justify-center pt-4 lg:pt-12"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeLeft}
+            >
+              <span className="text-xs md:text-[13px] font-bold tracking-[0.15em] uppercase text-gray-800 mb-4">
+                Industry Insight
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a0a0a] leading-[1.2] mb-6">
+                How AI is Revolutionizing Capital<br className="hidden lg:block" /> Markets
+              </h2>
+              <div className="space-y-4 text-base md:text-lg text-gray-800 font-medium leading-relaxed max-w-[95%]">
+                <p>
+                  The capital markets software development landscape is undergoing a massive shift, with AI driving this transformation.
+                </p>
+                <p>
+                  Our intelligent financial solutions help firms automate routine operations, enhance decision-making capabilities, and unlock new revenue opportunities. With our capital markets technology solutions, financial organizations can gain a competitive edge in an increasingly complex market.
+                </p>
+              </div>
+            </motion.div>
+
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* --- Driving Growth Section --- */}
+        <section className="relative w-full pb-20 pt-8 px-6 md:px-12 lg:px-24 bg-transparent z-10">
+          <motion.div 
+            className="max-w-7xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            {/* Aligned left to match the left edge of the image above it */}
+            <div className="max-w-4xl">
+              <h2 className="text-sm md:text-base font-bold tracking-[0.1em] uppercase text-black mb-6 leading-snug">
+                Driving Growth With Intelligent<br className="hidden md:block" /> Financial Technology
+              </h2>
+              <div className="space-y-4 text-gray-800 text-sm md:text-base font-medium leading-relaxed">
+                <p>
+                  Capital markets are experiencing rapid evolution through AI integration, digital platforms, intelligent automation, and real-time data analytics. Financial organizations must deliver faster trade execution, strengthen regulatory compliance, manage complex risks, and provide superior investor experiences.
+                </p>
+                <p>
+                  Our capital market software development expertise ensures your technology infrastructure is future-ready which empowers financial institutions to modernize outdated systems that support long-term growth.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+      </div>
 
       {/* 4. Capital Market Insights Section */}
       <section className="bg-[#0b1121] py-24 px-6 md:px-12 lg:px-24 text-white">
         <div className="max-w-[1400px] mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold mb-12">
+          <motion.h2 
+            className="text-3xl md:text-4xl lg:text-[40px] font-bold mb-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
             Capital Market Insights
-          </h2>
-          <div 
+          </motion.h2>
+          <motion.div 
             ref={insightsScrollRef}
             className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
           >
             {insightsData.map((insight, index) => (
-              <div key={index} className="relative h-[400px] md:h-[450px] min-w-[320px] w-[350px] shrink-0 snap-start rounded-md overflow-hidden group cursor-pointer shadow-lg border border-white/5 bg-slate-800">
+              <div 
+                key={index} 
+                onClick={() => handleButtonClick(`Read more on ${insight.title.replace('\n', ' ')}`)}
+                className="relative h-[400px] md:h-[450px] min-w-[320px] w-[350px] shrink-0 snap-start rounded-md overflow-hidden group cursor-pointer shadow-lg border border-white/5 bg-slate-800"
+              >
                 <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url('${insight.img}')` }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0b1121] via-[#0b1121]/60 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-8 w-full flex flex-col justify-end">
@@ -178,7 +268,7 @@ const CapitalMarketPage: React.FC = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
           
           <div className="flex justify-end gap-6 mt-4 pr-4 md:pr-12">
             <button onClick={() => scrollCarousel(insightsScrollRef, 'left')} className="text-gray-500 hover:text-white transition-colors cursor-pointer" aria-label="Scroll left">
@@ -194,7 +284,13 @@ const CapitalMarketPage: React.FC = () => {
       {/* 5. Smart Financial Operations Section */}
       <section className="bg-white py-20 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="space-y-6">
+          <motion.div 
+            className="space-y-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeRight}
+          >
             <span className="text-sm font-semibold tracking-[0.15em] uppercase text-gray-800">
               SMART FINANCIAL OPERATIONS
             </span>
@@ -209,28 +305,46 @@ const CapitalMarketPage: React.FC = () => {
                 As a leading provider of capital markets IT services, we help you unlock the full potential of AI for superior business results.
               </p>
             </div>
-          </div>
-          <div className="w-full flex justify-center md:justify-end">
+          </motion.div>
+          <motion.div 
+            className="w-full flex justify-center md:justify-end"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeLeft}
+          >
             <img 
-              src="/path-to-financial-operations-team.jpg" 
+              src={img26} 
               alt="Professionals analyzing data on a board" 
-              className="w-full h-auto min-h-[300px] object-cover max-h-[500px] bg-gray-200 rounded-sm"
+              className="w-full h-auto object-contain bg-gray-200 rounded-sm"
             />
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* 6. Case Study: Modernizing Investment Operations */}
       <section className="bg-[#2f64ed] text-white py-20 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="w-full">
+          <motion.div 
+            className="w-full"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeRight}
+          >
             <img 
-              src="/path-to-whiteboard-meeting.jpg" 
+              src={img86} 
               alt="Team collaborating on a whiteboard with sticky notes" 
-              className="w-full h-auto min-h-[300px] object-cover shadow-lg rounded-sm bg-blue-800" 
+              className="w-full h-auto object-contain shadow-lg rounded-sm bg-blue-800" 
             />
-          </div>
-          <div className="space-y-6">
+          </motion.div>
+          <motion.div 
+            className="space-y-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeLeft}
+          >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
               Modernizing Investment<br className="hidden lg:block" /> Operations
             </h2>
@@ -257,7 +371,7 @@ const CapitalMarketPage: React.FC = () => {
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -265,21 +379,35 @@ const CapitalMarketPage: React.FC = () => {
       <section className="bg-white py-20 px-6 md:px-12 lg:px-24">
         <div className="max-w-[1400px] mx-auto">
           
-          <div className="mb-12 space-y-3">
+          <motion.div 
+            className="mb-12 space-y-3"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black uppercase tracking-wide">
               WHY CAPYNGEN
             </h2>
             <p className="text-lg text-gray-800 font-medium">
               Technology That Powers Modern Financial Markets
             </p>
-          </div>
+          </motion.div>
 
-          <div 
+          <motion.div 
             ref={whyScrollRef}
             className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
           >
             {whyData.map((item, index) => (
-              <div key={index} className="relative h-[450px] min-w-[320px] w-full md:w-[calc(33.333%-1rem)] shrink-0 snap-start rounded-lg overflow-hidden group shadow-md border border-gray-100 bg-gray-200">
+              <div 
+                key={index} 
+                onClick={() => handleButtonClick(`Read more about ${item.title.replace('\n', ' ')}`)}
+                className="relative h-[450px] min-w-[320px] w-full md:w-[calc(33.333%-1rem)] shrink-0 snap-start rounded-lg overflow-hidden group shadow-md border border-gray-100 bg-gray-200 cursor-pointer"
+              >
                 <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url('${item.img}')` }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-8 w-full flex flex-col justify-end">
@@ -290,7 +418,7 @@ const CapitalMarketPage: React.FC = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
 
           <div className="flex justify-end gap-6 mt-4 pr-4 md:pr-8">
             <button onClick={() => scrollCarousel(whyScrollRef, 'left')} className="text-gray-400 hover:text-black transition-colors cursor-pointer" aria-label="Scroll left">
@@ -305,7 +433,13 @@ const CapitalMarketPage: React.FC = () => {
 
       {/* 8. Client Testimonial Section */}
       <section className="bg-white py-20 px-6 md:px-12 lg:px-24">
-        <div className="max-w-5xl mx-auto">
+        <motion.div 
+          className="max-w-5xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+        >
           <hr className="border-gray-300" />
           <div className="py-16 flex flex-col md:flex-row gap-8">
             
@@ -334,17 +468,29 @@ const CapitalMarketPage: React.FC = () => {
 
           </div>
           <hr className="border-gray-300" />
-        </div>
+        </motion.div>
       </section>
 
       {/* 9. Frequently Asked Questions Section */}
       <section className="bg-white py-24 px-6 md:px-16 lg:px-24">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16 relative">
+          <motion.div 
+            className="text-center mb-16 relative"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-24 bg-blue-100 rounded-full blur-[40px] -z-10 opacity-70"></div>
             <h2 className="text-5xl md:text-6xl font-bold text-[#1e293b] tracking-wide">FAQs</h2>
-          </div>
-          <div className="space-y-2">
+          </motion.div>
+          <motion.div 
+            className="space-y-2"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
             {faqData.map((faq, index) => {
               const isOpen = openFaq === index;
               return (
@@ -361,22 +507,33 @@ const CapitalMarketPage: React.FC = () => {
                     </span>
                   </button>
                   {isOpen && (
-                    <div className="mt-4 pr-12 animate-fadeIn">
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="mt-4 pr-12"
+                    >
                       <p className="text-slate-500 leading-relaxed font-normal">
                         {faq.a}
                       </p>
-                    </div>
+                    </motion.div>
                   )}
                 </div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* 10. Call to Action (CTA) Section */}
       <section className="bg-[#050514] text-white py-24 px-6 text-center flex flex-col items-center justify-center border-b border-white/5">
-        <div className="max-w-4xl mx-auto space-y-8">
+        <motion.div 
+          className="max-w-4xl mx-auto space-y-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+        >
           <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold leading-tight tracking-tight">
             Build the Future of Capital Markets with Capyngen
           </h2>
@@ -384,11 +541,14 @@ const CapitalMarketPage: React.FC = () => {
             Our capital markets software development expertise transform investment operations, strengthen security frameworks, and accelerate digital innovation with AI-powered capital market software development solutions.
           </p>
           <div className="pt-6">
-            <button className="bg-transparent hover:bg-white/10 text-white border border-gray-400 rounded-full py-4 px-8 text-[17px] font-medium transition-all duration-300">
+            <button 
+              onClick={() => handleButtonClick('Connect with Our Experts')} 
+              className="bg-transparent hover:bg-white/10 text-white border border-gray-400 rounded-full py-4 px-8 text-[17px] font-medium transition-all duration-300"
+            >
               Connect with Our Experts
             </button>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* 11. Footer Section */}
@@ -403,59 +563,59 @@ const CapitalMarketPage: React.FC = () => {
               business.
             </p>
             <div className="flex space-x-3">
-              <a href="#" className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm text-xs font-semibold transition-colors">IN</a>
-              <a href="#" className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm text-xs font-semibold transition-colors">TW</a>
-              <a href="#" className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm text-xs font-semibold transition-colors">YT</a>
+              <button onClick={() => handleButtonClick('LinkedIn')} className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm text-xs font-semibold transition-colors">IN</button>
+              <button onClick={() => handleButtonClick('Twitter')} className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm text-xs font-semibold transition-colors">TW</button>
+              <button onClick={() => handleButtonClick('YouTube')} className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm text-xs font-semibold transition-colors">YT</button>
             </div>
           </div>
 
           <div className="md:col-span-3 lg:col-span-2">
             <h3 className="text-sm font-bold tracking-widest uppercase mb-8">Services</h3>
             <ul className="text-gray-400 text-sm space-y-5">
-              <li><a href="#" className="hover:text-white transition-colors">Software Development</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">AI Solutions</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">UI/UX Design</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Cloud Services</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">DevOps</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Digital Marketing</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Enterprise Software</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Consulting</a></li>
+              <li><button onClick={() => handleButtonClick('Software Development')} className="hover:text-white transition-colors">Software Development</button></li>
+              <li><button onClick={() => handleButtonClick('AI Solutions')} className="hover:text-white transition-colors">AI Solutions</button></li>
+              <li><button onClick={() => handleButtonClick('UI/UX Design')} className="hover:text-white transition-colors">UI/UX Design</button></li>
+              <li><button onClick={() => handleButtonClick('Cloud Services')} className="hover:text-white transition-colors">Cloud Services</button></li>
+              <li><button onClick={() => handleButtonClick('DevOps')} className="hover:text-white transition-colors">DevOps</button></li>
+              <li><button onClick={() => handleButtonClick('Digital Marketing')} className="hover:text-white transition-colors">Digital Marketing</button></li>
+              <li><button onClick={() => handleButtonClick('Enterprise Software')} className="hover:text-white transition-colors">Enterprise Software</button></li>
+              <li><button onClick={() => handleButtonClick('Consulting')} className="hover:text-white transition-colors">Consulting</button></li>
             </ul>
           </div>
 
           <div className="md:col-span-3 lg:col-span-2">
             <h3 className="text-sm font-bold tracking-widest uppercase mb-8">Industries</h3>
             <ul className="text-gray-400 text-sm space-y-5">
-              <li><a href="#" className="hover:text-white transition-colors">Healthcare</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Banking</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Education</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Retail</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Manufacturing</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Insurance</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Logistics</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Real Estate</a></li>
+              <li><button onClick={() => handleButtonClick('Healthcare')} className="hover:text-white transition-colors">Healthcare</button></li>
+              <li><button onClick={() => handleButtonClick('Banking')} className="hover:text-white transition-colors">Banking</button></li>
+              <li><button onClick={() => handleButtonClick('Education')} className="hover:text-white transition-colors">Education</button></li>
+              <li><button onClick={() => handleButtonClick('Retail')} className="hover:text-white transition-colors">Retail</button></li>
+              <li><button onClick={() => handleButtonClick('Manufacturing')} className="hover:text-white transition-colors">Manufacturing</button></li>
+              <li><button onClick={() => handleButtonClick('Insurance')} className="hover:text-white transition-colors">Insurance</button></li>
+              <li><button onClick={() => handleButtonClick('Logistics')} className="hover:text-white transition-colors">Logistics</button></li>
+              <li><button onClick={() => handleButtonClick('Real Estate')} className="hover:text-white transition-colors">Real Estate</button></li>
             </ul>
           </div>
 
           <div className="md:col-span-3 lg:col-span-2">
             <h3 className="text-sm font-bold tracking-widest uppercase mb-8">Company</h3>
             <ul className="text-gray-400 text-sm space-y-5">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Case Studies</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">News</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blogs</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              <li><button onClick={() => handleButtonClick('About Us')} className="hover:text-white transition-colors">About Us</button></li>
+              <li><button onClick={() => handleButtonClick('Careers')} className="hover:text-white transition-colors">Careers</button></li>
+              <li><button onClick={() => handleButtonClick('Case Studies')} className="hover:text-white transition-colors">Case Studies</button></li>
+              <li><button onClick={() => handleButtonClick('News')} className="hover:text-white transition-colors">News</button></li>
+              <li><button onClick={() => handleButtonClick('Blogs')} className="hover:text-white transition-colors">Blogs</button></li>
+              <li><button onClick={() => handleButtonClick('Contact')} className="hover:text-white transition-colors">Contact</button></li>
             </ul>
           </div>
 
           <div className="md:col-span-3 lg:col-span-2">
             <h3 className="text-sm font-bold tracking-widest uppercase mb-8">Resources</h3>
             <ul className="text-gray-400 text-sm space-y-5">
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms & Conditions</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">FAQs</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
+              <li><button onClick={() => handleButtonClick('Privacy Policy')} className="hover:text-white transition-colors">Privacy Policy</button></li>
+              <li><button onClick={() => handleButtonClick('Terms & Conditions')} className="hover:text-white transition-colors">Terms & Conditions</button></li>
+              <li><button onClick={() => handleButtonClick('FAQs Page')} className="hover:text-white transition-colors">FAQs</button></li>
+              <li><button onClick={() => handleButtonClick('Support')} className="hover:text-white transition-colors">Support</button></li>
             </ul>
           </div>
 
