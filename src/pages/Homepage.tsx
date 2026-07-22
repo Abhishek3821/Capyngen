@@ -24,6 +24,7 @@ import img23 from "../assets/homepage/23.png";
 import img24 from "../assets/homepage/24.png";
 import img25 from "../assets/homepage/25.png";
 import img26 from "../assets/homepage/26.png";
+import vedio1 from "../assets/1000095423.mp4"
 
 // --- Scroll Animation Wrapper Component ---
 interface RevealOnScrollProps {
@@ -298,15 +299,16 @@ const HomePage: React.FC = () => {
           HERO SECTION
           ========================================= */}
       <section className="relative flex min-h-[calc(100vh-80px)] w-full items-center justify-center overflow-hidden bg-slate-950 pt-10 pb-16 md:pt-16">
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: 'linear-gradient(to right, #1e293b, #0f172a)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        >
+        {/* Background Video Layer */}
+        <div className="absolute inset-0 z-0">
+          <video 
+            src={vedio1} 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="h-full w-full object-cover"
+          />
           <div className="absolute inset-0 bg-[#0f172a]/75 mix-blend-multiply"></div>
           <div className="absolute inset-0 bg-blue-900/20"></div>
         </div>

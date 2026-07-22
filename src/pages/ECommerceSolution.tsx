@@ -7,6 +7,15 @@ import {
   Smartphone,
   Phone
 } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
+
+// Serial Imports based on the folder structure
+import img1 from "../assets/Ecommerce solutions/1.png";
+import img2 from "../assets/Ecommerce solutions/2.png";
+import img3 from "../assets/Ecommerce solutions/3.png";
+import img4 from "../assets/Ecommerce solutions/4.png";
+import img5 from "../assets/Ecommerce solutions/5.png";
+import img6 from "../assets/Ecommerce solutions/6.png";
 
 const EcommerceLandingPage: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -46,50 +55,80 @@ const EcommerceLandingPage: React.FC = () => {
     }
   ];
 
+  // Interaction Handlers
+  const handleExploreClick = () => {
+    document.getElementById('future-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleCardAction = () => {
+    alert("Navigating to detailed view...");
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Thank you! Your application has been successfully submitted. Our team will contact you shortly.");
+  };
+
+  // Scroll Animation Configuration with explicit Variants type to fix TS error
+  const fadeUpVariant: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
   return (
     <div className="min-h-screen bg-[#f8f9fc] font-sans text-slate-600">
       
-      {/* 1. Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="max-w-2xl">
-            <p className="inline-block bg-blue-50 text-blue-700 font-semibold px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-6 border border-blue-100">
-              Digital Commerce
-            </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
-              Remodelling<br />Virtual<br />Commerce Experiences
-            </h1>
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg">
-              Providing worldwide Ecommerce software development for shopkeepers with fast-track, smart AI planning that connects and fills the difference between physical and online storefronts.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <button className="bg-[#0b5a93] hover:bg-[#094876] text-white px-8 py-3.5 rounded font-medium transition-colors shadow-sm">
-                Explore Services & Solutions
-              </button>
-            </div>
-          </div>
-          
-          <div className="relative">
-            <div className="bg-white p-2 rounded-xl shadow-2xl border border-slate-100 relative">
-              <img 
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000" 
-                alt="Laptop showing analytics dashboard" 
-                className="w-full h-auto rounded-lg"
-              />
-              
-              {/* Floating Stat Card */}
-             
-            </div>
+      {/* 1. Hero Section (Updated with Background Image) */}
+      <section className="relative py-24 lg:py-32 overflow-hidden min-h-[80vh] flex items-center">
+        {/* Background Image Layer */}
+        <div className="absolute inset-0 z-0">
+          <img src={img1} alt="Hero Background" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-slate-900/80"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div 
+              className="max-w-2xl"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUpVariant}
+            >
+              <p className="inline-block bg-white/10 text-white font-semibold px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-6 border border-white/20 backdrop-blur-sm">
+                Digital Commerce
+              </p>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                Remodelling<br />Virtual<br />Commerce Experiences
+              </h1>
+              <p className="text-lg text-slate-300 mb-8 leading-relaxed max-w-lg">
+                Providing worldwide Ecommerce software development for shopkeepers with fast-track, smart AI planning that connects and fills the difference between physical and online storefronts.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <button 
+                  onClick={handleExploreClick}
+                  className="bg-[#0b5a93] hover:bg-[#094876] text-white px-8 py-3.5 rounded font-medium transition-colors shadow-sm"
+                >
+                  Explore Services & Solutions
+                </button>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* 2. Future of Commerce Section */}
-      <section className="bg-white py-20 lg:py-28 mt-8">
+      <section id="future-section" className="bg-white py-20 lg:py-28 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             
-            <div className="lg:pr-8">
+            <motion.div 
+              className="lg:pr-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={fadeUpVariant}
+            >
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
                 Rising Commerce for<br />the Future Generation
               </h2>
@@ -107,36 +146,57 @@ const EcommerceLandingPage: React.FC = () => {
                   <span className="text-slate-700 font-medium">Whether you are running B2B industrial supply management or a direct-to-consumer brand, our approach combines sharp technical execution with real retail thinking.</span>
                 </li>
               </ul>
-            </div>
+            </motion.div>
             
             {/* Bento Box Image Grid */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="rounded-xl overflow-hidden shadow-sm h-48">
+              <motion.div 
+                className="space-y-4"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={{
+                  hidden: { opacity: 0, x: 30 },
+                  visible: { opacity: 1, x: 0, transition: { duration: 0.6, delay: 0.2 } }
+                }}
+              >
+                {/* Full native height image block */}
+                <div className="rounded-xl overflow-hidden shadow-sm w-full">
                   <img 
-                    src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80&w=400" 
+                    src={img2} 
                     alt="Mobile Shopping" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto block"
                   />
                 </div>
                 <div className="bg-[#0b5a93] p-6 rounded-xl shadow-sm text-white h-32 flex flex-col justify-center">
                   <ShoppingCart className="w-6 h-6 mb-3 opacity-80" />
                   <p className="font-semibold text-sm">Enterprise-level pressure</p>
                 </div>
-              </div>
-              <div className="space-y-4 mt-8">
+              </motion.div>
+              
+              <motion.div 
+                className="space-y-4 mt-8"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={{
+                  hidden: { opacity: 0, x: 30 },
+                  visible: { opacity: 1, x: 0, transition: { duration: 0.6, delay: 0.4 } }
+                }}
+              >
                 <div className="bg-[#eef3fb] p-6 rounded-xl shadow-sm h-32 flex flex-col justify-center border border-blue-50">
                   <BarChart3 className="w-6 h-6 mb-3 text-[#0b5a93]" />
                   <p className="font-semibold text-sm text-[#0b5a93]">Personalized Customer Journey</p>
                 </div>
-                <div className="rounded-xl overflow-hidden shadow-sm h-48">
+                {/* Full native height image block */}
+                <div className="rounded-xl overflow-hidden shadow-sm w-full">
                   <img 
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=400" 
+                    src={img3} 
                     alt="Team Analytics Review" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto block"
                   />
                 </div>
-              </div>
+              </motion.div>
             </div>
 
           </div>
@@ -146,23 +206,38 @@ const EcommerceLandingPage: React.FC = () => {
       {/* 3. News / Articles Section */}
       <section className="bg-[#f8f9fc] py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-end mb-10">
+          <motion.div 
+            className="flex justify-between items-end mb-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUpVariant}
+          >
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">What's Happening?</h2>
               <p className="text-slate-600 max-w-2xl">
                 The newest overview in retail high-end tech and E-commerce.
               </p>
             </div>
-          </div>
+          </motion.div>
           
           <div className="grid md:grid-cols-3 gap-6">
+            
             {/* Article 1 */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full">
-              <div className="relative">
+            <motion.div 
+              onClick={handleCardAction}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.1 } } }}
+              className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full"
+            >
+              {/* Full height image */}
+              <div className="relative w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=600" 
+                  src={img4} 
                   alt="Headless Commerce Concept" 
-                  className="w-full h-48 object-cover"
+                  className="w-full h-auto block"
                 />
                 <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0b5a93] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">Report</span>
               </div>
@@ -174,15 +249,22 @@ const EcommerceLandingPage: React.FC = () => {
                   View Report <ArrowRight className="ml-1 w-4 h-4" />
                 </p>
               </div>
-            </div>
+            </motion.div>
             
             {/* Article 2 */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full">
-              <div className="relative">
+            <motion.div 
+              onClick={handleCardAction}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.2 } } }}
+              className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full"
+            >
+              <div className="relative w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=600" 
+                  src={img5} 
                   alt="Mobile Payments" 
-                  className="w-full h-48 object-cover"
+                  className="w-full h-auto block"
                 />
                 <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0b5a93] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">Award</span>
               </div>
@@ -194,15 +276,22 @@ const EcommerceLandingPage: React.FC = () => {
                   View Award <ArrowRight className="ml-1 w-4 h-4" />
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Article 3 */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full">
-              <div className="relative">
+            <motion.div 
+              onClick={handleCardAction}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.3 } } }}
+              className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full"
+            >
+              <div className="relative w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600" 
+                  src={img6} 
                   alt="Data Streams" 
-                  className="w-full h-48 object-cover"
+                  className="w-full h-auto block"
                 />
                 <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0b5a93] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">Case Study</span>
               </div>
@@ -214,15 +303,22 @@ const EcommerceLandingPage: React.FC = () => {
                   View Case <ArrowRight className="ml-1 w-4 h-4" />
                 </p>
               </div>
-            </div>
+            </motion.div>
             
             {/* Article 4 */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full">
-              <div className="relative">
+            <motion.div 
+              onClick={handleCardAction}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.4 } } }}
+              className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full"
+            >
+              <div className="relative w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600" 
+                  src={img2} 
                   alt="Data Streams" 
-                  className="w-full h-48 object-cover"
+                  className="w-full h-auto block"
                 />
                 <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0b5a93] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">Report</span>
               </div>
@@ -234,15 +330,22 @@ const EcommerceLandingPage: React.FC = () => {
                   View Report <ArrowRight className="ml-1 w-4 h-4" />
                 </p>
               </div>
-            </div>
+            </motion.div>
             
             {/* Article 5 */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full">
-              <div className="relative">
+            <motion.div 
+              onClick={handleCardAction}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.5 } } }}
+              className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full"
+            >
+              <div className="relative w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600" 
+                  src={img3} 
                   alt="Data Streams" 
-                  className="w-full h-48 object-cover"
+                  className="w-full h-auto block"
                 />
                 <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0b5a93] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">Case Study</span>
               </div>
@@ -254,7 +357,7 @@ const EcommerceLandingPage: React.FC = () => {
                   View Case <ArrowRight className="ml-1 w-4 h-4" />
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -262,57 +365,42 @@ const EcommerceLandingPage: React.FC = () => {
       {/* 4. Specializations Grid 1: What We Offer? */}
       <section className="bg-[#eef3fb] py-16 border-y border-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.div 
+            className="text-center max-w-3xl mx-auto mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUpVariant}
+          >
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">What We Offer?</h2>
             <p className="text-slate-600 font-medium text-lg">
               E-Commerce Solutions
             </p>
-          </div>
+          </motion.div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <ShoppingCart className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Marketplace Development</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Building multi-shop platforms that enhance product scaling faster and diverse revenue and are very easy to manage.
-              </p>
-            </div>
-            
-            {/* Card 2 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <CreditCard className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Payment Combination</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Building secure, global payment gateways that support multiple currencies, crypto, and local transaction processes.
-              </p>
-            </div>
-            
-            {/* Card 3 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <BarChart3 className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">B2B Ecommerce Solutions</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Custom E-commerce development with volume-based pricing, contract management, and clear approval workflows for global teams.
-              </p>
-            </div>
-            
-            {/* Card 4 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <Smartphone className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Multi-channel Structure</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Delivering inventory, customer data, and marketing together across every physical and digital touchpoint for one brand experience.
-              </p>
-            </div>
+            {[
+              { icon: ShoppingCart, title: "Marketplace Development", desc: "Building multi-shop platforms that enhance product scaling faster and diverse revenue and are very easy to manage." },
+              { icon: CreditCard, title: "Payment Combination", desc: "Building secure, global payment gateways that support multiple currencies, crypto, and local transaction processes." },
+              { icon: BarChart3, title: "B2B Ecommerce Solutions", desc: "Custom E-commerce development with volume-based pricing, contract management, and clear approval workflows for global teams." },
+              { icon: Smartphone, title: "Multi-channel Structure", desc: "Delivering inventory, customer data, and marketing together across every physical and digital touchpoint for one brand experience." }
+            ].map((item, index) => (
+              <motion.div 
+                key={index}
+                onClick={handleCardAction}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { delay: index * 0.1 } } }}
+                className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 cursor-pointer hover:-translate-y-2 transition-transform duration-300"
+              >
+                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3">{item.title}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -320,54 +408,39 @@ const EcommerceLandingPage: React.FC = () => {
       {/* Specializations Grid 2: Functional Strategy */}
       <section className="bg-[#f8f9fc] py-16 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.div 
+            className="text-center max-w-3xl mx-auto mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUpVariant}
+          >
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Functional Strategy</h2>
-          </div>
+          </motion.div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <BarChart3 className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Process Enhancement</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Simplifying end-to-end functions with your team, ensuring less time on manual work and more time on growth.
-              </p>
-            </div>
-            
-            {/* Card 2 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <BarChart3 className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Data-Driven Decision</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Applying real-time data and dashboards to navigate inventory, pricing, and seller decisions.
-              </p>
-            </div>
-            
-            {/* Card 3 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <BarChart3 className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Adoptable Infrastructure</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Providing customized systems that grow with your business, so expanding up does not mean starting over.
-              </p>
-            </div>
-            
-            {/* Card 4 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <BarChart3 className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Risk & Compliance Management</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Functioning secure and compliant management globally, so you can expand without unexpected setbacks.
-              </p>
-            </div>
+            {[
+              { title: "Process Enhancement", desc: "Simplifying end-to-end functions with your team, ensuring less time on manual work and more time on growth." },
+              { title: "Data-Driven Decision", desc: "Applying real-time data and dashboards to navigate inventory, pricing, and seller decisions." },
+              { title: "Adoptable Infrastructure", desc: "Providing customized systems that grow with your business, so expanding up does not mean starting over." },
+              { title: "Risk & Compliance Management", desc: "Functioning secure and compliant management globally, so you can expand without unexpected setbacks." }
+            ].map((item, index) => (
+              <motion.div 
+                key={index}
+                onClick={handleCardAction}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { delay: index * 0.1 } } }}
+                className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 cursor-pointer hover:-translate-y-2 transition-transform duration-300"
+              >
+                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
+                  <BarChart3 className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3">{item.title}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -375,54 +448,39 @@ const EcommerceLandingPage: React.FC = () => {
       {/* Specializations Grid 3: Marketplace Development */}
       <section className="bg-[#eef3fb] py-16 lg:py-24 border-b border-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.div 
+            className="text-center max-w-3xl mx-auto mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUpVariant}
+          >
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Marketplace Development</h2>
-          </div>
+          </motion.div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <ShoppingCart className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Multiple Vendor Platform Layout</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Serving e-commerce development services that support multiple sellers, product catalogs, and vendor onboarding.
-              </p>
-            </div>
-            
-            {/* Card 2 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <ShoppingCart className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Order & Inventory Management</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Easily manage your stock levels, order tracking, and accuracy across every vendor on the platform.
-              </p>
-            </div>
-            
-            {/* Card 3 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <ShoppingCart className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Explorer and Discover Upgradation</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Simplifying the system for buyers to find the right products smoothly, with smart search, filters, and suggestion boxes.
-              </p>
-            </div>
-            
-            {/* Card 4 */}
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
-                <ShoppingCart className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Digital Platform Analytics</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Delivering clear visibility into sales, performance, and consumers' behavior to guide better decisions.
-              </p>
-            </div>
+             {[
+              { title: "Multiple Vendor Platform Layout", desc: "Serving e-commerce development services that support multiple sellers, product catalogs, and vendor onboarding." },
+              { title: "Order & Inventory Management", desc: "Easily manage your stock levels, order tracking, and accuracy across every vendor on the platform." },
+              { title: "Explorer and Discover Upgradation", desc: "Simplifying the system for buyers to find the right products smoothly, with smart search, filters, and suggestion boxes." },
+              { title: "Digital Platform Analytics", desc: "Delivering clear visibility into sales, performance, and consumers' behavior to guide better decisions." }
+            ].map((item, index) => (
+              <motion.div 
+                key={index}
+                onClick={handleCardAction}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { delay: index * 0.1 } } }}
+                className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 cursor-pointer hover:-translate-y-2 transition-transform duration-300"
+              >
+                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-[#0b5a93]">
+                  <ShoppingCart className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3">{item.title}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -432,7 +490,12 @@ const EcommerceLandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             
-            <div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUpVariant}
+            >
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
                 Why Choose Capyngen?
               </h2>
@@ -441,32 +504,34 @@ const EcommerceLandingPage: React.FC = () => {
               </p>
               
               <div className="grid grid-cols-2 gap-8 pt-6 border-t border-slate-100">
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">Custom E-commerce Solution</h3>
+                <div onClick={handleCardAction} className="cursor-pointer group">
+                  <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#0b5a93] transition-colors">Custom E-commerce Solution</h3>
                   <p className="text-sm text-slate-600 mb-2">Online stores customized to your business.</p>
-                  {/* <span className="text-xs font-semibold text-[#0b5a93] uppercase tracking-wider cursor-pointer hover:underline">Know More</span> */}
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">Scalable Platform Architecture</h3>
+                <div onClick={handleCardAction} className="cursor-pointer group">
+                  <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#0b5a93] transition-colors">Scalable Platform Architecture</h3>
                   <p className="text-sm text-slate-600 mb-2">Manage huge amounts of traffic and orders.</p>
-                  {/* <span className="text-xs font-semibold text-[#0b5a93] uppercase tracking-wider cursor-pointer hover:underline">Know More</span> */}
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="rounded-xl overflow-hidden bg-[#f8f9fc] border border-slate-100 shadow-sm p-6 flex flex-col justify-center h-56">
+            <motion.div 
+              className="grid sm:grid-cols-2 gap-6"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{ hidden: { opacity: 0, x: 30 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
+            >
+              <div onClick={handleCardAction} className="rounded-xl overflow-hidden bg-[#f8f9fc] border border-slate-100 shadow-sm p-6 flex flex-col justify-center h-56 cursor-pointer hover:shadow-md transition-shadow">
                 <h3 className="text-lg font-bold text-slate-900 mb-3">Payment and System Integrations</h3>
                 <p className="text-sm text-slate-600 mb-4">Connect your store with payment gateways.</p>
-                {/* <span className="text-[#0b5a93] text-xs font-semibold uppercase tracking-wider cursor-pointer hover:underline">Know More</span> */}
               </div>
               
-              <div className="rounded-xl overflow-hidden bg-[#eef3fb] border border-blue-50 shadow-sm sm:translate-y-8 p-6 flex flex-col justify-center h-56">
+              <div onClick={handleCardAction} className="rounded-xl overflow-hidden bg-[#eef3fb] border border-blue-50 shadow-sm sm:translate-y-8 p-6 flex flex-col justify-center h-56 cursor-pointer hover:shadow-md transition-shadow">
                 <h3 className="text-lg font-bold text-slate-900 mb-3">Global E-commerce Solutions</h3>
                 <p className="text-sm text-slate-600 mb-4">Manage operations across the world.</p>
-                {/* <span className="text-[#0b5a93] text-xs font-semibold uppercase tracking-wider cursor-pointer hover:underline">Know More</span> */}
               </div>
-            </div>
+            </motion.div>
             
           </div>
         </div>
@@ -478,7 +543,13 @@ const EcommerceLandingPage: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             
             {/* Contact Info */}
-            <div className="flex flex-col justify-center h-full">
+            <motion.div 
+              className="flex flex-col justify-center h-full"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUpVariant}
+            >
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
                 Apply For Services
               </h2>
@@ -497,11 +568,17 @@ const EcommerceLandingPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
             
             {/* Contact Form */}
-            <div className="bg-white rounded-xl p-8 sm:p-10 shadow-2xl relative text-slate-900">
-              <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+            <motion.div 
+              className="bg-white rounded-xl p-8 sm:p-10 shadow-2xl relative text-slate-900"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } } }}
+            >
+              <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div className="grid grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="firstName" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">First Name *</label>
@@ -566,12 +643,12 @@ const EcommerceLandingPage: React.FC = () => {
 
                 <button 
                   type="submit" 
-                  className="w-full bg-[#0b5a93] hover:bg-[#094876] text-white font-medium py-3.5 rounded transition-colors"
+                  className="w-full bg-[#0b5a93] hover:bg-[#094876] text-white font-medium py-3.5 rounded transition-colors shadow-md hover:shadow-lg"
                 >
                   Confirm
                 </button>
               </form>
-            </div>
+            </motion.div>
             
           </div>
         </div>
@@ -580,28 +657,43 @@ const EcommerceLandingPage: React.FC = () => {
       {/* 7. FAQs Section */}
       <section className="bg-white py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUpVariant}
+          >
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">FAQs</h2>
-          </div>
+          </motion.div>
           
           <div className="space-y-4">
             {faqsData.map((faq, index) => (
-              <div key={index} className="bg-[#f8f9fc] rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+              <motion.div 
+                key={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0, transition: { delay: index * 0.05 } } }} 
+                className="bg-[#f8f9fc] rounded-xl shadow-sm border border-slate-100 overflow-hidden"
+              >
                 <button
                   onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
                   className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none hover:bg-slate-50 transition-colors"
                 >
                   <span className="text-lg font-bold text-slate-900 pr-8">{faq.question}</span>
-                  <span className="text-[#0b5a93] text-2xl leading-none">
+                  <span className="text-[#0b5a93] text-2xl leading-none font-medium">
                     {openFaqIndex === index ? '−' : '+'}
                   </span>
                 </button>
-                {openFaqIndex === index && (
+                <div 
+                  className={`transition-all duration-300 ease-in-out overflow-hidden ${openFaqIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                >
                   <div className="px-6 pb-5 pt-2 text-slate-600 leading-relaxed">
                     {faq.answer}
                   </div>
-                )}
-              </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>

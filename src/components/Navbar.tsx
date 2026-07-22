@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Logo from "../assets/capyngenLogo.png";
+import rightimg from "../assets/Group35633.png";
 
 // --- Types ---
 type SubMenuItem = { label: string; to: string };
@@ -43,7 +44,7 @@ const servicesCategories: Category[] = [
       { label: "UI/UX Design", to: "/ui-ux-design-services" },
       { label: "Website Design", to: "/website-design-company-india" },
       { label: "Branding & Identity Design", to: "/branding-identity-design" },
-      { label: "E-Commerce Website Design", to: "/ecommerce-website-design" },
+      // { label: "E-Commerce Website Design", to: "/ecommerce-website-design" },
       { label: "CMS Website Design", to: "/cms-website-design" },
     ],
   },
@@ -265,7 +266,7 @@ const Navbar: React.FC = () => {
           )}
         </div>
 
-        {/* Right side (Contact Us + Mobile Toggle) */}
+        {/* Right side (Contact Us + Right Image + Mobile Toggle) */}
         <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
           <Link
             to="/contact-us"
@@ -274,6 +275,13 @@ const Navbar: React.FC = () => {
           >
             Contact Us
           </Link>
+
+          {/* Right Image Graphic */}
+          <img 
+            src={rightimg} 
+            alt="Decorative Graphic" 
+            className="h-8 md:h-10 w-auto object-contain transition-all duration-200" 
+          />
 
           {/* Mobile toggle (visible below lg) */}
           <button
@@ -456,13 +464,18 @@ const Navbar: React.FC = () => {
               </NavLink>
             ))}
 
-          <div className="px-5 py-4 mb-4">
+          <div className="px-5 py-4 mb-4 flex items-center justify-between gap-4">
             <Link
               to="/contact-us"
-              className="block rounded-full bg-blue-600 px-5 py-2.5 text-center text-sm font-semibold text-white hover:bg-blue-700"
+              className="flex-1 rounded-full bg-blue-600 px-5 py-2.5 text-center text-sm font-semibold text-white hover:bg-blue-700"
             >
               Contact Us
             </Link>
+            <img 
+              src={rightimg} 
+              alt="Decorative Graphic" 
+              className="h-8 w-auto object-contain" 
+            />
           </div>
         </div>
       )}
