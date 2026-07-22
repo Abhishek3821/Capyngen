@@ -439,6 +439,11 @@ const WebDevelopmentPage = () => {
               <p className="text-slate-300 text-lg mb-8 max-w-md leading-relaxed">
                 Want to know more about how Capyngen can help your organization move forward? Connect with us and get the proper framework for your ideas, and enterprise web development services with post-launch solutions.
               </p>
+              <div className="flex flex-col gap-2 mb-8 text-sm font-bold text-slate-800 border-b  pb-4">
+                <span className="cursor-pointer text-white border-b-2  pb-4 -mb-[17px] w-fit">Got any specific question?</span>
+                  <span className="text-white font-normal mt-3">Book a 15-minute chat with one of our experts.</span>
+                </div>
+               
             </RevealOnScroll>
           </div>
 
@@ -446,7 +451,6 @@ const WebDevelopmentPage = () => {
             <RevealOnScroll delay={0.2}>
               <div className="bg-white p-8 shadow-xl rounded-md">
                 <div className="flex flex-col gap-2 mb-8 text-sm font-bold text-slate-800 border-b border-slate-200 pb-4">
-                  <span className="cursor-pointer text-slate-900 border-b-2 border-slate-900 pb-4 -mb-[17px] w-fit">Got any specific question?</span>
                   <span className="text-slate-500 font-normal mt-3">Book a 15-minute chat with one of our experts.</span>
                 </div>
 

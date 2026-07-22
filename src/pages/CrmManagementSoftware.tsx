@@ -120,7 +120,7 @@ const CRMSolutionsPage: React.FC = () => {
         {/* Background Image with Light Overlay */}
         <div className="absolute inset-0 z-0">
           <img src={img1} alt="Hero Background" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#f8f9fa]/70"></div>
+          <div className="absolute inset-0 bg-[black]/50"></div>
         </div>
 
         <div className="relative z-10 flex flex-col items-center">
@@ -131,13 +131,13 @@ const CRMSolutionsPage: React.FC = () => {
           </RevealOnScroll>
           
           <RevealOnScroll delay={0.1}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 max-w-4xl leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-4xl leading-tight">
               More advanced CRM & Management Software means Smarter Growth.
             </h1>
           </RevealOnScroll>
 
           <RevealOnScroll delay={0.2}>
-            <p className="text-lg text-slate-600 mb-10 max-w-3xl mx-auto">
+            <p className="text-lg text-white mb-10 max-w-3xl mx-auto">
               CRM & management software helps to drive business performance by making it easy to operate, generate more business and boost team productivity. Capyngen creates smart digital solutions that unify your business processes. 
             </p>
           </RevealOnScroll>

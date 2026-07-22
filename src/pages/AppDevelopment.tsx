@@ -146,27 +146,27 @@ const AppDevelopmentPage = () => {
   return (
     <div className="font-sans text-slate-900 bg-white">
       
-      {/* Hero Section */}
+      {/* Hero Section - Full Screen & Highly Responsive */}
       <section 
-        className="relative py-16 sm:py-24 px-4 sm:px-6 md:px-12 lg:px-24 flex flex-col items-center justify-center text-center min-h-[60vh] md:min-h-[70vh] bg-cover bg-center bg-no-repeat"
+        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center py-12 px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32 bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{ backgroundImage: `url(${img1})` }}
       >
         {/* Overlay to ensure text readability over the background image */}
-        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute inset-0 bg-black/40 transition-all duration-300"></div>
         
-        <RevealOnScroll direction="up" className="relative z-10 flex flex-col items-center mt-8 sm:mt-0">
-          <div className="bg-[#0a1526] text-white text-[10px] sm:text-xs font-bold px-3 py-1 mb-6 sm:mb-8 tracking-widest uppercase rounded-sm">
+        <RevealOnScroll direction="up" className="relative z-10 flex flex-col items-center w-full">
+          <div className="bg-[#0a1526] text-white text-[10px] sm:text-xs font-bold px-3 py-1 mb-6 tracking-widest uppercase rounded-sm inline-block">
             MOBILITY SERVICES
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 max-w-4xl leading-tight">
+          <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold text-white mb-6 max-w-3xl lg:max-w-5xl xl:max-w-6xl leading-tight">
             Future-Gen Smartphone App <br className="hidden md:block" />
             Services, Powered by AI
           </h1>
-          <p className="text-sm sm:text-base md:text-lg text-white mb-8 sm:mb-10 max-w-2xl mx-auto font-medium px-2">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-200 mb-10 max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto font-medium px-2 sm:px-0">
             We create high-performing native and cross-platform apps that can make your enterprise mobility simple, engaging, and efficient for your consumer.
           </p>
-          <button onClick={() => scrollToSection('explore-section')} className="bg-[#0056b3] hover:bg-blue-800 text-white font-medium py-3 sm:py-4 px-6 sm:px-8 transition-colors flex items-center justify-center gap-2 text-xs sm:text-sm rounded-sm cursor-pointer w-full sm:w-auto">
-            Explore Our Expertise <ArrowUpRight className="w-4 h-4" />
+          <button onClick={() => scrollToSection('explore-section')} className="bg-[#0056b3] hover:bg-blue-800 text-white font-medium py-3 px-8 sm:px-10 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base tracking-wide mx-auto rounded-sm cursor-pointer shadow-lg hover:shadow-xl w-full sm:w-auto">
+            Explore Our Expertise <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </RevealOnScroll>
       </section>
@@ -200,119 +200,120 @@ const AppDevelopmentPage = () => {
         </div>
       </section>
 
-      {/* Mobile Trends Carousel Section */}
+      {/* Mobile Trends Carousel Section - Standardized UI applied */}
       <section className="bg-[#f4f6f8] py-16 sm:py-24 px-4 sm:px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <RevealOnScroll direction="up" className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 sm:mb-12 gap-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Mobile Trends Right Now</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">App Trends Right Now</h2>
               <p className="text-slate-500 text-xs sm:text-sm">Insights and updates from our mobility team</p>
             </div>
             <div className="flex gap-2 self-end sm:self-auto">
-              <button onClick={() => scrollHappenings('left')} className="w-10 h-10 flex items-center justify-center bg-white border border-slate-300 hover:bg-slate-50 transition-colors cursor-pointer">
-                <ChevronLeft className="w-5 h-5 text-slate-600" />
+              <button onClick={() => scrollHappenings('left')} className="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer rounded-sm shadow-sm">
+                <ChevronLeft className="w-5 h-5 text-slate-900" />
               </button>
-              <button onClick={() => scrollHappenings('right')} className="w-10 h-10 flex items-center justify-center bg-[#0a1526] text-white hover:bg-slate-800 transition-colors cursor-pointer">
+              <button onClick={() => scrollHappenings('right')} className="w-10 h-10 flex items-center justify-center bg-[#0a1526] text-white hover:bg-slate-800 transition-colors cursor-pointer rounded-sm shadow-sm">
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>
           </RevealOnScroll>
 
           <RevealOnScroll direction="up" delay={100}>
-            <div ref={happeningsRef} className="flex gap-4 sm:gap-6 md:gap-8 overflow-x-auto pb-6 sm:pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar items-stretch" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+            <div ref={happeningsRef} className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar items-stretch" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
               <style dangerouslySetInnerHTML={{__html: `
                 .hide-scrollbar::-webkit-scrollbar { display: none; }
               `}} />
 
               {/* Card 1 */}
-              <div onClick={handleLinkClick} className="bg-white w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 flex flex-col rounded-md overflow-hidden border border-slate-200">
-                <div className="w-full h-48 sm:h-56 shrink-0 bg-[#eef2f6] flex items-center justify-center p-0 relative overflow-hidden">
+              <div onClick={handleLinkClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
                   <img src={img3} alt="Report" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-5 sm:p-6 flex-grow flex flex-col">
-                  <span className="inline-block bg-[#0056b3] text-white text-[9px] sm:text-[10px] font-bold px-2 py-1 uppercase tracking-wider mb-3 sm:mb-4 w-max rounded-sm">
+                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
                     Report
-                  </span>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-4 sm:mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                  </div>
+                </div>
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
                     2025 Mobile Application Development: iOS Growth in the Enterprise
                   </h3>
-                  <div className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2 mt-auto">
+                  <div className="flex items-center text-sm font-bold text-[#0056b3] gap-2 mt-auto">
                     Read Here <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
 
               {/* Card 2 */}
-              <div onClick={handleLinkClick} className="bg-white w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 flex flex-col rounded-md overflow-hidden border border-slate-200">
-                <div className="w-full h-48 sm:h-56 shrink-0 bg-[#eef2f6] flex items-center justify-center p-0 relative overflow-hidden">
+              <div onClick={handleLinkClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
                   <img src={img4} alt="Award" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-5 sm:p-6 flex-grow flex flex-col">
-                  <span className="inline-block bg-[#0056b3] text-white text-[9px] sm:text-[10px] font-bold px-2 py-1 uppercase tracking-wider mb-3 sm:mb-4 w-max rounded-sm">
+                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
                     Award
-                  </span>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-4 sm:mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                  </div>
+                </div>
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
                     Capyngen Recognized as a Leader in Gartner Magic Quadrant for Mobile Development
                   </h3>
-                  <div className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2 mt-auto">
+                  <div className="flex items-center text-sm font-bold text-[#0056b3] gap-2 mt-auto">
                     Read Here <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
 
               {/* Card 3 */}
-              <div onClick={handleLinkClick} className="bg-white w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 flex flex-col rounded-md overflow-hidden border border-slate-200">
-                <div className="w-full h-48 sm:h-56 shrink-0 bg-[#eef2f6] flex items-center justify-center p-0 relative overflow-hidden">
+              <div onClick={handleLinkClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
                   <img src={img5} alt="Case Study" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-5 sm:p-6 flex-grow flex flex-col">
-                  <span className="inline-block bg-[#0056b3] text-white text-[9px] sm:text-[10px] font-bold px-2 py-1 uppercase tracking-wider mb-3 sm:mb-4 w-max rounded-sm">
+                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
                     Case Study
-                  </span>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-4 sm:mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                  </div>
+                </div>
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
                     Bringing Global Operations Together with One Cross-Platform Hub
                   </h3>
-                  <div className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2 mt-auto">
+                  <div className="flex items-center text-sm font-bold text-[#0056b3] gap-2 mt-auto">
                     Read Here <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
 
               {/* Card 4 */}
-              <div onClick={handleLinkClick} className="bg-white w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 flex flex-col rounded-md overflow-hidden border border-slate-200">
-                <div className="w-full h-48 sm:h-56 shrink-0 bg-[#eef2f6] flex items-center justify-center p-0 relative overflow-hidden">
+              <div onClick={handleLinkClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
                   <img src={img6} alt="Report" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-5 sm:p-6 flex-grow flex flex-col">
-                  <span className="inline-block bg-[#0056b3] text-white text-[9px] sm:text-[10px] font-bold px-2 py-1 uppercase tracking-wider mb-3 sm:mb-4 w-max rounded-sm">
+                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
                     Report
-                  </span>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-4 sm:mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                  </div>
+                </div>
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
                     Why Enterprises Are Rethinking Native-Only Strategies?
                   </h3>
-                  <div className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2 mt-auto">
+                  <div className="flex items-center text-sm font-bold text-[#0056b3] gap-2 mt-auto">
                     Read Here <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
 
               {/* Card 5 */}
-              <div onClick={handleLinkClick} className="bg-white w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 flex flex-col rounded-md overflow-hidden border border-slate-200">
-                <div className="w-full h-48 sm:h-56 shrink-0 bg-[#eef2f6] flex items-center justify-center p-0 relative overflow-hidden">
+              <div onClick={handleLinkClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
                   <img src={img7} alt="Case Study" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-5 sm:p-6 flex-grow flex flex-col">
-                  <span className="inline-block bg-[#0056b3] text-white text-[9px] sm:text-[10px] font-bold px-2 py-1 uppercase tracking-wider mb-3 sm:mb-4 w-max rounded-sm">
+                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
                     Case Study
-                  </span>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-4 sm:mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                  </div>
+                </div>
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
                     Company Cut Delivery Errors by 35% with a Custom Mobile App Development
                   </h3>
-                  <div className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2 mt-auto">
+                  <div className="flex items-center text-sm font-bold text-[#0056b3] gap-2 mt-auto">
                     Read Here <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
+
             </div>
           </RevealOnScroll>
         </div>

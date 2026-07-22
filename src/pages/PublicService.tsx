@@ -72,53 +72,35 @@ const handleContactClick = (e?: React.MouseEvent) => {
 
 // 1. Define specific literal types for the tabs to prevent indexing errors
 type TabName = 
-  | 'All Notification' 
-  | 'Pronouncements' 
-  | 'Event Showcases' 
-  | 'Success Stories' 
-  | 'News Release' 
-  | 'Blogs';
+  | 'Featured Article' 
+  | 'Case Study' 
+  | 'Resource';
 
 const PublicServicesLandingPage = () => {
   // 2. Explicitly type the states
-  const [activeTab, setActiveTab] = useState<TabName>('All Notification');
+  const [activeTab, setActiveTab] = useState<TabName>('Featured Article');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   // 3. Type the tabs array using the TabName type
   const tabs: TabName[] = [
-    'All Notification',
-    'Pronouncements',
-    'Event Showcases',
-    'Success Stories',
-    'News Release',
-    'Blogs'
+    'Featured Article',
+    'Case Study',
+    'Resource'
   ];
 
   // 4. Strongly type the content object
   const pressPortalContent: Record<TabName, { title: string; linkText: string }> = {
-    'All Notification': {
-      title: 'Capyngen offers public sector IT services',
-      linkText: 'Explore More'
+    'Featured Article': {
+      title: 'How Responsive Design Improves User Experience and SEO',
+      linkText: 'Read More'
     },
-    'Pronouncements': {
-      title: 'Digital Transformation— Major Role For Government',
-      linkText: 'Explore More'
+    'Case Study': {
+      title: 'Building a High-Performance Corporate Website for a Manufacturing Brand',
+      linkText: 'Read More'
     },
-    'Event Showcases': {
-      title: 'Ragister Now With Capyngen And Get the Best Deal',
-      linkText: 'Explore More'
-    },
-    'Success Stories': {
-      title: 'How Capyngen Assisted Us With Public Software Solution?',
-      linkText: 'Explore More'
-    },
-    'News Release': {
-      title: 'Top-Rated Software Application Solution Company',
-      linkText: 'Explore More'
-    },
-    'Blogs': {
-      title: 'Why is digital transformation important for the government?',
-      linkText: 'Explore More'
+    'Resource': {
+      title: 'How to Choose the Right Website Design Company',
+      linkText: 'Read More'
     }
   };
 
@@ -134,7 +116,7 @@ const PublicServicesLandingPage = () => {
     },
     {
       title: 'Intellect Authority',
-      description: 'Enhacing truthfulness, responsiblilty, and concluding decisions through statistics.',
+      description: 'Enhancing truthfulness, responsibility, and concluding decisions through statistics.',
       icon: (
         <svg className="w-6 h-6 text-[#2563eb]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -143,7 +125,7 @@ const PublicServicesLandingPage = () => {
     },
     {
       title: 'Citizen Security',
-      description: 'Advancing calamity response, safety, and nations citizen secuity.',
+      description: 'Advancing calamity response, safety, and nations\' citizen security.',
       icon: (
         <svg className="w-6 h-6 text-[#2563eb]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -188,7 +170,7 @@ const PublicServicesLandingPage = () => {
     },
     {
       title: 'Capital Expansion',
-      description: 'Innovating advancement, career, and modernization for a well-built community.',
+      description: 'Innovating advancement, careers, and modernization for a well-built community.',
       icon: (
         <svg className="w-6 h-6 text-[#2563eb]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -200,39 +182,39 @@ const PublicServicesLandingPage = () => {
   const faqsData = [
     {
       question: 'What are government IT solutions?',
-      answer: 'Government IT solutions include software, cloud platform, and digital tools that support the administration department to manage operations and deliver secure solutions.'
+      answer: 'Government IT solutions include software, cloud platforms, and digital tools that support the administration department to manage operations and deliver secure solutions.'
     },
     {
       question: 'Why do governments need public sector software development?',
-      answer: 'In the modern world, traditional paper-based systems slow processes down. A custom softwrae is becoming a necessity for government depart to run faster, cut cost and give citizen quick access to information and services.'
+      answer: 'In the modern world, traditional paper-based systems slow processes down. Custom software is becoming a necessity for government departments to run faster, cut costs, and give citizens quick access to information and services.'
     },
     {
       question: 'Do government IT solutions include cloud systems?',
-      answer: 'Yes, the Cloud system is the core part of IT solutions for the government, as it stores administration data, runs applications and adopts services.'
+      answer: 'Yes, the cloud system is the core part of IT solutions for the government, as it stores administration data, runs applications, and adopts services.'
     },
     {
-      question: 'How secure government IT solutions wil be?',
+      question: 'How secure will government IT solutions be?',
       answer: 'Capyngen provides highly secured IT solutions for the government and ensures that it is built to withstand advanced threats and protect citizen data.'
     },
     {
       question: 'Why is digital transformation important for the government?',
-      answer: 'Digital transformation is playing a major role for the government in the modernized nation of the world, supporting transparency, quick announcement and increased efficiency.'
+      answer: 'Digital transformation is playing a major role for the government in the modernized nations of the world, supporting transparency, quick announcements, and increased efficiency.'
     },
     {
       question: 'Do government data systems need special security?',
-      answer: 'Yes, government data systems indeed need advanced security, because they manage a vast amount of sensitive information of citizens.'
+      answer: 'Yes, government data systems indeed need advanced security because they manage a vast amount of sensitive information on citizens.'
     },
     {
       question: 'How does software help with disaster response?',
-      answer: 'Capyngen builds software that service real-time data to respond faster, and help the government allocate resources during disaster.'
+      answer: 'Capyngen builds software that serves real-time data to respond faster and helps the government allocate resources during disasters.'
     },
     {
       question: 'What does Capyngen mean by "public sector software solutions"?',
-      answer: 'For Capyngen, public sector software solutions refers to end-to-end online platform design that support the government to modernise in the digital world.'
+      answer: 'For Capyngen, public sector software solutions refer to end-to-end online platform design that supports the government in modernizing in the digital world.'
     },
     {
       question: 'What industries fall under "public services" at Capyngen?',
-      answer: 'We classify public services into e-government and IT solutions that cover citizen security, health & welfare, capital expansion and eco-logical balance.'
+      answer: 'We classify public services into e-government and IT solutions that cover citizen security, health & welfare, capital expansion, and ecological balance.'
     },
     {
       question: 'Can Capyngen build custom government IT solutions?',
@@ -287,13 +269,13 @@ const PublicServicesLandingPage = () => {
           </RevealOnScroll>
           <RevealOnScroll direction="left" className="lg:col-span-8 text-gray-700 text-base md:text-[17px] leading-relaxed space-y-6">
             <p>
-              Advanced tech is innovating the way Administration serves the nation with government cloud solutions. By simplifying civil services to enhance principles and functional productivity, digital transformation for government is at the core of High-tech modern nations.
+              Advanced tech is innovating the way administration serves the nation with government cloud solutions. By simplifying civil services to enhance principles and functional productivity, digital transformation for government is at the core of high-tech modern nations.
             </p>
             <p>
               Capyngen collaborates with council sectors and civil service administrations to shape and create safe, flexible, and all-in digital services that build government software development for the nation and serve sustainable progress.
             </p>
             <p className="italic font-medium text-gray-800 pt-2">
-              Our Mission: Capyngen has a clear view to support high-tech and master plans to deliver brighter, reactive, and better durable government application development.
+              Our Mission: Capyngen has a clear view to support high-tech and master plans to deliver brighter, more reactive, and better-durable government application development.
             </p>
           </RevealOnScroll>
         </div>
@@ -332,7 +314,7 @@ const PublicServicesLandingPage = () => {
           <div className="text-[#0055ff] text-7xl font-serif mb-2 leading-none">“</div>
           
           <blockquote className="text-2xl md:text-3xl lg:text-[34px] font-bold text-[#1d64db] leading-snug mb-10">
-            "Capyngen has always been a long-standing IT partner with our career profession towards high-end digital innovation. With their professional capability, dedication, and better clarification of public sector barriers have assisted us with citizen-centric features that actually deliver solutions.“
+            "Capyngen has always been a long-standing IT partner with our career profession towards high-end digital innovation. With their professional capability, dedication, and better clarification of public sector barriers, they have assisted us with citizen-centric features that actually deliver solutions.“
           </blockquote>
           
           <div className="pt-6 border-t border-gray-100">
@@ -350,7 +332,7 @@ const PublicServicesLandingPage = () => {
       <section id="press" className="bg-[#0b1424] text-white py-20 px-6 lg:px-8 scroll-mt-10">
         <div className="max-w-7xl mx-auto">
           <RevealOnScroll direction="up">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">Latest Blogs</h2>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">From Our Experts</h2>
           </RevealOnScroll>
           
           {/* Tabs Navigation */}
@@ -372,7 +354,7 @@ const PublicServicesLandingPage = () => {
           <RevealOnScroll direction="up" className="grid grid-cols-1 lg:grid-cols-12 items-stretch bg-[#070d18] rounded-none overflow-hidden border border-gray-900">
             <div className="lg:col-span-5 p-12 lg:p-16 flex flex-col justify-center">
               <span className="text-[#0055ff] font-semibold text-xs tracking-widest uppercase mb-4 block">
-                FEATURED STORY
+                FEATURED ARTICLE
               </span>
               <h3 className="text-3xl md:text-4xl font-bold leading-tight mb-8 whitespace-pre-line">
                 {pressPortalContent[activeTab].title}
@@ -451,7 +433,7 @@ const PublicServicesLandingPage = () => {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button onClick={handleContactClick} className="w-full sm:w-auto bg-white hover:bg-gray-50 text-[#2563eb] font-semibold py-3.5 px-8 rounded-none transition duration-300 flex items-center justify-center gap-2 text-sm">
-              Transform Your Organizations
+              Transform Your Organization
             </button>
             <button onClick={handleContactClick} className="w-full sm:w-auto bg-transparent border border-white hover:bg-white/10 text-white font-semibold py-3.5 px-8 rounded-none transition duration-300 flex items-center justify-center gap-2 text-sm">
               Contact Our Experts

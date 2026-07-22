@@ -164,25 +164,25 @@ const BlockchainSolutionsPage = () => {
   return (
     <div className="font-sans text-slate-900 bg-white">
       
-      {/* Hero Section */}
+      {/* Hero Section - Updated to be full screen and responsive across all breakpoints */}
       <section 
-        className="relative py-24 px-6 md:px-12 lg:px-24 flex flex-col items-center justify-center text-center min-h-[60vh] bg-cover bg-center bg-no-repeat"
+        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-12 lg:px-24 py-20 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${img1})` }}
       >
         {/* Overlay to ensure text readability over the background image */}
         <div className="absolute inset-0 bg-[black]/60"></div>
         
-        <RevealOnScroll direction="up" className="relative z-10 flex flex-col items-center">
-          <div className="bg-[#0a1526] text-white text-[10px] font-bold px-3 py-1 mb-8 tracking-widest uppercase">
+        <RevealOnScroll direction="up" className="relative z-10 flex flex-col items-center w-full max-w-7xl mx-auto mt-12 md:mt-0">
+          <div className="bg-[#0a1526] text-white text-[9px] sm:text-[10px] md:text-xs font-bold px-3 py-1 mb-6 sm:mb-8 tracking-widest uppercase rounded-sm">
             BLOCKCHAIN ENGINEERING
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-4xl leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 max-w-4xl xl:max-w-5xl leading-tight">
             Enterprise-Grade Decentralized Technology Solutions
           </h1>
-          <p className="text-lg text-white mb-10 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white mb-8 sm:mb-10 max-w-2xl xl:max-w-3xl mx-auto px-2 sm:px-0">
             Modernizing business with our blockchain development solutions trust through immutable distributed ledgers, autonomous smart contracts, and decentralized architectures built for global scalability and enterprise security. 
           </p>
-          <button onClick={() => scrollToSection('about')} className="bg-[#0056b3] hover:bg-blue-800 text-white font-medium py-3 px-8 transition-colors flex items-center gap-2 text-sm rounded-sm">
+          <button onClick={() => scrollToSection('about')} className="bg-[#0056b3] hover:bg-blue-800 text-white font-medium py-3 sm:py-4 px-6 sm:px-8 transition-colors flex items-center gap-2 text-xs sm:text-sm rounded-sm cursor-pointer w-full sm:w-auto justify-center">
             Read More <ArrowUpRight className="w-4 h-4" />
           </button>
         </RevealOnScroll>
@@ -208,7 +208,7 @@ const BlockchainSolutionsPage = () => {
       </section>
 
       {/* What's Happening Section */}
-      <section className="bg-[#f4f6f8] py-24 px-6 md:px-12 lg:px-24">
+      <section className="bg-[#f4f6f8] py-20 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <RevealOnScroll direction="up" className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
             <div>

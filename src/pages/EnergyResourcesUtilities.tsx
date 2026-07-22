@@ -347,7 +347,7 @@ const EnergyInsights = () => {
         
         <RevealOnScroll direction="up">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black mb-10 tracking-tight">
-            Sustainable Energy Solution
+            Sustainable Energy Blog
           </h2>
         </RevealOnScroll>
 

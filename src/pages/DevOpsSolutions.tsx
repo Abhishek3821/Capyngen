@@ -128,11 +128,11 @@ const DevOpsPage = () => {
       
       {/* Hero Section - Full Screen & Responsive */}
       <section 
-        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center py-24 px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32 bg-cover bg-center bg-no-repeat overflow-hidden"
+        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center py-10 px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32 bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{ backgroundImage: `url(${img10})` }}
       >
         {/* Overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-[#f8f9fa]/85 md:bg-[#f8f9fa]/80 transition-all duration-300"></div>
+        <div className="absolute inset-0 bg-black/40 md:bg-[#f8f9fa]/840 transition-all duration-300"></div>
         
         <div className="relative z-10 flex flex-col items-center w-full">
           <RevealOnScroll delay={0}>
@@ -141,20 +141,14 @@ const DevOpsPage = () => {
             </div>
           </RevealOnScroll>
           
-          <RevealOnScroll delay={0.1}>
-            <div className="text-xs sm:text-sm md:text-base font-semibold tracking-wide text-slate-700 mb-6 uppercase">
-              Services {'>'} DevOps 
-            </div>
-          </RevealOnScroll>
-          
           <RevealOnScroll delay={0.2}>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-slate-900 mb-6 max-w-3xl lg:max-w-5xl xl:max-w-6xl leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 max-w-3xl lg:max-w-5xl xl:max-w-6xl leading-tight">
               Enhancing IT Delivery with <br className="hidden sm:block" /> DevOps
             </h1>
           </RevealOnScroll>
 
           <RevealOnScroll delay={0.3}>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-700 mb-10 max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto font-medium px-2 sm:px-0">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white mb-10 max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto font-medium px-2 sm:px-0">
               Rebuilding IT delivery with cloud-native DevOps automation services, accurate CI/CD development, and security-first lifestyle innovation.
             </p>
           </RevealOnScroll>
