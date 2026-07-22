@@ -5,8 +5,7 @@ import {
   Search, 
   AlertOctagon, 
   ShieldAlert, 
-  Mail, 
-  PhoneCall,
+
   ChevronDown
 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
@@ -486,7 +485,7 @@ const CyberSecurityLandingPage: React.FC = () => {
                 Work with a trusted Cybersecurity Service Provider like Capyngen to gain access to a complete suite of Cybersecurity Consulting Services, and Customized Enterprise Cybersecurity Solutions that will protect your business now and in the future.
               </p>
               
-              <div className="space-y-6">
+              {/* <div className="space-y-6">
                 <div className="flex items-center text-slate-700 bg-white p-4 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
                   <Mail className="w-5 h-5 mr-4 text-[#084887]" />
                   <a href="mailto:cybersecurity@capyngen.com" className="text-sm font-semibold hover:text-[#084887] transition-colors">cybersecurity@capyngen.com</a>
@@ -495,7 +494,7 @@ const CyberSecurityLandingPage: React.FC = () => {
                   <PhoneCall className="w-5 h-5 mr-4 text-[#084887]" />
                   <span className="text-sm font-semibold">+1 (800) CAPYNGEN</span>
                 </div>
-              </div>
+              </div> */}
             </motion.div>
             
             {/* Right Side - Form */}

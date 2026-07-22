@@ -222,7 +222,7 @@ const WebDevelopmentPage = () => {
           <RevealOnScroll delay={0.3}>
             <button 
               onClick={handleScrollToServices}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3.5 px-8 transition-colors flex items-center gap-2 mx-auto rounded-sm"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3.5 px-8 transition-colors flex items-center gap-2 mx-auto rounded-sm cursor-pointer"
             >
               Explore Services <ArrowUpRight className="w-4 h-4" />
             </button>
@@ -278,28 +278,28 @@ const WebDevelopmentPage = () => {
           <RevealOnScroll delay={0.2}>
             <div 
               ref={sliderRef}
-              className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide scroll-smooth"
+              className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide scroll-smooth items-stretch"
             >
               {happenings.map((item, idx) => (
                 <div 
                   key={idx} 
                   onClick={handleScrollToContact}
-                  className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow duration-300 min-w-[300px] md:min-w-[340px] snap-start flex-shrink-0 flex flex-col rounded-none"
+                  className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
                 >
-                  <div className="w-full h-[420px] relative overflow-hidden bg-slate-100 p-0">
-                    <img src={item.img} alt={item.title} className="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-500" />
+                  <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
+                    <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                      {item.tag}
+                    </div>
                   </div>
                   
                   {/* Card Content */}
-                  <div className="p-8 flex-1 flex flex-col items-start">
-                    <span className={`inline-block ${item.color} text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-wider mb-5 rounded-none`}>
-                      {item.tag}
-                    </span>
-                    <h3 className={`text-[20px] leading-snug font-medium text-[#0a1526] mb-8 transition-colors ${item.hoverColor}`}>
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <h3 className={`text-lg font-bold text-[#0a1526] mb-6 transition-colors leading-snug ${item.hoverColor}`}>
                       {item.title}
                     </h3>
-                    <div className={`mt-auto flex items-center text-[11px] font-bold text-[#0a1526] transition-colors uppercase tracking-widest ${item.hoverColor}`}>
-                      READ MORE <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                    <div className={`mt-auto flex items-center text-sm font-bold text-[#0a1526] transition-colors gap-2 uppercase tracking-wide ${item.hoverColor}`}>
+                      Read More <ArrowRight className="w-4 h-4" />
                     </div>
                   </div>
                 </div>
@@ -360,10 +360,10 @@ const WebDevelopmentPage = () => {
           </div>
         </div>
 
-        {/* Right Column (Fixed image to cover the entire container) */}
+        {/* Right Column */}
         <div className="lg:w-1/2 bg-[#0a1526] relative min-h-[400px] lg:min-h-auto">
           <RevealOnScroll delay={0.3} className="absolute inset-0 w-full h-full">
-             <img src={img3} alt="Our Services" className="absolute inset-0 w-full h-full object-cover opacity-90 block" />
+             <img src={img6} alt="Our Services" className="absolute inset-0 w-full h-full object-cover opacity-90 block" />
           </RevealOnScroll>
         </div>
       </section>
@@ -387,7 +387,7 @@ const WebDevelopmentPage = () => {
                   </div>
                   <div className="p-5 flex-1">
                     <h4 className="text-lg font-bold text-slate-900 leading-tight">{item.title}</h4>
-                    <p className="text-slate-500 text-xs mb-2 uppercase tracking-wide mt-1">{item.desc}</p>
+                    <p className="text-slate-500 text-xs mb-4 uppercase tracking-wide mt-1">{item.desc}</p>
                   </div>
                 </div>
               </RevealOnScroll>
@@ -408,7 +408,7 @@ const WebDevelopmentPage = () => {
                 <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
                   <button
                     onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
-                    className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none hover:bg-slate-50 transition-colors"
+                    className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none hover:bg-slate-50 transition-colors cursor-pointer"
                   >
                     <span className="font-bold text-slate-800 pr-8">{faq.question}</span>
                     <span className="text-blue-600 text-2xl leading-none font-medium">
@@ -493,7 +493,7 @@ const WebDevelopmentPage = () => {
                     </div>
                   </div>
 
-                  <button type="submit" className="bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 px-8 transition-colors text-sm rounded-sm">
+                  <button type="submit" className="bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 px-8 transition-colors text-sm rounded-sm cursor-pointer">
                     Confirm
                   </button>
                 </form>

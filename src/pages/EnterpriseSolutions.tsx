@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { 
-  ArrowRight, 
+import {  
   BarChart4, 
   Layers, 
   ShieldCheck, 
-  Cpu, 
-  PhoneCall, 
-  MapPin, 
+  Cpu,
   ChevronRight,
   ChevronDown
 } from 'lucide-react';
@@ -304,9 +301,7 @@ const EnterpriseLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 mb-6 leading-relaxed">
                 Full implementation and optimization of Custom Enterprise Software to enhance enterprise performance.
               </p>
-              <a href="#" className="inline-flex items-center text-xs font-bold text-[#0d47a1] uppercase tracking-wider hover:text-[#09357a]">
-                Learn More <ArrowRight className="ml-1 w-3 h-3" />
-              </a>
+              
             </div>
             
             {/* Card 2 */}
@@ -318,9 +313,7 @@ const EnterpriseLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 mb-6 leading-relaxed">
                 Modern Enterprise Technology Solutions used to streamline business processes and boost the efficiency of the organization.
               </p>
-              <a href="#" className="inline-flex items-center text-xs font-bold text-[#0d47a1] uppercase tracking-wider hover:text-[#09357a]">
-                Learn More <ArrowRight className="ml-1 w-3 h-3" />
-              </a>
+              
             </div>
             
             {/* Card 3 */}
@@ -332,9 +325,7 @@ const EnterpriseLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 mb-6 leading-relaxed">
                 The integration of HR technologies to make employee management, and workforce development simpler with advanced Enterprise IT Solutions.
               </p>
-              <a href="#" className="inline-flex items-center text-xs font-bold text-[#0d47a1] uppercase tracking-wider hover:text-[#09357a]">
-                Learn More <ArrowRight className="ml-1 w-3 h-3" />
-              </a>
+             
             </div>
             
             {/* Card 4 */}
@@ -346,9 +337,7 @@ const EnterpriseLandingPage: React.FC = () => {
               <p className="text-sm text-slate-600 mb-6 leading-relaxed">
                 Reliable financial management systems with Enterprise Management Solutions to increase the accuracy of business visibility.
               </p>
-              <a href="#" className="inline-flex items-center text-xs font-bold text-[#0d47a1] uppercase tracking-wider hover:text-[#09357a]">
-                Learn More <ArrowRight className="ml-1 w-3 h-3" />
-              </a>
+              
             </div>
           </div>
         </div>
@@ -438,7 +427,7 @@ const EnterpriseLandingPage: React.FC = () => {
               </p>
             </div>
             
-            <div className="space-y-6">
+            {/* <div className="space-y-6">
               <div className="flex items-center text-blue-50">
                 <PhoneCall className="w-6 h-6 mr-4 text-blue-300" />
                 <span className="font-medium tracking-wide">+1 (800) CAPYNGEN</span>
@@ -447,7 +436,7 @@ const EnterpriseLandingPage: React.FC = () => {
                 <MapPin className="w-6 h-6 mr-4 text-blue-300 mt-1" />
                 <span className="font-medium leading-relaxed">Board of Directors: New York, NY, USA</span>
               </div>
-            </div>
+            </div> */}
           </div>
           
           {/* Right Side - Form */}

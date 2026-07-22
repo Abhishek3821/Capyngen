@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   ArrowRight, 
   ShoppingCart, 
   CreditCard, 
   BarChart3, 
   Smartphone,
-  Phone
+  Phone,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 
@@ -19,6 +21,9 @@ import img6 from "../assets/Ecommerce solutions/6.png";
 
 const EcommerceLandingPage: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  
+  // Ref for the slider container
+  const happeningsRef = useRef<HTMLDivElement>(null);
 
   const faqsData = [
     {
@@ -60,6 +65,16 @@ const EcommerceLandingPage: React.FC = () => {
     document.getElementById('future-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollHappenings = (direction: 'left' | 'right') => {
+    if (happeningsRef.current) {
+      const scrollAmount = 350;
+      happeningsRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const handleCardAction = () => {
     alert("Navigating to detailed view...");
   };
@@ -79,7 +94,7 @@ const EcommerceLandingPage: React.FC = () => {
     <div className="min-h-screen bg-[#f8f9fc] font-sans text-slate-600">
       
       {/* 1. Hero Section (Updated with Background Image) */}
-      <section className="relative py-24 lg:py-32 overflow-hidden min-h-[80vh] flex items-center">
+      <section className="relative py-14 lg:py-16 overflow-hidden min-h-[80vh] flex items-center">
         {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
           <img src={img1} alt="Hero Background" className="w-full h-full object-cover" />
@@ -203,11 +218,11 @@ const EcommerceLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. News / Articles Section */}
+      {/* 3. News / Articles Section - Updated with Unified Carousel Structure */}
       <section className="bg-[#f8f9fc] py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="flex justify-between items-end mb-10"
+            className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -219,9 +234,31 @@ const EcommerceLandingPage: React.FC = () => {
                 The newest overview in retail high-end tech and E-commerce.
               </p>
             </div>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => scrollHappenings('left')} 
+                className="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 hover:bg-slate-50 transition-colors rounded-sm cursor-pointer shadow-sm"
+              >
+                <ChevronLeft className="w-5 h-5 text-slate-900" />
+              </button>
+              <button 
+                onClick={() => scrollHappenings('right')} 
+                className="w-10 h-10 flex items-center justify-center bg-[#0b5a93] text-white hover:bg-[#094876] transition-colors rounded-sm cursor-pointer shadow-sm"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </motion.div>
           
-          <div className="grid md:grid-cols-3 gap-6">
+          {/* Scrollable Container */}
+          <div 
+            ref={happeningsRef}
+            className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar items-stretch"
+            style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
+          >
+            <style dangerouslySetInnerHTML={{__html: `
+              .hide-scrollbar::-webkit-scrollbar { display: none; }
+            `}} />
             
             {/* Article 1 */}
             <motion.div 
@@ -230,24 +267,25 @@ const EcommerceLandingPage: React.FC = () => {
               whileInView="visible"
               viewport={{ once: true }}
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.1 } } }}
-              className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full"
+              className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
-              {/* Full height image */}
-              <div className="relative w-full">
+              <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
                 <img 
                   src={img4} 
                   alt="Headless Commerce Concept" 
-                  className="w-full h-auto block"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0b5a93] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">Report</span>
+                <div className="absolute top-4 left-4 bg-white text-[#0b5a93] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                  Report
+                </div>
               </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5a93] transition-colors leading-tight">
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
                   The Artificial Shift Toward Resilient Supply Chains
                 </h3>
-                <p className="text-[#0b5a93] font-medium text-sm mt-auto flex items-center">
-                  View Report <ArrowRight className="ml-1 w-4 h-4" />
-                </p>
+                <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
+                  View Report <ArrowRight className="w-4 h-4" />
+                </div>
               </div>
             </motion.div>
             
@@ -258,23 +296,25 @@ const EcommerceLandingPage: React.FC = () => {
               whileInView="visible"
               viewport={{ once: true }}
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.2 } } }}
-              className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full"
+              className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
-              <div className="relative w-full">
+              <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
                 <img 
                   src={img5} 
                   alt="Mobile Payments" 
-                  className="w-full h-auto block"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0b5a93] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">Award</span>
+                <div className="absolute top-4 left-4 bg-white text-[#0b5a93] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                  Award
+                </div>
               </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5a93] transition-colors leading-tight">
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
                   Capyngen Ranks in Top Retail Tech Consultants for 2024
                 </h3>
-                <p className="text-[#0b5a93] font-medium text-sm mt-auto flex items-center">
-                  View Award <ArrowRight className="ml-1 w-4 h-4" />
-                </p>
+                <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
+                  View Award <ArrowRight className="w-4 h-4" />
+                </div>
               </div>
             </motion.div>
 
@@ -285,23 +325,25 @@ const EcommerceLandingPage: React.FC = () => {
               whileInView="visible"
               viewport={{ once: true }}
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.3 } } }}
-              className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full"
+              className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
-              <div className="relative w-full">
+              <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
                 <img 
                   src={img6} 
                   alt="Data Streams" 
-                  className="w-full h-auto block"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0b5a93] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">Case Study</span>
+                <div className="absolute top-4 left-4 bg-white text-[#0b5a93] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                  Case Study
+                </div>
               </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5a93] transition-colors leading-tight">
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
                   Global Shopkeepers' Growth by 40% with multichannel
                 </h3>
-                <p className="text-[#0b5a93] font-medium text-sm mt-auto flex items-center">
-                  View Case <ArrowRight className="ml-1 w-4 h-4" />
-                </p>
+                <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
+                  View Case <ArrowRight className="w-4 h-4" />
+                </div>
               </div>
             </motion.div>
             
@@ -312,23 +354,25 @@ const EcommerceLandingPage: React.FC = () => {
               whileInView="visible"
               viewport={{ once: true }}
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.4 } } }}
-              className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full"
+              className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
-              <div className="relative w-full">
+              <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
                 <img 
                   src={img2} 
                   alt="Data Streams" 
-                  className="w-full h-auto block"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0b5a93] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">Report</span>
+                <div className="absolute top-4 left-4 bg-white text-[#0b5a93] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                  Report
+                </div>
               </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5a93] transition-colors leading-tight">
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
                   Why Headless Commerce Is Becoming the Retail Standard
                 </h3>
-                <p className="text-[#0b5a93] font-medium text-sm mt-auto flex items-center">
-                  View Report <ArrowRight className="ml-1 w-4 h-4" />
-                </p>
+                <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
+                  View Report <ArrowRight className="w-4 h-4" />
+                </div>
               </div>
             </motion.div>
             
@@ -339,25 +383,28 @@ const EcommerceLandingPage: React.FC = () => {
               whileInView="visible"
               viewport={{ once: true }}
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.5 } } }}
-              className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow flex flex-col h-full"
+              className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
-              <div className="relative w-full">
+              <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
                 <img 
                   src={img3} 
                   alt="Data Streams" 
-                  className="w-full h-auto block"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0b5a93] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">Case Study</span>
+                <div className="absolute top-4 left-4 bg-white text-[#0b5a93] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                  Case Study
+                </div>
               </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5a93] transition-colors leading-tight">
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
                   B2B Distributor Cut Order Errors by 60% with Custom Portals
                 </h3>
-                <p className="text-[#0b5a93] font-medium text-sm mt-auto flex items-center">
-                  View Case <ArrowRight className="ml-1 w-4 h-4" />
-                </p>
+                <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
+                  View Case <ArrowRight className="w-4 h-4" />
+                </div>
               </div>
             </motion.div>
+
           </div>
         </div>
       </section>
@@ -643,7 +690,7 @@ const EcommerceLandingPage: React.FC = () => {
 
                 <button 
                   type="submit" 
-                  className="w-full bg-[#0b5a93] hover:bg-[#094876] text-white font-medium py-3.5 rounded transition-colors shadow-md hover:shadow-lg"
+                  className="w-full bg-[#0b5a93] hover:bg-[#094876] text-white font-medium py-3.5 rounded transition-colors shadow-md hover:shadow-lg cursor-pointer"
                 >
                   Confirm
                 </button>
@@ -679,7 +726,7 @@ const EcommerceLandingPage: React.FC = () => {
               >
                 <button
                   onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
-                  className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none hover:bg-slate-50 transition-colors"
+                  className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none hover:bg-slate-50 transition-colors cursor-pointer"
                 >
                   <span className="text-lg font-bold text-slate-900 pr-8">{faq.question}</span>
                   <span className="text-[#0b5a93] text-2xl leading-none font-medium">

@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion, type Variants } from 'framer-motion';
-import { ArrowRight, ChevronLeft, ChevronRight, Mail, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
 
 // Serial Image Imports from Folder as per image_f0800a.png
 import bannerImg from "../assets/Custom AI Solutions Service/banner.png";
@@ -188,20 +188,19 @@ const AISolutionsPage = () => {
 
           <div 
             ref={scrollRef}
-            className="flex gap-8 overflow-x-auto snap-x snap-mandatory pb-6"
+            className="flex gap-6 md:gap-8 overflow-x-auto snap-x snap-mandatory pb-6 items-stretch"
             style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
           >
             {happenings.map((item, index) => (
-              <div key={index} className="bg-white group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 min-w-[280px] md:min-w-[320px] flex-shrink-0 flex flex-col snap-start rounded-md overflow-hidden">
-                {/* Fixed height and object-cover to enforce uniform portrait look */}
-                <div className="w-full h-[300px] relative overflow-hidden bg-slate-100 p-0">
+              <div key={index} className="bg-white group cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 w-[280px] md:w-[350px] flex-shrink-0 flex flex-col snap-start rounded-xl overflow-hidden border border-slate-200">
+                <div className="w-full h-52 shrink-0 relative overflow-hidden bg-slate-100 p-0">
                   <img src={item.img} alt={item.title} className="w-full h-full object-cover block transition-transform duration-500 group-hover:scale-105" />
                 </div>
-                <div className="p-6 flex-grow flex flex-col justify-between border-t border-slate-100">
+                <div className="p-6 flex-grow flex flex-col">
                   <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
                     {item.title}
                   </h3>
-                  <button onClick={() => alert(`Read more about: ${item.title}`)} className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2 hover:gap-3 w-max focus:outline-none">
+                  <button onClick={() => alert(`Read more about: ${item.title}`)} className="flex items-center text-sm font-bold text-[#0056b3] transition-colors gap-2 hover:gap-3 w-max focus:outline-none mt-auto">
                     READ MORE <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -363,7 +362,7 @@ const AISolutionsPage = () => {
               Di​s‍cover⁠ how w​e ca‌n su‌pport your‍ organi​zation's AI transformation jo‍ur⁠ney with our custom AI soluitions. Our experts ar‍e​ rea⁠dy to‌ ass⁠ess your requirements an‍d‍ create‍ a custom⁠i‍z⁠ed str‌ate‌gic roadm‍ap as y​our leading⁠ AI solutions provider.
             </p>
             
-            <div className="flex items-start gap-4">
+            {/* <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full border border-blue-500/30 bg-blue-900/20 flex items-center justify-center shrink-0 shadow-lg">
                 <Mail className="w-5 h-5 text-blue-400" />
               </div>
@@ -373,7 +372,7 @@ const AISolutionsPage = () => {
                   solution⁠s@capyn‌g⁠en.com
                 </a>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="lg:w-1/2 w-full">

@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Brain, 
   Layout, 
   Palette, 
   Pointer, 
   Search,
-  Mail,
-  Phone,
-  MapPin,
-  ChevronDown
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import heroimg from "../assets/ux.png"
 
 const UIUXLandingPage: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const insightsRef = useRef<HTMLDivElement>(null);
+
+  const scrollInsights = (direction: 'left' | 'right') => {
+    if (insightsRef.current) {
+      const scrollAmount = window.innerWidth < 640 ? 280 : 350;
+      insightsRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const faqs = [
     { q: "Q1. What are UI/UX design services?", a: "The UI/UX design services are dedicated to making digital experiences more intuitive, visually appealing, and user-friendly, which helps to enhance customer interaction and business effectiveness." },
@@ -108,89 +118,113 @@ const UIUXLandingPage: React.FC = () => {
       {/* 3. News / Articles Section */}
       <section className="bg-white py-16 lg:py-24 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-end mb-10">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4">
             <div>
               <p className="text-blue-700 font-semibold mb-2 uppercase tracking-wider text-sm">INSIGHTS</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">Industry Perspectives</h2>
             </div>
+            <div className="flex gap-2 self-end sm:self-auto">
+              <button onClick={() => scrollInsights('left')} className="w-10 h-10 flex items-center justify-center bg-white border border-slate-300 hover:bg-slate-50 transition-colors cursor-pointer rounded-sm">
+                <ChevronLeft className="w-5 h-5 text-slate-600" />
+              </button>
+              <button onClick={() => scrollInsights('right')} className="w-10 h-10 flex items-center justify-center bg-[#0a1526] text-white hover:bg-slate-800 transition-colors cursor-pointer rounded-sm">
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div ref={insightsRef} className="flex gap-6 sm:gap-8 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar items-stretch" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+            <style dangerouslySetInnerHTML={{__html: `
+              .hide-scrollbar::-webkit-scrollbar { display: none; }
+            `}} />
+
             {/* Article 1 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-              <img 
-                src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=600" 
-                alt="Woman working on laptop" 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6 flex-1 flex flex-col">
+            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
+              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=600" 
+                  alt="Woman working on laptop" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 flex-grow flex flex-col">
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">AI-Powered User Experiences</h3>
-                <p className="text-slate-600 text-sm flex-1">Discover how smarter technologies are reshaping the product design and how they assist the businesses in delivering smarter digital interactions.</p>
+                <p className="text-slate-600 text-sm flex-grow">Discover how smarter technologies are reshaping the product design and how they assist the businesses in delivering smarter digital interactions.</p>
               </div>
             </div>
             
             {/* Article 2 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-              <img 
-                src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&q=80&w=600" 
-                alt="Tablet with wireframes" 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6 flex-1 flex flex-col">
+            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
+              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&q=80&w=600" 
+                  alt="Tablet with wireframes" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 flex-grow flex flex-col">
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Inclusive Design for Modern Businesses</h3>
-                <p className="text-slate-600 text-sm flex-1">Recognise the importance of accessible digital products on the basis of customer satisfaction and according to the changing global usability requirements.</p>
+                <p className="text-slate-600 text-sm flex-grow">Recognise the importance of accessible digital products on the basis of customer satisfaction and according to the changing global usability requirements.</p>
               </div>
             </div>
 
             {/* Article 3 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-              <img 
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" 
-                alt="Charts and wireframes" 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6 flex-1 flex flex-col">
+            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
+              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" 
+                  alt="Charts and wireframes" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 flex-grow flex flex-col">
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Creating Meaningful Digital Moments</h3>
-                <p className="text-slate-600 text-sm flex-1">Learn how attention to interface details and interactions can boost engagement on websites and apps.</p>
+                <p className="text-slate-600 text-sm flex-grow">Learn how attention to interface details and interactions can boost engagement on websites and apps.</p>
               </div>
             </div>
 
             {/* Article 4 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-              <img 
-                src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=80&w=600" 
-                alt="Mobile-First" 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6 flex-1 flex flex-col">
+            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
+              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=80&w=600" 
+                  alt="Mobile-First" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 flex-grow flex flex-col">
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Mobile-First Experience Design</h3>
-                <p className="text-slate-600 text-sm flex-1">Discuss the benefits of responsive, mobile-first approaches to increasing usability on mobile devices like smart phones and tablets, as well as today's other types of digital devices.</p>
+                <p className="text-slate-600 text-sm flex-grow">Discuss the benefits of responsive, mobile-first approaches to increasing usability on mobile devices like smart phones and tablets, as well as today's other types of digital devices.</p>
               </div>
             </div>
 
             {/* Article 5 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-              <img 
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600" 
-                alt="Data-Driven" 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6 flex-1 flex flex-col">
+            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
+              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600" 
+                  alt="Data-Driven" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 flex-grow flex flex-col">
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Data-Driven UX Optimization</h3>
-                <p className="text-slate-600 text-sm flex-1">Know the role that analytics, usability testing, and understanding customer behavior can play in enhancing product performance and user satisfaction.</p>
+                <p className="text-slate-600 text-sm flex-grow">Know the role that analytics, usability testing, and understanding customer behavior can play in enhancing product performance and user satisfaction.</p>
               </div>
             </div>
 
             {/* Article 6 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-              <img 
-                src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=600" 
-                alt="Design Systems" 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6 flex-1 flex flex-col">
+            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
+              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=600" 
+                  alt="Design Systems" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 flex-grow flex flex-col">
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Design Systems for Consistency</h3>
-                <p className="text-slate-600 text-sm flex-1">Understand the value of scalable design systems for businesses in terms of their ability to ensure brand consistency and speed up product development.</p>
+                <p className="text-slate-600 text-sm flex-grow">Understand the value of scalable design systems for businesses in terms of their ability to ensure brand consistency and speed up product development.</p>
               </div>
             </div>
 
@@ -327,7 +361,7 @@ const UIUXLandingPage: React.FC = () => {
                 Collaborate with a reputable UI/UX design company, Capyngen, to create captivating digital products aligned with business goals. 
               </p>
               
-              <div className="space-y-6">
+              {/* <div className="space-y-6">
                 <div className="flex items-center text-slate-700">
                   <Mail className="w-5 h-5 text-blue-700 mr-4 flex-shrink-0" />
                   <a href="mailto:design@capyngen.com" className="hover:text-blue-700 transition-colors">design@capyngen.com</a>
@@ -340,7 +374,7 @@ const UIUXLandingPage: React.FC = () => {
                   <MapPin className="w-5 h-5 text-blue-700 mr-4 flex-shrink-0 mt-1" />
                   <span>Global HQ New York, NY</span>
                 </div>
-              </div>
+              </div> */}
             </div>
             
             {/* Contact Form */}

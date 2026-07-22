@@ -101,7 +101,7 @@ const HomePage: React.FC = () => {
   // Functions to handle left/right scrolling
   const scrollArticles = (direction: 'left' | 'right') => {
     if (latestArticlesContainerRef.current) {
-      const scrollAmount = 350; 
+      const scrollAmount = window.innerWidth < 640 ? 300 : 350; 
       latestArticlesContainerRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -111,7 +111,7 @@ const HomePage: React.FC = () => {
 
   const scrollSolutions = (direction: 'left' | 'right') => {
     if (solutionsContainerRef.current) {
-      const scrollAmount = 420; 
+      const scrollAmount = window.innerWidth < 640 ? 300 : 420; 
       solutionsContainerRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -121,7 +121,7 @@ const HomePage: React.FC = () => {
 
   const scrollSuccessStories = (direction: 'left' | 'right') => {
     if (successStoriesContainerRef.current) {
-      const scrollAmount = 350; 
+      const scrollAmount = window.innerWidth < 640 ? 300 : 350; 
       successStoriesContainerRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -131,7 +131,7 @@ const HomePage: React.FC = () => {
 
   const scrollInsights = (direction: 'left' | 'right') => {
     if (insightsContainerRef.current) {
-      const scrollAmount = 350; 
+      const scrollAmount = window.innerWidth < 640 ? 300 : 350; 
       insightsContainerRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -298,7 +298,7 @@ const HomePage: React.FC = () => {
       {/* =========================================
           HERO SECTION
           ========================================= */}
-      <section className="relative flex min-h-[calc(100vh-80px)] w-full items-center justify-center overflow-hidden bg-slate-950 pt-10 pb-16 md:pt-16">
+      <section className="relative flex min-h-[calc(100vh-80px)] w-full items-center justify-center overflow-hidden bg-slate-950 pt-16 pb-20 md:pt-24 lg:pt-32">
         {/* Background Video Layer */}
         <div className="absolute inset-0 z-0">
           <video 
@@ -313,12 +313,12 @@ const HomePage: React.FC = () => {
           <div className="absolute inset-0 bg-blue-900/20"></div>
         </div>
 
-        <div className="relative z-10 mx-auto flex h-full min-h-[75vh] w-full max-w-[1400px] flex-col justify-between px-6 lg:px-12 xl:px-16">
-          <RevealOnScroll direction="up" className="max-w-4xl">
-            <p className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-[#00e5ff] sm:text-sm">
+        <div className="relative z-10 mx-auto flex h-full min-h-[75vh] w-full max-w-[1536px] flex-col justify-between px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24">
+          <RevealOnScroll direction="up" className="max-w-4xl mt-10 md:mt-0">
+            <p className="mb-4 sm:mb-6 text-xs font-bold uppercase tracking-[0.2em] text-[#00e5ff] sm:text-sm">
               Building the Future of Digital Business
             </p>
-            <h1 className="mb-6 font-['Syne',sans-serif] text-[48px] font-normal leading-[1.2] text-white md:text-[72px] md:leading-[77.8px] tracking-[0px]">
+            <h1 className="mb-6 font-['Syne',sans-serif] text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-normal leading-[1.2] lg:leading-[1.1] text-white tracking-[0px]">
               AI. Software.<br />
               <span className="text-[#2563eb]">Innovation.</span><br />
               Everything Your Business Needs to Grow.
@@ -326,10 +326,10 @@ const HomePage: React.FC = () => {
             <p className="mb-10 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg lg:text-xl">
               We create smart digital solutions that empower businesses to innovate, grow, and stay ahead of the competition. As a leading IT Company, we combine deep technical expertise with business understanding to deliver results that truly matter.
             </p>
-            <div className="flex flex-col gap-4 sm:flex-row">
+            <div className="flex flex-col gap-4 sm:flex-row w-full sm:w-auto">
               <button 
                 onClick={() => scrollToSection('contact')}
-                className="flex items-center justify-center gap-2 rounded-sm bg-[#2563eb] px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+                className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-sm bg-[#2563eb] px-8 py-4 sm:py-3.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
               >
                 Start Your Project
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -338,29 +338,29 @@ const HomePage: React.FC = () => {
               </button>
               <button 
                 onClick={() => scrollToSection('services')}
-                className="rounded-sm border border-white/20 bg-transparent px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10"
+                className="w-full sm:w-auto rounded-sm border border-white/20 bg-transparent px-8 py-4 sm:py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10"
               >
                 Explore Our Services
               </button>
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll direction="up" delay={200} className="mt-20 grid grid-cols-2 gap-y-10 border-t border-white/20 pb-8 pt-10 md:grid-cols-4 md:gap-8 lg:mt-32">
+          <RevealOnScroll direction="up" delay={200} className="mt-20 grid grid-cols-2 gap-y-10 gap-x-6 border-t border-white/20 pb-8 pt-10 md:grid-cols-4 md:gap-8 lg:mt-32">
             <div className="flex flex-col">
-              <h3 className="mb-1 text-4xl font-bold text-white sm:text-5xl">200+</h3>
-              <p className="text-sm font-medium text-slate-300">Projects Delivered</p>
+              <h3 className="mb-1 text-3xl sm:text-4xl lg:text-5xl font-bold text-white">200+</h3>
+              <p className="text-xs sm:text-sm font-medium text-slate-300">Projects Delivered</p>
             </div>
             <div className="flex flex-col">
-              <h3 className="mb-1 text-4xl font-bold text-white sm:text-5xl">50+</h3>
-              <p className="text-sm font-medium text-slate-300">Technology Experts</p>
+              <h3 className="mb-1 text-3xl sm:text-4xl lg:text-5xl font-bold text-white">50+</h3>
+              <p className="text-xs sm:text-sm font-medium text-slate-300">Technology Experts</p>
             </div>
             <div className="flex flex-col">
-              <h3 className="mb-1 text-4xl font-bold text-white sm:text-5xl">15+</h3>
-              <p className="text-sm font-medium text-slate-300">Industries Served</p>
+              <h3 className="mb-1 text-3xl sm:text-4xl lg:text-5xl font-bold text-white">15+</h3>
+              <p className="text-xs sm:text-sm font-medium text-slate-300">Industries Served</p>
             </div>
             <div className="flex flex-col">
-              <h3 className="mb-1 text-4xl font-bold text-white sm:text-5xl">98%</h3>
-              <p className="text-sm font-medium text-slate-300">Client Satisfaction</p>
+              <h3 className="mb-1 text-3xl sm:text-4xl lg:text-5xl font-bold text-white">98%</h3>
+              <p className="text-xs sm:text-sm font-medium text-slate-300">Client Satisfaction</p>
             </div>
           </RevealOnScroll>
         </div>
@@ -369,17 +369,17 @@ const HomePage: React.FC = () => {
       {/* =========================================
           LATEST AT CAPYNGEN SECTION 
           ========================================= */}
-      <section className="mx-auto w-full max-w-[1400px] px-6 py-20 lg:px-12 xl:px-16">
-        <RevealOnScroll className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+      <section className="mx-auto w-full max-w-[1536px] px-4 py-16 sm:px-6 md:px-8 lg:py-20 lg:px-12 xl:px-16 2xl:px-24">
+        <RevealOnScroll className="mb-10 lg:mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-3xl">
-            <h2 className="mb-4 font-['Syne',sans-serif] text-4xl font-semibold text-slate-900 md:text-5xl">
+            <h2 className="mb-4 font-['Syne',sans-serif] text-3xl sm:text-4xl font-semibold text-slate-900 md:text-5xl">
               Latest at Capyngen
             </h2>
             <p className="text-base text-slate-500 sm:text-lg">
               Keep up with our latest breakthroughs, tech insights, product releases, client success stories, and official company updates. As a leading information technology company in India, we continuously push the boundaries of what's possible.
             </p>
           </div>
-          <div className="flex shrink-0 gap-3">
+          <div className="hidden lg:flex shrink-0 gap-3">
             <button onClick={() => scrollArticles('left')} className="flex h-12 w-12 items-center justify-center border border-slate-200 text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900 focus:outline-none">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
             </button>
@@ -390,13 +390,13 @@ const HomePage: React.FC = () => {
         </RevealOnScroll>
 
         <RevealOnScroll>
-          <div ref={latestArticlesContainerRef} className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 scroll-smooth">
+          <div ref={latestArticlesContainerRef} className="no-scrollbar flex snap-x snap-mandatory gap-4 sm:gap-6 overflow-x-auto pb-6 pt-2 scroll-smooth">
             {latestArticles.map((article) => (
-              <div key={article.id} onClick={handleContactClick} className="group flex w-[300px] shrink-0 snap-start cursor-pointer flex-col overflow-hidden border border-slate-100 bg-white transition-shadow hover:shadow-lg sm:w-[320px] md:w-[340px]">
+              <div key={article.id} onClick={handleContactClick} className="group flex w-[85vw] max-w-[340px] shrink-0 snap-center sm:snap-start cursor-pointer flex-col overflow-hidden border border-slate-100 bg-white transition-shadow hover:shadow-lg sm:w-[320px] md:w-[340px]">
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
                   <img src={article.imageUrl} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
-                <div className="flex flex-1 flex-col p-6">
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
                   <h3 className="mb-3 text-lg font-bold leading-snug text-slate-900">{article.title}</h3>
                   <p className="flex-1 text-sm leading-relaxed text-slate-500">{article.description}</p>
                   <div className="my-5 h-[1px] w-full bg-slate-100"></div>
@@ -416,13 +416,13 @@ const HomePage: React.FC = () => {
       {/* =========================================
           TECHNOLOGY SOLUTIONS SECTION 
           ========================================= */}
-      <section id="services" className="w-full bg-[#2563eb] py-20 px-6 lg:px-12 xl:px-16 scroll-mt-10">
-        <div className="mx-auto w-full max-w-[1400px]">
-          <RevealOnScroll className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <h2 className="font-['Syne',sans-serif] text-4xl font-semibold text-white md:text-5xl">
+      <section id="services" className="w-full bg-[#2563eb] py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 scroll-mt-10">
+        <div className="mx-auto w-full max-w-[1536px]">
+          <RevealOnScroll className="mb-10 lg:mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+            <h2 className="font-['Syne',sans-serif] text-3xl sm:text-4xl font-semibold text-white md:text-5xl">
               Technology Solutions That Drive Growth
             </h2>
-            <div className="flex shrink-0 gap-3">
+            <div className="hidden lg:flex shrink-0 gap-3">
               <button onClick={() => scrollSolutions('left')} className="flex h-12 w-12 items-center justify-center border border-white/20 text-white transition-colors hover:bg-white/10 focus:outline-none">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
@@ -433,19 +433,19 @@ const HomePage: React.FC = () => {
           </RevealOnScroll>
           
           <RevealOnScroll>
-            <div ref={solutionsContainerRef} className="no-scrollbar flex snap-x snap-mandatory gap-8 overflow-x-auto pb-4 scroll-smooth">
+            <div ref={solutionsContainerRef} className="no-scrollbar flex snap-x snap-mandatory gap-4 sm:gap-6 lg:gap-8 overflow-x-auto pb-6 pt-2 scroll-smooth">
               {technologySolutions.map((solution) => (
-                <div key={solution.title} onClick={handleContactClick} className="flex w-[290px] shrink-0 snap-start flex-col border border-white/10 bg-[#1e293b] p-8 shadow-xl transition-shadow hover:shadow-2xl sm:w-[360px] md:w-[400px] cursor-pointer">
+                <div key={solution.title} onClick={handleContactClick} className="group flex w-[85vw] max-w-[400px] shrink-0 snap-center sm:snap-start flex-col border border-white/10 bg-[#1e293b] p-6 sm:p-8 shadow-xl transition-shadow hover:shadow-2xl sm:w-[360px] md:w-[400px] cursor-pointer">
                   <div className="relative aspect-video w-full overflow-hidden">
                     <img src={solution.imageUrl} alt={solution.title} className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
                   </div>
-                  <div className="mt-8 flex flex-1 flex-col justify-between">
+                  <div className="mt-6 sm:mt-8 flex flex-1 flex-col justify-between">
                     <div>
-                      <h3 className="mb-4 text-2xl font-semibold text-white">{solution.title}</h3>
-                      <p className="mb-8 text-base leading-relaxed text-slate-300">{solution.description}</p>
+                      <h3 className="mb-3 sm:mb-4 text-xl sm:text-2xl font-semibold text-white">{solution.title}</h3>
+                      <p className="mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed text-slate-300">{solution.description}</p>
                     </div>
                     <div className="group flex cursor-pointer items-center gap-3">
-                      <span className="text-base font-medium text-white transition-colors hover:text-[#00e5ff]">Discover our impact</span>
+                      <span className="text-sm sm:text-base font-medium text-white transition-colors hover:text-[#00e5ff]">Discover our impact</span>
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-[#3b82f6] text-white transition-transform group-hover:translate-x-1">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                       </div>
@@ -461,13 +461,13 @@ const HomePage: React.FC = () => {
       {/* =========================================
           SUCCESS STORIES
           ========================================= */}
-      <section className="w-full bg-white py-20 px-6 lg:px-12 xl:px-16 border-t border-slate-100">
-        <div className="mx-auto w-full max-w-[1400px]">
-          <RevealOnScroll className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <h2 className="font-['Syne',sans-serif] text-4xl font-semibold text-slate-900 md:text-5xl">
+      <section className="w-full bg-white py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 border-t border-slate-100">
+        <div className="mx-auto w-full max-w-[1536px]">
+          <RevealOnScroll className="mb-10 lg:mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+            <h2 className="font-['Syne',sans-serif] text-3xl sm:text-4xl font-semibold text-slate-900 md:text-5xl">
               Success Stories
             </h2>
-            <div className="flex shrink-0 gap-3">
+            <div className="hidden lg:flex shrink-0 gap-3">
               <button onClick={() => scrollSuccessStories('left')} className="flex h-12 w-12 items-center justify-center bg-white border border-slate-200 text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900 focus:outline-none shadow-sm">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
@@ -478,15 +478,15 @@ const HomePage: React.FC = () => {
           </RevealOnScroll>
 
           <RevealOnScroll>
-            <div ref={successStoriesContainerRef} className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 scroll-smooth">
+            <div ref={successStoriesContainerRef} className="no-scrollbar flex snap-x snap-mandatory gap-4 sm:gap-6 overflow-x-auto pb-6 pt-2 scroll-smooth">
               {successStories.map((story) => (
-                <div key={story.id} onClick={handleContactClick} className="group flex w-[300px] shrink-0 snap-start cursor-pointer flex-col bg-white border border-slate-200 transition-all hover:shadow-xl sm:w-[320px] md:w-[350px]">
+                <div key={story.id} onClick={handleContactClick} className="group flex w-[85vw] max-w-[350px] shrink-0 snap-center sm:snap-start cursor-pointer flex-col bg-white border border-slate-200 transition-all hover:shadow-xl sm:w-[320px] md:w-[350px]">
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
                     <img src={story.imageUrl} alt={story.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
-                  <div className="flex flex-1 flex-col p-6 lg:p-8">
-                    <span className="mb-3 text-[11px] font-bold tracking-widest text-[#2563eb] uppercase">{story.category}</span>
-                    <h3 className="mb-3 text-xl font-bold leading-snug text-slate-900">{story.title}</h3>
+                  <div className="flex flex-1 flex-col p-5 sm:p-6 lg:p-8">
+                    <span className="mb-3 text-[10px] sm:text-[11px] font-bold tracking-widest text-[#2563eb] uppercase">{story.category}</span>
+                    <h3 className="mb-3 text-lg sm:text-xl font-bold leading-snug text-slate-900">{story.title}</h3>
                     <p className="flex-1 text-sm leading-relaxed text-slate-500">{story.description}</p>
                     <div className="my-5 h-[1px] w-full bg-slate-100"></div>
                     <div className="flex w-full items-center justify-between">
@@ -506,13 +506,13 @@ const HomePage: React.FC = () => {
       {/* =========================================
           INSIGHTS THAT INSPIRE INNOVATION
           ========================================= */}
-      <section className="w-full bg-[#f8f9fa] py-20 px-6 lg:px-12 xl:px-16 border-t border-slate-100">
-        <div className="mx-auto w-full max-w-[1400px]">
-          <RevealOnScroll className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <h2 className="font-['Syne',sans-serif] text-4xl font-semibold text-slate-900 md:text-5xl">
+      <section className="w-full bg-[#f8f9fa] py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 border-t border-slate-100">
+        <div className="mx-auto w-full max-w-[1536px]">
+          <RevealOnScroll className="mb-10 lg:mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+            <h2 className="font-['Syne',sans-serif] text-3xl sm:text-4xl font-semibold text-slate-900 md:text-5xl">
               Insights That Inspire Innovation
             </h2>
-            <div className="flex shrink-0 gap-3">
+            <div className="hidden lg:flex shrink-0 gap-3">
               <button onClick={() => scrollInsights('left')} className="flex h-12 w-12 items-center justify-center bg-white border border-slate-200 text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900 focus:outline-none shadow-sm">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
@@ -523,15 +523,15 @@ const HomePage: React.FC = () => {
           </RevealOnScroll>
 
           <RevealOnScroll>
-            <div ref={insightsContainerRef} className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 scroll-smooth">
+            <div ref={insightsContainerRef} className="no-scrollbar flex snap-x snap-mandatory gap-4 sm:gap-6 overflow-x-auto pb-6 pt-2 scroll-smooth">
               {insightsData.map((insight) => (
-                <div key={insight.id} onClick={handleContactClick} className="group flex w-[300px] shrink-0 snap-start cursor-pointer flex-col bg-white border border-slate-200 transition-all hover:shadow-xl sm:w-[320px] md:w-[350px]">
+                <div key={insight.id} onClick={handleContactClick} className="group flex w-[85vw] max-w-[350px] shrink-0 snap-center sm:snap-start cursor-pointer flex-col bg-white border border-slate-200 transition-all hover:shadow-xl sm:w-[320px] md:w-[350px]">
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
                     <img src={insight.imageUrl} alt={insight.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
-                  <div className="flex flex-1 flex-col p-6 lg:p-8">
-                    <span className="mb-3 text-[11px] font-bold tracking-widest text-[#2563eb] uppercase">{insight.category}</span>
-                    <h3 className="mb-3 text-xl font-bold leading-snug text-slate-900">{insight.title}</h3>
+                  <div className="flex flex-1 flex-col p-5 sm:p-6 lg:p-8">
+                    <span className="mb-3 text-[10px] sm:text-[11px] font-bold tracking-widest text-[#2563eb] uppercase">{insight.category}</span>
+                    <h3 className="mb-3 text-lg sm:text-xl font-bold leading-snug text-slate-900">{insight.title}</h3>
                     <p className="flex-1 text-sm leading-relaxed text-slate-500">{insight.description}</p>
                     <div className="my-5 h-[1px] w-full bg-slate-100"></div>
                     <div className="flex w-full items-center justify-between">
@@ -551,10 +551,10 @@ const HomePage: React.FC = () => {
       {/* =========================================
           INDUSTRIES WE SERVE 
           ========================================= */}
-      <section className="mx-auto w-full max-w-[1400px] px-6 py-20 lg:px-12 xl:px-16">
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-20">
+      <section className="mx-auto w-full max-w-[1536px] px-4 py-16 sm:px-6 md:px-8 lg:py-20 lg:px-12 xl:px-16 2xl:px-24">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
           
-          <RevealOnScroll direction="right" className="relative aspect-square w-full overflow-hidden bg-slate-100 lg:sticky lg:top-24">
+          <RevealOnScroll direction="right" className="relative order-2 lg:order-1 aspect-video lg:aspect-square w-full overflow-hidden bg-slate-100 lg:sticky lg:top-24 rounded-sm">
             <img 
               key={activeIndustry.id}
               src={activeIndustry.imageUrl} 
@@ -562,8 +562,8 @@ const HomePage: React.FC = () => {
               className="h-full w-full object-cover transition-all duration-700 ease-in-out animate-in fade-in zoom-in-95" 
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-[#0f172a]/30 to-transparent"></div>
-            <div className="absolute bottom-0 left-0 p-8 text-white md:p-12">
-              <h3 className="mb-2 font-['Syne',sans-serif] text-3xl font-semibold md:text-4xl">
+            <div className="absolute bottom-0 left-0 p-6 sm:p-8 md:p-12 text-white">
+              <h3 className="mb-2 font-['Syne',sans-serif] text-2xl sm:text-3xl font-semibold md:text-4xl">
                 Trusted Across Industries
               </h3>
               <p className="text-sm text-slate-300 md:text-base">
@@ -572,8 +572,8 @@ const HomePage: React.FC = () => {
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll direction="left" className="flex flex-col pt-4">
-            <p className="mb-10 font-['Syne',sans-serif] text-4xl font-semibold text-slate-900 md:text-5xl lg:text-[56px] leading-[1.1]">
+          <RevealOnScroll direction="left" className="flex flex-col pt-2 lg:pt-4 order-1 lg:order-2">
+            <p className="mb-6 sm:mb-10 font-['Syne',sans-serif] text-3xl sm:text-4xl font-semibold text-slate-900 md:text-5xl lg:text-[56px] leading-[1.2] lg:leading-[1.1]">
              INDUSTRIES WE SERVE 
             </p>
             <h2 className="mb-4 text-xs font-bold tracking-widest text-[#2563eb] uppercase">
@@ -594,10 +594,10 @@ const HomePage: React.FC = () => {
                   >
                     <button
                       onClick={() => setActiveIndustryId(industry.id)}
-                      className="group flex w-full items-center justify-between py-5 text-left transition-all duration-300 focus:outline-none"
+                      className="group flex w-full items-center justify-between py-4 sm:py-5 text-left transition-all duration-300 focus:outline-none"
                     >
                       <span 
-                        className={`text-base font-medium md:text-lg transition-colors ${
+                        className={`text-sm sm:text-base font-medium md:text-lg transition-colors ${
                           isActive ? 'text-[#2563eb]' : 'text-slate-600 group-hover:text-slate-900'
                         }`}
                       >
@@ -616,10 +616,10 @@ const HomePage: React.FC = () => {
                     {/* Smooth height transition utilizing CSS Grid */}
                     <div
                       className={`grid transition-all duration-300 ease-in-out ${
-                        isActive ? 'grid-rows-[1fr] opacity-100 pb-5' : 'grid-rows-[0fr] opacity-0 pb-0'
+                        isActive ? 'grid-rows-[1fr] opacity-100 pb-4 sm:pb-5' : 'grid-rows-[0fr] opacity-0 pb-0'
                       }`}
                     >
-                      <div className="overflow-hidden pr-8 md:pr-12">
+                      <div className="overflow-hidden pr-6 sm:pr-8 md:pr-12">
                         <p className="text-sm leading-relaxed text-slate-500 md:text-base">
                           {industry.description}
                         </p>
@@ -637,24 +637,24 @@ const HomePage: React.FC = () => {
       {/* =========================================
           WHY CHOOSE & OUR PROCESS 
           ========================================= */}
-      <section className="w-full bg-[#0b1221] py-20 px-6 text-white lg:px-12 xl:px-16 overflow-hidden">
-        <div className="mx-auto w-full max-w-[1400px]">
+      <section className="w-full bg-[#0b1221] py-16 sm:py-20 px-4 sm:px-6 md:px-8 text-white lg:px-12 xl:px-16 2xl:px-24 overflow-hidden">
+        <div className="mx-auto w-full max-w-[1536px]">
           
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
             <RevealOnScroll direction="right" className="flex flex-col">
               <span className="mb-4 text-xs font-bold uppercase tracking-widest text-[#00e5ff]">
                 Why Choose Capyngen
               </span>
-              <h2 className="mb-6 font-['Syne',sans-serif] text-4xl font-semibold leading-tight md:text-5xl">
+              <h2 className="mb-6 font-['Syne',sans-serif] text-3xl sm:text-4xl font-semibold leading-tight md:text-5xl">
                 Built Differently.<br />
                 Delivered Differently.
               </h2>
-              <p className="mb-10 max-w-lg text-base leading-relaxed text-slate-400 md:text-lg">
+              <p className="mb-8 sm:mb-10 max-w-lg text-sm sm:text-base leading-relaxed text-slate-400 md:text-lg">
                 We bring together deep technical knowledge and sharp business insight to create digital products that don't just function—they dominate the market. As a leading IT Company, we are committed to your success.
               </p>
               <button 
                 onClick={() => scrollToSection('contact')}
-                className="flex w-fit items-center gap-2 rounded-sm bg-[#2563eb] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+                className="flex w-full sm:w-fit justify-center items-center gap-2 rounded-sm bg-[#2563eb] px-6 py-4 sm:py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
               >
                 Learn more
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -663,11 +663,11 @@ const HomePage: React.FC = () => {
               </button>
             </RevealOnScroll>
 
-            <RevealOnScroll direction="left" className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2">
+            <RevealOnScroll direction="left" className="grid grid-cols-1 gap-x-8 lg:gap-x-12 gap-y-12 sm:grid-cols-2">
               {whyChooseUsFeatures.map((feature, index) => (
                 <div key={index} className="flex flex-col">
-                  <div className="mb-5 h-6 w-1 bg-[#2563eb]"></div>
-                  <h3 className="mb-3 text-lg font-semibold text-white">
+                  <div className="mb-4 sm:mb-5 h-6 w-1 bg-[#2563eb]"></div>
+                  <h3 className="mb-2 sm:mb-3 text-base sm:text-lg font-semibold text-white">
                     {feature.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-400">
@@ -678,28 +678,26 @@ const HomePage: React.FC = () => {
             </RevealOnScroll>
           </div>
 
-          <div className="my-24 h-px w-full bg-white/10"></div>
+          <div className="my-16 lg:my-24 h-px w-full bg-white/10"></div>
 
           <RevealOnScroll direction="up">
             <span className="mb-4 block text-xs font-bold uppercase tracking-widest text-[#00e5ff]">
               Our Process
             </span>
-            <h2 className="mb-16 font-['Syne',sans-serif] text-3xl font-semibold md:text-4xl">
+            <h2 className="mb-10 lg:mb-16 font-['Syne',sans-serif] text-2xl sm:text-3xl font-semibold md:text-4xl">
               How We Deliver Excellence
             </h2>
 
-            <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 lg:grid-cols-6 lg:gap-y-0">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 lg:gap-12 xl:gap-8">
               {processSteps.map((step, index) => (
                 <div 
                   key={index} 
-                  className={`flex flex-col ${
-                    index !== 0 ? 'border-l border-white/10 pl-6 sm:pl-8' : 'pr-6 sm:pr-8'
-                  }`}
+                  className="flex flex-col border-t border-white/10 pt-6"
                 >
-                  <span className="mb-5 text-sm font-bold text-[#2563eb]">
+                  <span className="mb-4 sm:mb-5 text-sm font-bold text-[#2563eb]">
                     {step.num}
                   </span>
-                  <h3 className="mb-3 text-lg font-semibold text-white">
+                  <h3 className="mb-2 sm:mb-3 text-base sm:text-lg font-semibold text-white">
                     {step.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-400">
@@ -716,7 +714,7 @@ const HomePage: React.FC = () => {
       {/* =========================================
           CAREERS SECTION
           ========================================= */}
-      <section className="relative flex w-full items-center justify-start overflow-hidden py-32 lg:py-48">
+      <section className="relative flex w-full items-center justify-start overflow-hidden py-24 sm:py-32 lg:py-48">
         
         <div 
           className="absolute inset-0 z-0"
@@ -730,24 +728,24 @@ const HomePage: React.FC = () => {
           <div className="absolute inset-0 bg-black/20"></div>
         </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-12 xl:px-16">
+        <div className="relative z-10 mx-auto w-full max-w-[1536px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24">
           <RevealOnScroll className="max-w-xl">
-            <span className="mb-5 block text-xs font-bold uppercase tracking-[0.2em] text-[#00e5ff]">
+            <span className="mb-4 sm:mb-5 block text-xs font-bold uppercase tracking-[0.2em] text-[#00e5ff]">
               Careers
             </span>
             
-            <h2 className="mb-6 font-['Syne',sans-serif] text-5xl font-normal leading-[1.15] text-slate-200 md:text-6xl">
+            <h2 className="mb-6 font-['Syne',sans-serif] text-4xl sm:text-5xl font-normal leading-[1.15] text-slate-200 md:text-6xl lg:text-[72px]">
               Build Your Career<br />
               <span className="font-bold text-white">at Capyngen</span>
             </h2>
             
-            <p className="mb-10 text-base leading-relaxed text-slate-300 md:text-lg">
+            <p className="mb-8 sm:mb-10 text-sm sm:text-base leading-relaxed text-slate-300 md:text-lg">
               Become part of a team of skilled engineers, creative designers, strategic marketers, AI experts, and forward-thinking innovators who are building technology that creates meaningful change in the real world. As a leading software IT Company, we offer exciting career opportunities.
             </p>
             
             <button 
               onClick={handleContactClick}
-              className="flex w-fit items-center justify-center gap-3 rounded-sm bg-[#2563eb] px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+              className="flex w-full sm:w-fit items-center justify-center gap-3 rounded-sm bg-[#2563eb] px-8 py-4 sm:py-3.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
             >
               Explore Careers
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -761,13 +759,13 @@ const HomePage: React.FC = () => {
       {/* =========================================
           FAQ SECTION
           ========================================= */}
-      <section className="w-full bg-white py-24 px-6 lg:px-12 xl:px-16">
+      <section className="w-full bg-white py-16 sm:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24">
         <RevealOnScroll className="mx-auto w-full max-w-4xl">
           
           {/* Header with Background Blur */}
-          <div className="relative mb-16 flex justify-center py-6">
+          <div className="relative mb-12 sm:mb-16 flex justify-center py-4 sm:py-6">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-24 w-48 rounded-full bg-[#3b82f6]/30 blur-[50px]"></div>
-            <h2 className="relative z-10 font-['Syne',sans-serif] text-5xl font-bold text-slate-800 md:text-6xl tracking-tight">
+            <h2 className="relative z-10 font-['Syne',sans-serif] text-4xl sm:text-5xl font-bold text-slate-800 md:text-6xl tracking-tight">
               FAQs
             </h2>
           </div>
@@ -777,20 +775,20 @@ const HomePage: React.FC = () => {
             {faqs.map((faq, index) => {
               const isOpen = openFaqIndex === index;
               return (
-                <div key={index} className="border-b border-slate-200 py-6">
+                <div key={index} className="border-b border-slate-200 py-4 sm:py-6">
                   <button
                     onClick={() => setOpenFaqIndex(isOpen ? null : index)}
                     className="group flex w-full items-center justify-between text-left focus:outline-none"
                   >
                     <span
-                      className={`pr-6 text-base font-semibold transition-colors sm:text-lg ${
+                      className={`pr-4 sm:pr-6 text-sm sm:text-base font-semibold transition-colors md:text-lg ${
                         isOpen ? 'text-[#0ea5e9]' : 'text-slate-700 group-hover:text-slate-900'
                       }`}
                     >
                       {faq.q}
                     </span>
                     <span
-                      className={`flex-shrink-0 text-2xl font-light transition-colors ${
+                      className={`flex-shrink-0 text-xl sm:text-2xl font-light transition-colors ${
                         isOpen ? 'text-[#0ea5e9]' : 'text-slate-400 group-hover:text-slate-600'
                       }`}
                     >
@@ -801,11 +799,11 @@ const HomePage: React.FC = () => {
                   {/* Smooth height transition utilizing CSS Grid */}
                   <div
                     className={`grid transition-all duration-300 ease-in-out ${
-                      isOpen ? 'mt-4 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                      isOpen ? 'mt-3 sm:mt-4 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                     }`}
                   >
-                    <div className="overflow-hidden pr-8 sm:pr-12">
-                      <p className="text-sm leading-relaxed text-slate-500 sm:text-base">
+                    <div className="overflow-hidden pr-6 sm:pr-8 md:pr-12">
+                      <p className="text-xs sm:text-sm leading-relaxed text-slate-500 md:text-base">
                         {faq.a}
                       </p>
                     </div>
@@ -821,23 +819,23 @@ const HomePage: React.FC = () => {
       {/* =========================================
           CTA SECTION (Ready to Transform)
           ========================================= */}
-      <section id="contact" className="w-full bg-[#050b14] py-24 px-6 lg:px-12 xl:px-16 scroll-mt-10">
-        <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center justify-between gap-16 lg:flex-row lg:gap-20">
+      <section id="contact" className="w-full bg-[#050b14] py-16 sm:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 scroll-mt-10">
+        <div className="mx-auto flex w-full max-w-[1536px] flex-col items-center justify-between gap-12 lg:flex-row lg:gap-16 xl:gap-20">
           
           {/* Left Content */}
-          <RevealOnScroll direction="right" className="flex max-w-xl flex-col">
-            <h2 className="mb-6 font-['Syne',sans-serif] text-4xl font-normal text-white md:text-5xl lg:text-6xl lg:leading-[1.1]">
-              Ready to Transform <br />
+          <RevealOnScroll direction="right" className="flex w-full lg:max-w-xl flex-col order-2 lg:order-1">
+            <h2 className="mb-4 sm:mb-6 font-['Syne',sans-serif] text-3xl sm:text-4xl font-normal text-white md:text-5xl lg:text-6xl lg:leading-[1.1]">
+              Ready to Transform <br className="hidden sm:block" />
               <span className="font-semibold text-[#3b82f6]">Your Business?</span>
             </h2>
             
-            <p className="mb-10 text-base leading-relaxed text-slate-400 md:text-lg">
+            <p className="mb-8 sm:mb-10 text-sm sm:text-base leading-relaxed text-slate-400 md:text-lg">
               Let's collaborate to build intelligent digital solutions that drive results. Our team is ready to listen to your vision, understand your objectives, and craft a customized technology strategy that moves your business forward. As a full service IT Comapny, we provide end-to-end solutions for your business needs.
             </p>
             
             <button 
               onClick={handleContactClick}
-              className="flex w-fit items-center justify-center gap-3 rounded-sm bg-[#3b82f6] px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-blue-600"
+              className="flex w-full sm:w-fit items-center justify-center gap-3 rounded-sm bg-[#3b82f6] px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-blue-600"
             >
               Contact Our Experts
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -847,7 +845,7 @@ const HomePage: React.FC = () => {
           </RevealOnScroll>
 
           {/* Right Content: Tech Image */}
-          <RevealOnScroll direction="left" className="relative w-full max-w-[600px] shrink-0 overflow-hidden lg:w-1/2">
+          <RevealOnScroll direction="left" className="relative w-full lg:max-w-[600px] shrink-0 overflow-hidden lg:w-1/2 order-1 lg:order-2 rounded-sm">
             <img 
               src={img15} 
               alt="Digital Transformation Technology" 

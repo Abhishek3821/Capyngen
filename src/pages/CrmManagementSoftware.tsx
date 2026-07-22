@@ -329,48 +329,48 @@ const CRMSolutionsPage: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <RevealOnScroll delay={0.1}>
               <div className="group cursor-pointer">
-                <div className="h-64 bg-white/90 w-full overflow-hidden mb-4 rounded-sm flex items-center justify-center p-4">
+                <div className="h-64 bg-white/0 w-full overflow-hidden rounded-sm flex items-center justify-center">
                    <img src={img7} alt="Experienced CRM Experts" className="w-full h-full object-contain grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-white leading-tight mb-1">01. Experienced CRM Experts</h4>
-                  <p className="text-blue-100 text-sm mb-3">Reliable industry certified professionals providing CRM software solutions.</p>
+                  <h4 className="text-base font-bold text-white leading-tight">01. Experienced CRM Experts</h4>
+                  <p className="text-blue-100 text-sm">Reliable industry certified professionals providing CRM software solutions.</p>
                 </div>
               </div>
             </RevealOnScroll>
 
             <RevealOnScroll delay={0.2}>
               <div className="group cursor-pointer">
-                <div className="h-64 bg-white/90 w-full overflow-hidden mb-4 rounded-sm flex items-center justify-center p-4">
+                <div className="h-64 bg-white/0 w-full overflow-hidden rounded-sm flex items-center justify-center">
                    <img src={img8} alt="Tailor-Made Business Solutions" className="w-full h-full object-contain grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-white leading-tight mb-1">02. Tailor-Made Business Solutions</h4>
-                  <p className="text-blue-100 text-sm mb-3">Platforms that are custom-built to fit your business requirements.</p>
+                  <h4 className="text-base font-bold text-white leading-tight">02. Tailor-Made Business Solutions</h4>
+                  <p className="text-blue-100 text-sm">Platforms that are custom-built to fit your business requirements.</p>
                 </div>
               </div>
             </RevealOnScroll>
 
             <RevealOnScroll delay={0.3}>
               <div className="group cursor-pointer">
-                <div className="h-64 bg-white/90 w-full overflow-hidden mb-4 rounded-sm flex items-center justify-center p-4">
+                <div className="h-64 bg-white/0 w-full overflow-hidden rounded-sm flex items-center justify-center">
                    <img src={img9} alt="Seamless Integration & Automation" className="w-full h-full object-contain grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-white leading-tight mb-1">03. Seamless Integration & Automation</h4>
-                  <p className="text-blue-100 text-sm mb-3">Integrate systems, streamline processes, and enhance productivity.</p>
+                  <h4 className="text-base font-bold text-white leading-tight">03. Seamless Integration & Automation</h4>
+                  <p className="text-blue-100 text-sm">Integrate systems, streamline processes, and enhance productivity.</p>
                 </div>
               </div>
             </RevealOnScroll>
 
             <RevealOnScroll delay={0.4}>
               <div className="group cursor-pointer">
-                <div className="h-64 bg-white/90 w-full overflow-hidden mb-4 rounded-sm flex items-center justify-center p-4">
+                <div className="h-64 bg-white/50 w-full overflow-hidden rounded-sm flex items-center justify-center">
                    <img src={img2} alt="End-to-End Support" className="w-full h-full object-contain grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-white leading-tight mb-1">04. End-to-End Support</h4>
-                  <p className="text-blue-100 text-sm mb-3">Full implementation, maintenance, upgrade and technical assistance</p>
+                  <h4 className="text-base font-bold text-white leading-tight">04. End-to-End Support</h4>
+                  <p className="text-blue-100 text-sm">Full implementation, maintenance, upgrade and technical assistance</p>
                 </div>
               </div>
             </RevealOnScroll>

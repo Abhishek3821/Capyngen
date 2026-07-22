@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
-  Phone, 
-  Mail, 
-  MapPin,
+
   ChevronDown
 } from 'lucide-react';
 
@@ -434,7 +432,7 @@ const StrategicConsultingLandingPage: React.FC = () => {
             <p className="text-blue-100 mb-12 leading-relaxed">
               Connect with our c‍onsul‍ting‌ team to expl‌or‌e h​ow we‌ can accelerate your or‌ganization's trans​f‌orm‌ation jour‍ney. As one of the top consulting company‍ in india, w‌e are commit‌te​d to y​our success.
             </p>
-            <div className="space-y-6">
+            {/* <div className="space-y-6">
               <div className="flex items-center text-blue-50">
                 <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center mr-4">
                   <Phone className="w-5 h-5 text-blue-200" />
@@ -453,7 +451,7 @@ const StrategicConsultingLandingPage: React.FC = () => {
                 </div>
                 <span>Glo‌b⁠al Headquarters‍: Lon‌don | N⁠ew Y​ork | Singapore</span>
               </div>
-            </div>
+            </div> */}
           </div>
           
           <div className="p-10 lg:p-16 lg:w-7/12 flex items-center">

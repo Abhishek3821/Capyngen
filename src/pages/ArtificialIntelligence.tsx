@@ -10,8 +10,7 @@ import {
   MessageSquareText, 
   Eye, 
   GitMerge, 
-  Mail, 
-  MapPin,
+ 
   Activity
 } from 'lucide-react';
 
@@ -506,7 +505,7 @@ const AILandingPage: React.FC = () => {
                 Always have a partner for the most reliable Artificial Intelligence Services, that will enhance the operational efficiency and help in the long-term digital transformation. Our AI experts are on hand to grasp your business goals and design an AI strategy to match.
               </p>
               
-              <div className="space-y-8">
+              {/* <div className="space-y-8">
                 <div className="flex items-start">
                   <div className="w-10 h-10 bg-white/5 rounded flex items-center justify-center mr-4 mt-1">
                     <Mail className="w-5 h-5 text-blue-400" />
@@ -527,7 +526,7 @@ const AILandingPage: React.FC = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             
             {/* Right Side - Form */}

@@ -24,7 +24,9 @@ const RevealOnScroll = ({ children, delay = 0 }: { children: ReactNode, delay?: 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setTimeout(() => {
+            setIsVisible(true);
+          }, delay);
           observer.unobserve(entry.target);
         }
       },
@@ -34,7 +36,7 @@ const RevealOnScroll = ({ children, delay = 0 }: { children: ReactNode, delay?: 
       observer.observe(ref.current);
     }
     return () => observer.disconnect();
-  }, []);
+  }, [delay]);
 
   return (
     <div
@@ -81,7 +83,6 @@ const DevOpsPage = () => {
     ]
   };
 
-  // Added img assignments serially (6 to 9)
   const whyChooseData: Array<{ title: string; desc: string; link?: string; img: string }> = [
     { title: "Security & Compliance", desc: "We offer Security testing, and compliance validation.", link: "Learn More", img: img6 },
     { title: "Proven DevOps Expertise", desc: "Implementing reliable, business CI/CD services solutions.", link: "Learn More", img: img7 },
@@ -107,13 +108,13 @@ const DevOpsPage = () => {
 
   const scrollSliderLeft = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+      sliderRef.current.scrollBy({ left: -350, behavior: 'smooth' });
     }
   };
 
   const scrollSliderRight = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      sliderRef.current.scrollBy({ left: 350, behavior: 'smooth' });
     }
   };
 
@@ -125,49 +126,52 @@ const DevOpsPage = () => {
   return (
     <div className="font-sans text-slate-900 bg-white">
       
-      {/* Hero Section */}
-      <section className="relative bg-[#f8f9fa] py-24 px-6 md:px-12 lg:px-24 flex flex-col items-center justify-center text-center min-h-[60vh] overflow-hidden">
-        {/* Integrating image 10 softly in the background/side of hero */}
-        <div className="absolute -right-20 -bottom-20 opacity-10 pointer-events-none">
-          <img src={img10} alt="DevOps Background" className="w-[600px] h-auto" />
+      {/* Hero Section - Full Screen & Responsive */}
+      <section 
+        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center py-24 px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32 bg-cover bg-center bg-no-repeat overflow-hidden"
+        style={{ backgroundImage: `url(${img10})` }}
+      >
+        {/* Overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-[#f8f9fa]/85 md:bg-[#f8f9fa]/80 transition-all duration-300"></div>
+        
+        <div className="relative z-10 flex flex-col items-center w-full">
+          <RevealOnScroll delay={0}>
+            <div className="bg-[#0a1526] text-white text-[10px] sm:text-xs font-bold px-3 py-1 mb-6 tracking-widest uppercase inline-block rounded-sm">
+              DEVOPS SOLUTIONS
+            </div>
+          </RevealOnScroll>
+          
+          <RevealOnScroll delay={0.1}>
+            <div className="text-xs sm:text-sm md:text-base font-semibold tracking-wide text-slate-700 mb-6 uppercase">
+              Services {'>'} DevOps 
+            </div>
+          </RevealOnScroll>
+          
+          <RevealOnScroll delay={0.2}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-slate-900 mb-6 max-w-3xl lg:max-w-5xl xl:max-w-6xl leading-tight">
+              Enhancing IT Delivery with <br className="hidden sm:block" /> DevOps
+            </h1>
+          </RevealOnScroll>
+
+          <RevealOnScroll delay={0.3}>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-700 mb-10 max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto font-medium px-2 sm:px-0">
+              Rebuilding IT delivery with cloud-native DevOps automation services, accurate CI/CD development, and security-first lifestyle innovation.
+            </p>
+          </RevealOnScroll>
+
+          <RevealOnScroll delay={0.4}>
+            <button 
+              onClick={handleScrollToNextSection}
+              className="bg-[#0a1526] hover:bg-slate-800 text-white font-medium py-3 px-8 sm:px-10 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base tracking-wide mx-auto rounded-sm cursor-pointer active:scale-95 shadow-lg hover:shadow-xl"
+            >
+              Explore Here <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+          </RevealOnScroll>
         </div>
-        
-        <RevealOnScroll delay={0}>
-          <div className="bg-[#0a1526] text-white text-[10px] font-bold px-3 py-1 mb-6 tracking-widest uppercase inline-block">
-            DEVOPS SOLUTIONS
-          </div>
-        </RevealOnScroll>
-        
-        <RevealOnScroll delay={0.1}>
-          <div className="text-sm font-semibold tracking-wide text-slate-600 mb-6 uppercase">
-            Services {'>'} DevOps 
-          </div>
-        </RevealOnScroll>
-        
-        <RevealOnScroll delay={0.2}>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 max-w-4xl leading-tight">
-            Enhancing IT Delivery with <br /> DevOps
-          </h1>
-        </RevealOnScroll>
-
-        <RevealOnScroll delay={0.3}>
-          <p className="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">
-            Rebuilding IT delivery with cloud-native DevOps automation services, accurate CI/CD development, and security-first lifestyle innovation.
-          </p>
-        </RevealOnScroll>
-
-        <RevealOnScroll delay={0.4}>
-          <button 
-            onClick={handleScrollToNextSection}
-            className="bg-[#0a1526] hover:bg-slate-800 text-white font-medium py-3 px-8 transition-colors flex items-center gap-2 text-sm tracking-wide mx-auto"
-          >
-            Explore Here <ArrowUpRight className="w-4 h-4" />
-          </button>
-        </RevealOnScroll>
       </section>
 
       {/* Empowering Section */}
-      <section id="empowering-section" className="py-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
+      <section id="empowering-section" className="py-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto scroll-mt-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24 items-center">
           <div className="col-span-1">
             <RevealOnScroll delay={0}>
@@ -208,13 +212,13 @@ const DevOpsPage = () => {
               <div className="flex gap-2">
                 <button 
                   onClick={scrollSliderLeft}
-                  className="w-10 h-10 flex items-center justify-center bg-transparent border border-blue-400 hover:bg-blue-600 transition-colors"
+                  className="w-10 h-10 flex items-center justify-center bg-transparent border border-blue-400 hover:bg-blue-600 transition-colors cursor-pointer"
                 >
                   <ChevronLeft className="w-5 h-5 text-white" />
                 </button>
                 <button 
                   onClick={scrollSliderRight}
-                  className="w-10 h-10 flex items-center justify-center bg-white text-[#2563eb] hover:bg-slate-100 transition-colors"
+                  className="w-10 h-10 flex items-center justify-center bg-white text-[#2563eb] hover:bg-slate-100 transition-colors cursor-pointer"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -222,24 +226,31 @@ const DevOpsPage = () => {
             </RevealOnScroll>
           </div>
 
-          {/* Slider Container */}
+          {/* Slider Container - Updated to match image reference closely */}
           <RevealOnScroll delay={0.2}>
             <div 
               ref={sliderRef}
-              className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide"
+              className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide items-stretch"
             >
               {happenings.map((item, index) => (
-                <div key={index} className="bg-white flex flex-col group cursor-pointer shadow-lg hover:-translate-y-1 transition-transform duration-300 min-w-[280px] sm:min-w-[320px] snap-start flex-shrink-0">
-                  {/* Updated image to be full height without cutting */}
-                  <div className="w-full relative flex-shrink-0 bg-slate-50">
-                    <img src={item.img} alt={item.title} className="w-full h-auto block object-cover aspect-[4/3]" />
+                <div key={index} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300">
+                  {/* Top: Image Area with Tag Label */}
+                  <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                      {item.tag}
+                    </div>
                   </div>
-                  <div className="p-8 flex-1 flex flex-col">
-                    <span className="text-[#2563eb] text-[9px] font-bold uppercase tracking-wider mb-3">{item.tag}</span>
-                    <h3 className="text-xl font-bold text-slate-900 mb-6 group-hover:text-[#2563eb] transition-colors leading-snug flex-1">
+                  {/* Content Area */}
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#2563eb] transition-colors leading-snug">
                       {item.title}
                     </h3>
-                    <div className="flex items-center text-xs font-bold text-[#2563eb] gap-2">
+                    <div className="flex items-center text-sm font-bold text-[#2563eb] gap-2 mt-auto">
                       {item.link} <ArrowRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -258,7 +269,7 @@ const DevOpsPage = () => {
       <section className="bg-[#f4f6f8] py-24 px-6 md:px-12 lg:px-24">
         <RevealOnScroll delay={0}>
           <div className="max-w-7xl mx-auto">
-            <div className="bg-white shadow-xl flex flex-col lg:flex-row overflow-hidden min-h-[500px]">
+            <div className="bg-white shadow-xl flex flex-col lg:flex-row overflow-hidden min-h-[500px] rounded-sm">
               
               {/* Left Column (Tabs) */}
               <div className="lg:w-2/5 p-10 md:p-14 border-r border-slate-100 bg-white flex flex-col justify-center relative">
@@ -319,7 +330,7 @@ const DevOpsPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyChooseData.map((item, index) => (
               <RevealOnScroll delay={index * 0.1} key={index}>
-                <div className="group cursor-pointer bg-white p-6 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col">
+                <div className="group cursor-pointer bg-white p-6 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col rounded-sm">
                   {/* Updated image rendering - full height no cutting */}
                   <div className="w-full mb-6">
                     <img src={item.img} alt={item.title} className="w-full h-auto block grayscale group-hover:grayscale-0 transition-all duration-300" />
@@ -329,9 +340,7 @@ const DevOpsPage = () => {
                       <h4 className="text-base font-bold text-slate-900 leading-tight mb-2">{item.title}</h4>
                       <p className="text-slate-500 text-[11px] mb-4 tracking-wide leading-relaxed">{item.desc}</p>
                     </div>
-                    <div className="flex items-center text-[10px] font-bold text-[#0056b3] gap-1 uppercase">
-                      {item.link} <ArrowRight className="w-3 h-3" />
-                    </div>
+                    
                   </div>
                 </div>
               </RevealOnScroll>
@@ -352,7 +361,7 @@ const DevOpsPage = () => {
                 <div className="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden shadow-sm">
                   <button
                     onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
-                    className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none hover:bg-slate-100 transition-colors"
+                    className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none hover:bg-slate-100 transition-colors cursor-pointer"
                   >
                     <span className="font-semibold text-slate-900 pr-8">{faq.question}</span>
                     <span className="text-[#2563eb] text-2xl leading-none">
@@ -440,7 +449,7 @@ const DevOpsPage = () => {
                     </div>
                   </div>
 
-                  <button type="submit" className="bg-[#0a1526] hover:bg-slate-800 text-white font-medium py-3 px-10 transition-colors text-xs tracking-widest uppercase cursor-pointer">
+                  <button type="submit" className="bg-[#0a1526] hover:bg-slate-800 text-white font-medium py-3 px-10 transition-colors text-xs tracking-widest uppercase cursor-pointer rounded-sm">
                     Confirm
                   </button>
                 </form>
