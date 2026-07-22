@@ -27,7 +27,7 @@ const BrandLandingPage: React.FC = () => {
 
   const faqs = [
     {
-      question: "What does a branding and identity design services company actually do?",
+      question: "What does a branding and identity design services company actually do ?",
       answer: "It's about more than a logo. A good branding and identity design services partner shapes how your company looks, sounds, and feels across everything—your website, your pitch deck, your packaging, even how your team talks about the brand internally. At Capyngen, we treat it as building a system, not just a set of assets."
     },
     {
