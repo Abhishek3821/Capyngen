@@ -152,17 +152,17 @@ const AppDevelopmentPage = () => {
         style={{ backgroundImage: `url(${img1})` }}
       >
         {/* Overlay to ensure text readability over the background image */}
-        <div className="absolute inset-0 bg-slate-50/70"></div>
+        <div className="absolute inset-0 bg-black/30"></div>
         
         <RevealOnScroll direction="up" className="relative z-10 flex flex-col items-center mt-8 sm:mt-0">
           <div className="bg-[#0a1526] text-white text-[10px] sm:text-xs font-bold px-3 py-1 mb-6 sm:mb-8 tracking-widest uppercase rounded-sm">
             MOBILITY SERVICES
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 sm:mb-6 max-w-4xl leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 max-w-4xl leading-tight">
             Future-Gen Smartphone App <br className="hidden md:block" />
             Services, Powered by AI
           </h1>
-          <p className="text-sm sm:text-base md:text-lg text-slate-700 mb-8 sm:mb-10 max-w-2xl mx-auto font-medium px-2">
+          <p className="text-sm sm:text-base md:text-lg text-white mb-8 sm:mb-10 max-w-2xl mx-auto font-medium px-2">
             We create high-performing native and cross-platform apps that can make your enterprise mobility simple, engaging, and efficient for your consumer.
           </p>
           <button onClick={() => scrollToSection('explore-section')} className="bg-[#0056b3] hover:bg-blue-800 text-white font-medium py-3 sm:py-4 px-6 sm:px-8 transition-colors flex items-center justify-center gap-2 text-xs sm:text-sm rounded-sm cursor-pointer w-full sm:w-auto">

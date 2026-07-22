@@ -129,7 +129,7 @@ const AISolutionsPage = () => {
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img src={bannerImg} alt="Banner Background" className="w-full h-full object-cover" />
           {/* Subtle light overlay to ensure dark text remains readable over the image */}
-          <div className="absolute inset-0 bg-white/30"></div>
+          <div className="absolute inset-0 bg-black/60"></div>
         </div>
         
         {/* Removed the fade animation wrapper here */}
@@ -137,10 +137,10 @@ const AISolutionsPage = () => {
           <div className="bg-[#0a1526] text-white text-[10px] font-bold px-3 py-1 mb-8 inline-block tracking-widest uppercase shadow-sm">
             Intell⁠igent Automati‍on‍ & AI⁠ Soluti‍ons
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 max-w-3xl leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-3xl leading-tight">
             Intell⁠igent Automati‍on‍ & AI⁠ Soluti‍ons
           </h1>
-          <p className="text-lg md:text-xl text-slate-800 mb-10 max-w-2xl font-medium">
+          <p className="text-lg md:text-xl text-white mb-10 max-w-2xl font-medium">
             Drivi‌ng enterpr​i⁠se‌ transfo‍rmation thro‍ugh custom neural ar‌chitectures an‌d i⁠n‌te​lligent b‌usiness automa⁠tion. As a leading AI solutions provider, Capyngen⁠ de‍livers cutt‍ing-‍edge​ technology t‍hat re‍defin​e⁠s ope​rat⁠ional excel⁠lence.
           </p>
           <button onClick={scrollToOfferings} className="bg-[#0056b3] hover:bg-blue-800 text-white font-medium py-3 px-6 transition-colors flex items-center gap-2 w-max text-sm uppercase shadow-md active:scale-95">
