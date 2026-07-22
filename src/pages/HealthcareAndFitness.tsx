@@ -381,8 +381,8 @@ const HealthcarePage = () => {
               <h4 className="text-lg font-normal text-white">Results</h4>
               <ul className="space-y-3">
                 {[
-                  '60% Faster Patient Registration',
-                  '40% Reduction in Administrative Work',
+                  ' Faster Patient Registration',
+                  ' Reduction in Administrative Work',
                   'Improved Patient Satisfaction',
                   'Secure Cloud-Based Platform'
                 ].map((item, i) => (

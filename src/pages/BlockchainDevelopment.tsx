@@ -90,7 +90,7 @@ const BlockchainSolutionsPage = () => {
 
   const scrollHappenings = (direction: 'left' | 'right') => {
     if (happeningsRef.current) {
-      const scrollAmount = 350;
+      const scrollAmount = window.innerWidth < 640 ? 280 : 350;
       happeningsRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -164,26 +164,26 @@ const BlockchainSolutionsPage = () => {
   return (
     <div className="font-sans text-slate-900 bg-white">
       
-      {/* Hero Section - Updated to be full screen and responsive across all breakpoints */}
+      {/* Hero Section - Full Screen & Highly Responsive */}
       <section 
-        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-12 lg:px-24 py-20 bg-cover bg-center bg-no-repeat"
+        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32 py-20 bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{ backgroundImage: `url(${img1})` }}
       >
         {/* Overlay to ensure text readability over the background image */}
-        <div className="absolute inset-0 bg-[black]/60"></div>
+        <div className="absolute inset-0 bg-[black]/60 transition-all duration-300"></div>
         
-        <RevealOnScroll direction="up" className="relative z-10 flex flex-col items-center w-full max-w-7xl mx-auto mt-12 md:mt-0">
-          <div className="bg-[#0a1526] text-white text-[9px] sm:text-[10px] md:text-xs font-bold px-3 py-1 mb-6 sm:mb-8 tracking-widest uppercase rounded-sm">
+        <RevealOnScroll direction="up" className="relative z-10 flex flex-col items-center w-full mt-12 md:mt-0">
+          <div className="bg-[#0a1526] text-white text-[10px] sm:text-xs font-bold px-3 py-1 mb-6 sm:mb-8 tracking-widest uppercase rounded-sm inline-block">
             BLOCKCHAIN ENGINEERING
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 max-w-4xl xl:max-w-5xl leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 max-w-3xl lg:max-w-5xl xl:max-w-6xl leading-tight">
             Enterprise-Grade Decentralized Technology Solutions
           </h1>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white mb-8 sm:mb-10 max-w-2xl xl:max-w-3xl mx-auto px-2 sm:px-0">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-200 mb-10 max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto font-medium px-2 sm:px-0">
             Modernizing business with our blockchain development solutions trust through immutable distributed ledgers, autonomous smart contracts, and decentralized architectures built for global scalability and enterprise security. 
           </p>
-          <button onClick={() => scrollToSection('about')} className="bg-[#0056b3] hover:bg-blue-800 text-white font-medium py-3 sm:py-4 px-6 sm:px-8 transition-colors flex items-center gap-2 text-xs sm:text-sm rounded-sm cursor-pointer w-full sm:w-auto justify-center">
-            Read More <ArrowUpRight className="w-4 h-4" />
+          <button onClick={() => scrollToSection('about')} className="bg-[#0056b3] hover:bg-blue-800 text-white font-medium py-3 px-8 sm:px-10 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base tracking-wide mx-auto rounded-sm cursor-pointer shadow-lg hover:shadow-xl w-full sm:w-auto">
+            Read More <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </RevealOnScroll>
       </section>
@@ -207,7 +207,7 @@ const BlockchainSolutionsPage = () => {
         </div>
       </section>
 
-      {/* What's Happening Section */}
+      {/* What's Happening Section - Standardized UI applied */}
       <section className="bg-[#f4f6f8] py-20 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <RevealOnScroll direction="up" className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
@@ -215,125 +215,125 @@ const BlockchainSolutionsPage = () => {
               <h2 className="text-3xl font-bold text-slate-900 mb-2">What's Happening</h2>
               <p className="text-slate-500 text-sm">Latest updates from our blockchain innovation team</p>
             </div>
-            <div className="flex gap-2">
-              <button onClick={() => scrollHappenings('left')} className="w-10 h-10 flex items-center justify-center bg-white border border-slate-300 hover:bg-slate-50 transition-colors">
-                <ChevronLeft className="w-5 h-5 text-slate-600" />
+            <div className="flex gap-2 self-end sm:self-auto">
+              <button onClick={() => scrollHappenings('left')} className="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 hover:bg-slate-50 transition-colors rounded-sm shadow-sm cursor-pointer">
+                <ChevronLeft className="w-5 h-5 text-slate-900" />
               </button>
-              <button onClick={() => scrollHappenings('right')} className="w-10 h-10 flex items-center justify-center bg-[#0a1526] text-white hover:bg-slate-800 transition-colors">
+              <button onClick={() => scrollHappenings('right')} className="w-10 h-10 flex items-center justify-center bg-[#0a1526] text-white hover:bg-slate-800 transition-colors rounded-sm shadow-sm cursor-pointer">
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>
           </RevealOnScroll>
 
           <RevealOnScroll direction="up" delay={100}>
-            <div ref={happeningsRef} className="flex gap-8 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+            <div ref={happeningsRef} className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar items-stretch" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
               <style dangerouslySetInnerHTML={{__html: `
                 .hide-scrollbar::-webkit-scrollbar { display: none; }
               `}} />
 
               {/* Card 1 */}
-              <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-58 bg-[#eef2f6] flex items-center justify-center p-1 relative overflow-hidden">
-                  <img src={img2} alt="Web3" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
+              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
+                  <img src={img2} alt="Report" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                    Report
+                  </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <span className="inline-block bg-[#0056b3] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider mb-4 w-max rounded-sm">
-                    Web3
-                  </span>
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug flex-1">
-                    Web3 Revolution in Global Supply Chains 
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                    AI-Powered Business Solutions for Modern Enterprises
                   </h3>
-                  <div className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2">
+                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
                     Read More <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
 
               {/* Card 2 */}
-              <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-58 bg-[#eef2f6] flex items-center justify-center p-1 relative overflow-hidden">
-                  <img src={img3} alt="Leadership" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
+              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
+                  <img src={img3} alt="Case Study" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                    Case Study
+                  </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <span className="inline-block bg-[#0056b3] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider mb-4 w-max rounded-sm">
-                    Leadership
-                  </span>
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug flex-1">
-                    Capyngen Recognized as DLT Leader 2025 
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                    Driving Digital Transformation Success
                   </h3>
-                  <div className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2">
+                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
                     Read More <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
 
               {/* Card 3 */}
-              <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-58 bg-[#eef2f6] flex items-center justify-center p-1 relative overflow-hidden">
-                  <img src={img4} alt="DeFi" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
+              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
+                  <img src={img4} alt="Article" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                    Article
+                  </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <span className="inline-block bg-[#0056b3] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider mb-4 w-max rounded-sm">
-                    DeFi
-                  </span>
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug flex-1">
-                    DeFi Protocol Scaling for 50M Users 
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                    Custom Software Strategies for Business Growth
                   </h3>
-                  <div className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2">
+                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
                     Read More <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
               
               {/* Card 4 */}
-              <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-58 bg-[#effcf6] flex items-center justify-center p-1 relative overflow-hidden">
-                  <img src={img5} alt="Enterprise" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
+              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
+                  <img src={img5} alt="Insight" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                    Insight
+                  </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <span className="inline-block bg-[#0056b3] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider mb-4 w-max rounded-sm">
-                    Enterprise
-                  </span>
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug flex-1">
-                    Zero-Knowledge Proofs in Enterprise 
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                    Building Scalable Cloud-Native Applications
                   </h3>
-                  <div className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2">
+                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
                     Read More <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
               
               {/* Card 5 */}
-              <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-58 bg-[#fcf2ef] flex items-center justify-center p-1 relative overflow-hidden">
-                  <img src={img6} alt="Solutions" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
+              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
+                  <img src={img6} alt="Guide" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                    Guide
+                  </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <span className="inline-block bg-[#0056b3] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider mb-4 w-max rounded-sm">
-                    Solutions
-                  </span>
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug flex-1">
-                    Blockchain Interoperability Solutions 
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                    Smarter Web & Mobile Development Solutions
                   </h3>
-                  <div className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2">
+                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
                     Read More <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
               
               {/* Card 6 */}
-              <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-58 bg-[#eef7fc] flex items-center justify-center p-1 relative overflow-hidden">
-                  <img src={img7} alt="Sustainability" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
+              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
+                  <img src={img7} alt="News" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                    News
+                  </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <span className="inline-block bg-[#0056b3] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider mb-4 w-max rounded-sm">
-                    Sustainability
-                  </span>
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug flex-1">
-                    Sustainable Blockchain Practices 
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                    Future-Ready Technology for Enterprise Innovation
                   </h3>
-                  <div className="flex items-center text-xs font-bold text-[#0056b3] transition-colors gap-2">
+                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
                     Read More <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
@@ -382,7 +382,7 @@ const BlockchainSolutionsPage = () => {
               <p className="text-slate-300 mb-8 text-sm leading-relaxed">
                 Permissioned DLT frameworks using Hyperledger or Corda for high-performance, confidential corporate data environments.
               </p>
-              <button onClick={handleContactClick} className="border border-slate-500 hover:border-white text-white px-6 py-2 text-xs font-bold tracking-wider uppercase transition-colors w-max rounded-sm">
+              <button onClick={handleContactClick} className="border border-slate-500 hover:border-white text-white px-6 py-2 text-xs font-bold tracking-wider uppercase transition-colors w-max rounded-sm cursor-pointer">
                 Explore
               </button>
             </RevealOnScroll>
@@ -485,7 +485,6 @@ const BlockchainSolutionsPage = () => {
               <div className="px-5 flex flex-col flex-grow">
                 <h4 className="text-base font-bold text-slate-900 leading-tight mb-1">Security-First Approach</h4>
                 <p className="text-slate-500 text-[10px] mb-4 uppercase tracking-wide flex-grow">We prioritize mathematical security and rigorous auditing in every solution we deliver.</p>
-                
               </div>
             </RevealOnScroll>
 
@@ -497,7 +496,6 @@ const BlockchainSolutionsPage = () => {
               <div className="px-5 flex flex-col flex-grow">
                 <h4 className="text-base font-bold text-slate-900 leading-tight mb-1">Regulatory Compliance</h4>
                 <p className="text-slate-500 text-[10px] mb-4 uppercase tracking-wide flex-grow">We ensure all implementations meet international standards and legal requirements.</p>
-                
               </div>
             </RevealOnScroll>
 
@@ -509,7 +507,6 @@ const BlockchainSolutionsPage = () => {
               <div className="px-5 flex flex-col flex-grow">
                 <h4 className="text-base font-bold text-slate-900 leading-tight mb-1">End-to-End Support</h4>
                 <p className="text-slate-500 text-[10px] mb-4 uppercase tracking-wide flex-grow">From strategy to deployment and maintenance, we partner with you at every step.</p>
-                
               </div>
             </RevealOnScroll>
           </div>
@@ -524,7 +521,7 @@ const BlockchainSolutionsPage = () => {
             {faqs.map((faq, index) => (
               <div key={index} className="border border-slate-200 rounded-sm">
                 <button
-                  className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none hover:bg-slate-50 transition-colors"
+                  className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none hover:bg-slate-50 transition-colors cursor-pointer"
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
                 >
                   <span className="font-bold text-slate-900 pr-8">{faq.q}</span>
@@ -592,7 +589,7 @@ const BlockchainSolutionsPage = () => {
                   </p>
                 </div>
 
-                <button type="submit" className="w-full bg-[#0a1526] hover:bg-slate-800 text-white font-medium py-3 px-8 transition-colors text-xs tracking-wider uppercase rounded-sm">
+                <button type="submit" className="w-full bg-[#0a1526] hover:bg-slate-800 text-white font-medium py-3 px-8 transition-colors text-xs tracking-wider uppercase rounded-sm cursor-pointer">
                   Submit Request
                 </button>
               </form>

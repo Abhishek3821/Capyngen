@@ -85,13 +85,13 @@ const CyberSecurityLandingPage: React.FC = () => {
           className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 flex flex-col items-center"
         >
           <Shield className="w-16 h-16 text-blue-300/50 absolute -top-8 -z-10" strokeWidth={1} />
-          <p className="text-blue-200 font-semibold text-[10px] uppercase tracking-[0.2em] mb-4">
+          <p className="text-blue-200 font-semibold text-[20px] uppercase tracking-[0.2em] mb-4">
             CYBERSECURITY SERVICES
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight mb-4 drop-shadow-md">
             Intelligent Digital Protection
           </h1>
-          <p className="text-sm text-blue-50 mb-8 leading-relaxed max-w-2xl mx-auto font-medium drop-shadow-md">
+          <p className="text-xl text-blue-50 mb-8 leading-relaxed max-w-2xl mx-auto font-medium drop-shadow-md">
             Implement Capyngen's Cybersecurity Services to power a robust digital environment, providing proactive defense, and Zero-Trust protection for modern enterprises.
           </p>
           <button 

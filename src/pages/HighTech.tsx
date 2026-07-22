@@ -337,20 +337,20 @@ const HighTechMetricsTestimonial = () => {
             </h3>
             <div className="grid grid-cols-2 gap-x-8 gap-y-10">
               <div className="border-l-2 border-gray-800 pl-4">
-                <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">180K+</div>
-                <div className="text-[11px] md:text-xs text-gray-600 pr-2">Engineering experts across every domain</div>
+                {/* <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">Engineering experts across every domain</div> */}
+                <div className="text-[21px] md:text-xl text-gray-600 pr-2">Engineering experts across every domain</div>
               </div>
               <div className="border-l-2 border-gray-800 pl-4">
-                <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">40</div>
-                <div className="text-[11px] md:text-xs text-gray-600 pr-2">Countries with active client presence</div>
+                {/* <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">40</div> */}
+                <div className="text-[21px] md:text-xl text-gray-600 pr-2">Countries with active client presence</div>
               </div>
               <div className="border-l-2 border-gray-800 pl-4">
-                <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">98%</div>
-                <div className="text-[11px] md:text-xs text-gray-600 pr-2">Client engagement across all projects</div>
+                {/* <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">98%</div> */}
+                <div className="text-[11px] md:text-xl text-gray-600 pr-2">Client engagement across all projects</div>
               </div>
               <div className="border-l-2 border-gray-800 pl-4">
-                <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">$8B+</div>
-                <div className="text-[11px] md:text-xs text-gray-600 pr-2">Annual revenue reflecting market trust</div>
+                {/* <div className="text-3xl md:text-4xl lg:text-[42px] font-bold text-[#2563eb] mb-2 leading-tight">$8B+</div> */}
+                <div className="text-[11px] md:text-xl text-gray-600 pr-2">Annual revenue reflecting market trust</div>
               </div>
             </div>
           </div>

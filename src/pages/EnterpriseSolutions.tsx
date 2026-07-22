@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {  
   BarChart4, 
   Layers, 
   ShieldCheck, 
   Cpu,
   ChevronRight,
+  ChevronLeft,
   ChevronDown
 } from 'lucide-react';
 
 const EnterpriseLandingPage: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  
+  // Ref for the insights carousel
+  const insightsRef = useRef<HTMLDivElement>(null);
 
   const faqs = [
     {
@@ -78,6 +82,20 @@ const EnterpriseLandingPage: React.FC = () => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  const scrollInsights = (direction: 'left' | 'right') => {
+    if (insightsRef.current) {
+      // Calculate dynamic scroll amount based on the first card's width + gap
+      const cardWidth = insightsRef.current.firstElementChild?.clientWidth || 350;
+      const gap = 24; // gap-6 is 24px
+      const scrollAmount = cardWidth + gap;
+      
+      insightsRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f8f9fa] font-sans text-slate-700">
       
@@ -101,7 +119,7 @@ const EnterpriseLandingPage: React.FC = () => {
           <p className="text-lg text-blue-100 mb-10 leading-relaxed max-w-2xl mx-auto font-medium drop-shadow">
             Capyngen provides scalable Enterprise Solutions to enable innovation, enhance efficiency and future-proof businesses.
           </p>
-          <button className="bg-white hover:bg-slate-50 text-[#0d47a1] px-10 py-4 font-bold transition-colors shadow-xl text-sm tracking-widest uppercase">
+          <button className="bg-white hover:bg-slate-50 text-[#0d47a1] px-10 py-4 font-bold transition-colors shadow-xl text-sm tracking-widest uppercase cursor-pointer">
             Discover Our Services
           </button>
         </div>
@@ -149,19 +167,44 @@ const EnterpriseLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. News / Insights Section */}
+      {/* 3. News / Insights Section (Scrollable Carousel) */}
       <section className="bg-[#f1f4f9] py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-end mb-12">
+          
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-6">
             <div>
               <p className="text-[#0d47a1] font-bold text-xs uppercase tracking-[0.2em] mb-2">INDUSTRY INSIGHTS</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">Technology Shaping Tomorrow's Business</h2>
             </div>
+            
+            {/* Carousel Navigation Buttons */}
+            <div className="flex gap-2 self-end sm:self-auto shrink-0">
+              <button 
+                onClick={() => scrollInsights('left')} 
+                className="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer shadow-sm"
+              >
+                <ChevronLeft className="w-5 h-5 text-slate-900" />
+              </button>
+              <button 
+                onClick={() => scrollInsights('right')} 
+                className="w-10 h-10 flex items-center justify-center bg-[#0d47a1] text-white hover:bg-blue-800 transition-colors cursor-pointer shadow-sm"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <style dangerouslySetInnerHTML={{__html: `
+            .hide-scrollbar::-webkit-scrollbar { display: none; }
+          `}} />
+          
+          <div 
+            ref={insightsRef} 
+            className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar items-stretch"
+            style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
+          >
             {/* Insight 1 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
               <div className="overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600" 
@@ -181,7 +224,7 @@ const EnterpriseLandingPage: React.FC = () => {
             </div>
             
             {/* Insight 2 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
               <div className="overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=600" 
@@ -201,7 +244,7 @@ const EnterpriseLandingPage: React.FC = () => {
             </div>
 
             {/* Insight 3 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
               <div className="overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=600" 
@@ -221,7 +264,7 @@ const EnterpriseLandingPage: React.FC = () => {
             </div>
 
             {/* Insight 4 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
               <div className="overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600" 
@@ -241,7 +284,7 @@ const EnterpriseLandingPage: React.FC = () => {
             </div>
 
             {/* Insight 5 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
               <div className="overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600" 
@@ -261,7 +304,7 @@ const EnterpriseLandingPage: React.FC = () => {
             </div>
 
             {/* Insight 6 */}
-            <div className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
               <div className="overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" 
@@ -394,7 +437,7 @@ const EnterpriseLandingPage: React.FC = () => {
               >
                 <button 
                   onClick={() => toggleFaq(index)}
-                  className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none"
+                  className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none cursor-pointer"
                 >
                   <span className="font-bold text-slate-900 text-lg pr-8">{faq.question}</span>
                   <ChevronDown 
@@ -500,7 +543,7 @@ const EnterpriseLandingPage: React.FC = () => {
               
               <button 
                 type="submit" 
-                className="bg-[#0d47a1] hover:bg-[#09357a] text-white font-bold py-4 px-10 transition-colors mt-4 text-sm tracking-widest uppercase"
+                className="bg-[#0d47a1] hover:bg-[#09357a] text-white font-bold py-4 px-10 transition-colors mt-4 text-sm tracking-widest uppercase cursor-pointer"
               >
                 Submit Request
               </button>

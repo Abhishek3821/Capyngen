@@ -298,7 +298,7 @@ const HomePage: React.FC = () => {
       {/* =========================================
           HERO SECTION
           ========================================= */}
-      <section className="relative flex min-h-[calc(100vh-80px)] w-full items-center justify-center overflow-hidden bg-slate-950 pt-16 pb-20 md:pt-24 lg:pt-32">
+      <section className="relative flex min-h-[calc(100vh-80px)] w-full items-center justify-center overflow-hidden bg-slate-950 pt-16 pb-20 md:pt-18 lg:pt-10">
         {/* Background Video Layer */}
         <div className="absolute inset-0 z-0">
           <video 
@@ -345,7 +345,7 @@ const HomePage: React.FC = () => {
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll direction="up" delay={200} className="mt-20 grid grid-cols-2 gap-y-10 gap-x-6 border-t border-white/20 pb-8 pt-10 md:grid-cols-4 md:gap-8 lg:mt-32">
+          {/* <RevealOnScroll direction="up" delay={200} className="mt-20 grid grid-cols-2 gap-y-10 gap-x-6 border-t border-white/20 pb-8 pt-10 md:grid-cols-4 md:gap-8 lg:mt-32">
             <div className="flex flex-col">
               <h3 className="mb-1 text-3xl sm:text-4xl lg:text-5xl font-bold text-white">200+</h3>
               <p className="text-xs sm:text-sm font-medium text-slate-300">Projects Delivered</p>
@@ -362,7 +362,7 @@ const HomePage: React.FC = () => {
               <h3 className="mb-1 text-3xl sm:text-4xl lg:text-5xl font-bold text-white">98%</h3>
               <p className="text-xs sm:text-sm font-medium text-slate-300">Client Satisfaction</p>
             </div>
-          </RevealOnScroll>
+          </RevealOnScroll> */}
         </div>
       </section>
 

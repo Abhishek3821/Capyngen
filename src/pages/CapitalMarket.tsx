@@ -355,9 +355,9 @@ const CapitalMarketPage: React.FC = () => {
               <h4 className="text-lg font-normal text-white">Results</h4>
               <ul className="space-y-3">
                 {[
-                  '60% Faster Investment Processing',
-                  '45% Reduction in Operational Costs',
-                  '99.9% Platform Availability',
+                  ' Faster Investment Processing',
+                  ' Reduction in Operational Costs',
+                  ' Platform Availability',
                   'Enhanced Regulatory Compliance'
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-blue-50 text-base md:text-lg">

@@ -303,12 +303,12 @@ const GlobalBrandPlatformsSection = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-medium text-white tracking-tight">
             Global brand platforms
           </h2>
-          <button 
+          {/* <button 
             onClick={handleLinkClick}
             className="inline-flex items-center justify-center px-6 py-2 border border-white/40 hover:border-white hover:bg-white/10 text-white text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap cursor-pointer"
           >
             View all platforms
-          </button>
+          </button> */}
         </RevealOnScroll>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {platforms.map((platform, idx) => (

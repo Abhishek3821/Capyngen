@@ -344,8 +344,8 @@ const Insurance = () => {
             <h3 className="text-lg font-bold mb-4 tracking-wider uppercase">Results:</h3>
             <ul className="space-y-3">
               {[
-                "70% Faster Claims Processing",
-                "45% Reduction in Costs",
+                " Faster Claims Processing",
+                " Reduction in Costs",
                 "Enhanced Fraud Detection",
                 "Higher Customer Satisfaction"
               ].map((item, index) => (

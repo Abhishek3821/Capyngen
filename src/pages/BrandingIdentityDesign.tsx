@@ -72,12 +72,10 @@ const BrandLandingPage: React.FC = () => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  // Fixed the Ref TypeScript issue by accepting the HTMLElement directly
   const scrollToSection = (element: HTMLElement | null) => {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Animation variants explicitly typed with `Variants` to fix Framer Motion TS errors
   const fadeUp: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -92,40 +90,39 @@ const BrandLandingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9fc] font-sans text-slate-600 overflow-x-hidden">
+    <div>
       
-      {/* 1. Hero Section - Updated with Background Image */}
+      {/* 1. Hero Section */}
       <section 
-        className="relative w-full min-h-[600px] lg:min-h-[700px] flex items-center bg-cover bg-center bg-no-repeat"
+        className="relative w-full min-h-[100svh] md:min-h-[600px] lg:min-h-[700px] flex items-center bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{ backgroundImage: `url(${imgHero})` }}
       >
-        {/* Light Overlay to ensure text readability while keeping the image visible */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/40 to-white/30 sm:from-white/5 sm:via-white/30 sm:to-white/20"></div>
 
         <motion.div 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full"
+          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 xl:px-12 py-16 sm:py-20 lg:py-24 w-full"
         >
           <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#113a5d] leading-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#113a5d] leading-tight mb-4 sm:mb-6">
               Building Bold Brand Identities
             </h1>
-            <p className="text-lg text-slate-700 font-medium mb-8 leading-relaxed max-w-lg">
+            <p className="text-base sm:text-lg md:text-xl text-slate-800 sm:text-slate-700 font-medium mb-6 sm:mb-8 leading-relaxed max-w-lg">
               We program a strong corporate identity along with a strategic visual system that connects institutional trust with modern-day durability.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4">
               <button 
                 onClick={() => scrollToSection(contactRef.current)}
-                className="bg-[#0b5c92] hover:bg-[#094a75] text-white px-8 py-3.5 rounded-sm font-medium transition-colors shadow-sm"
+                className="w-full sm:w-auto bg-[#0b5c92] hover:bg-[#094a75] text-white px-8 py-3.5 rounded-sm font-medium transition-colors shadow-sm text-center"
               >
                 Build Brand Here
               </button>
               <button 
                 onClick={() => scrollToSection(portfolioRef.current)}
-                className="bg-white/60 backdrop-blur-sm hover:bg-white text-slate-800 border border-slate-300 px-8 py-3.5 rounded-sm font-medium transition-colors"
+                className="w-full sm:w-auto bg-white/70 backdrop-blur-sm hover:bg-white text-slate-800 border border-slate-300 px-8 py-3.5 rounded-sm font-medium transition-colors text-center"
               >
                 Explore Portfolio
               </button>
@@ -140,47 +137,47 @@ const BrandLandingPage: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeUp}
-        className="bg-white py-16 lg:py-24"
+        className="bg-white py-16 sm:py-20 lg:py-24 w-full overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 xl:px-12">
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-16 items-center">
             
             {/* Overlapping Images adjusted for full height */}
-            <div className="relative min-h-[500px] hidden sm:block">
+            <div className="relative min-h-[400px] sm:min-h-[500px] hidden md:block w-full">
               <img 
                 src={img2} 
                 alt="Brand Mark" 
-                className="absolute top-0 left-0 w-3/5 h-auto object-contain rounded-sm shadow-md z-10"
+                className="absolute top-0 left-0 w-[60%] sm:w-3/5 h-auto object-contain rounded-sm shadow-md z-10"
               />
               <img 
                 src={img3} 
                 alt="Desktop Workspace" 
-                className="absolute top-32 right-4 w-3/5 h-auto object-contain rounded-sm shadow-lg z-20 border-4 border-white"
+                className="absolute top-24 sm:top-32 right-0 sm:right-4 w-[60%] sm:w-3/5 h-auto object-contain rounded-sm shadow-lg z-20 border-4 border-white"
               />
             </div>
             
-            <div>
-              <p className="text-[#0b5c92] font-semibold mb-3 uppercase tracking-wider text-xs">OUR PHILOSOPHY</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
-                Thoughtful Brand<br />Evolution
+            <div className="w-full">
+              <p className="text-[#0b5c92] font-semibold mb-3 uppercase tracking-wider text-xs sm:text-sm">OUR PHILOSOPHY</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 leading-tight">
+                Thoughtful Brand<br className="hidden sm:block" />Evolution
               </h2>
-              <p className="text-slate-600 mb-6 leading-relaxed">
+              <p className="text-slate-600 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
                 At Capyngen, we build the entire visual ecosystem—offering branding and identity design services. We provide services in branding and identity design that depend on strong storytelling and careful visual systems that keep your message consistent across every touchpoint.
               </p>
-              <p className="text-slate-600 mb-8 leading-relaxed">
+              <p className="text-slate-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
                 We work with expertise leaders to transform complex corporate missions into clear, powerful visual languages that get the most attention and build lasting trust.
               </p>
               
-              <ul className="space-y-4">
-                <li className="flex items-center text-slate-700 font-medium">
+              <ul className="space-y-3 sm:space-y-4">
+                <li className="flex items-center text-slate-700 font-medium text-sm sm:text-base">
                   <span className="w-1.5 h-1.5 bg-[#0b5c92] rounded-full mr-3 flex-shrink-0"></span>
                   Research-Backed Analyst
                 </li>
-                <li className="flex items-center text-slate-700 font-medium">
+                <li className="flex items-center text-slate-700 font-medium text-sm sm:text-base">
                   <span className="w-1.5 h-1.5 bg-[#0b5c92] rounded-full mr-3 flex-shrink-0"></span>
                   Adaptable Design Frameworks
                 </li>
-                <li className="flex items-center text-slate-700 font-medium">
+                <li className="flex items-center text-slate-700 font-medium text-sm sm:text-base">
                   <span className="w-1.5 h-1.5 bg-[#0b5c92] rounded-full mr-3 flex-shrink-0"></span>
                   Forward-Looking Brand Guidelines
                 </li>
@@ -191,40 +188,40 @@ const BrandLandingPage: React.FC = () => {
       </motion.section>
 
       {/* 3. News / Articles Section */}
-      <section ref={portfolioRef} className="bg-[#f2f5f9] py-16 lg:py-24 scroll-mt-10">
+      <section ref={portfolioRef} className="bg-[#f2f5f9] py-16 sm:py-20 lg:py-24 scroll-mt-10 w-full overflow-hidden">
         <motion.div 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 xl:px-12"
         >
-          <motion.div variants={fadeUp} className="flex justify-between items-end mb-10">
+          <motion.div variants={fadeUp} className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 sm:mb-10 gap-4">
             <div>
-              <p className="text-[#0b5c92] font-semibold mb-2 uppercase tracking-wider text-xs">IMPACT REPORTS</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">What's Happening?</h2>
+              <p className="text-[#0b5c92] font-semibold mb-2 uppercase tracking-wider text-xs sm:text-sm">IMPACT REPORTS</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900">What's Happening?</h2>
             </div>
             <button 
               onClick={() => scrollToSection(contactRef.current)} 
-              className="hidden sm:flex items-center text-[#0b5c92] font-medium hover:text-[#094a75]"
+              className="flex items-center text-[#0b5c92] font-medium hover:text-[#094a75] text-sm sm:text-base transition-colors"
             >
               Explore Here <ArrowRight className="ml-2 w-4 h-4" />
             </button>
           </motion.div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Article 1 */}
             <motion.div variants={fadeUp} className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
               <img 
                 src={img4} 
                 alt="Corporate Office" 
-                className="w-full h-auto object-contain bg-slate-100"
+                className="w-full h-48 sm:h-auto object-cover sm:object-contain bg-slate-100"
               />
-              <div className="p-6 flex-1 flex flex-col">
+              <div className="p-5 sm:p-6 flex-1 flex flex-col">
                 <p className="text-[#0b5c92] text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#0b5c92] mr-2"></span> FinTech Sector
                 </p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5c92] transition-colors">Private Equity Firm</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3 group-hover:text-[#0b5c92] transition-colors">Private Equity Firm</h3>
                 <p className="text-slate-600 text-sm flex-1">Modernizing the visual legacy of a 50-year-old investment firm for the digital…</p>
               </div>
             </motion.div>
@@ -234,29 +231,29 @@ const BrandLandingPage: React.FC = () => {
               <img 
                 src={img5} 
                 alt="Stationery Mockup" 
-                className="w-full h-auto object-contain bg-slate-100"
+                className="w-full h-48 sm:h-auto object-cover sm:object-contain bg-slate-100"
               />
-              <div className="p-6 flex-1 flex flex-col">
+              <div className="p-5 sm:p-6 flex-1 flex flex-col">
                 <p className="text-[#0b5c92] text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#0b5c92] mr-2"></span> Industrial Tech
                 </p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5c92] transition-colors">Medium Mechanics</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3 group-hover:text-[#0b5c92] transition-colors">Medium Mechanics</h3>
                 <p className="text-slate-600 text-sm flex-1">Developing a visual language for the next generation of renewable energy…</p>
               </div>
             </motion.div>
 
             {/* Article 3 */}
-            <motion.div variants={fadeUp} className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+            <motion.div variants={fadeUp} className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow sm:col-span-2 lg:col-span-1">
               <img 
                 src={img6} 
                 alt="Mobile App" 
-                className="w-full h-auto object-contain bg-slate-100"
+                className="w-full h-48 sm:h-auto object-cover sm:object-contain bg-slate-100"
               />
-              <div className="p-6 flex-1 flex flex-col">
+              <div className="p-5 sm:p-6 flex-1 flex flex-col">
                 <p className="text-[#0b5c92] text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#0b5c92] mr-2"></span> SaaS Global
                 </p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0b5c92] transition-colors">Multi-Platform </h3>
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3 group-hover:text-[#0b5c92] transition-colors">Multi-Platform </h3>
                 <p className="text-slate-600 text-sm flex-1">Shaping a consistent identity system across 48 global markets and 12 product</p>
               </div>
             </motion.div>
@@ -270,21 +267,21 @@ const BrandLandingPage: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        className="bg-white py-16 lg:py-24 border-y border-slate-100"
+        className="bg-white py-16 sm:py-20 lg:py-24 border-y border-slate-100 w-full overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div variants={fadeUp} className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-[#0b5c92] font-semibold mb-2 uppercase tracking-wider text-xs">SERVICE CAPABILITIES</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Core Specializations</h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 xl:px-12">
+          <motion.div variants={fadeUp} className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+            <p className="text-[#0b5c92] font-semibold mb-2 uppercase tracking-wider text-xs sm:text-sm">SERVICE CAPABILITIES</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">Core Specializations</h2>
           </motion.div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {/* Card 1 */}
             <motion.div variants={fadeUp} className="text-left group cursor-default">
-              <div className="mb-5 text-[#0b5c92]">
+              <div className="mb-4 sm:mb-5 text-[#0b5c92]">
                 <Palette className="w-6 h-6 stroke-[1.5]" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Brand Identity System</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-2 sm:mb-3">Brand Identity System</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 Thorough visual languages crafted for scale, consistency, and worldwide recognition.
               </p>
@@ -292,10 +289,10 @@ const BrandLandingPage: React.FC = () => {
             
             {/* Card 2 */}
             <motion.div variants={fadeUp} className="text-left group cursor-default">
-              <div className="mb-5 text-[#0b5c92]">
+              <div className="mb-4 sm:mb-5 text-[#0b5c92]">
                 <Target className="w-6 h-6 stroke-[1.5]" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Brand Strategy</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-2 sm:mb-3">Brand Strategy</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 Market positioning and brand narratives that define your competitive advantage.
               </p>
@@ -303,10 +300,10 @@ const BrandLandingPage: React.FC = () => {
             
             {/* Card 3 */}
             <motion.div variants={fadeUp} className="text-left group cursor-default">
-              <div className="mb-5 text-[#0b5c92]">
+              <div className="mb-4 sm:mb-5 text-[#0b5c92]">
                 <Monitor className="w-6 h-6 stroke-[1.5]" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Logo & Wordmark Design</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-2 sm:mb-3">Logo & Wordmark Design</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 We offer timeless logos that turn a complex identity into one simple, strong mark.
               </p>
@@ -314,10 +311,10 @@ const BrandLandingPage: React.FC = () => {
             
             {/* Card 4 */}
             <motion.div variants={fadeUp} className="text-left group cursor-default">
-              <div className="mb-5 text-[#0b5c92]">
+              <div className="mb-4 sm:mb-5 text-[#0b5c92]">
                 <BookOpen className="w-6 h-6 stroke-[1.5]" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Brand Guidelines</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-2 sm:mb-3">Brand Guidelines</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 Detailed documentation that protects brand integrity across all future media and platforms.
               </p>
@@ -332,42 +329,42 @@ const BrandLandingPage: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeUp}
-        className="bg-[#f8f9fc] py-16 lg:py-24"
+        className="bg-[#f8f9fc] py-16 sm:py-20 lg:py-24 w-full overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="relative rounded-sm shadow-md overflow-hidden bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 xl:px-12">
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 items-center">
+            <div className="relative rounded-sm shadow-md overflow-hidden bg-white w-full order-2 lg:order-1">
               <img 
                 src={img7} 
                 alt="Expert Portrait" 
-                className="w-full h-auto object-contain"
+                className="w-full h-auto object-cover sm:object-contain"
               />
             </div>
             
-            <div className="lg:pl-8">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
+            <div className="lg:pl-8 order-1 lg:order-2 w-full">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 leading-tight">
                 Why Choose Capyngen?
               </h2>
               
-              <p className="text-slate-600 mb-8 leading-relaxed text-lg">
+              <p className="text-slate-600 mb-6 sm:mb-8 leading-relaxed text-base sm:text-lg">
                 At Capyngen, we combine solid enterprise expertise with real insight into how businesses function day to day.
               </p>
               
-              <div className="space-y-4">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
-                  <p className="text-slate-900 font-bold text-md">Skill Expertise:</p>
+                  <p className="text-slate-900 font-bold text-base sm:text-md">Skill Expertise:</p>
                   <p className="text-slate-600 text-sm">We offer proven experience in branding & identity design services and an expert team.</p>
                 </div>
                 <div>
-                  <p className="text-slate-900 font-bold text-md">Customized Solutions:</p>
+                  <p className="text-slate-900 font-bold text-base sm:text-md">Customized Solutions:</p>
                   <p className="text-slate-600 text-sm">We offer custom solutions for your workflows and goals, not generic templates.</p>
                 </div>
                 <div>
-                  <p className="text-slate-900 font-bold text-md">Full Support:</p>
+                  <p className="text-slate-900 font-bold text-base sm:text-md">Full Support:</p>
                   <p className="text-slate-600 text-sm">At Capyngen, we serve a strategic framework to support ongoing projects.</p>
                 </div>
                 <div>
-                  <p className="text-slate-900 font-bold text-md">Long-Term Outcome:</p>
+                  <p className="text-slate-900 font-bold text-base sm:text-md">Long-Term Outcome:</p>
                   <p className="text-slate-600 text-sm">Capyngen focuses on result outcomes in projects and ensures that you get long-term growth.</p>
                 </div>
               </div>
@@ -382,31 +379,31 @@ const BrandLandingPage: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
         variants={fadeUp}
-        className="bg-white py-16 lg:py-24"
+        className="bg-white py-16 sm:py-20 lg:py-24 w-full overflow-hidden"
       >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">FAQs</h2>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900">FAQs</h2>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4 w-full">
             {faqs.map((faq, index) => (
               <div 
                 key={index} 
-                className="bg-[#f8f9fc] rounded-sm shadow-sm border border-slate-100 overflow-hidden"
+                className="bg-[#f8f9fc] rounded-sm shadow-sm border border-slate-100 overflow-hidden w-full"
               >
                 <button 
                   onClick={() => toggleFaq(index)}
-                  className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none"
+                  className="w-full px-4 sm:px-6 py-4 sm:py-5 text-left flex justify-between items-center focus:outline-none"
                 >
-                  <span className="font-bold text-slate-900 text-lg pr-8">{faq.question}</span>
+                  <span className="font-bold text-slate-900 text-base sm:text-lg pr-4 sm:pr-8">{faq.question}</span>
                   <ChevronDown 
                     className={`w-5 h-5 text-[#0b5c92] transition-transform duration-300 flex-shrink-0 ${openFaq === index ? 'rotate-180' : ''}`} 
                   />
                 </button>
                 <div 
-                  className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-96 pb-5 opacity-100' : 'max-h-0 opacity-0'}`}
+                  className={`px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-[500px] pb-4 sm:pb-5 opacity-100' : 'max-h-0 opacity-0'}`}
                 >
-                  <p className="text-slate-600 leading-relaxed">
+                  <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
                     {faq.answer}
                   </p>
                 </div>
@@ -423,58 +420,50 @@ const BrandLandingPage: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeUp}
-        className="bg-[#161e2c] py-16 lg:py-24 text-white scroll-mt-10"
+        className="bg-[#161e2c] py-16 sm:py-20 lg:py-24 text-white scroll-mt-10 w-full overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 xl:px-12 w-full">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
             
             {/* Left side text */}
-            <div className="flex flex-col justify-center h-full">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to Evolve?</h2>
-              <p className="text-slate-300 mb-10 text-lg leading-relaxed max-w-md">
+            <div className="flex flex-col justify-center h-full w-full">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">Ready to Evolve?</h2>
+              <p className="text-slate-300 mb-8 sm:mb-10 text-base sm:text-lg leading-relaxed max-w-md">
                 Reach out to us through the official contact details, or just fill out the form below, and our expert team will get back to you within 24 hours.
               </p>
-              
-              {/* <div className="space-y-6">
-                <div className="flex items-center text-slate-300">
-                  <Mail className="w-5 h-5 text-[#4da6ff] mr-4 flex-shrink-0" />
-                  <a href="mailto:solutions@capyngen.com" className="hover:text-white transition-colors">solutions@capyngen.com</a>
-                </div>
-                
-              </div> */}
             </div>
             
             {/* Right side form */}
-            <div className="bg-white rounded-sm p-8 sm:p-10 shadow-2xl">
-              <form onSubmit={(e) => { e.preventDefault(); alert('Consultation Requested!'); }} className="space-y-6">
+            <div className="bg-white rounded-sm p-6 sm:p-8 lg:p-10 shadow-2xl w-full">
+              <form onSubmit={(e) => { e.preventDefault(); alert('Consultation Requested!'); }} className="space-y-5 sm:space-y-6 w-full">
                 <div>
-                  <label htmlFor="name" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Full Name</label>
+                  <label htmlFor="name" className="block text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 sm:mb-2">Full Name</label>
                   <input 
                     type="text" 
                     id="name"
                     required
-                    className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-400"
+                    className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-400 text-sm sm:text-base"
                     placeholder="Jane Doe"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Company Email</label>
+                  <label htmlFor="email" className="block text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 sm:mb-2">Company Email</label>
                   <input 
                     type="email" 
                     id="email"
                     required
-                    className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-400"
+                    className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent placeholder-slate-400 text-sm sm:text-base"
                     placeholder="jane@company.com"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="focus" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Area of Focus</label>
+                  <label htmlFor="focus" className="block text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 sm:mb-2">Area of Focus</label>
                   <select 
                     id="focus"
                     required
-                    className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent cursor-pointer"
+                    className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent cursor-pointer text-sm sm:text-base"
                     defaultValue=""
                   >
                     <option value="" disabled>Select an option...</option>
@@ -486,19 +475,19 @@ const BrandLandingPage: React.FC = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="message" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Message</label>
+                  <label htmlFor="message" className="block text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 sm:mb-2">Message</label>
                   <textarea 
                     id="message"
                     required
                     rows={3}
-                    className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent resize-none placeholder-slate-400"
+                    className="w-full px-0 py-2 border-b border-slate-300 focus:border-[#0b5c92] outline-none transition-colors text-slate-900 bg-transparent resize-none placeholder-slate-400 text-sm sm:text-base"
                     placeholder="Tell us about your project goals..."
                   ></textarea>
                 </div>
                 
                 <button 
                   type="submit" 
-                  className="w-full mt-4 bg-[#0b5c92] hover:bg-[#094a75] text-white font-medium py-3.5 rounded-sm transition-colors shadow-sm"
+                  className="w-full mt-2 sm:mt-4 bg-[#0b5c92] hover:bg-[#094a75] text-white font-medium py-3 sm:py-3.5 rounded-sm transition-colors shadow-sm text-sm sm:text-base"
                 >
                   Request Consultation
                 </button>
