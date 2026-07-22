@@ -192,10 +192,10 @@ const AISolutionsPage = () => {
             style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
           >
             {happenings.map((item, index) => (
-              <div key={index} className="bg-white group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 min-w-[280px] md:min-w-[350px] flex-shrink-0 flex flex-col snap-start rounded-md overflow-hidden">
-                {/* Full Image Display - No Height Cut */}
-                <div className="w-full bg-slate-100 flex-shrink-0 flex items-center justify-center p-4">
-                  <img src={item.img} alt={item.title} className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105" />
+              <div key={index} className="bg-white group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 min-w-[280px] md:min-w-[320px] flex-shrink-0 flex flex-col snap-start rounded-md overflow-hidden">
+                {/* Fixed height and object-cover to enforce uniform portrait look */}
+                <div className="w-full h-[300px] relative overflow-hidden bg-slate-100 p-0">
+                  <img src={item.img} alt={item.title} className="w-full h-full object-cover block transition-transform duration-500 group-hover:scale-105" />
                 </div>
                 <div className="p-6 flex-grow flex flex-col justify-between border-t border-slate-100">
                   <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
@@ -301,9 +301,7 @@ const AISolutionsPage = () => {
                     <h4 className="text-lg font-bold text-slate-900 leading-snug mb-3 group-hover:text-[#0056b3] transition-colors">{item.title}</h4>
                     <p className="text-slate-500 text-sm mb-6 leading-relaxed">{item.desc}</p>
                   </div>
-                  <button onClick={() => alert(`Exploring: ${item.title}`)} className="flex items-center text-xs font-bold text-[#0056b3] gap-2 hover:gap-3 transition-all focus:outline-none w-max">
-                    READ MORE <ArrowRight className="w-4 h-4" />
-                  </button>
+                  
                 </div>
               </div>
             ))}
@@ -328,7 +326,9 @@ const AISolutionsPage = () => {
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
                 >
                   <span className="font-bold text-slate-900 pr-8 text-[15px] md:text-base">{faq.q}</span>
-                  <ChevronDown className={`w-5 h-5 text-[#0056b3] flex-shrink-0 transition-transform duration-300 ${openFaq === index ? 'rotate-180' : ''}`} />
+                  <span className="text-[#0056b3] flex-shrink-0 transition-transform duration-300">
+                    <ChevronDown className={`w-5 h-5 ${openFaq === index ? 'rotate-180' : ''}`} />
+                  </span>
                 </button>
                 {openFaq === index && (
                   <motion.div 

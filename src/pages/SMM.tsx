@@ -226,7 +226,7 @@ const SMMLandingPage = () => {
               <div key={i} className="bg-slate-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
                 <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
                 <p className="text-sm text-slate-600 mb-6 flex-grow">{item.desc}</p>
-                <a href="#" className="text-[#0066cc] font-medium text-sm hover:underline mt-auto">Know More</a>
+                {/* <a href="#" className="text-[#0066cc] font-medium text-sm hover:underline mt-auto">Know More</a> */}
               </div>
             ))}
           </div>

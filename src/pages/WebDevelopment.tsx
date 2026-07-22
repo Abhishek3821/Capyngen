@@ -10,7 +10,7 @@ import img5 from "../assets/Web Development Service/5.png";
 import img6 from "../assets/Web Development Service/6.png";
 
 // --- Scroll Animation Wrapper Component ---
-const RevealOnScroll = ({ children, delay = 0 }: { children: ReactNode, delay?: number }) => {
+const RevealOnScroll = ({ children, delay = 0, className = "" }: { children: ReactNode, delay?: number, className?: string }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -33,6 +33,7 @@ const RevealOnScroll = ({ children, delay = 0 }: { children: ReactNode, delay?: 
   return (
     <div
       ref={ref}
+      className={className}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
@@ -168,6 +169,10 @@ const WebDevelopmentPage = () => {
     document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleScrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const scrollSliderLeft = () => {
     if (sliderRef.current) {
       sliderRef.current.scrollBy({ left: -380, behavior: 'smooth' });
@@ -183,10 +188,6 @@ const WebDevelopmentPage = () => {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert("Thank you! Your request has been successfully submitted.");
-  };
-
-  const handleCardClick = () => {
-    alert("Opening detailed view...");
   };
 
   return (
@@ -249,7 +250,7 @@ const WebDevelopmentPage = () => {
         </div>
       </section>
 
-      {/* What's Happening Section (Redesigned based on reference image) */}
+      {/* What's Happening Section */}
       <section className="bg-[#f4f6f8] py-24 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-10">
@@ -277,20 +278,19 @@ const WebDevelopmentPage = () => {
           <RevealOnScroll delay={0.2}>
             <div 
               ref={sliderRef}
-              className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide"
+              className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide scroll-smooth"
             >
               {happenings.map((item, idx) => (
                 <div 
                   key={idx} 
-                  onClick={handleCardClick}
-                  className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow duration-300 min-w-[320px] md:min-w-[380px] snap-start flex-shrink-0 flex flex-col rounded-none"
+                  onClick={handleScrollToContact}
+                  className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow duration-300 min-w-[300px] md:min-w-[340px] snap-start flex-shrink-0 flex flex-col rounded-none"
                 >
-                  {/* Image matching the design (object-cover, specific height) */}
-                  <div className="w-full h-56 relative overflow-hidden bg-slate-100 p-0">
+                  <div className="w-full h-[420px] relative overflow-hidden bg-slate-100 p-0">
                     <img src={item.img} alt={item.title} className="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   
-                  {/* Card Content styled to match reference exactly */}
+                  {/* Card Content */}
                   <div className="p-8 flex-1 flex flex-col items-start">
                     <span className={`inline-block ${item.color} text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-wider mb-5 rounded-none`}>
                       {item.tag}
@@ -314,7 +314,7 @@ const WebDevelopmentPage = () => {
       </section>
 
       {/* Our Services Section */}
-      <section id="services-section" className="flex flex-col lg:flex-row w-full">
+      <section id="services-section" className="flex flex-col lg:flex-row w-full scroll-mt-10">
         {/* Left Column */}
         <div className="lg:w-1/2 bg-[#f4f6f8] p-10 md:p-16 lg:p-24 flex justify-end">
           <div className="max-w-xl w-full">
@@ -360,10 +360,10 @@ const WebDevelopmentPage = () => {
           </div>
         </div>
 
-        {/* Right Column */}
-        <div className="lg:w-1/2 bg-[#0a1526] relative flex items-center justify-center overflow-hidden">
-          <RevealOnScroll delay={0.3}>
-             <img src={img6} alt="Our Services" className="w-full h-auto object-cover opacity-90 block" />
+        {/* Right Column (Fixed image to cover the entire container) */}
+        <div className="lg:w-1/2 bg-[#0a1526] relative min-h-[400px] lg:min-h-auto">
+          <RevealOnScroll delay={0.3} className="absolute inset-0 w-full h-full">
+             <img src={img3} alt="Our Services" className="absolute inset-0 w-full h-full object-cover opacity-90 block" />
           </RevealOnScroll>
         </div>
       </section>
@@ -381,14 +381,13 @@ const WebDevelopmentPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyChooseItems.map((item, idx) => (
               <RevealOnScroll delay={idx * 0.1} key={idx}>
-                <div className="bg-white group cursor-pointer flex flex-col h-full hover:shadow-lg transition-shadow">
-                  {/* Full image width and native height without cutting */}
-                  <div className="w-full relative overflow-hidden bg-slate-100">
-                     <img src={item.img} alt={item.title} className="w-full h-auto block transition-transform duration-500 group-hover:scale-105" />
+                <div onClick={handleScrollToContact} className="bg-white group cursor-pointer flex flex-col h-full hover:shadow-lg transition-shadow">
+                  <div className="w-full h-56 relative overflow-hidden bg-slate-100">
+                     <img src={item.img} alt={item.title} className="w-full h-full object-cover block transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   <div className="p-5 flex-1">
                     <h4 className="text-lg font-bold text-slate-900 leading-tight">{item.title}</h4>
-                    <p className="text-slate-500 text-xs mb-4 uppercase tracking-wide mt-1">{item.desc}</p>
+                    <p className="text-slate-500 text-xs mb-2 uppercase tracking-wide mt-1">{item.desc}</p>
                   </div>
                 </div>
               </RevealOnScroll>
@@ -429,7 +428,7 @@ const WebDevelopmentPage = () => {
       </section>
 
       {/* Contact Form Section */}
-      <section className="bg-[#0f172a] py-24 px-6 md:px-12 lg:px-24">
+      <section id="contact" className="bg-[#0f172a] py-24 px-6 md:px-12 lg:px-24 scroll-mt-10">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
           
           <div className="lg:w-1/2 text-white">
@@ -445,7 +444,7 @@ const WebDevelopmentPage = () => {
 
           <div className="lg:w-1/2 w-full">
             <RevealOnScroll delay={0.2}>
-              <div className="bg-white p-8 shadow-xl">
+              <div className="bg-white p-8 shadow-xl rounded-md">
                 <div className="flex flex-col gap-2 mb-8 text-sm font-bold text-slate-800 border-b border-slate-200 pb-4">
                   <span className="cursor-pointer text-slate-900 border-b-2 border-slate-900 pb-4 -mb-[17px] w-fit">Got any specific question?</span>
                   <span className="text-slate-500 font-normal mt-3">Book a 15-minute chat with one of our experts.</span>
@@ -455,46 +454,46 @@ const WebDevelopmentPage = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-2 uppercase">First Name *</label>
-                      <input required type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-400" />
+                      <input required type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-400 rounded-sm" />
                     </div>
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-2 uppercase">Last Name *</label>
-                      <input required type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-400" />
+                      <input required type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-400 rounded-sm" />
                     </div>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-2 uppercase">Email *</label>
-                      <input required type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-400" />
+                      <input required type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-400 rounded-sm" />
                     </div>
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-2 uppercase">Company *</label>
-                      <input required type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-400" />
+                      <input required type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-400 rounded-sm" />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-2 uppercase">Message</label>
-                    <textarea rows={4} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-400 resize-none"></textarea>
+                    <textarea rows={4} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-400 resize-none rounded-sm"></textarea>
                   </div>
 
                   <div className="flex flex-col gap-3">
                     <div className="flex items-start gap-3">
-                      <input type="checkbox" className="mt-1 w-4 h-4 bg-slate-50 border-slate-300 focus:ring-slate-500 rounded-none cursor-pointer" />
+                      <input type="checkbox" className="mt-1 w-4 h-4 bg-slate-50 border-slate-300 focus:ring-slate-500 rounded-sm cursor-pointer" />
                       <p className="text-xs text-slate-500 leading-relaxed">
                         Sign up to get Capyngen's mobile insights and marketing updates.
                       </p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <input type="checkbox" required className="mt-1 w-4 h-4 bg-slate-50 border-slate-300 focus:ring-slate-500 rounded-none cursor-pointer" />
+                      <input type="checkbox" required className="mt-1 w-4 h-4 bg-slate-50 border-slate-300 focus:ring-slate-500 rounded-sm cursor-pointer" />
                       <p className="text-xs text-slate-500 leading-relaxed">
                         I agree to the Privacy Statement *
                       </p>
                     </div>
                   </div>
 
-                  <button type="submit" className="bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 px-8 transition-colors text-sm">
+                  <button type="submit" className="bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 px-8 transition-colors text-sm rounded-sm">
                     Confirm
                   </button>
                 </form>

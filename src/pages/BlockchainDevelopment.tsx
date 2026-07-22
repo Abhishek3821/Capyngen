@@ -233,7 +233,7 @@ const BlockchainSolutionsPage = () => {
 
               {/* Card 1 */}
               <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-48 bg-[#eef2f6] flex items-center justify-center p-6 relative overflow-hidden">
+                <div className="w-full h-58 bg-[#eef2f6] flex items-center justify-center p-1 relative overflow-hidden">
                   <img src={img2} alt="Web3" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
@@ -251,7 +251,7 @@ const BlockchainSolutionsPage = () => {
 
               {/* Card 2 */}
               <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-48 bg-[#fcf8ef] flex items-center justify-center p-6 relative overflow-hidden">
+                <div className="w-full h-58 bg-[#eef2f6] flex items-center justify-center p-1 relative overflow-hidden">
                   <img src={img3} alt="Leadership" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
@@ -269,7 +269,7 @@ const BlockchainSolutionsPage = () => {
 
               {/* Card 3 */}
               <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-48 bg-[#eef2f6] flex items-center justify-center p-6 relative overflow-hidden">
+                <div className="w-full h-58 bg-[#eef2f6] flex items-center justify-center p-1 relative overflow-hidden">
                   <img src={img4} alt="DeFi" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
@@ -287,7 +287,7 @@ const BlockchainSolutionsPage = () => {
               
               {/* Card 4 */}
               <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-48 bg-[#effcf6] flex items-center justify-center p-6 relative overflow-hidden">
+                <div className="w-full h-58 bg-[#effcf6] flex items-center justify-center p-1 relative overflow-hidden">
                   <img src={img5} alt="Enterprise" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
@@ -305,7 +305,7 @@ const BlockchainSolutionsPage = () => {
               
               {/* Card 5 */}
               <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-48 bg-[#fcf2ef] flex items-center justify-center p-6 relative overflow-hidden">
+                <div className="w-full h-58 bg-[#fcf2ef] flex items-center justify-center p-1 relative overflow-hidden">
                   <img src={img6} alt="Solutions" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
@@ -323,7 +323,7 @@ const BlockchainSolutionsPage = () => {
               
               {/* Card 6 */}
               <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-48 bg-[#eef7fc] flex items-center justify-center p-6 relative overflow-hidden">
+                <div className="w-full h-58 bg-[#eef7fc] flex items-center justify-center p-1 relative overflow-hidden">
                   <img src={img7} alt="Sustainability" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
@@ -474,9 +474,6 @@ const BlockchainSolutionsPage = () => {
               <div className="px-5 flex flex-col flex-grow">
                 <h4 className="text-base font-bold text-slate-900 leading-tight mb-1">Deep Technical Expertise</h4>
                 <p className="text-slate-500 text-[10px] mb-4 uppercase tracking-wide flex-grow">Our team brings years of experience in blockchain architecture and smart contract development.</p>
-                <div onClick={handleContactClick} className="flex items-center text-[10px] font-bold text-[#0056b3] gap-1 cursor-pointer mt-auto">
-                  READ MORE <ArrowRight className="w-3 h-3" />
-                </div>
               </div>
             </RevealOnScroll>
 
@@ -488,9 +485,7 @@ const BlockchainSolutionsPage = () => {
               <div className="px-5 flex flex-col flex-grow">
                 <h4 className="text-base font-bold text-slate-900 leading-tight mb-1">Security-First Approach</h4>
                 <p className="text-slate-500 text-[10px] mb-4 uppercase tracking-wide flex-grow">We prioritize mathematical security and rigorous auditing in every solution we deliver.</p>
-                <div onClick={handleContactClick} className="flex items-center text-[10px] font-bold text-[#0056b3] gap-1 cursor-pointer mt-auto">
-                  READ MORE <ArrowRight className="w-3 h-3" />
-                </div>
+                
               </div>
             </RevealOnScroll>
 
@@ -502,9 +497,7 @@ const BlockchainSolutionsPage = () => {
               <div className="px-5 flex flex-col flex-grow">
                 <h4 className="text-base font-bold text-slate-900 leading-tight mb-1">Regulatory Compliance</h4>
                 <p className="text-slate-500 text-[10px] mb-4 uppercase tracking-wide flex-grow">We ensure all implementations meet international standards and legal requirements.</p>
-                <div onClick={handleContactClick} className="flex items-center text-[10px] font-bold text-[#0056b3] gap-1 cursor-pointer mt-auto">
-                  READ MORE <ArrowRight className="w-3 h-3" />
-                </div>
+                
               </div>
             </RevealOnScroll>
 
@@ -516,9 +509,7 @@ const BlockchainSolutionsPage = () => {
               <div className="px-5 flex flex-col flex-grow">
                 <h4 className="text-base font-bold text-slate-900 leading-tight mb-1">End-to-End Support</h4>
                 <p className="text-slate-500 text-[10px] mb-4 uppercase tracking-wide flex-grow">From strategy to deployment and maintenance, we partner with you at every step.</p>
-                <div onClick={handleContactClick} className="flex items-center text-[10px] font-bold text-[#0056b3] gap-1 cursor-pointer mt-auto">
-                  READ MORE <ArrowRight className="w-3 h-3" />
-                </div>
+                
               </div>
             </RevealOnScroll>
           </div>

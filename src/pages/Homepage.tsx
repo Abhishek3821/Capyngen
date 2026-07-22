@@ -24,7 +24,7 @@ import img23 from "../assets/homepage/23.png";
 import img24 from "../assets/homepage/24.png";
 import img25 from "../assets/homepage/25.png";
 import img26 from "../assets/homepage/26.png";
-import vedio1 from "../assets/1000095423.mp4"
+import vedio1 from "../assets/Homepagevideo.mp4";
 
 // --- Scroll Animation Wrapper Component ---
 interface RevealOnScrollProps {
