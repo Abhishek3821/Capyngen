@@ -371,7 +371,7 @@ const DigitalMarketingLanding: React.FC = () => {
           >
             <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 150%, #ffffff 0%, transparent 50%)' }}></div>
             <p className="text-xl md:text-2xl font-medium leading-relaxed max-w-4xl mx-auto mb-8 relative z-10">
-              "Digital marketing is not just about the digital marketing company spending the most budget, but it is about who analyzes the data the best. At Capyngen, we offer the best digital marketing services in India with data as a strategic asset."
+              "Digital marketing is not just about the digital marketing company spending the most budget, but it is about who analyzes the data the best. At Capyngen, we offer  digital marketing services in India with data as a strategic asset."
             </p>
             <p className="text-blue-200 text-sm font-semibold tracking-widest uppercase relative z-10">ESTABLISHED 2018 </p>
           </motion.div>

@@ -436,13 +436,13 @@ const BrandLandingPage: React.FC = () => {
                 Reach out to us through the official contact details, or just fill out the form below, and our expert team will get back to you within 24 hours.
               </p>
               
-              <div className="space-y-6">
+              {/* <div className="space-y-6">
                 <div className="flex items-center text-slate-300">
                   <Mail className="w-5 h-5 text-[#4da6ff] mr-4 flex-shrink-0" />
                   <a href="mailto:solutions@capyngen.com" className="hover:text-white transition-colors">solutions@capyngen.com</a>
                 </div>
                 
-              </div>
+              </div> */}
             </div>
             
             {/* Right side form */}

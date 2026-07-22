@@ -437,12 +437,12 @@ const DataAnalyticsLandingPage: React.FC = () => {
                 Innovate your data into a strategic benefit to your enterprise? Book your consultation chat or call with our expert leads to discuss your current data.
               </p>
               
-              <div className="space-y-6">
+              {/* <div className="space-y-6">
                 <div className="flex items-center text-slate-700">
                   <Mail className="w-5 h-5 mr-4 text-[#0e6ba8]" />
                   <a href="mailto:solutions@capyngen.com" className="font-medium hover:text-[#0e6ba8] transition-colors">solutions@capyngen.com</a>
                 </div>
-              </div>
+              </div> */}
             </motion.div>
             
             {/* Right Side - Form */}

@@ -88,8 +88,8 @@ const SEOLandingPage = () => {
             <ul className="space-y-4">
               {[
                 "Global technical framework audits for bot navigation.",
-                "User intent content converges for top domain expertise.",
-                "Data-centric connection, procuring from top domain origin authority. "
+                "User intent content converges for exclusive domain expertise.",
+                "Data-centric connection, procuring from domain origin authority. "
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-slate-700 font-medium">
                   <svg className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

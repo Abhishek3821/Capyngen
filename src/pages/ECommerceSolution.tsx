@@ -310,7 +310,7 @@ const EcommerceLandingPage: React.FC = () => {
               </div>
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
-                  Capyngen Ranks in Top Retail Tech Consultants for 2024
+                  Capyngen Ranks in Leading Retail Tech Consultants for 2026
                 </h3>
                 <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
                   View Award <ArrowRight className="w-4 h-4" />

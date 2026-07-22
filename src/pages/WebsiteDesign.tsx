@@ -385,7 +385,7 @@ const WebsiteDesignLandingPage: React.FC = () => {
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-[#0f3b68] mb-6">Why Choose Us?</h2>
           <p className="text-slate-600 leading-relaxed text-lg">
-            Capyngen is a top tech partner and the best website design company in India, creating powerful web hubs, crafting high-speed portals, and responsive web layouts centered entirely around your users. 
+            Capyngen is a top tech partner and the leading website design company in India, creating powerful web hubs, crafting high-speed portals, and responsive web layouts centered entirely around your users. 
           </p>
         </motion.div>
       </section>
