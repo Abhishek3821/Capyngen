@@ -5,7 +5,6 @@ import {
   Settings2, 
   BarChart3, 
   Network,
-  Mail,
   ChevronDown
 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';

@@ -5,7 +5,6 @@ import {
   Target, 
   Monitor, 
   BookOpen, 
-  Mail,
   ChevronDown
 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
