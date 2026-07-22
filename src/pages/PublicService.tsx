@@ -350,7 +350,7 @@ const PublicServicesLandingPage = () => {
       <section id="press" className="bg-[#0b1424] text-white py-20 px-6 lg:px-8 scroll-mt-10">
         <div className="max-w-7xl mx-auto">
           <RevealOnScroll direction="up">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">Press Portal</h2>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">Latest Blogs</h2>
           </RevealOnScroll>
           
           {/* Tabs Navigation */}

@@ -472,7 +472,7 @@ const TransformingDigitalLearning = () => {
               Rebuilding Your Online<br className="hidden md:block" /> Learning Platform
             </h2>
             <p className="text-gray-900 text-base sm:text-lg md:text-xl leading-relaxed mb-6">
-              Capyngen builds and designs modern learning solutions that offer best educational experiences, latest academic functions, and upgrades for the future.
+              Capyngen builds and designs modern learning solutions that offer educational experiences, latest academic functions, and upgrades for the future.
             </p>
             <div className="text-gray-900 text-base sm:text-lg md:text-xl mb-4 font-semibold">
               Our Capabilities 

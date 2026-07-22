@@ -504,7 +504,7 @@ const GamingTestimonial = () => {
             </svg>
           </div>
           <p className="text-[#3b82f6] text-lg md:text-xl font-bold leading-relaxed">
-            "Capyngen's gaming intelligence platform helped us cut the 30-day long duration by 22% and grow our ARPDAU significantly within just a few months. The AI models they built for event personalization are unlike anything else we've seen on the market, and the results show why they are the top game development company." 
+            "Capyngen's gaming intelligence platform helped us cut the 30-day long duration by 22% and grow our ARPDAU significantly within just a few months. The AI models they built for event personalization are unlike anything else we've seen on the market, and the results show why they are the game development company." 
           </p>
         </div>
 
