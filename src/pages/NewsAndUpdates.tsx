@@ -2,7 +2,39 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BlogService, formatBlogDate, type Blog } from '../services/blogService';
 import { createSlug } from '../utils/slug';
-import heroImage from '../assets/news.png'; 
+import heroImage from '../assets/news.png';
+
+// --- TOPIC FILTERS ---
+// Fixed list of topics used to filter the blogs. `slug` is compared against the
+// slugified category / group / tags of each blog; `label` is what's shown on the button.
+const TOPICS: { slug: string; label: string }[] = [
+  { slug: 'custom-ai-solutions', label: 'Custom AI Solutions' },
+  { slug: 'blockchain-development', label: 'Blockchain Development' },
+  { slug: 'application-solutions', label: 'Application Solutions' },
+  { slug: 'crm-management-software', label: 'CRM Management Software' },
+  { slug: 'ui-ux-design-services', label: 'UI/UX Design Services' },
+  { slug: 'artificial-intelligence-services', label: 'Artificial Intelligence Services' },
+  { slug: 'cybersecurity', label: 'Cybersecurity' },
+  { slug: 'enterprise-solutions', label: 'Enterprise Solutions' },
+  { slug: 'consulting', label: 'Consulting' },
+  { slug: 'public-service', label: 'Public Service' },
+  { slug: 'life-science', label: 'Life Science' },
+  { slug: 'education', label: 'Education' },
+  { slug: 'energy-resources-utilities', label: 'Energy, Resources & Utilities' },
+  { slug: 'high-tech', label: 'High Tech' },
+  { slug: 'gaming', label: 'Gaming' },
+  { slug: 'web-development', label: 'Web Development' },
+  { slug: 'app-development', label: 'App Development' },
+  { slug: 'ecommerce-solutions', label: 'eCommerce Solutions' },
+  { slug: 'devops-solutions', label: 'DevOps Solutions' },
+  { slug: 'website-design-company-india', label: 'Website Design Company India' },
+  { slug: 'branding-identity-design', label: 'Branding & Identity Design' },
+  { slug: 'cms-website-design', label: 'CMS Website Design' },
+  { slug: 'digital-marketing', label: 'Digital Marketing' },
+  { slug: 'seo', label: 'SEO' },
+  { slug: 'ppc', label: 'PPC' },
+  { slug: 'data-analytics-services', label: 'Data Analytics Services' },
+];
 
 // --- HERO COMPONENT ---
 const NewsHero = () => {
@@ -16,7 +48,6 @@ const NewsHero = () => {
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-semibold text-white tracking-tight mb-4 sm:mb-6 leading-none">
             News Alerts
           </h1>
@@ -34,7 +65,8 @@ const NewsGrid = () => {
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeFilter, setActiveFilter] = useState('All');
+  // Holds the active topic slug, or 'all' for no filtering.
+  const [activeFilter, setActiveFilter] = useState('all');
 
   // Fetch blogs from the API
   useEffect(() => {
@@ -52,19 +84,24 @@ const NewsGrid = () => {
     fetchBlogs();
   }, []);
 
-  // Filters are built from the categories that exist in the API data
+  // Only show topics that actually have at least one matching blog, plus "All".
   const filters = useMemo(() => {
-    const categories = new Set<string>();
+    const slugsInUse = new Set<string>();
     blogs.forEach((item) => {
-      if (item.category) categories.add(item.category);
+      [item.category, item.group, ...(item.tags ?? [])].forEach((value) => {
+        if (value) slugsInUse.add(createSlug(value));
+      });
     });
-    return ['All', ...Array.from(categories)];
+    const available = TOPICS.filter((topic) => slugsInUse.has(topic.slug));
+    return [{ slug: 'all', label: 'All' }, ...available];
   }, [blogs]);
 
-  // Basic filtering logic
+  // A blog matches when its slugified category, group, or any tag equals the active topic slug.
   const filteredData = blogs.filter((item) => {
-    if (activeFilter === 'All') return true;
-    return item.category === activeFilter || item.tags?.includes(activeFilter);
+    if (activeFilter === 'all') return true;
+    return [item.category, item.group, ...(item.tags ?? [])]
+      .filter(Boolean)
+      .some((value) => createSlug(value as string) === activeFilter);
   });
 
   const openBlog = (blog: Blog) => {
@@ -74,34 +111,49 @@ const NewsGrid = () => {
   return (
     <section className="w-full bg-white pb-16 lg:pb-24">
       
-      {/* Full-width Filter Bar */}
-      <div className="w-full border-b border-gray-100 bg-white sticky top-0 z-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center space-x-4 sm:space-x-6 overflow-x-auto scrollbar-hide">
-          <span className="text-[11px] font-semibold tracking-[0.15em] text-gray-400 uppercase whitespace-nowrap">
-            Filters
-          </span>
-          <div className="flex space-x-3">
+      {/* Full-width Redesigned Filter Bar */}
+      <div className="w-full bg-white/80 backdrop-blur-lg sticky top-0 z-20 border-b border-gray-200 shadow-sm transition-all">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          
+          {/* Label and Icon */}
+          <div className="flex items-center gap-2 pr-5 mr-2 border-r border-gray-300 shrink-0">
+            <svg 
+              className="w-4 h-4 text-gray-500" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            <span className="text-[11px] font-bold tracking-widest text-gray-800 uppercase">
+              Filter By
+            </span>
+          </div>
+
+          {/* Filter Buttons */}
+          <div className="flex items-center gap-2.5 px-2">
             {filters.map((filter) => (
               <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors duration-200 ${
-                  activeFilter === filter
-                    ? 'bg-[#0a1128] text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                key={filter.slug}
+                onClick={() => setActiveFilter(filter.slug)}
+                className={`px-4 py-1.5 rounded-md text-sm font-medium whitespace-nowrap transition-all duration-300 border ${
+                  activeFilter === filter.slug
+                    ? 'bg-blue-600 border-blue-600 text-white shadow-sm'
+                    : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900'
                 }`}
               >
-                {filter}
+                {filter.label}
               </button>
             ))}
           </div>
+
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 lg:pt-14">
         {/* Section Title */}
         <h2 className="text-3xl md:text-[2.5rem] font-medium text-gray-900 mb-10 tracking-tight">
-          Discover Capynge News Alerts
+          Discover Capyngen News Alerts
         </h2>
 
         {loading ? (

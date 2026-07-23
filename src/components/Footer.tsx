@@ -1,5 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from "../assets/capyngenLogo.png";
+
+// --- Custom Social Icons (matching Lucide style) ---
+const LinkedinIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
+const FacebookIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
+const InstagramIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
+const TwitterIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+  </svg>
+);
+
+const YoutubeIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M2.5 7.1c.3-1.5 1-2.8 2.2-3.8C6 2.3 8.9 2 12 2s6 .3 7.3 1.3c1.2 1 1.9 2.3 2.2 3.8.3 1.6.3 3.3.3 4.9s0 3.3-.3 4.9c-.3 1.5-1 2.8-2.2 3.8-1.3 1-4.2 1.3-7.3 1.3s-6-.3-7.3-1.3c-1.2-1-1.9-2.3-2.2-3.8C2 15.3 2 13.6 2 12s0-3.3.5-4.9z" />
+    <path d="m10 15 5-3-5-3z" />
+  </svg>
+);
 
 const Footer: React.FC = () => {
   return (
@@ -8,16 +45,40 @@ const Footer: React.FC = () => {
         
         {/* Brand Column */}
         <div className="md:col-span-4 pr-8">
-          <h2 className="text-3xl font-bold mb-6">Capyngen</h2>
+          <Link to="/">
+            <img src={logo} alt="Capyngen Logo" className="h-10 mb-6 object-contain" />
+          </Link>
           <p className="text-gray-400 text-sm leading-relaxed mb-6">
-            AI. Software. Innovation.<br />
-            Building the future of digital<br />
-            business.
+            Empowering businesses with innovative technology, creative design, and digital solutions that drive sustainable growth and lasting success.
           </p>
-          <div className="flex space-x-3">
-            <a href="#" className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm text-xs font-semibold transition-colors">IN</a>
-            <a href="#" className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm text-xs font-semibold transition-colors">TW</a>
-            <a href="#" className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm text-xs font-semibold transition-colors">YT</a>
+          
+          <div className="text-gray-400 text-sm mb-6 space-y-2">
+            <p>
+              <a href="mailto:query@capyngen.com" className="hover:text-white transition-colors">
+                query@capyngen.com
+              </a>
+            </p>
+            <p className="leading-relaxed">
+              Tower B3, Spaze i-Tech Park, Sector 49, Gurugram, Haryana 122018
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <a href="https://www.linkedin.com/company/capyngen/" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm transition-colors" aria-label="LinkedIn">
+              <LinkedinIcon size={18} />
+            </a>
+            <a href="https://www.facebook.com/capyngen" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm transition-colors" aria-label="Facebook">
+              <FacebookIcon size={18} />
+            </a>
+            <a href="https://www.instagram.com/capyngen_official/" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm transition-colors" aria-label="Instagram">
+              <InstagramIcon size={18} />
+            </a>
+            <a href="https://x.com/capyngen" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm transition-colors" aria-label="Twitter">
+              <TwitterIcon size={18} />
+            </a>
+            <a href="https://www.youtube.com/@Capyngen_official" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] hover:bg-gray-800 text-gray-300 w-10 h-10 flex items-center justify-center rounded-sm transition-colors" aria-label="YouTube">
+              <YoutubeIcon size={18} />
+            </a>
           </div>
         </div>
 
@@ -69,7 +130,6 @@ const Footer: React.FC = () => {
           <ul className="text-gray-400 text-sm space-y-4">
             <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
             <li><Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link></li>
-            
           </ul>
         </div>
 
@@ -77,7 +137,7 @@ const Footer: React.FC = () => {
 
       {/* Bottom Bar */}
       <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-[#1a1a1a] flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-        <p>&copy; 2026 Capyngen Technologies Pvt. Ltd. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Capyngen Technologies Pvt. Ltd. All rights reserved.</p>
         <p className="mt-4 md:mt-0">AI &middot; Software &middot; Innovation &middot; Gurugram, India</p>
       </div>
     </footer>
