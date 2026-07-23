@@ -400,12 +400,12 @@ const HomePage: React.FC = () => {
                   <h3 className="mb-3 text-lg font-bold leading-snug text-slate-900">{article.title}</h3>
                   <p className="flex-1 text-sm leading-relaxed text-slate-500">{article.description}</p>
                   <div className="my-5 h-[1px] w-full bg-slate-100"></div>
-                  <div className="flex w-full items-center justify-between">
+                  {/* <div className="flex w-full items-center justify-between">
                     <span className="text-sm font-bold text-slate-900">Read more</span>
                     <svg className="text-blue-600 transition-transform group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ))}
@@ -444,12 +444,12 @@ const HomePage: React.FC = () => {
                       <h3 className="mb-3 sm:mb-4 text-xl sm:text-2xl font-semibold text-white">{solution.title}</h3>
                       <p className="mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed text-slate-300">{solution.description}</p>
                     </div>
-                    <div className="group flex cursor-pointer items-center gap-3">
+                    {/* <div className="group flex cursor-pointer items-center gap-3">
                       <span className="text-sm sm:text-base font-medium text-white transition-colors hover:text-[#00e5ff]">Discover our impact</span>
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-[#3b82f6] text-white transition-transform group-hover:translate-x-1">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}
@@ -489,12 +489,12 @@ const HomePage: React.FC = () => {
                     <h3 className="mb-3 text-lg sm:text-xl font-bold leading-snug text-slate-900">{story.title}</h3>
                     <p className="flex-1 text-sm leading-relaxed text-slate-500">{story.description}</p>
                     <div className="my-5 h-[1px] w-full bg-slate-100"></div>
-                    <div className="flex w-full items-center justify-between">
+                    {/* <div className="flex w-full items-center justify-between">
                       <span className="text-sm font-bold text-slate-900">Read more</span>
                       <svg className="text-[#2563eb] transition-transform group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}
@@ -534,12 +534,12 @@ const HomePage: React.FC = () => {
                     <h3 className="mb-3 text-lg sm:text-xl font-bold leading-snug text-slate-900">{insight.title}</h3>
                     <p className="flex-1 text-sm leading-relaxed text-slate-500">{insight.description}</p>
                     <div className="my-5 h-[1px] w-full bg-slate-100"></div>
-                    <div className="flex w-full items-center justify-between">
+                    {/* <div className="flex w-full items-center justify-between">
                       <span className="text-sm font-bold text-slate-900">Read more</span>
                       <svg className="text-[#2563eb] transition-transform group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}

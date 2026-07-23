@@ -219,7 +219,7 @@ const WebDevelopmentPage = () => {
     <div className="font-sans text-slate-900 bg-white">
       
       {/* Hero Section with Background Image */}
-      <section className="relative py-32 px-6 md:px-12 lg:px-24 flex flex-col items-center justify-center text-center min-h-[75vh] overflow-hidden">
+      <section className="relative py-15 px-6 md:px-12 lg:px-24 flex flex-col items-center justify-center text-center min-h-[75vh] overflow-hidden">
         {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
           <img src={img1} alt="Hero Background" className="w-full h-full object-cover" />
