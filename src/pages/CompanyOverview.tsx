@@ -81,7 +81,7 @@ const handleLinkClick = (e: React.MouseEvent) => {
 // --- HERO COMPONENT ---
 const AboutHero = () => {
   return (
-    <section className="relative w-full h-[55vh] min-h-[400px] xl:min-h-[500px] overflow-hidden flex items-center">
+    <section className="relative w-full h-screen min-h-[500px] overflow-hidden flex items-center">
       <div className="absolute inset-0 w-full h-full">
         <img 
           src={img1} 
@@ -93,12 +93,12 @@ const AboutHero = () => {
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24">
         <RevealOnScroll direction="up" className="max-w-3xl">
-          <div className="mb-6 sm:mb-8 w-full border-b border-white/20 pb-4">
-            <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-white uppercase">
+          <div className="mb-4 sm:mb-6 md:mb-8 w-full border-b border-white/20 pb-3 sm:pb-4">
+            <span className="text-[10px] xs:text-xs sm:text-sm font-bold tracking-[0.25em] text-white uppercase">
               About Us
             </span>
           </div>
-          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[5.5rem] font-semibold text-white tracking-tight leading-none">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-semibold text-white tracking-tight leading-none">
             Our Company
           </h1>
         </RevealOnScroll>

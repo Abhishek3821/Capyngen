@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, type Variants } from 'framer-motion';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial image imports from the DIGITAL MARKETING folder as shown in the file tree
 import img1 from "../assets/DIGITAL MARKETING/1.png";
@@ -30,6 +34,8 @@ const staggerContainer: Variants = {
 
 const DigitalMarketingLanding: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const digitalMarketingBlogs = useTopicBlogs('digital-marketing');
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -86,6 +92,32 @@ const DigitalMarketingLanding: React.FC = () => {
       answer: "Book a consultation with our strategy team. We will walk through a funnel audit, put together a competitive brief and build a custom growth roadmap around your specific goals."
     }
   ];
+
+  const latestEvents = [
+    { tag: "STRATEGY", title: "Smart Marketing in a Privacy-First World", desc: "Industry brands are now handling the damage of third-party cookies along with sustaining their procurement footprint. ", img: img2 },
+    { tag: "INSIGHT", title: "Making Content Feel Personal— With Automation", desc: "Maximizing generative versions to build plenty of unique ads that convert better than broad… ", img: img3 },
+    { tag: "CASE STUDY", title: "The $50M Climb: How We Are Scaling Our SaaS Together", desc: "At Capyngen, we moved beyond single-channel marketing to win major enterprise accounts. ", img: img4 }
+  ];
+
+  // Show live Digital Marketing blogs when available; otherwise fall back to the static cards.
+  const latestEventsItems = useMemo(() => {
+    if (digitalMarketingBlogs.length === 0) {
+      return latestEvents.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return digitalMarketingBlogs.map((blog, i) => ({
+      ...latestEvents[i % latestEvents.length],
+      title: blog.title,
+      img: blog.image || latestEvents[i % latestEvents.length].img,
+      desc: blog.description || latestEvents[i % latestEvents.length].desc,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [digitalMarketingBlogs]);
+
+  const openLatestEvents = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <div className="font-sans text-slate-800 bg-[#fbfcfd] min-h-screen overflow-hidden">
@@ -297,16 +329,12 @@ const DigitalMarketingLanding: React.FC = () => {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            {[
-              { tag: "STRATEGY", title: "Smart Marketing in a Privacy-First World", desc: "Industry brands are now handling the damage of third-party cookies along with sustaining their procurement footprint. ", img: img2 },
-              { tag: "INSIGHT", title: "Making Content Feel Personal— With Automation", desc: "Maximizing generative versions to build plenty of unique ads that convert better than broad… ", img: img3 },
-              { tag: "CASE STUDY", title: "The $50M Climb: How We Are Scaling Our SaaS Together", desc: "At Capyngen, we moved beyond single-channel marketing to win major enterprise accounts. ", img: img4 }
-            ].map((post, i) => (
-              <motion.div 
-                key={i} 
+            {latestEventsItems.map((post, i) => (
+              <motion.div
+                key={post.blog?._id ?? i}
                 className="group cursor-pointer flex flex-col h-full"
                 variants={fadeInUp}
-                onClick={() => handleButtonClick(`Read Event: ${post.title}`)}
+                onClick={() => post.blog ? openLatestEvents(post.blog) : handleButtonClick(`Read Event: ${post.title}`)}
               >
                 <div className="overflow-hidden rounded-lg mb-5 bg-slate-100 shrink-0">
                   {/* Updated image to preserve height with object-contain */}

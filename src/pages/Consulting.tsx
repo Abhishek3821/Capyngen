@@ -1,7 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { 
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import {
   ChevronDown
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial Image Imports from the CON_SULTING folder based on image_e4aedd.png
 import img1 from "../assets/CON_SULTING/01.png";
@@ -67,6 +71,8 @@ const RevealOnScroll: React.FC<RevealOnScrollProps> = ({
 
 const StrategicConsultingLandingPage: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('consulting');
 
   // Refs for scrolling to sections
   const contactRef = useRef<HTMLElement>(null);
@@ -108,6 +114,36 @@ const StrategicConsultingLandingPage: React.FC = () => {
     { q: "Q14. How doe‌s Capyngen align technology with business​?", a: "We ens‍ure every digital initiati⁠ve supports‍ you​r core busi​ness⁠ obj​ectives through‍ strategic planning and execution."},
     { q: "Q15. Wha​t ma‍rkets does Capyngen serve?", a: "We‌ serv‌e over 30 markets glob​ally wit⁠h h‍ea‍dquarters in London, N⁠ew York, and‌ Singapore as a premier consulting company."}
   ];
+
+  const insights = [
+    { category: "DIGITAL CONSULTING", title: "Accelerating Digital Transformation", desc: "Helping businesses modernize operations with scalable digital strategies, cloud technologies, and customer-focused innovation that delivers measurable growth.", img: img3, delay: 100 },
+    { category: "BUSINESS STRATEGY", title: "Building Smarter Growth Plans", desc: "Developing practical business strategies that improve efficiency, unlock new opportunities, and create sustainable competitive advantages.", img: img4, delay: 200 },
+    { category: "TECHNOLOGY CONSULTING", title: "Future-Ready Technology Solutions", desc: "Guiding organizations in selecting and implementing modern technologies that enhance performance, security, and long-term scalability.", img: img5, delay: 300 },
+    { category: "PROCESS OPTIMIZATION", title: "Improving Business Performance", desc: "Transforming complex workflows into streamlined processes that increase productivity, reduce operational costs, and improve business outcomes.", img: img6, delay: 100 },
+    { category: "DIGITAL EXPERIENCE", title: "Creating Customer-Centric Solutions", desc: "Designing seamless digital experiences that strengthen customer relationships, improve engagement, and build lasting brand loyalty.", img: img7, delay: 200 },
+    { category: "INNOVATION CONSULTING", title: "Empowering Businesses Through Innovation", desc: "Enabling organizations to embrace emerging technologies, optimize decision-making, and achieve continuous growth through strategic digital consulting.", img: img3, delay: 300 }
+  ];
+
+  // Show live Consulting blogs when available; otherwise fall back to the static insight cards.
+  const insightsItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return insights.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...insights[i % insights.length],
+      category: blog.category || insights[i % insights.length].category,
+      title: blog.title,
+      desc: blog.description || insights[i % insights.length].desc,
+      img: blog.image || insights[i % insights.length].img,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openInsight = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <div className="min-h-screen bg-[#f8fafd] font-sans text-slate-700">
@@ -193,101 +229,22 @@ const StrategicConsultingLandingPage: React.FC = () => {
           </RevealOnScroll>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Insight 1 */}
-            <RevealOnScroll direction="up" delay={100}>
-              <div onClick={scrollToContact} className="group cursor-pointer bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                <div className="overflow-hidden mb-5 bg-[#f0f5fb] rounded-lg flex items-center justify-center">
-                  <img src={img3} alt="Digital Strategy" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out" />
+            {insightsItems.map((item, index) => (
+              <RevealOnScroll key={item.blog?._id ?? index} direction="up" delay={item.delay}>
+                <div onClick={() => (item.blog ? openInsight(item.blog) : scrollToContact())} className="group cursor-pointer bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                  <div className="overflow-hidden mb-5 bg-[#f0f5fb] rounded-lg flex items-center justify-center">
+                    <img src={item.img} alt={item.title} className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out" />
+                  </div>
+                  <p className="text-[#165a98] text-xs font-bold uppercase tracking-wider mb-2">{item.category}</p>
+                  <h3 className="text-xl font-bold text-[#0a3a66] mb-3 group-hover:text-[#165a98] transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm">
+                    {item.desc}
+                  </p>
                 </div>
-                <p className="text-[#165a98] text-xs font-bold uppercase tracking-wider mb-2">DIGITAL CONSULTING</p>
-                <h3 className="text-xl font-bold text-[#0a3a66] mb-3 group-hover:text-[#165a98] transition-colors">
-                  Accelerating Digital Transformation
-                </h3>
-                <p className="text-slate-600 text-sm">
-                  Helping businesses modernize operations with scalable digital strategies, cloud technologies, and customer-focused innovation that delivers measurable growth.
-                </p>
-              </div>
-            </RevealOnScroll>
-            
-            {/* Insight 2 */}
-            <RevealOnScroll direction="up" delay={200}>
-              <div onClick={scrollToContact} className="group cursor-pointer bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                <div className="overflow-hidden mb-5 bg-[#f0f5fb] rounded-lg flex items-center justify-center">
-                  <img src={img4} alt="Operational Excellence" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out" />
-                </div>
-                <p className="text-[#165a98] text-xs font-bold uppercase tracking-wider mb-2">BUSINESS STRATEGY</p>
-                <h3 className="text-xl font-bold text-[#0a3a66] mb-3 group-hover:text-[#165a98] transition-colors">
-                  Building Smarter Growth Plans
-                </h3>
-                <p className="text-slate-600 text-sm">
-                  Developing practical business strategies that improve efficiency, unlock new opportunities, and create sustainable competitive advantages.
-                </p>
-              </div>
-            </RevealOnScroll>
-
-            {/* Insight 3 */}
-            <RevealOnScroll direction="up" delay={300}>
-              <div onClick={scrollToContact} className="group cursor-pointer bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                <div className="overflow-hidden mb-5 bg-[#f0f5fb] rounded-lg flex items-center justify-center">
-                  <img src={img5} alt="Change Management" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out" />
-                </div>
-                <p className="text-[#165a98] text-xs font-bold uppercase tracking-wider mb-2">TECHNOLOGY CONSULTING</p>
-                <h3 className="text-xl font-bold text-[#0a3a66] mb-3 group-hover:text-[#165a98] transition-colors">
-                  Future-Ready Technology Solutions
-                </h3>
-                <p className="text-slate-600 text-sm">
-                  Guiding organizations in selecting and implementing modern technologies that enhance performance, security, and long-term scalability.
-                </p>
-              </div>
-            </RevealOnScroll>
-            
-            {/* Insight 4 */}
-            <RevealOnScroll direction="up" delay={100}>
-              <div onClick={scrollToContact} className="group cursor-pointer bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                <div className="overflow-hidden mb-5 bg-[#f0f5fb] rounded-lg flex items-center justify-center">
-                  <img src={img6} alt="Data-Driven Decision Making" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out" />
-                </div>
-                <p className="text-[#165a98] text-xs font-bold uppercase tracking-wider mb-2">PROCESS OPTIMIZATION</p>
-                <h3 className="text-xl font-bold text-[#0a3a66] mb-3 group-hover:text-[#165a98] transition-colors">
-                  Improving Business Performance
-                </h3>
-                <p className="text-slate-600 text-sm">
-                  Transforming complex workflows into streamlined processes that increase productivity, reduce operational costs, and improve business outcomes.
-                </p>
-              </div>
-            </RevealOnScroll>
-            
-            {/* Insight 5 */}
-            <RevealOnScroll direction="up" delay={200}>
-              <div onClick={scrollToContact} className="group cursor-pointer bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                <div className="overflow-hidden mb-5 bg-[#f0f5fb] rounded-lg flex items-center justify-center">
-                  <img src={img7} alt="Customer Experience Transformation" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out" />
-                </div>
-                <p className="text-[#165a98] text-xs font-bold uppercase tracking-wider mb-2">DIGITAL EXPERIENCE</p>
-                <h3 className="text-xl font-bold text-[#0a3a66] mb-3 group-hover:text-[#165a98] transition-colors">
-                  Creating Customer-Centric Solutions
-                </h3>
-                <p className="text-slate-600 text-sm">
-                  Designing seamless digital experiences that strengthen customer relationships, improve engagement, and build lasting brand loyalty.
-                </p>
-              </div>
-            </RevealOnScroll>
-
-            {/* Insight 6 */}
-            <RevealOnScroll direction="up" delay={300}>
-              <div onClick={scrollToContact} className="group cursor-pointer bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                <div className="overflow-hidden mb-5 bg-[#f0f5fb] rounded-lg flex items-center justify-center">
-                  <img src={img3} alt="Intelligent Automation" className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out" />
-                </div>
-                <p className="text-[#165a98] text-xs font-bold uppercase tracking-wider mb-2">INNOVATION CONSULTING</p>
-                <h3 className="text-xl font-bold text-[#0a3a66] mb-3 group-hover:text-[#165a98] transition-colors">
-                  Empowering Businesses Through Innovation
-                </h3>
-                <p className="text-slate-600 text-sm">
-                  Enabling organizations to embrace emerging technologies, optimize decision-making, and achieve continuous growth through strategic digital consulting.
-                </p>
-              </div>
-            </RevealOnScroll>
+              </RevealOnScroll>
+            ))}
           </div>
         </div>
       </section>

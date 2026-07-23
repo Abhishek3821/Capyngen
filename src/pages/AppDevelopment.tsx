@@ -1,5 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, ChevronDown, CheckCircle } from 'lucide-react';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial Imports based on your folder structure
 import img1 from "../assets/App Development service/1.png";
@@ -9,6 +13,10 @@ import img4 from "../assets/App Development service/4.png";
 import img5 from "../assets/App Development service/5.png";
 import img6 from "../assets/App Development service/6.png";
 import img7 from "../assets/App Development service/7.png";
+import img8 from "../assets/App Development service/8.jpg";
+import img9 from "../assets/App Development service/9.jpg";
+import img10 from "../assets/App Development service/10.jpg";
+import img11 from "../assets/App Development service/11.jpg";
 
 // --- Scroll Animation Wrapper Component ---
 interface RevealOnScrollProps {
@@ -80,9 +88,39 @@ const handleLinkClick = (e: React.MouseEvent) => {
 };
 
 const AppDevelopmentPage = () => {
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('app-development');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const happeningsRef = useRef<HTMLDivElement>(null);
+
+  // Static fallback cards for the "App Trends Right Now" carousel.
+  const trendCards = [
+    { tag: "Report", title: "2025 Mobile Application Development: iOS Growth in the Enterprise", img: img3 },
+    { tag: "Award", title: "Capyngen Recognized as a Leader in Gartner Magic Quadrant for Mobile Development", img: img4 },
+    { tag: "Case Study", title: "Bringing Global Operations Together with One Cross-Platform Hub", img: img5 },
+    { tag: "Report", title: "Why Enterprises Are Rethinking Native-Only Strategies?", img: img6 },
+    { tag: "Case Study", title: "Company Cut Delivery Errors by 35% with a Custom Mobile App Development", img: img7 }
+  ];
+
+  // Show live App Development blogs when available; otherwise fall back to the static cards.
+  const trendItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return trendCards.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...trendCards[i % trendCards.length],
+      title: blog.title,
+      img: blog.image || trendCards[i % trendCards.length].img,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openTrend = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   const scrollHappenings = (direction: 'left' | 'right') => {
     if (happeningsRef.current) {
@@ -224,95 +262,28 @@ const AppDevelopmentPage = () => {
                 .hide-scrollbar::-webkit-scrollbar { display: none; }
               `}} />
 
-              {/* Card 1 */}
-              <div onClick={handleLinkClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                  <img src={img3} alt="Report" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                    Report
+              {trendItems.map((item, index) => (
+                <div
+                  key={item.blog?._id ?? index}
+                  onClick={(e) => item.blog ? openTrend(item.blog) : handleLinkClick(e)}
+                  className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
+                >
+                  <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
+                    <img src={item.img} alt={item.tag} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                      {item.tag}
+                    </div>
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
+                      {item.title}
+                    </h3>
+                    <div className="flex items-center text-sm font-bold text-[#0056b3] gap-2 mt-auto">
+                      Read Here <ArrowRight className="w-4 h-4" />
+                    </div>
                   </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
-                    2025 Mobile Application Development: iOS Growth in the Enterprise
-                  </h3>
-                  <div className="flex items-center text-sm font-bold text-[#0056b3] gap-2 mt-auto">
-                    Read Here <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 2 */}
-              <div onClick={handleLinkClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                  <img src={img4} alt="Award" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                    Award
-                  </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
-                    Capyngen Recognized as a Leader in Gartner Magic Quadrant for Mobile Development
-                  </h3>
-                  <div className="flex items-center text-sm font-bold text-[#0056b3] gap-2 mt-auto">
-                    Read Here <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 3 */}
-              <div onClick={handleLinkClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                  <img src={img5} alt="Case Study" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                    Case Study
-                  </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
-                    Bringing Global Operations Together with One Cross-Platform Hub
-                  </h3>
-                  <div className="flex items-center text-sm font-bold text-[#0056b3] gap-2 mt-auto">
-                    Read Here <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 4 */}
-              <div onClick={handleLinkClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                  <img src={img6} alt="Report" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                    Report
-                  </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
-                    Why Enterprises Are Rethinking Native-Only Strategies?
-                  </h3>
-                  <div className="flex items-center text-sm font-bold text-[#0056b3] gap-2 mt-auto">
-                    Read Here <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 5 */}
-              <div onClick={handleLinkClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                  <img src={img7} alt="Case Study" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                    Case Study
-                  </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
-                    Company Cut Delivery Errors by 35% with a Custom Mobile App Development
-                  </h3>
-                  <div className="flex items-center text-sm font-bold text-[#0056b3] gap-2 mt-auto">
-                    Read Here <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
+              ))}
 
             </div>
           </RevealOnScroll>
@@ -381,7 +352,7 @@ const AppDevelopmentPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <RevealOnScroll direction="up" delay={100} className="group cursor-pointer">
               <div className="bg-slate-50 border border-slate-100 aspect-[4/3] sm:h-48 md:h-56 lg:h-60 rounded-sm mb-4 overflow-hidden relative shadow-sm group-hover:shadow-md transition-shadow">
-                 <img src={img3} alt="Healthcare & Life Sciences" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                 <img src={img8} alt="Healthcare & Life Sciences" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <h4 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#0056b3] transition-colors leading-tight">01. Healthcare & Life Sciences</h4>
               <p className="text-slate-500 text-[11px] sm:text-xs mt-2 leading-relaxed">Secure, compliant mobile apps for patient care, telehealth, and health data management.</p>
@@ -389,7 +360,7 @@ const AppDevelopmentPage = () => {
 
             <RevealOnScroll direction="up" delay={200} className="group cursor-pointer">
               <div className="bg-slate-50 border border-slate-100 aspect-[4/3] sm:h-48 md:h-56 lg:h-60 rounded-sm mb-4 overflow-hidden relative shadow-sm group-hover:shadow-md transition-shadow">
-                 <img src={img4} alt="Shopping & Digital Retail" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                 <img src={img11} alt="Shopping & Digital Retail" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <h4 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#0056b3] transition-colors leading-tight">02. Shopping & Digital Retail</h4>
               <p className="text-slate-500 text-[11px] sm:text-xs mt-2 leading-relaxed">We Offer solutions with real-time inventory, offers, and online shopping experiences.</p>
@@ -397,7 +368,7 @@ const AppDevelopmentPage = () => {
 
             <RevealOnScroll direction="up" delay={300} className="group cursor-pointer">
               <div className="bg-slate-50 border border-slate-100 aspect-[4/3] sm:h-48 md:h-56 lg:h-60 rounded-sm mb-4 overflow-hidden relative shadow-sm group-hover:shadow-md transition-shadow">
-                 <img src={img5} alt="Banking & Financial Services" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                 <img src={img9} alt="Banking & Financial Services" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <h4 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#0056b3] transition-colors leading-tight">03. Banking & Financial Services</h4>
               <p className="text-slate-500 text-[11px] sm:text-xs mt-2 leading-relaxed">Secure mobile banking and high finance apps built to handle sensitive data and strict compliance needs.</p>
@@ -405,7 +376,7 @@ const AppDevelopmentPage = () => {
 
             <RevealOnScroll direction="up" delay={400} className="group cursor-pointer">
               <div className="bg-slate-50 border border-slate-100 aspect-[4/3] sm:h-48 md:h-56 lg:h-60 rounded-sm mb-4 overflow-hidden relative shadow-sm group-hover:shadow-md transition-shadow">
-                 <img src={img6} alt="Logistics & Supply Chain" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                 <img src={img10} alt="Logistics & Supply Chain" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <h4 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#0056b3] transition-colors leading-tight">04. Logistics & Supply Chain</h4>
               <p className="text-slate-500 text-[11px] sm:text-xs mt-2 leading-relaxed">We offer industries solutions that track shipments, and quickly manage processes with custom app development services.</p>

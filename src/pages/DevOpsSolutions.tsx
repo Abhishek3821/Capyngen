@@ -1,5 +1,9 @@
-import React, { useState, useRef, useEffect, type ReactNode } from 'react';
+import React, { useState, useRef, useEffect, useMemo, type ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+import { type Blog } from '../services/blogService';
+import { createSlug } from '../utils/slug';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial Imports based on your exact folder structure
 import img1 from "../assets/Dev op Solution Service/1.png";
@@ -58,6 +62,8 @@ const DevOpsPage = () => {
   
   // Ref for the slider container
   const sliderRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('devops-solutions');
 
   // Added img assignments serially (1 to 5)
   const happenings = [
@@ -67,6 +73,25 @@ const DevOpsPage = () => {
     { tag: "Whitepaper", title: "Zero-Downtime Deployments: A Blueprint for Regulated Industries", link: "Read More", img: img4 },
     { tag: "Case Study", title: "Cutting Infrastructure Costs by 40% for a Healthcare Platform", link: "Read More", img: img5 }
   ];
+
+  // Show live DevOps Solutions blogs when available; otherwise fall back to the static cards.
+  const happeningItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return happenings.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...happenings[i % happenings.length],
+      title: blog.title,
+      img: blog.image || happenings[i % happenings.length].img,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openHappening = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   const offeringsData: Record<string, { title: string, desc: string }[]> = {
     'Service Offerings': [
@@ -226,8 +251,8 @@ const DevOpsPage = () => {
               ref={sliderRef}
               className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide items-stretch"
             >
-              {happenings.map((item, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300">
+              {happeningItems.map((item, index) => (
+                <div key={item.blog?._id ?? index} onClick={() => openHappening(item.blog)} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
                   {/* Top: Image Area with Tag Label */}
                   <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
                     <img

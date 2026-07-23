@@ -1,13 +1,17 @@
-import React, { useState, useRef } from 'react';
-import { 
-  ArrowRight, 
-  Palette, 
-  Target, 
-  Monitor, 
-  BookOpen, 
+import React, { useState, useRef, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  ArrowRight,
+  Palette,
+  Target,
+  Monitor,
+  BookOpen,
   ChevronDown
 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
+import { type Blog } from '../services/blogService';
+import { createSlug } from '../utils/slug';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial-wise imports matching your VS Code structure
 import img2 from "../assets/Building Bold Brand Identities/2.png";
@@ -24,6 +28,9 @@ const BrandLandingPage: React.FC = () => {
   // Refs for smooth scrolling
   const portfolioRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('branding-identity-design');
 
   const faqs = [
     {
@@ -87,6 +94,33 @@ const BrandLandingPage: React.FC = () => {
       opacity: 1,
       transition: { staggerChildren: 0.2 }
     }
+  };
+
+  // Static "What's Happening?" cards (used as fallback when no blogs match this topic)
+  const happenings = [
+    { img: img4, category: "FinTech Sector", title: "Private Equity Firm", desc: "Modernizing the visual legacy of a 50-year-old investment firm for the digital…", alt: "Corporate Office", extra: "" },
+    { img: img5, category: "Industrial Tech", title: "Medium Mechanics", desc: "Developing a visual language for the next generation of renewable energy…", alt: "Stationery Mockup", extra: "" },
+    { img: img6, category: "SaaS Global", title: "Multi-Platform ", desc: "Shaping a consistent identity system across 48 global markets and 12 product", alt: "Mobile App", extra: "sm:col-span-2 lg:col-span-1" }
+  ];
+
+  // Show live Branding & Identity blogs when available; otherwise fall back to the static cards.
+  const happeningItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return happenings.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...happenings[i % happenings.length],
+      title: blog.title,
+      img: blog.image || happenings[i % happenings.length].img,
+      desc: blog.description || happenings[i % happenings.length].desc,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openHappening = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
   };
 
   return (
@@ -210,53 +244,27 @@ const BrandLandingPage: React.FC = () => {
           </motion.div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {/* Article 1 */}
-            <motion.div variants={fadeUp} className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-              <img 
-                src={img4} 
-                alt="Corporate Office" 
-                className="w-full h-48 sm:h-auto object-cover sm:object-contain bg-slate-100"
-              />
-              <div className="p-5 sm:p-6 flex-1 flex flex-col">
-                <p className="text-[#0b5c92] text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#0b5c92] mr-2"></span> FinTech Sector
-                </p>
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3 group-hover:text-[#0b5c92] transition-colors">Private Equity Firm</h3>
-                <p className="text-slate-600 text-sm flex-1">Modernizing the visual legacy of a 50-year-old investment firm for the digital…</p>
-              </div>
-            </motion.div>
-            
-            {/* Article 2 */}
-            <motion.div variants={fadeUp} className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-              <img 
-                src={img5} 
-                alt="Stationery Mockup" 
-                className="w-full h-48 sm:h-auto object-cover sm:object-contain bg-slate-100"
-              />
-              <div className="p-5 sm:p-6 flex-1 flex flex-col">
-                <p className="text-[#0b5c92] text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#0b5c92] mr-2"></span> Industrial Tech
-                </p>
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3 group-hover:text-[#0b5c92] transition-colors">Medium Mechanics</h3>
-                <p className="text-slate-600 text-sm flex-1">Developing a visual language for the next generation of renewable energy…</p>
-              </div>
-            </motion.div>
-
-            {/* Article 3 */}
-            <motion.div variants={fadeUp} className="bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow sm:col-span-2 lg:col-span-1">
-              <img 
-                src={img6} 
-                alt="Mobile App" 
-                className="w-full h-48 sm:h-auto object-cover sm:object-contain bg-slate-100"
-              />
-              <div className="p-5 sm:p-6 flex-1 flex flex-col">
-                <p className="text-[#0b5c92] text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#0b5c92] mr-2"></span> SaaS Global
-                </p>
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3 group-hover:text-[#0b5c92] transition-colors">Multi-Platform </h3>
-                <p className="text-slate-600 text-sm flex-1">Shaping a consistent identity system across 48 global markets and 12 product</p>
-              </div>
-            </motion.div>
+            {happeningItems.map((item, index) => (
+              <motion.div
+                key={item.blog?._id ?? index}
+                variants={fadeUp}
+                onClick={() => openHappening(item.blog)}
+                className={`bg-white group cursor-pointer flex flex-col h-full rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow ${item.extra}`}
+              >
+                <img
+                  src={item.img}
+                  alt={item.alt}
+                  className="w-full h-48 sm:h-auto object-cover sm:object-contain bg-slate-100"
+                />
+                <div className="p-5 sm:p-6 flex-1 flex flex-col">
+                  <p className="text-[#0b5c92] text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0b5c92] mr-2"></span> {item.category}
+                  </p>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3 group-hover:text-[#0b5c92] transition-colors">{item.title}</h3>
+                  <p className="text-slate-600 text-sm flex-1">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </section>

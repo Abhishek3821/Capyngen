@@ -1,5 +1,9 @@
-import React, { useState, useRef, useEffect, type ReactNode } from 'react';
+import React, { useState, useRef, useEffect, useMemo, type ReactNode } from 'react';
 import { ArrowUpRight, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial Image Imports
 import img1 from "../assets/CRM/1.png";
@@ -53,6 +57,9 @@ const CRMSolutionsPage: React.FC = () => {
 
   // 2. State for FAQ Accordion
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('crm-management-software');
 
   // 3. Ref and functions for "What's Happening" Carousel
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -111,6 +118,32 @@ const CRMSolutionsPage: React.FC = () => {
     { q: "Q14. Can the customers' relationships be protected with a CRM system?", a: "Yes. We have enterprise level security, role based access, data encryption and compliance in place to keep business information safe." },
     { q: "Q15. What do I need to do to start using Capyngen?", a: "Simply contact our team with your business requirements. We'll evaluate your requirements and provide you with the CRM & management software solution for your company." }
   ];
+
+  const happenings = [
+    { title: "Boost the digital shift using Customer Relationship Management software.", img: img2 },
+    { title: "Famous for its CRM software development application solutions.", img: img3 },
+    { title: "Allowing organizations to be empowered by CRM software development services.", img: img4 },
+    { title: "Technology of the future, smarter business management.", img: img5 }
+  ];
+
+  // Show live CRM & Management Software blogs when available; otherwise fall back to the static cards.
+  const happeningItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return happenings.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...happenings[i % happenings.length],
+      title: blog.title,
+      img: blog.image || happenings[i % happenings.length].img,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openHappening = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <div className="font-sans text-slate-900 bg-white">
@@ -211,53 +244,22 @@ const CRMSolutionsPage: React.FC = () => {
                 .scrollbar-hide::-webkit-scrollbar { display: none; }
               `}} />
               
-              {/* Card 1 */}
-              <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col w-[300px] min-w-[300px] max-w-[300px] flex-shrink-0 snap-start">
-                <div className="h-80 bg-slate-100 w-full overflow-hidden relative">
-                  <img src={img2} alt="Digital Shift" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              {happeningItems.map((item, index) => (
+                <div
+                  key={item.blog?._id ?? index}
+                  onClick={() => openHappening(item.blog)}
+                  className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col w-[300px] min-w-[300px] max-w-[300px] flex-shrink-0 snap-start"
+                >
+                  <div className="h-80 bg-slate-100 w-full overflow-hidden relative">
+                    <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col justify-center">
+                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#0056b3] transition-colors leading-snug">
+                      {item.title}
+                    </h3>
+                  </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col justify-center">
-                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#0056b3] transition-colors leading-snug">
-                    Boost the digital shift using Customer Relationship Management software.
-                  </h3>
-                </div>
-              </div>
-
-              {/* Card 2 */}
-              <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col w-[300px] min-w-[300px] max-w-[300px] flex-shrink-0 snap-start">
-                <div className="h-80 bg-slate-100 w-full overflow-hidden relative">
-                  <img src={img3} alt="CRM Software Application" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-center">
-                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#0056b3] transition-colors leading-snug">
-                    Famous for its CRM software development application solutions.
-                  </h3>
-                </div>
-              </div>
-
-              {/* Card 3 */}
-              <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col w-[300px] min-w-[300px] max-w-[300px] flex-shrink-0 snap-start">
-                <div className="h-80 bg-slate-100 w-full overflow-hidden relative">
-                  <img src={img4} alt="CRM Empowerment" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-center">
-                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#0056b3] transition-colors leading-snug">
-                    Allowing organizations to be empowered by CRM software development services.
-                  </h3>
-                </div>
-              </div>
-
-              {/* Card 4 */}
-              <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col w-[300px] min-w-[300px] max-w-[300px] flex-shrink-0 snap-start">
-                <div className="h-80 bg-slate-100 w-full overflow-hidden relative">
-                  <img src={img5} alt="Future Technology" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-center">
-                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#0056b3] transition-colors leading-snug">
-                    Technology of the future, smarter business management.
-                  </h3>
-                </div>
-              </div>
+              ))}
             </div>
           </RevealOnScroll>
         </div>

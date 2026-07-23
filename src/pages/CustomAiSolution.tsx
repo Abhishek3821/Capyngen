@@ -1,6 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, type Variants } from 'framer-motion';
 import { ArrowRight, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+import { type Blog } from '../services/blogService';
+import { createSlug } from '../utils/slug';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial Image Imports from Folder as per image_f0800a.png
 import bannerImg from "../assets/Custom AI Solutions Service/banner.png";
@@ -22,7 +26,9 @@ const fadeUp: Variants = {
 };
 
 const AISolutionsPage = () => {
+  const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const aiBlogs = useTopicBlogs('custom-ai-solutions');
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -113,6 +119,25 @@ const AISolutionsPage = () => {
     { title: "⁠Pi​o‍neerin⁠g Sustainable AI Solution‌s for Green Energy In​i⁠tia‌tive⁠s​", img: img6 }
   ];
 
+  // Show live Custom AI Solutions blogs when available; otherwise fall back to the static cards.
+  const fallbackImgs = [img1, img2, img3, img4, img5, img6];
+  const happeningItems = useMemo(() => {
+    if (aiBlogs.length === 0) {
+      return happenings.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return aiBlogs.map((blog, i) => ({
+      title: blog.title,
+      img: blog.image || fallbackImgs[i % fallbackImgs.length],
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [aiBlogs]);
+
+  const openHappening = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
+
   const whyChooseUs = [
     { title: "Deep AI Expertise Across Industri⁠es", desc: "We deliv‍er spec‍ialize⁠d‌ so‌lutions for diverse bus‌iness challen⁠ges.", img: img7 },
     { title: "End-to‌-‍En​d Cust⁠om A‍I​ Developmen‍t", desc: "From concept to deplo⁠yment‍, we manage⁠ e⁠ver​ything⁠.", img: img8 },
@@ -191,8 +216,12 @@ const AISolutionsPage = () => {
             className="flex gap-6 md:gap-8 overflow-x-auto snap-x snap-mandatory pb-6 items-stretch"
             style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
           >
-            {happenings.map((item, index) => (
-              <div key={index} className="bg-white group cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 w-[280px] md:w-[350px] flex-shrink-0 flex flex-col snap-start rounded-xl overflow-hidden border border-slate-200">
+            {happeningItems.map((item, index) => (
+              <div
+                key={item.blog?._id ?? index}
+                onClick={() => openHappening(item.blog)}
+                className="bg-white group cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 w-[280px] md:w-[350px] flex-shrink-0 flex flex-col snap-start rounded-xl overflow-hidden border border-slate-200"
+              >
                 <div className="w-full h-52 shrink-0 relative overflow-hidden bg-slate-100 p-0">
                   <img src={item.img} alt={item.title} className="w-full h-full object-cover block transition-transform duration-500 group-hover:scale-105" />
                 </div>
@@ -200,7 +229,10 @@ const AISolutionsPage = () => {
                   <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
                     {item.title}
                   </h3>
-                  <button onClick={() => alert(`Read more about: ${item.title}`)} className="flex items-center text-sm font-bold text-[#0056b3] transition-colors gap-2 hover:gap-3 w-max focus:outline-none mt-auto">
+                  <button
+                    onClick={(e) => { e.stopPropagation(); item.blog ? openHappening(item.blog) : alert(`Read more about: ${item.title}`); }}
+                    className="flex items-center text-sm font-bold text-[#0056b3] transition-colors gap-2 hover:gap-3 w-max focus:outline-none mt-auto"
+                  >
                     READ MORE <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>

@@ -1,18 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, type Variants } from 'framer-motion';
-import { 
-  ArrowRight, 
+import {
+  ArrowRight,
   ChevronLeft,
   ChevronRight,
   ChevronDown,
   ChevronUp,
-  BrainCircuit, 
-  MessageSquareText, 
-  Eye, 
-  GitMerge, 
- 
+  BrainCircuit,
+  MessageSquareText,
+  Eye,
+  GitMerge,
+
   Activity
 } from 'lucide-react';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial Image Imports
 import img1 from "../assets/Artificial Intelligence Service/01.png";
@@ -23,6 +27,8 @@ import img5 from "../assets/Artificial Intelligence Service/05.png";
 import img6 from "../assets/Artificial Intelligence Service/06.png";
 
 const AILandingPage: React.FC = () => {
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('artificial-intelligence-services');
   // Carousel Scroll Reference and Handler
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   
@@ -86,6 +92,33 @@ const AILandingPage: React.FC = () => {
     { q: "Q14. How long does it take to implement AI?", a: "The timeline varies depending on the complexity of the project, the business objectives, the resources that are available and integration needs." },
     { q: "Q15. What is the starting point to use Capyngen's Artificial Intelligence Services?", a: "Talk to the Capyngen AI experts today and discover how to leverage AI for your business, how to see opportunities, and how to develop a plan for implementing AI in your business." }
   ];
+
+  const insights = [
+    { img: img3, alt: "Generative AI", title: "Generative AI for Modern Businesses", desc: "Discover how Generative AI Services are transforming content creation, customer engagement, and accelerating innovation in various departments." },
+    { img: img4, alt: "Enterprise AI", title: "Enterprise AI Solutions", desc: "Learn how Enterprise AI Solutions can help businesses streamline processes, gain insights into operations, and make quick, informed decisions." },
+    { img: img5, alt: "AI Consulting", title: "AI Consulting Services", desc: "Learn about strategic AI Consulting Services and how they can assist organizations in finding opportunities for AI, creating implementation plans, and maximizing the value of AI in the long run." },
+    { img: img6, alt: "Automation", title: "Intelligent Business Automation", desc: "Discover how AI Automation Services use intelligent automation technologies to streamline repetitive tasks, cut down on expenses and boost productivity." }
+  ];
+
+  // Show live Artificial Intelligence blogs when available; otherwise fall back to the static cards.
+  const insightsItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return insights.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...insights[i % insights.length],
+      title: blog.title,
+      img: blog.image || insights[i % insights.length].img,
+      desc: blog.description || insights[i % insights.length].desc,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openInsight = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800">
@@ -209,94 +242,36 @@ const AILandingPage: React.FC = () => {
             style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
           >
             <style dangerouslySetInnerHTML={{__html: `.scrollbar-hide::-webkit-scrollbar { display: none; }`}} />
-            
-            {/* Card 1 */}
-            <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
-              <div className="overflow-hidden bg-slate-50 flex items-center justify-center">
-                <img 
-                  src={img3} 
-                  alt="Generative AI" 
-                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#0056b3] transition-colors leading-snug">
-                  Generative AI for Modern Businesses
-                </h3>
-                <p className="text-slate-600 text-sm mb-6 flex-1">
-                  Discover how Generative AI Services are transforming content creation, customer engagement, and accelerating innovation in various departments.
-                </p>
-                <button onClick={() => scrollToSection(contactRef)} className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
-                  Read Article <ArrowRight className="ml-1 w-3 h-3" />
-                </button>
-              </div>
-            </div>
-            
-            {/* Card 2 */}
-            <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
-              <div className="overflow-hidden bg-slate-50 flex items-center justify-center">
-                <img 
-                  src={img4} 
-                  alt="Enterprise AI" 
-                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#0056b3] transition-colors leading-snug">
-                  Enterprise AI Solutions
-                </h3>
-                <p className="text-slate-600 text-sm mb-6 flex-1">
-                  Learn how Enterprise AI Solutions can help businesses streamline processes, gain insights into operations, and make quick, informed decisions.
-                </p>
-                <button onClick={() => scrollToSection(contactRef)} className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
-                  Read Article <ArrowRight className="ml-1 w-3 h-3" />
-                </button>
-              </div>
-            </div>
 
-            {/* Card 3 */}
-            <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
-              <div className="overflow-hidden bg-slate-50 flex items-center justify-center">
-                <img 
-                  src={img5} 
-                  alt="AI Consulting" 
-                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
+            {insightsItems.map((item, index) => (
+              <div
+                key={item.blog?._id ?? index}
+                onClick={() => openInsight(item.blog)}
+                className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100"
+              >
+                <div className="overflow-hidden bg-slate-50 flex items-center justify-center">
+                  <img
+                    src={item.img}
+                    alt={item.alt}
+                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#0056b3] transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm mb-6 flex-1">
+                    {item.desc}
+                  </p>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); item.blog ? openInsight(item.blog) : scrollToSection(contactRef); }}
+                    className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider"
+                  >
+                    Read Article <ArrowRight className="ml-1 w-3 h-3" />
+                  </button>
+                </div>
               </div>
-              <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#0056b3] transition-colors leading-snug">
-                  AI Consulting Services
-                </h3>
-                <p className="text-slate-600 text-sm mb-6 flex-1">
-                  Learn about strategic AI Consulting Services and how they can assist organizations in finding opportunities for AI, creating implementation plans, and maximizing the value of AI in the long run.
-                </p>
-                <button onClick={() => scrollToSection(contactRef)} className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
-                  Read Article <ArrowRight className="ml-1 w-3 h-3" />
-                </button>
-              </div>
-            </div>
-
-            {/* Card 4 */}
-            <div className="bg-white group cursor-pointer shadow-sm hover:shadow-md transition-shadow w-[280px] sm:w-[350px] flex-none snap-start flex flex-col border border-slate-100">
-              <div className="overflow-hidden bg-slate-50 flex items-center justify-center">
-                <img 
-                  src={img6} 
-                  alt="Automation" 
-                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#0056b3] transition-colors leading-snug">
-                  Intelligent Business Automation
-                </h3>
-                <p className="text-slate-600 text-sm mb-6 flex-1">
-                  Discover how AI Automation Services use intelligent automation technologies to streamline repetitive tasks, cut down on expenses and boost productivity.
-                </p>
-                <button onClick={() => scrollToSection(contactRef)} className="inline-flex items-center text-xs font-bold text-[#0056b3] uppercase tracking-wider">
-                  Read Article <ArrowRight className="ml-1 w-3 h-3" />
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </motion.section>

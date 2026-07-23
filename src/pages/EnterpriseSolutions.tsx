@@ -1,17 +1,23 @@
-import React, { useState, useRef } from 'react';
-import {  
-  BarChart4, 
-  Layers, 
-  ShieldCheck, 
+import React, { useState, useRef, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  BarChart4,
+  Layers,
+  ShieldCheck,
   Cpu,
   ChevronRight,
   ChevronLeft,
   ChevronDown
 } from 'lucide-react';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 const EnterpriseLandingPage: React.FC = () => {
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('enterprise-solutions');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  
+
   // Ref for the insights carousel
   const insightsRef = useRef<HTMLDivElement>(null);
 
@@ -94,6 +100,36 @@ const EnterpriseLandingPage: React.FC = () => {
         behavior: 'smooth'
       });
     }
+  };
+
+  const insights = [
+    { img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600", alt: "Enterprise Transformation", category: "Enterprise Transformation", title: "Creating Better Digital Basics for Contemporary Companies", desc: "Discover methods for businesses to upgrade old systems to efficient, intelligent Enterprise Solutions that boost performance and flexibility while future-proofing their operations." },
+    { img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=600", alt: "Cloud Solutions", category: "Cloud Solutions", title: "Unlocking Greater Business Value Through Cloud Innovation", desc: "Discover how to implement cloud solutions in each department for enhanced security, collaboration and Enterprise Digital Transformation." },
+    { img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=600", alt: "Enterprise Application Development", category: "Enterprise Application Development", title: "Custom Applications Built for Business Growth", desc: "Learn how to leverage Enterprise Application Development to enhance your user experiences and boost productivity in your organization." },
+    { img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600", alt: "Enterprise Automation", category: "Enterprise Automation", title: "Automating Workflows for Better Efficiency", desc: "Understand the benefits of Enterprise Automation Solutions in simplifying manual tasks, enhancing accuracy, and promoting operational excellence." },
+    { img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600", alt: "Enterprise Software Development", category: "Enterprise Software Development", title: "Creating Scalable Digital Platforms", desc: "Learn how Enterprise Software Development provides secure, scalable, and future-proof business applications that meet the needs of organizations." },
+    { img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600", alt: "Enterprise Management", category: "Enterprise Management", title: "Driving Smarter Business Operations", desc: "Learn how Enterprise Management Solutions help to make better decisions, use resources effectively and enhance business performance." }
+  ];
+
+  // Show live Enterprise Solutions blogs when available; otherwise fall back to the static cards.
+  const insightsItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return insights.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...insights[i % insights.length],
+      title: blog.title,
+      img: blog.image || insights[i % insights.length].img,
+      desc: blog.description || insights[i % insights.length].desc,
+      category: blog.category || insights[i % insights.length].category,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openInsight = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
   };
 
   return (
@@ -203,125 +239,30 @@ const EnterpriseLandingPage: React.FC = () => {
             className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar items-stretch"
             style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
           >
-            {/* Insight 1 */}
-            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600" 
-                  alt="Enterprise Transformation" 
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
+            {insightsItems.map((item, index) => (
+              <div
+                key={item.blog?._id ?? index}
+                onClick={() => openInsight(item.blog)}
+                className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={item.img}
+                    alt={item.alt}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <p className="text-[#0d47a1] text-xs font-bold uppercase tracking-wider mb-3">{item.category}</p>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0d47a1] transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm flex-1">
+                    {item.desc}
+                  </p>
+                </div>
               </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <p className="text-[#0d47a1] text-xs font-bold uppercase tracking-wider mb-3">Enterprise Transformation</p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0d47a1] transition-colors leading-snug">
-                  Creating Better Digital Basics for Contemporary Companies
-                </h3>
-                <p className="text-slate-600 text-sm flex-1">
-                  Discover methods for businesses to upgrade old systems to efficient, intelligent Enterprise Solutions that boost performance and flexibility while future-proofing their operations.
-                </p>
-              </div>
-            </div>
-            
-            {/* Insight 2 */}
-            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=600" 
-                  alt="Cloud Solutions" 
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <p className="text-[#0d47a1] text-xs font-bold uppercase tracking-wider mb-3">Cloud Solutions</p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0d47a1] transition-colors leading-snug">
-                  Unlocking Greater Business Value Through Cloud Innovation
-                </h3>
-                <p className="text-slate-600 text-sm flex-1">
-                  Discover how to implement cloud solutions in each department for enhanced security, collaboration and Enterprise Digital Transformation.
-                </p>
-              </div>
-            </div>
-
-            {/* Insight 3 */}
-            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=600" 
-                  alt="Enterprise Application Development" 
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <p className="text-[#0d47a1] text-xs font-bold uppercase tracking-wider mb-3">Enterprise Application Development</p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0d47a1] transition-colors leading-snug">
-                  Custom Applications Built for Business Growth
-                </h3>
-                <p className="text-slate-600 text-sm flex-1">
-                  Learn how to leverage Enterprise Application Development to enhance your user experiences and boost productivity in your organization.
-                </p>
-              </div>
-            </div>
-
-            {/* Insight 4 */}
-            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600" 
-                  alt="Enterprise Automation" 
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <p className="text-[#0d47a1] text-xs font-bold uppercase tracking-wider mb-3">Enterprise Automation</p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0d47a1] transition-colors leading-snug">
-                  Automating Workflows for Better Efficiency
-                </h3>
-                <p className="text-slate-600 text-sm flex-1">
-                  Understand the benefits of Enterprise Automation Solutions in simplifying manual tasks, enhancing accuracy, and promoting operational excellence.
-                </p>
-              </div>
-            </div>
-
-            {/* Insight 5 */}
-            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600" 
-                  alt="Enterprise Software Development" 
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <p className="text-[#0d47a1] text-xs font-bold uppercase tracking-wider mb-3">Enterprise Software Development</p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0d47a1] transition-colors leading-snug">
-                  Creating Scalable Digital Platforms
-                </h3>
-                <p className="text-slate-600 text-sm flex-1">
-                  Learn how Enterprise Software Development provides secure, scalable, and future-proof business applications that meet the needs of organizations.
-                </p>
-              </div>
-            </div>
-
-            {/* Insight 6 */}
-            <div className="w-[85vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.3333%-1rem)] shrink-0 snap-start group cursor-pointer flex flex-col h-auto bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" 
-                  alt="Enterprise Management" 
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <p className="text-[#0d47a1] text-xs font-bold uppercase tracking-wider mb-3">Enterprise Management</p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0d47a1] transition-colors leading-snug">
-                  Driving Smarter Business Operations
-                </h3>
-                <p className="text-slate-600 text-sm flex-1">
-                  Learn how Enterprise Management Solutions help to make better decisions, use resources effectively and enhance business performance.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

@@ -1,5 +1,9 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, type Variants } from 'framer-motion';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial Image Imports from Folder
 import img1 from "../assets/High Tech/01.png";
@@ -124,7 +128,6 @@ const IntelligentMobility = () => {
               </p>
               <p>
                  With plenty of experts across multiple nations. We offer exclusive insight to each contract and deal. We provide multiplex high-end tech interpreting with determined benefits at each overlap of the stack. 
-
               </p>
             </div>
           </div>
@@ -137,6 +140,8 @@ const IntelligentMobility = () => {
 
 // --- Section 3: Trending ---
 const Trending = () => {
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('high-tech');
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -152,6 +157,25 @@ const Trending = () => {
     { title: "IT Security in the Era of AI Adoptablity", image: img5 },
     { title: "Advanced Tech Used by AI Solution Providers", image: img6 }
   ];
+
+  // Show live High Tech blogs when available; otherwise fall back to the static cards.
+  const trendingBlogItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return trendingItems.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...trendingItems[i % trendingItems.length],
+      title: blog.title,
+      image: blog.image || trendingItems[i % trendingItems.length].image,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openTrending = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <section className="bg-white py-16 md:py-24 w-full">
@@ -169,9 +193,10 @@ const Trending = () => {
           className="flex gap-6 lg:gap-8 overflow-x-auto snap-x snap-mandatory pb-4"
           style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
         >
-          {trendingItems.map((item, index) => (
-            <div 
-              key={index} 
+          {trendingBlogItems.map((item, index) => (
+            <div
+              key={item.blog?._id ?? index}
+              onClick={() => openTrending(item.blog)}
               className="relative group rounded-md overflow-hidden min-w-[280px] md:min-w-[320px] h-[420px] md:h-[480px] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer snap-start flex-shrink-0 bg-gray-900"
             >
               {/* Image without cutting height */}
@@ -267,30 +292,33 @@ const HighTechSolutions = () => {
   ];
 
   return (
-    <section className="bg-white py-16 md:py-24 w-full">
+    <section className="bg-white py-16 md:py-24 w-full overflow-hidden">
       <motion.div 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}
-        className="max-w-7xl mx-auto px-6 md:px-12"
+        className="w-full"
       >
-        <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-black mb-10 tracking-tight">
-          Our Services
-        </h2>
+        {/* Title constrained to site grid */}
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-black mb-10 tracking-tight">
+            Our Services
+          </h2>
+        </div>
 
-        {/* Scrollable Container */}
+        {/* Scrollable Container bleeding right with calculated left offset */}
         <div 
-          className="flex gap-6 lg:gap-8 overflow-x-auto snap-x snap-mandatory pb-4"
+          className="flex gap-6 lg:gap-8 overflow-x-auto snap-x snap-mandatory pb-4 pl-6 md:pl-12 xl:pl-[calc(50vw-640px+3rem)] pr-6 md:pr-12"
           style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
         >
           {solutions.map((card, index) => (
             <div 
               key={index} 
-              className="relative group rounded-md overflow-hidden min-w-[280px] md:min-w-[320px] h-[420px] md:h-[480px] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer snap-start flex-shrink-0 bg-gray-900"
+              className="relative group rounded-md overflow-hidden min-w-[85vw] sm:min-w-[450px] md:min-w-[600px] lg:min-w-[700px] h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer snap-start flex-shrink-0 bg-gray-900"
             >
-              {/* Image without cutting height */}
+              {/* Image updated to object-cover to fit landscape orientation nicely */}
               <img 
                 src={card.image} 
                 alt={card.title}
-                className="absolute inset-0 w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               
               {/* Dark Gradient Overlay */}

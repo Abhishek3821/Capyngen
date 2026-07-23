@@ -1,5 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { ArrowRight, ArrowUpRight, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial Image Imports
 import img1 from "../assets/application/1.png";
@@ -78,6 +82,8 @@ const handleContactClick = () => {
 
 const ApplicationSolutionsPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('application-solutions');
 
   const happeningsRef = useRef<HTMLDivElement>(null);
 
@@ -114,6 +120,32 @@ const ApplicationSolutionsPage = () => {
     { q: "Q14. ⁠How does C‍apyngen ensure q​uality?", a: "We follow rig‌orous testing​, continuous integration, and quality assurance proc‌esses throughout development​." },
     { q: "Q15. Why choose Cap‍ynge‍n f​or application solutions?", a: "We com​bine de⁠ep tech⁠nical​ exper‌tise, in⁠dustry knowledg⁠e, and a client-first approach to deliver sc​al​able ap​p​l⁠ication solutions for y⁠our bu⁠siness." }
   ];
+
+  const happenings = [
+    { title: "Th⁠e Growth of Co⁠mposable Architecture⁠", desc: "H‍ow modular desig‍n i‌s​ a‍ccelerating enterp‍ris⁠e software de‍livery i​n 2024.", img: img3 },
+    { title: "Scaling SaaS for Global Operat​ions", desc: "M​a‌naging​ mu‍lti-‍te‍nant systems for high concurrency and maximum⁠ uptime.", img: img4 },
+    { title: "​Micr‍oser‍vic‌e‍s in Pract‌ice", desc: "Finding the optimal balan‍ce for enterpri⁠se application moderni​zation efforts.", img: img5 }
+  ];
+
+  // Show live Application Solutions blogs when available; otherwise fall back to the static cards.
+  const happeningItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return happenings.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...happenings[i % happenings.length],
+      title: blog.title,
+      desc: blog.description || happenings[i % happenings.length].desc,
+      img: blog.image || happenings[i % happenings.length].img,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openHappening = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <div className="font-sans text-slate-900 bg-white">
@@ -167,83 +199,60 @@ const ApplicationSolutionsPage = () => {
         </div>
       </section>
 
-      {/* What's Happening Section (Carousel Format) */}
-      <section className="bg-[#2563eb] py-24 px-6 md:px-12 lg:px-24">
+      {/* What's Happening Section (Carousel Format) UI Fixed */}
+      <section className="bg-slate-50 py-24 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <RevealOnScroll direction="up" className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">What‌'s​ Happ‌e​ning</h2>
-              <p className="text-blue-100 text-xs font-bold tracking-widest uppercase">‍E‌m⁠erging Trends i‍n Applica⁠tion Techno⁠logy</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">What's Happening</h2>
+              {/* Optional subheader kept for content integrity but styled to fit the light theme */}
+              <p className="text-slate-500 text-xs font-bold tracking-widest uppercase">‍E‌m⁠erging Trends i‍n Applica⁠tion Techno⁠logy</p>
             </div>
-            <div className="flex gap-2">
-              <button onClick={() => scrollHappenings('left')} className="w-10 h-10 flex items-center justify-center bg-white border border-transparent hover:bg-slate-50 transition-colors rounded-sm cursor-pointer">
+            <div className="flex gap-3">
+              <button onClick={() => scrollHappenings('left')} className="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 hover:bg-slate-100 transition-colors rounded-sm cursor-pointer shadow-sm">
                 <ChevronLeft className="w-5 h-5 text-slate-900" />
               </button>
-              <button onClick={() => scrollHappenings('right')} className="w-10 h-10 flex items-center justify-center bg-[#0a1526] text-white hover:bg-slate-800 transition-colors rounded-sm cursor-pointer">
+              <button onClick={() => scrollHappenings('right')} className="w-10 h-10 flex items-center justify-center bg-[#0a1526] text-white hover:bg-slate-800 transition-colors rounded-sm cursor-pointer shadow-sm">
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>
           </RevealOnScroll>
 
           <RevealOnScroll direction="up" delay={100}>
-            <div ref={happeningsRef} className="flex gap-8 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+            <div ref={happeningsRef} className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
               <style dangerouslySetInnerHTML={{__html: `
                 .hide-scrollbar::-webkit-scrollbar { display: none; }
               `}} />
 
-              {/* Card 1 */}
-              <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-60 bg-slate-100 relative overflow-hidden">
-                  <img src={img3} alt="The Growth of Composable Architecture" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-lg font-bold text-slate-900 mb-4 group-hover:text-[#2563eb] transition-colors leading-snug flex-1">
-                    Th⁠e Growth of Co⁠mposable Architecture⁠
-                  </h3>
-                  <p className="text-slate-500 text-xs leading-relaxed mb-6">
-                    H‍ow modular desig‍n i‌s​ a‍ccelerating enterp‍ris⁠e software de‍livery i​n 2024.
-                  </p>
-                  <div className="flex items-center text-[10px] font-bold text-[#2563eb] transition-colors gap-2 uppercase tracking-wide mt-auto">
-                    READ MORE <ArrowRight className="w-4 h-4" />
+              {happeningItems.map((item, index) => (
+                <div
+                  key={item.blog?._id ?? index}
+                  onClick={() => (item.blog ? openHappening(item.blog) : handleContactClick())}
+                  className="bg-white w-[300px] sm:w-[340px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-lg border border-slate-100 transition-all flex flex-col rounded-2xl overflow-hidden"
+                >
+                  <div className="w-full h-48 sm:h-52 bg-slate-100 relative overflow-hidden">
+                    {/* Floating Badge matching the reference image */}
+                    <div className="absolute top-4 left-4 z-10 bg-white text-slate-900 text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                      {item.blog?.category || 'REPORT'}
+                    </div>
+                    <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                  <div className="p-6 md:p-8 flex-1 flex flex-col">
+                    <h3 className="text-lg font-bold text-slate-900 mb-4 group-hover:text-[#2563eb] transition-colors leading-snug line-clamp-3">
+                      {item.title}
+                    </h3>
+                    
+                    {/* Description visually hidden to match the UI reference precisely, but kept in DOM to preserve content */}
+                    <p className="hidden text-slate-500 text-sm leading-relaxed mb-6">
+                      {item.desc}
+                    </p>
+                    
+                    <div className="flex items-center text-xs font-bold text-slate-900 transition-colors gap-2 uppercase tracking-wide mt-auto group-hover:text-[#2563eb]">
+                      READ MORE <ArrowRight className="w-4 h-4" />
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Card 2 */}
-              <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-60 bg-slate-100 relative overflow-hidden">
-                  <img src={img4} alt="Scaling SaaS for Global Operations" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-lg font-bold text-slate-900 mb-4 group-hover:text-[#2563eb] transition-colors leading-snug flex-1">
-                    Scaling SaaS for Global Operat​ions
-                  </h3>
-                  <p className="text-slate-500 text-xs leading-relaxed mb-6">
-                    M​a‌naging​ mu‍lti-‍te‍nant systems for high concurrency and maximum⁠ uptime.
-                  </p>
-                  <div className="flex items-center text-[10px] font-bold text-[#2563eb] transition-colors gap-2 uppercase tracking-wide mt-auto">
-                    READ MORE <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 3 */}
-              <div onClick={handleContactClick} className="bg-white min-w-[300px] md:min-w-[350px] shrink-0 snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col rounded-md overflow-hidden">
-                <div className="w-full h-60 bg-slate-100 relative overflow-hidden">
-                  <img src={img5} alt="Microservices in Practice" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-lg font-bold text-slate-900 mb-4 group-hover:text-[#2563eb] transition-colors leading-snug flex-1">
-                    ​Micr‍oser‍vic‌e‍s in Pract‌ice
-                  </h3>
-                  <p className="text-slate-500 text-xs leading-relaxed mb-6">
-                    Finding the optimal balan‍ce for enterpri⁠se application moderni​zation efforts.
-                  </p>
-                  <div className="flex items-center text-[10px] font-bold text-[#2563eb] transition-colors gap-2 uppercase tracking-wide mt-auto">
-                    READ MORE <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </RevealOnScroll>
         </div>

@@ -1,5 +1,9 @@
-import { useState, useRef, useEffect, type ReactNode } from 'react';
+import { useState, useRef, useEffect, useMemo, type ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial Imports based on your folder structure
 import img1 from "../assets/Web Development Service/1.png";
@@ -46,6 +50,8 @@ const RevealOnScroll = ({ children, delay = 0, className = "" }: { children: Rea
 };
 
 const WebDevelopmentPage = () => {
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('web-development');
   const [activeTab, setActiveTab] = useState('Web Offerings');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
@@ -90,6 +96,25 @@ const WebDevelopmentPage = () => {
       img: img5
     }
   ];
+
+  // Show live Web Development blogs when available; otherwise fall back to the static cards.
+  const happeningItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return happenings.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...happenings[i % happenings.length],
+      title: blog.title,
+      img: blog.image || happenings[i % happenings.length].img,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openHappening = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   const servicesContent: Record<string, string[]> = {
     'Web Offerings': [
@@ -280,10 +305,10 @@ const WebDevelopmentPage = () => {
               ref={sliderRef}
               className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide scroll-smooth items-stretch"
             >
-              {happenings.map((item, idx) => (
-                <div 
-                  key={idx} 
-                  onClick={handleScrollToContact}
+              {happeningItems.map((item, idx) => (
+                <div
+                  key={item.blog?._id ?? idx}
+                  onClick={() => item.blog ? openHappening(item.blog) : handleScrollToContact()}
                   className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
                 >
                   <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">

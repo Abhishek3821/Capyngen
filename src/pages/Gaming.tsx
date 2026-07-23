@@ -1,4 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 import image1 from '../assets/gaming/01.png';
 import image2 from '../assets/gaming/02.png';
 import image3 from '../assets/gaming/03.png';
@@ -184,6 +188,8 @@ const PlayerIntelligence = () => {
 
 // --- 3. Gaming Industry Insights Section ---
 const GamingInsights = () => {
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('gaming');
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -199,7 +205,7 @@ const GamingInsights = () => {
   const insightCards = [
     {
       title: "Tracking Player Habits and Predicting Churn",
-      image: image3, 
+      image: image3,
     },
     {
       title: "AI Smart Difficulty That Adjusts to You",
@@ -218,6 +224,25 @@ const GamingInsights = () => {
       image: image7,
     },
   ];
+
+  // Show live Gaming blogs when available; otherwise fall back to the static cards.
+  const insightItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return insightCards.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...insightCards[i % insightCards.length],
+      title: blog.title,
+      image: blog.image || insightCards[i % insightCards.length].image,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openInsight = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <section className="bg-white py-16 md:py-24 w-full">
@@ -247,29 +272,30 @@ const GamingInsights = () => {
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide scroll-smooth"
         >
-          {insightCards.map((card, idx) => (
-            <div 
-              key={idx}
-              className="relative group h-[420px] w-[280px] sm:w-[300px] flex-shrink-0 rounded-lg overflow-hidden flex flex-col justify-end p-6 bg-black snap-start"
+          {insightItems.map((card, idx) => (
+            <div
+              key={card.blog?._id ?? idx}
+              onClick={() => openInsight(card.blog)}
+              className="relative group h-[420px] w-[280px] sm:w-[300px] flex-shrink-0 rounded-lg overflow-hidden flex flex-col justify-end p-6 bg-black snap-start cursor-pointer"
             >
               {/* Card Background Image with Subtle Scale Effect on Hover */}
-              <img 
-                src={card.image} 
+              <img
+                src={card.image}
                 alt={card.title}
                 className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500 ease-out"
               />
-              
+
               {/* Bottom Gradient overlay for text readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-              
+
               {/* Text Context Content Container */}
               <div className="relative z-10 w-full">
                 <h3 className="text-white text-base md:text-[17px] font-bold leading-snug mb-6 group-hover:text-blue-400 transition-colors duration-300">
                   {card.title}
                 </h3>
-                
-                <button 
-                  onClick={() => scrollToSection('contact')}
+
+                <button
+                  onClick={(e) => { e.stopPropagation(); card.blog ? openInsight(card.blog) : scrollToSection('contact'); }}
                   className="flex items-center text-white/80 font-semibold tracking-wider text-[10px] uppercase group-hover:text-white transition-colors"
                 >
                   <span className="mr-1.5 font-sans">→</span> Read more

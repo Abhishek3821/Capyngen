@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 import img1 from "../assets/SEO.png"; // Ensure this path is correct
 
 const SEOLandingPage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const seoBlogs = useTopicBlogs('seo');
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -42,6 +48,47 @@ const SEOLandingPage = () => {
       answer: "You should check on-page SEO in every few months, as search trends shift, competitors update pages, and older content can lose its ranks. "
     }
   ];
+
+  const latestTrends = [
+    {
+      category: "ALGORITHM UPDATE", date: "5 MIN READ",
+      title: "Latest Transformation in Generative Search Vision",
+      desc: "The newest primary improvements are rebuilding the organic ranking context for industries' B2B operations. ",
+      img: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      category: "TECHNICAL SEO", date: "8 MIN READ",
+      title: "Empowering Essence Web Crucial for Growth",
+      desc: "Accurate aligning of web server edge response duration and performance consistency for competitive ranking benefits. ",
+      img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      category: "CONTENT STRATEGY", date: "6 MIN READ",
+      title: "Semantic Authority in Professional Services",
+      desc: "Developing beyond keywords to get the whole expertise chart for your industry's most crucial points. ",
+      img: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+    }
+  ];
+
+  // Show live SEO blogs when available; otherwise fall back to the static cards.
+  const latestTrendsItems = useMemo(() => {
+    if (seoBlogs.length === 0) {
+      return latestTrends.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return seoBlogs.map((blog, i) => ({
+      ...latestTrends[i % latestTrends.length],
+      title: blog.title,
+      img: blog.image || latestTrends[i % latestTrends.length].img,
+      desc: blog.description || latestTrends[i % latestTrends.length].desc,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seoBlogs]);
+
+  const openLatestTrends = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <div className="font-sans text-slate-800 bg-slate-50 min-h-screen">
@@ -128,27 +175,8 @@ const SEOLandingPage = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                category: "ALGORITHM UPDATE", date: "5 MIN READ",
-                title: "Latest Transformation in Generative Search Vision",
-                desc: "The newest primary improvements are rebuilding the organic ranking context for industries' B2B operations. ",
-                img: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-              },
-              {
-                category: "TECHNICAL SEO", date: "8 MIN READ",
-                title: "Empowering Essence Web Crucial for Growth",
-                desc: "Accurate aligning of web server edge response duration and performance consistency for competitive ranking benefits. ",
-                img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-              },
-              {
-                category: "CONTENT STRATEGY", date: "6 MIN READ",
-                title: "Semantic Authority in Professional Services",
-                desc: "Developing beyond keywords to get the whole expertise chart for your industry's most crucial points. ",
-                img: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-              }
-            ].map((post, i) => (
-              <div key={i} className="group cursor-pointer">
+            {latestTrendsItems.map((post, i) => (
+              <div key={post.blog?._id ?? i} onClick={() => openLatestTrends(post.blog)} className="group cursor-pointer">
                 <div className="overflow-hidden rounded-lg mb-4">
                   <img src={post.img} alt={post.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>

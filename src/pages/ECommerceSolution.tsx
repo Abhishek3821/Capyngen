@@ -1,15 +1,19 @@
-import React, { useState, useRef } from 'react';
-import { 
-  ArrowRight, 
-  ShoppingCart, 
-  CreditCard, 
-  BarChart3, 
+import React, { useState, useRef, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  ArrowRight,
+  ShoppingCart,
+  CreditCard,
+  BarChart3,
   Smartphone,
   Phone,
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
+import { type Blog } from '../services/blogService';
+import { createSlug } from '../utils/slug';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial Imports based on the folder structure
 import img1 from "../assets/Ecommerce solutions/1.png";
@@ -21,9 +25,40 @@ import img6 from "../assets/Ecommerce solutions/6.png";
 
 const EcommerceLandingPage: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
-  
+
   // Ref for the slider container
   const happeningsRef = useRef<HTMLDivElement>(null);
+
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('ecommerce-solutions');
+
+  // Static "What's Happening?" cards (used as fallback when no blogs match this topic)
+  const happenings = [
+    { img: img4, tag: "Report", title: "The Artificial Shift Toward Resilient Supply Chains", cta: "View Report", alt: "Headless Commerce Concept", delay: 0.1 },
+    { img: img5, tag: "Award", title: "Capyngen Ranks in Leading Retail Tech Consultants for 2026", cta: "View Award", alt: "Mobile Payments", delay: 0.2 },
+    { img: img6, tag: "Case Study", title: "Global Shopkeepers' Growth by 40% with multichannel", cta: "View Case", alt: "Data Streams", delay: 0.3 },
+    { img: img2, tag: "Report", title: "Why Headless Commerce Is Becoming the Retail Standard", cta: "View Report", alt: "Data Streams", delay: 0.4 },
+    { img: img3, tag: "Case Study", title: "B2B Distributor Cut Order Errors by 60% with Custom Portals", cta: "View Case", alt: "Data Streams", delay: 0.5 }
+  ];
+
+  // Show live E-commerce Solutions blogs when available; otherwise fall back to the static cards.
+  const happeningItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return happenings.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...happenings[i % happenings.length],
+      title: blog.title,
+      img: blog.image || happenings[i % happenings.length].img,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openHappening = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   const faqsData = [
     {
@@ -260,150 +295,36 @@ const EcommerceLandingPage: React.FC = () => {
               .hide-scrollbar::-webkit-scrollbar { display: none; }
             `}} />
             
-            {/* Article 1 */}
-            <motion.div 
-              onClick={handleCardAction}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.1 } } }}
-              className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
-            >
-              <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                <img 
-                  src={img4} 
-                  alt="Headless Commerce Concept" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4 bg-white text-[#0b5a93] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                  Report
+            {happeningItems.map((item, index) => (
+              <motion.div
+                key={item.blog?._id ?? index}
+                onClick={() => (item.blog ? openHappening(item.blog) : handleCardAction())}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: item.delay } } }}
+                className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
+              >
+                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
+                  <img
+                    src={item.img}
+                    alt={item.alt}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4 bg-white text-[#0b5a93] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                    {item.tag}
+                  </div>
                 </div>
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
-                  The Artificial Shift Toward Resilient Supply Chains
-                </h3>
-                <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
-                  View Report <ArrowRight className="w-4 h-4" />
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+                  <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
+                    {item.cta} <ArrowRight className="w-4 h-4" />
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-            
-            {/* Article 2 */}
-            <motion.div 
-              onClick={handleCardAction}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.2 } } }}
-              className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
-            >
-              <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                <img 
-                  src={img5} 
-                  alt="Mobile Payments" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4 bg-white text-[#0b5a93] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                  Award
-                </div>
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
-                  Capyngen Ranks in Leading Retail Tech Consultants for 2026
-                </h3>
-                <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
-                  View Award <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Article 3 */}
-            <motion.div 
-              onClick={handleCardAction}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.3 } } }}
-              className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
-            >
-              <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                <img 
-                  src={img6} 
-                  alt="Data Streams" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4 bg-white text-[#0b5a93] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                  Case Study
-                </div>
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
-                  Global Shopkeepers' Growth by 40% with multichannel
-                </h3>
-                <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
-                  View Case <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
-            </motion.div>
-            
-            {/* Article 4 */}
-            <motion.div 
-              onClick={handleCardAction}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.4 } } }}
-              className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
-            >
-              <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                <img 
-                  src={img2} 
-                  alt="Data Streams" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4 bg-white text-[#0b5a93] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                  Report
-                </div>
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
-                  Why Headless Commerce Is Becoming the Retail Standard
-                </h3>
-                <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
-                  View Report <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
-            </motion.div>
-            
-            {/* Article 5 */}
-            <motion.div 
-              onClick={handleCardAction}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.5 } } }}
-              className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
-            >
-              <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                <img 
-                  src={img3} 
-                  alt="Data Streams" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4 bg-white text-[#0b5a93] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                  Case Study
-                </div>
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0b5a93] transition-colors leading-snug">
-                  B2B Distributor Cut Order Errors by 60% with Custom Portals
-                </h3>
-                <div className="flex items-center text-sm font-bold text-[#0b5a93] gap-2 mt-auto">
-                  View Case <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
 
           </div>
         </div>

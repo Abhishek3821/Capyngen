@@ -1,5 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Importing images sequentially as per the provided folder structure
 import img1 from "../assets/BLOC_KCH_AIN/1.png";
@@ -85,7 +89,9 @@ const handleContactClick = () => {
 
 const BlockchainSolutionsPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('blockchain-development');
+
   const happeningsRef = useRef<HTMLDivElement>(null);
 
   const scrollHappenings = (direction: 'left' | 'right') => {
@@ -161,6 +167,34 @@ const BlockchainSolutionsPage = () => {
     }
   ];
 
+  const happenings = [
+    { title: "AI-Powered Business Solutions for Modern Enterprises", img: img2, badge: "Report" },
+    { title: "Driving Digital Transformation Success", img: img3, badge: "Case Study" },
+    { title: "Custom Software Strategies for Business Growth", img: img4, badge: "Article" },
+    { title: "Building Scalable Cloud-Native Applications", img: img5, badge: "Insight" },
+    { title: "Smarter Web & Mobile Development Solutions", img: img6, badge: "Guide" },
+    { title: "Future-Ready Technology for Enterprise Innovation", img: img7, badge: "News" }
+  ];
+
+  // Show live Blockchain Development blogs when available; otherwise fall back to the static cards.
+  const happeningItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return happenings.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...happenings[i % happenings.length],
+      title: blog.title,
+      img: blog.image || happenings[i % happenings.length].img,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openHappening = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
+
   return (
     <div className="font-sans text-slate-900 bg-white">
       
@@ -231,113 +265,28 @@ const BlockchainSolutionsPage = () => {
                 .hide-scrollbar::-webkit-scrollbar { display: none; }
               `}} />
 
-              {/* Card 1 */}
-              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                  <img src={img2} alt="Report" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                    Report
+              {happeningItems.map((item, index) => (
+                <div
+                  key={item.blog?._id ?? index}
+                  onClick={() => (item.blog ? openHappening(item.blog) : handleContactClick())}
+                  className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer"
+                >
+                  <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
+                    <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+                      {item.badge}
+                    </div>
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
+                      {item.title}
+                    </h3>
+                    <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
+                      Read More <ArrowRight className="w-4 h-4" />
+                    </div>
                   </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
-                    AI-Powered Business Solutions for Modern Enterprises
-                  </h3>
-                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
-                    Read More <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 2 */}
-              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                  <img src={img3} alt="Case Study" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                    Case Study
-                  </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
-                    Driving Digital Transformation Success
-                  </h3>
-                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
-                    Read More <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 3 */}
-              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                  <img src={img4} alt="Article" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                    Article
-                  </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
-                    Custom Software Strategies for Business Growth
-                  </h3>
-                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
-                    Read More <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-              
-              {/* Card 4 */}
-              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                  <img src={img5} alt="Insight" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                    Insight
-                  </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
-                    Building Scalable Cloud-Native Applications
-                  </h3>
-                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
-                    Read More <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-              
-              {/* Card 5 */}
-              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                  <img src={img6} alt="Guide" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                    Guide
-                  </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
-                    Smarter Web & Mobile Development Solutions
-                  </h3>
-                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
-                    Read More <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-              
-              {/* Card 6 */}
-              <div onClick={handleContactClick} className="bg-white rounded-xl shadow-md border border-slate-100 flex flex-col overflow-hidden w-[300px] md:w-[350px] flex-shrink-0 snap-start h-auto min-h-full group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="w-full relative h-[200px] flex-shrink-0 bg-slate-100 overflow-hidden">
-                  <img src={img7} alt="News" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white text-[#0a1526] text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-sm">
-                    News
-                  </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-[#0056b3] transition-colors leading-snug">
-                    Future-Ready Technology for Enterprise Innovation
-                  </h3>
-                  <div className="mt-auto flex items-center text-sm font-bold text-[#0056b3] gap-2 uppercase tracking-wide">
-                    Read More <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </RevealOnScroll>
         </div>

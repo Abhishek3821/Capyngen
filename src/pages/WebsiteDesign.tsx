@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
-import { 
-  ArrowRight, 
-  Network, 
-  Megaphone, 
-  Cloud, 
+import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  ArrowRight,
+  Network,
+  Megaphone,
+  Cloud,
   Smartphone,
 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
+import { type Blog } from '../services/blogService';
+import { createSlug } from '../utils/slug';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial image imports from the Website Design folder as shown in the file tree
 import img1 from "../assets/Website Design/1.png";
@@ -40,12 +44,42 @@ const staggerContainer: Variants = {
 const WebsiteDesignLandingPage: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('website-design-company-india');
+
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
   const handleButtonClick = (actionName: string) => {
     alert(`${actionName} clicked!`);
+  };
+
+  // Static "Trending Events" items (index 0 = featured, rest = side list). Fallback when no blogs match.
+  const trending = [
+    { img: img3, category: "Advanced Tech", title: "Website Design Company Gurgaon: Using Plug-and-Play Tech. ", alt: "Network Abstract" },
+    { img: img4, category: "User-Centric Design", title: "Tiny digital moments that quietly turn casual visitors into buyers. ", alt: "Design Wireframes" },
+    { img: img5, category: "Strategy", title: "Connecting who you are with how your users experience you. ", alt: "Analytics Dashboard" },
+    { img: img27, category: "Performance", title: "Making your website load faster and feel smoother this year. ", alt: "Server Room" }
+  ];
+
+  // Show live Website Design blogs when available; otherwise fall back to the static cards.
+  const trendingItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return trending.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...trending[i % trending.length],
+      title: blog.title,
+      img: blog.image || trending[i % trending.length].img,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openTrending = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
   };
 
   const faqs = [
@@ -207,25 +241,25 @@ const WebsiteDesignLandingPage: React.FC = () => {
           </motion.div>
           
           <div className="grid lg:grid-cols-12 gap-8">
-            {/* Featured Article (Left) using img3 */}
-            <motion.div 
+            {/* Featured Article (Left) */}
+            <motion.div
               className="lg:col-span-7 xl:col-span-8 group cursor-pointer"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInRight}
-              onClick={() => handleButtonClick('Featured Article')}
+              onClick={() => (trendingItems[0].blog ? openTrending(trendingItems[0].blog) : handleButtonClick('Featured Article'))}
             >
               <div className="overflow-hidden rounded-sm mb-5 bg-slate-50">
-                <img 
-                  src={img3} 
-                  alt="Network Abstract" 
+                <img
+                  src={trendingItems[0].img}
+                  alt={trendingItems[0].alt}
                   className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-3">Advanced Tech</p>
+              <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-3">{trendingItems[0].category}</p>
               <h3 className="text-2xl sm:text-3xl font-bold text-[#0f3b68] mb-3 group-hover:text-[#0066cc] transition-colors">
-                Website Design Company Gurgaon: Using Plug-and-Play Tech. 
+                {trendingItems[0].title}
               </h3>
             </motion.div>
             
@@ -238,68 +272,28 @@ const WebsiteDesignLandingPage: React.FC = () => {
               variants={staggerContainer}
             >
               
-              {/* List Item 1 */}
-              <motion.div 
-                className="group cursor-pointer flex items-start gap-4 h-full"
-                variants={fadeInLeft}
-                onClick={() => handleButtonClick('Article 1')}
-              >
-                <div className="w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-sm bg-slate-50">
-                  <img 
-                    src={img4} 
-                    alt="Design Wireframes" 
-                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="flex flex-col justify-center h-full">
-                  <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-1">User-Centric Design</p>
-                  <h4 className="text-base sm:text-lg font-bold text-[#0f3b68] group-hover:text-[#0066cc] transition-colors leading-snug">
-                    Tiny digital moments that quietly turn casual visitors into buyers. 
-                  </h4>
-                </div>
-              </motion.div>
-
-              {/* List Item 2 */}
-              <motion.div 
-                className="group cursor-pointer flex items-start gap-4 h-full"
-                variants={fadeInLeft}
-                onClick={() => handleButtonClick('Article 2')}
-              >
-                <div className="w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-sm bg-slate-50">
-                  <img 
-                    src={img5} 
-                    alt="Analytics Dashboard" 
-                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="flex flex-col justify-center h-full">
-                  <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-1">Strategy</p>
-                  <h4 className="text-base sm:text-lg font-bold text-[#0f3b68] group-hover:text-[#0066cc] transition-colors leading-snug">
-                    Connecting who you are with how your users experience you. 
-                  </h4>
-                </div>
-              </motion.div>
-
-              {/* List Item 3 */}
-              <motion.div 
-                className="group cursor-pointer flex items-start gap-4 h-full"
-                variants={fadeInLeft}
-                onClick={() => handleButtonClick('Article 3')}
-              >
-                <div className="w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-sm bg-slate-50">
-                  <img 
-                    src={img27} 
-                    alt="Server Room" 
-                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="flex flex-col justify-center h-full">
-                  <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-1">Performance</p>
-                  <h4 className="text-base sm:text-lg font-bold text-[#0f3b68] group-hover:text-[#0066cc] transition-colors leading-snug">
-                    Making your website load faster and feel smoother this year. 
-                  </h4>
-                </div>
-              </motion.div>
+              {trendingItems.slice(1).map((item, index) => (
+                <motion.div
+                  key={item.blog?._id ?? index}
+                  className="group cursor-pointer flex items-start gap-4 h-full"
+                  variants={fadeInLeft}
+                  onClick={() => (item.blog ? openTrending(item.blog) : handleButtonClick(`Article ${index + 1}`))}
+                >
+                  <div className="w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-sm bg-slate-50">
+                    <img
+                      src={item.img}
+                      alt={item.alt}
+                      className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="flex flex-col justify-center h-full">
+                    <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-1">{item.category}</p>
+                    <h4 className="text-base sm:text-lg font-bold text-[#0f3b68] group-hover:text-[#0066cc] transition-colors leading-snug">
+                      {item.title}
+                    </h4>
+                  </div>
+                </motion.div>
+              ))}
 
             </motion.div>
           </div>

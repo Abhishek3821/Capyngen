@@ -1,4 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Importing images sequentially as per the provided folder structure
 import img3 from "../assets/Life Science/3.png";
@@ -84,6 +88,8 @@ const handleContactClick = () => {
 };
 
 const LifeScience = () => {
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('life-science');
   const [activeTab, setActiveTab] = useState('Industry');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
@@ -162,6 +168,25 @@ const LifeScience = () => {
     { title: "NLP and AI with Pharmacovigilance Automation", img: img8 },
     { title: "Accurate Treatment: Personalized Care with AI", img: img9 }
   ];
+
+  // Show live Life Science blogs when available; otherwise fall back to the static cards.
+  const insightsItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return insightsData.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...insightsData[i % insightsData.length],
+      title: blog.title,
+      img: blog.image || insightsData[i % insightsData.length].img,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openInsights = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   const faqs = [
     { question: "Why choose Capyngen as your life science software development company?", answer: "Because we get both sides of the equation, the science and the tech. So instead of handing you generic software and hoping it fits, we build around how your research and clinical teams already work." },
@@ -266,8 +291,8 @@ const LifeScience = () => {
         
         <RevealOnScroll direction="up" delay={200}>
           <div ref={insightsScrollRef} className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide scroll-smooth">
-            {insightsData.map((item, idx) => (
-              <div key={idx} onClick={handleContactClick} className="relative w-72 md:w-80 shrink-0 rounded-lg overflow-hidden group cursor-pointer snap-start flex flex-col bg-black">
+            {insightsItems.map((item, idx) => (
+              <div key={item.blog?._id ?? idx} onClick={() => (item.blog ? openInsights(item.blog) : handleContactClick())} className="relative w-72 md:w-80 shrink-0 rounded-lg overflow-hidden group cursor-pointer snap-start flex flex-col bg-black">
                 <img 
                   src={item.img} 
                   alt={item.title} 

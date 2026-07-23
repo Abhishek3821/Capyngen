@@ -1,17 +1,23 @@
-import React, { useState, useRef } from 'react';
-import { 
-  Brain, 
-  Layout, 
-  Palette, 
-  Pointer, 
+import React, { useState, useRef, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  Brain,
+  Layout,
+  Palette,
+  Pointer,
   Search,
   ChevronDown,
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 import heroimg from "../assets/ux.png"
 
 const UIUXLandingPage: React.FC = () => {
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('ui-ux-design-services');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const insightsRef = useRef<HTMLDivElement>(null);
 
@@ -42,6 +48,35 @@ const UIUXLandingPage: React.FC = () => {
     { q: "Q14. So what is the importance of UX research?", a: "UX research is used to gain insight into user behavior, to minimize the friction, and to build products that customers would expect." },
     { q: "Q15. How do I get started with Capyngen's UI/UX design services?", a: "Simply contact our design team to discuss your project requirements, and we'll create a tailored strategy for your business." }
   ];
+
+  const insights = [
+    { img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=600", alt: "Woman working on laptop", title: "AI-Powered User Experiences", desc: "Discover how smarter technologies are reshaping the product design and how they assist the businesses in delivering smarter digital interactions." },
+    { img: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&q=80&w=600", alt: "Tablet with wireframes", title: "Inclusive Design for Modern Businesses", desc: "Recognise the importance of accessible digital products on the basis of customer satisfaction and according to the changing global usability requirements." },
+    { img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600", alt: "Charts and wireframes", title: "Creating Meaningful Digital Moments", desc: "Learn how attention to interface details and interactions can boost engagement on websites and apps." },
+    { img: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=80&w=600", alt: "Mobile-First", title: "Mobile-First Experience Design", desc: "Discuss the benefits of responsive, mobile-first approaches to increasing usability on mobile devices like smart phones and tablets, as well as today's other types of digital devices." },
+    { img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600", alt: "Data-Driven", title: "Data-Driven UX Optimization", desc: "Know the role that analytics, usability testing, and understanding customer behavior can play in enhancing product performance and user satisfaction." },
+    { img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=600", alt: "Design Systems", title: "Design Systems for Consistency", desc: "Understand the value of scalable design systems for businesses in terms of their ability to ensure brand consistency and speed up product development." }
+  ];
+
+  // Show live UI/UX design blogs when available; otherwise fall back to the static cards.
+  const insightsItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return insights.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...insights[i % insights.length],
+      title: blog.title,
+      img: blog.image || insights[i % insights.length].img,
+      desc: blog.description || insights[i % insights.length].desc,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openInsight = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <div className="min-h-screen bg-[#f8f9fa] font-sans text-slate-600">
@@ -138,95 +173,25 @@ const UIUXLandingPage: React.FC = () => {
               .hide-scrollbar::-webkit-scrollbar { display: none; }
             `}} />
 
-            {/* Article 1 */}
-            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
-              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=600" 
-                  alt="Woman working on laptop" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+            {insightsItems.map((item, index) => (
+              <div
+                key={item.blog?._id ?? index}
+                onClick={() => openInsight(item.blog)}
+                className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100"
+              >
+                <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
+                  <img
+                    src={item.img}
+                    alt={item.alt}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6 flex-grow flex flex-col">
+                  <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">{item.title}</h3>
+                  <p className="text-slate-600 text-sm flex-grow">{item.desc}</p>
+                </div>
               </div>
-              <div className="p-6 flex-grow flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">AI-Powered User Experiences</h3>
-                <p className="text-slate-600 text-sm flex-grow">Discover how smarter technologies are reshaping the product design and how they assist the businesses in delivering smarter digital interactions.</p>
-              </div>
-            </div>
-            
-            {/* Article 2 */}
-            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
-              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&q=80&w=600" 
-                  alt="Tablet with wireframes" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6 flex-grow flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Inclusive Design for Modern Businesses</h3>
-                <p className="text-slate-600 text-sm flex-grow">Recognise the importance of accessible digital products on the basis of customer satisfaction and according to the changing global usability requirements.</p>
-              </div>
-            </div>
-
-            {/* Article 3 */}
-            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
-              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" 
-                  alt="Charts and wireframes" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6 flex-grow flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Creating Meaningful Digital Moments</h3>
-                <p className="text-slate-600 text-sm flex-grow">Learn how attention to interface details and interactions can boost engagement on websites and apps.</p>
-              </div>
-            </div>
-
-            {/* Article 4 */}
-            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
-              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=80&w=600" 
-                  alt="Mobile-First" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6 flex-grow flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Mobile-First Experience Design</h3>
-                <p className="text-slate-600 text-sm flex-grow">Discuss the benefits of responsive, mobile-first approaches to increasing usability on mobile devices like smart phones and tablets, as well as today's other types of digital devices.</p>
-              </div>
-            </div>
-
-            {/* Article 5 */}
-            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
-              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600" 
-                  alt="Data-Driven" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6 flex-grow flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Data-Driven UX Optimization</h3>
-                <p className="text-slate-600 text-sm flex-grow">Know the role that analytics, usability testing, and understanding customer behavior can play in enhancing product performance and user satisfaction.</p>
-              </div>
-            </div>
-
-            {/* Article 6 */}
-            <div className="w-[85vw] sm:w-[300px] md:w-[350px] shrink-0 snap-center sm:snap-start group cursor-pointer flex flex-col bg-[#f8f9fa] rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 border border-slate-100">
-              <div className="w-full h-48 sm:h-56 shrink-0 relative overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=600" 
-                  alt="Design Systems" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6 flex-grow flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Design Systems for Consistency</h3>
-                <p className="text-slate-600 text-sm flex-grow">Understand the value of scalable design systems for businesses in terms of their ability to ensure brand consistency and speed up product development.</p>
-              </div>
-            </div>
+            ))}
 
           </div>
         </div>

@@ -1,4 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Importing images sequentially as per the provided folder structure
 import img1 from "../assets/Energy, Resources, and Utilities/1.png";
@@ -323,6 +327,8 @@ const AIPowersExcellence = () => {
 
 // --- Section 6: Energy Insights Carousel Slider ---
 const EnergyInsights = () => {
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('energy-resources-utilities');
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -341,6 +347,25 @@ const EnergyInsights = () => {
     { title: "Eco-friendly Energy Analysis", image: img10 }
   ];
 
+  // Show live Energy blogs when available; otherwise fall back to the static cards.
+  const insightsItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return insights.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...insights[i % insights.length],
+      title: blog.title,
+      image: blog.image || insights[i % insights.length].image,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openInsights = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
+
   return (
     <section className="bg-gray-50 py-16 md:py-24 w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
@@ -356,14 +381,14 @@ const EnergyInsights = () => {
             ref={scrollRef}
             className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scroll-smooth hide-scrollbar"
           >
-            {insights.map((card, index) => (
-              <div 
-                key={index} 
-                onClick={handleContactClick}
+            {insightsItems.map((card, index) => (
+              <div
+                key={card.blog?._id ?? index}
+                onClick={() => (card.blog ? openInsights(card.blog) : handleContactClick())}
                 className="relative flex-none w-[280px] sm:w-[320px] md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] rounded-lg overflow-hidden snap-start group cursor-pointer shadow-sm hover:shadow-md transition-shadow duration-300 bg-black flex flex-col"
               >
-                <img 
-                  src={card.image} 
+                <img
+                  src={card.image}
                   alt={card.title}
                   className="w-full h-auto block opacity-80 group-hover:scale-105 transition-transform duration-700"
                 />

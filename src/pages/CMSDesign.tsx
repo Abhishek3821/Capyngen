@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
-import { 
-  ArrowRight, 
-  Network, 
-  Megaphone, 
-  Cloud, 
+import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  ArrowRight,
+  Network,
+  Megaphone,
+  Cloud,
   Smartphone,
 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Imported images strictly from the assets folder
 import img1 from "../assets/CMS DESIGN/1.png";
@@ -37,6 +41,8 @@ const staggerContainer: Variants = {
 
 const WebsiteDesignLandingPage: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const cmsBlogs = useTopicBlogs('cms-website-design');
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -84,6 +90,32 @@ const WebsiteDesignLandingPage: React.FC = () => {
       answer: "Book a consultation with our architecture team. We will audit your current setup, map your workflow from end to end, and put together a clear picture of what a better system would look like for your business—and what it would actually cost to get there."
     }
   ];
+
+  const whatsHappening = [
+    { category: "Technology", title: "The major Industry Switch to Modular", desc: "Why major companies are ditching rigid software for flexible, specialized web tools.", img: img3, alt: "Network Abstract" },
+    { category: "Workflow", title: "Using smart AI tools to Streamline Content", desc: "Using generative AI resources inside your editor to create better, Google-friendly content. ", img: img3, alt: "Design Wireframes" },
+    { category: "Security", title: "Verify Before Accessing Zero-Trust CMS Models", desc: "Secure global content by locking every asset and verifying every user, every single time.", img: img4, alt: "Analytics Dashboard" }
+  ];
+
+  // Show live CMS website design blogs when available; otherwise keep the static cards (fixed featured + list layout).
+  const whatsHappeningItems = useMemo(() => {
+    return whatsHappening.map((item, i) => {
+      const blog: Blog | undefined = cmsBlogs[i];
+      return {
+        ...item,
+        title: blog?.title || item.title,
+        img: blog?.image || item.img,
+        desc: blog?.description || item.desc,
+        blog,
+      };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cmsBlogs]);
+
+  const openWhatsHappening = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-600 overflow-hidden">
@@ -205,81 +237,61 @@ const WebsiteDesignLandingPage: React.FC = () => {
           
           <div className="grid lg:grid-cols-12 gap-8">
             {/* Featured Article (Left) */}
-            <motion.div 
+            <motion.div
               className="lg:col-span-7 xl:col-span-8 group cursor-pointer"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInRight}
-              onClick={() => handleButtonClick('Featured Article: The major Industry Switch')}
+              onClick={() => whatsHappeningItems[0].blog ? openWhatsHappening(whatsHappeningItems[0].blog) : handleButtonClick('Featured Article: The major Industry Switch')}
             >
               <div className="overflow-hidden rounded-sm mb-5 bg-slate-50">
                 {/* Image updated to preserve height */}
-                <img 
-                  src={img3} 
-                  alt="Network Abstract" 
+                <img
+                  src={whatsHappeningItems[0].img}
+                  alt={whatsHappeningItems[0].alt}
                   className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-3">Technology</p>
+              <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-3">{whatsHappeningItems[0].category}</p>
               <h3 className="text-2xl sm:text-3xl font-bold text-[#0f3b68] mb-3 group-hover:text-[#0066cc] transition-colors">
-                The major Industry Switch to Modular 
+                {whatsHappeningItems[0].title}
               </h3>
-              <p className="text-slate-600 text-sm">Why major companies are ditching rigid software for flexible, specialized web tools.</p>
+              <p className="text-slate-600 text-sm">{whatsHappeningItems[0].desc}</p>
             </motion.div>
-            
+
             {/* List Articles (Right) */}
-            <motion.div 
+            <motion.div
               className="lg:col-span-5 xl:col-span-4 flex flex-col gap-6"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={staggerContainer}
             >
-              
-              {/* List Item 1 */}
-              <motion.div 
-                className="group cursor-pointer flex items-start gap-4 h-full"
-                variants={fadeInLeft}
-                onClick={() => handleButtonClick('Article 1: Workflow')}
-              >
-                <div className="w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-sm bg-slate-50">
-                  <img 
-                    src={img3} 
-                    alt="Design Wireframes" 
-                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="flex flex-col justify-center h-full">
-                  <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-1">Workflow</p>
-                  <h4 className="text-base sm:text-lg font-bold text-[#0f3b68] group-hover:text-[#0066cc] transition-colors leading-snug">
-                    Using smart AI tools to Streamline Content
-                  </h4>
-                  <p className="text-slate-500 text-xs sm:text-sm mt-1">Using generative AI resources inside your editor to create better, Google-friendly content. </p>
-                </div>
-              </motion.div>
 
-              {/* List Item 2 */}
-              <motion.div 
+              {whatsHappeningItems.slice(1).map((item, index) => (
+              <motion.div
+                key={item.blog?._id ?? index}
                 className="group cursor-pointer flex items-start gap-4 h-full"
                 variants={fadeInLeft}
-                onClick={() => handleButtonClick('Article 2: Security')}
+                onClick={() => item.blog ? openWhatsHappening(item.blog) : handleButtonClick(`Article: ${item.title}`)}
               >
                 <div className="w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-sm bg-slate-50">
-                  <img 
-                    src={img4} 
-                    alt="Analytics Dashboard" 
+                  <img
+                    src={item.img}
+                    alt={item.alt}
                     className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="flex flex-col justify-center h-full">
-                  <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-1">Security</p>
+                  <p className="text-[#0066cc] text-xs font-semibold uppercase tracking-wider mb-1">{item.category}</p>
                   <h4 className="text-base sm:text-lg font-bold text-[#0f3b68] group-hover:text-[#0066cc] transition-colors leading-snug">
-                    Verify Before Accessing Zero-Trust CMS Models
+                    {item.title}
                   </h4>
-                  <p className="text-slate-500 text-xs sm:text-sm mt-1">Secure global content by locking every asset and verifying every user, every single time.</p>
+                  <p className="text-slate-500 text-xs sm:text-sm mt-1">{item.desc}</p>
                 </div>
               </motion.div>
+              ))}
 
             </motion.div>
           </div>

@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
-import { 
-  ArrowRight, 
-  Search, 
-  Monitor, 
-  RefreshCcw, 
-  TrendingUp, 
+import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  ArrowRight,
+  Search,
+  Monitor,
+  RefreshCcw,
+  TrendingUp,
   CheckCircle2,
 } from 'lucide-react';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 import img1 from "../assets/ppc/1.png";
 import img2 from "../assets/ppc/2.png";
 
 const PPCLandingPage: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const ppcBlogs = useTopicBlogs('ppc');
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -51,6 +57,31 @@ const PPCLandingPage: React.FC = () => {
       answer: "A Google Ads agency tracks all of it as part of their daily work, which means fewer costly mistakes and a budget that is being used as efficiently as possible."
     }
   ];
+
+  const successStories = [
+    { tag: "FINTECH SCALE-UP", title: "Scaling Search Revenue by 312% in Q3", desc: "A global SaaS business was spending heavily on paid search but not seeing the returns to match. The budget was going to the wrong places, and the right customers were not being reached.", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200" },
+    { tag: "E-COMMERCE COMFORT", title: "Omnichannel Remarketing", desc: "Recovering $2.4M in Abandoned Cart Revenue Through Cross-Platform Retargeting. Most of that revenue feels gone. It does not have to be.", img: "" }
+  ];
+
+  // Show live PPC blogs when available; otherwise keep the static cards (fixed two-card layout).
+  const successStoriesItems = useMemo(() => {
+    return successStories.map((item, i) => {
+      const blog: Blog | undefined = ppcBlogs[i];
+      return {
+        ...item,
+        title: blog?.title || item.title,
+        img: blog?.image || item.img,
+        desc: blog?.description || item.desc,
+        blog,
+      };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ppcBlogs]);
+
+  const openSuccessStories = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <div className="min-h-screen bg-[#f8f9fc] font-sans text-slate-600">
@@ -147,30 +178,44 @@ const PPCLandingPage: React.FC = () => {
         
         <div className="grid md:grid-cols-3 gap-6">
           {/* Large Image Card */}
-          <div className="md:col-span-2 group relative overflow-hidden rounded-xl bg-slate-900 min-h-[320px] sm:min-h-[400px]">
-            <img 
-              src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200" 
-              alt="Tech Circuit" 
+          <div
+            onClick={() => openSuccessStories(successStoriesItems[0].blog)}
+            className="md:col-span-2 group relative overflow-hidden rounded-xl bg-slate-900 min-h-[320px] sm:min-h-[400px] cursor-pointer"
+          >
+            <img
+              src={successStoriesItems[0].img}
+              alt={successStoriesItems[0].title}
               className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60 transition-opacity duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-8 w-full">
-              <p className="text-blue-300 font-semibold mb-2 text-sm uppercase tracking-wider">FINTECH SCALE-UP</p>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">Scaling Search Revenue by 312% in Q3</h3>
-              <p className="text-slate-300 mb-6 max-w-xl">A global SaaS business was spending heavily on paid search but not seeing the returns to match. The budget was going to the wrong places, and the right customers were not being reached.</p>
-              <a href="#" className="inline-flex items-center text-white font-medium border-b border-white pb-1 hover:text-blue-300 hover:border-blue-300 transition-colors">
+              <p className="text-blue-300 font-semibold mb-2 text-sm uppercase tracking-wider">{successStoriesItems[0].tag}</p>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">{successStoriesItems[0].title}</h3>
+              <p className="text-slate-300 mb-6 max-w-xl">{successStoriesItems[0].desc}</p>
+              <a
+                href="#"
+                onClick={(e) => { e.stopPropagation(); if (successStoriesItems[0].blog) { e.preventDefault(); openSuccessStories(successStoriesItems[0].blog); } }}
+                className="inline-flex items-center text-white font-medium border-b border-white pb-1 hover:text-blue-300 hover:border-blue-300 transition-colors"
+              >
                 Read Here <ArrowRight className="ml-2 w-4 h-4" />
               </a>
             </div>
           </div>
-          
+
           {/* Solid Color Card */}
-          <div className="bg-[#0f6bbd] rounded-xl p-8 flex flex-col justify-end min-h-[320px] sm:min-h-[400px] group hover:bg-[#0d5ca3] transition-colors cursor-pointer">
-            <p className="text-blue-200 font-semibold mb-2 text-sm uppercase tracking-wider">E-COMMERCE COMFORT</p>
-            <h3 className="text-2xl font-bold text-white mb-4">Omnichannel Remarketing</h3>
-            <p className="text-blue-100 mb-6">Recovering $2.4M in Abandoned Cart Revenue Through Cross-Platform Retargeting. Most of that revenue feels gone. It does not have to be.</p>
+          <div
+            onClick={() => openSuccessStories(successStoriesItems[1].blog)}
+            className="bg-[#0f6bbd] rounded-xl p-8 flex flex-col justify-end min-h-[320px] sm:min-h-[400px] group hover:bg-[#0d5ca3] transition-colors cursor-pointer"
+          >
+            <p className="text-blue-200 font-semibold mb-2 text-sm uppercase tracking-wider">{successStoriesItems[1].tag}</p>
+            <h3 className="text-2xl font-bold text-white mb-4">{successStoriesItems[1].title}</h3>
+            <p className="text-blue-100 mb-6">{successStoriesItems[1].desc}</p>
             <div className="mt-auto">
-              <a href="#" className="inline-flex items-center text-white font-medium border-b border-white/50 pb-1 group-hover:border-white transition-colors">
+              <a
+                href="#"
+                onClick={(e) => { e.stopPropagation(); if (successStoriesItems[1].blog) { e.preventDefault(); openSuccessStories(successStoriesItems[1].blog); } }}
+                className="inline-flex items-center text-white font-medium border-b border-white/50 pb-1 group-hover:border-white transition-colors"
+              >
                 Read Here <ArrowRight className="ml-2 w-4 h-4" />
               </a>
             </div>

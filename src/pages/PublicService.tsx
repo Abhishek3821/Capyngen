@@ -1,4 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Importing images sequentially as per the provided folder structure
 import img1 from "../assets/public service/01.png";
@@ -77,6 +81,8 @@ type TabName =
   | 'Resource';
 
 const PublicServicesLandingPage = () => {
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('public-service');
   // 2. Explicitly type the states
   const [activeTab, setActiveTab] = useState<TabName>('Featured Article');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -102,6 +108,36 @@ const PublicServicesLandingPage = () => {
       title: 'How to Choose the Right Website Design Company',
       linkText: 'Read More'
     }
+  };
+
+  // Show live Public Service blogs when available; otherwise fall back to the static tab content.
+  const pressPortalItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return tabs.map((tab) => ({
+        title: pressPortalContent[tab].title,
+        linkText: pressPortalContent[tab].linkText,
+        image: img2,
+        blog: undefined as Blog | undefined,
+      }));
+    }
+    return tabs.map((tab, i) => {
+      const blog = topicBlogs[i % topicBlogs.length];
+      return {
+        title: blog.title,
+        linkText: pressPortalContent[tab].linkText,
+        image: blog.image || img2,
+        blog,
+      };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const activePress =
+    pressPortalItems[tabs.indexOf(activeTab)] ?? pressPortalItems[0];
+
+  const openPressPortal = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
   };
 
   const impactAreas = [
@@ -357,18 +393,18 @@ const PublicServicesLandingPage = () => {
                 FEATURED ARTICLE
               </span>
               <h3 className="text-3xl md:text-4xl font-bold leading-tight mb-8 whitespace-pre-line">
-                {pressPortalContent[activeTab].title}
+                {activePress.title}
               </h3>
-              <a href="#read" onClick={handleContactClick} className="inline-flex items-center text-sm font-semibold text-gray-300 hover:text-white group">
-                → {pressPortalContent[activeTab].linkText}
+              <a href="#read" onClick={(e) => { e.preventDefault(); activePress.blog ? openPressPortal(activePress.blog) : handleContactClick(e); }} className="inline-flex items-center text-sm font-semibold text-gray-300 hover:text-white group">
+                → {activePress.linkText}
                 <span className="ml-2 transform group-hover:translate-x-1 transition duration-200"></span>
               </a>
             </div>
-            
+
             <div className="lg:col-span-7 flex items-center justify-center bg-black/20">
-              <img 
-                src={img2} 
-                alt="Capyngen public service delivery team meeting" 
+              <img
+                src={activePress.image}
+                alt="Capyngen public service delivery team meeting"
                 className="w-full h-auto block"
               />
             </div>

@@ -1,14 +1,18 @@
-import React, { useState, useRef } from 'react';
-import { 
-  Shield, 
-  Lock, 
-  Search, 
-  AlertOctagon, 
-  ShieldAlert, 
+import React, { useState, useRef, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  Shield,
+  Lock,
+  Search,
+  AlertOctagon,
+  ShieldAlert,
 
   ChevronDown
 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
+import { createSlug } from '../utils/slug';
+import { type Blog } from '../services/blogService';
+import { useTopicBlogs } from '../hooks/useTopicBlogs';
 
 // Serial Image Imports from the CyberSecurity folder
 import img1 from "../assets/CyberSecurity/1.png";
@@ -32,8 +36,10 @@ const staggerContainer: Variants = {
 };
 
 const CyberSecurityLandingPage: React.FC = () => {
+  const navigate = useNavigate();
+  const topicBlogs = useTopicBlogs('cybersecurity');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  
+
   // Ref for scrolling to the contact section
   const contactRef = useRef<HTMLElement>(null);
 
@@ -63,6 +69,35 @@ const CyberSecurityLandingPage: React.FC = () => {
     { q: "Q14. What does incident recovery mean?", a: "It includes rapid threat containment, forensic investigation and recovery planning to restore operations quickly following a security breach with the use of our cyber security solutions." },
     { q: "Q15. Which industries does Capyngen work in?", a: "As one of the top cybersecurity service providers, we provide customized cybersecurity solutions to industries such as banking, healthcare, manufacturing, retail, technology, and government." }
   ];
+
+  const insights = [
+    { img: img3, alt: "Network Cables", title: "Preventing Advanced Ransomware Attacks", desc: "Learn how Capyngen adds another layer of security, and enables proactive defense against complex ransomware attacks to your Enterprise Cybersecurity Solutions." },
+    { img: img4, alt: "Abstract Cloud Security", title: "Securing Hybrid & Multi Cloud Infrastructure", desc: "Discover how our cloud security services enable organizations to secure workloads, and ensure uniform protection of workloads across AWS, Microsoft Azure and Google Cloud." },
+    { img: img5, alt: "Compliance Documents", title: "Establishing Security Governance and Confidence", desc: "Discover how proactive governance, automation and frequent Cybersecurity Risk Assessment can enhance customer confidence, and business resilience." },
+    { img: img6, alt: "Code on screen", title: "Zero-Trust Architecture Implementation", desc: "Know how Capyngen applies Zero-Trust frameworks to constantly verify all users, apps, and devices throughout all digital infrastructure." },
+    { img: img7, alt: "Circuit board", title: "AI-Powered Threat Intelligence", desc: "Explore how AI enhances modern Cybersecurity Services by detecting evolving threats, and preventing attacks before they impact operations." },
+    { img: img8, alt: "Meeting", title: "Security Awareness Training", desc: "Gain insight into the role employee security awareness programs play in bolstering your organization's resiliency and how it fits into our full suite of Cybersecurity Solutions and enterprise security protection strategies." }
+  ];
+
+  // Show live Cybersecurity blogs when available; otherwise fall back to the static cards.
+  const insightsItems = useMemo(() => {
+    if (topicBlogs.length === 0) {
+      return insights.map((item) => ({ ...item, blog: undefined as Blog | undefined }));
+    }
+    return topicBlogs.map((blog, i) => ({
+      ...insights[i % insights.length],
+      title: blog.title,
+      img: blog.image || insights[i % insights.length].img,
+      desc: blog.description || insights[i % insights.length].desc,
+      blog,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicBlogs]);
+
+  const openInsight = (blog?: Blog) => {
+    if (!blog) return;
+    navigate(`/news-and-updates/${blog.slug || createSlug(blog.title)}`);
+  };
 
   return (
     <div className="min-h-screen bg-[#f7f9fc] font-sans text-slate-700">
@@ -258,119 +293,30 @@ const CyberSecurityLandingPage: React.FC = () => {
             variants={staggerContainer}
             className="grid md:grid-cols-3 gap-8"
           >
-            {/* Insight 1 */}
-            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
-                <img 
-                  src={img3} 
-                  alt="Network Cables" 
-                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
-                  Preventing Advanced Ransomware Attacks
-                </h3>
-                <p className="text-slate-600 text-xs flex-1 leading-relaxed">
-                  Learn how Capyngen adds another layer of security, and enables proactive defense against complex ransomware attacks to your Enterprise Cybersecurity Solutions.
-                </p>
-              </div>
-            </motion.div>
-            
-            {/* Insight 2 */}
-            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
-                <img 
-                  src={img4} 
-                  alt="Abstract Cloud Security" 
-                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
-                  Securing Hybrid & Multi Cloud Infrastructure
-                </h3>
-                <p className="text-slate-600 text-xs flex-1 leading-relaxed">
-                  Discover how our cloud security services enable organizations to secure workloads, and ensure uniform protection of workloads across AWS, Microsoft Azure and Google Cloud.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Insight 3 */}
-            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
-                <img 
-                  src={img5} 
-                  alt="Compliance Documents" 
-                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
-                  Establishing Security Governance and Confidence
-                </h3>
-                <p className="text-slate-600 text-xs flex-1 leading-relaxed">
-                  Discover how proactive governance, automation and frequent Cybersecurity Risk Assessment can enhance customer confidence, and business resilience.
-                </p>
-              </div>
-            </motion.div>
-            
-            {/* Insight 4 */}
-            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
-                <img 
-                  src={img6} 
-                  alt="Code on screen" 
-                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
-                  Zero-Trust Architecture Implementation
-                </h3>
-                <p className="text-slate-600 text-xs flex-1 leading-relaxed">
-                  Know how Capyngen applies Zero-Trust frameworks to constantly verify all users, apps, and devices throughout all digital infrastructure.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Insight 5 */}
-            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
-                <img 
-                  src={img7} 
-                  alt="Circuit board" 
-                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
-                  AI-Powered Threat Intelligence
-                </h3>
-                <p className="text-slate-600 text-xs flex-1 leading-relaxed">
-                  Explore how AI enhances modern Cybersecurity Services by detecting evolving threats, and preventing attacks before they impact operations.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Insight 6 */}
-            <motion.div variants={fadeInUp} className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
-                <img 
-                  src={img8} 
-                  alt="Meeting" 
-                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
-                  Security Awareness Training
-                </h3>
-                <p className="text-slate-600 text-xs flex-1 leading-relaxed">
-                  Gain insight into the role employee security awareness programs play in bolstering your organization's resiliency and how it fits into our full suite of Cybersecurity Solutions and enterprise security protection strategies.
-                </p>
-              </div>
-            </motion.div>
+            {insightsItems.map((item, index) => (
+              <motion.div
+                variants={fadeInUp}
+                key={item.blog?._id ?? index}
+                onClick={() => openInsight(item.blog)}
+                className="group cursor-pointer flex flex-col h-full bg-white shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="overflow-hidden bg-[#e9eff6] flex items-center justify-center">
+                  <img
+                    src={item.img}
+                    alt={item.alt}
+                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-[#084887] transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-600 text-xs flex-1 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
